@@ -1,7 +1,7 @@
 /**
  * 引入项目自定义全局 SCSS 变量库 (variables.scss)
  */
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss' as *;
 
 /**
  * uni-app 官方内置样式变量

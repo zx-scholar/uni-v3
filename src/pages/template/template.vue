@@ -1,8 +1,8 @@
 <template>
   <view class="page-container">
     <!-- 1. 顶部自定义导航栏组件 -->
-    <NavBar 
-      title="通用标准模板" 
+    <NavBar
+      title="通用标准模板"
       background="linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)"
     />
 
@@ -35,6 +35,19 @@
           <text class="val">15px (自动转 30rpx)</text>
         </view>
       </view>
+
+      <!-- 示例卡片 3：Pinia Store 使用演示 -->
+      <view class="card">
+        <view class="card-header">Pinia Store 数据示例</view>
+        <view class="item-row">
+          <text class="label">当前应用名称 (appStore.appName):</text>
+          <text class="val">{{ appStore.appName || '--' }}</text>
+        </view>
+        <view class="item-row">
+          <text class="label">CenterID (appStore.centerId):</text>
+          <text class="val">{{ appStore.centerId || '--' }}</text>
+        </view>
+      </view>
     </scroll-view>
 
     <!-- 3. 底部固定动作按钮栏 -->
@@ -46,9 +59,11 @@
 </template>
 
 <script>
+import { useAppStore } from '@/stores/app'
+
 export default {
   name: 'TemplatePage',
-  
+
   // 1. 响应式数据
   data() {
     return {
@@ -67,7 +82,7 @@ export default {
   // 3. 业务方法集
   methods: {
     handleCancel() {
-      // 路由统一返回
+      // router 已在 main.js 中挂载为全局变量，无需 import
       router.back()
     },
     handleSubmit() {
@@ -77,7 +92,11 @@ export default {
 
   // 4. 生命周期函数
   onLoad(options) {
-    console.log('通用模版页面 onLoad 接收参数:', options)
+    console.log('页面 onLoad 接收参数:', options)
+  },
+  onShow() {
+    // [可选] 页面每次显示时触发（如从其他页面返回时刷新数据）
+    console.log('页面 onShow')
   }
 }
 </script>
