@@ -12,6 +12,10 @@
       </view>
 
       <view class="menu-list">
+        <view class="menu-item" @click="handleGoTemplate">
+          <text class="menu-title">📄 通用标准页面模板 (顶栏+滚动+底栏)</text>
+          <text class="arrow">›</text>
+        </view>
         <view class="menu-item" @click="handleGoDemo">
           <text class="menu-title">📖 Vue3 + Pinia 教程示例页</text>
           <text class="arrow">›</text>
@@ -39,6 +43,9 @@ export default {
     }
   },
   methods: {
+    handleGoTemplate() {
+      router.push('template')
+    },
     handleGoDemo() {
       router.push('demo')
     },

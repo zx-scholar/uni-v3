@@ -1,0 +1,61 @@
+/* =========================================================================
+   全局主题与样式变量配置文件 (variables.scss)
+   支持在项目中统一配置与修改颜色、边距、圆角、渐变色与阴影
+   注：所有单位写 px，编译期将通过 PostCSS 自动转换为 rpx (1px -> 1rpx)
+   ========================================================================= */
+
+// --- 1. 品牌与主题颜色 ---
+$primary-color: #42b883;       // 品牌主色 (Vue绿 / 微信主题绿)
+$primary-dark: #35495e;        // 主色深色
+$primary-light: #e1f5eb;       // 主色浅色背景
+$accent-color: #3b82f6;        // 辅助强调色 (蓝)
+$danger-color: #ef4444;        // 危险/警告色 (红)
+$warning-color: #f59e0b;       // 提醒/金黄
+
+// --- 2. 文字颜色规范 ---
+$text-main: #1C1F1E;           // 标题 / 正文主色
+$text-sub: #9AA3A0;            // 描述 / 辅助说明
+$text-muted: #94a3b8;          // 占位符 / 禁用文本
+$text-white: #ffffff;          // 白色文字
+
+// --- 3. 背景色规范 ---
+$bg-page: #F5F6FA;             // 页面整体背景色
+$bg-card: #ffffff;             // 卡片背景色
+$bg-hover: #f1f5f9;            // 点击/悬停背景
+
+// --- 4. 渐变色配置 ---
+$gradient-primary: linear-gradient(135deg, #42b883 0%, #35495e 100%);
+$gradient-navbar: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+$gradient-btn: linear-gradient(135deg, #42b883 0%, #3aa876 100%);
+
+// --- 5. 字号规范 (px -> 自动转 rpx) ---
+$font-xs: 24px;              // 辅助/小标签 (最小)
+$font-sm: 24px;              // 次要说明文字
+$font-base: 26px;            // 正文/描述
+$font-md: 28px;              // 按钮文字 / 列表项
+$font-lg: 30px;              // 次级标题
+$font-xl: 32px;              // 页面标题 / 重要文字
+$font-xxl: 34px;             // 大标题 (正常标题)
+
+// --- 6. 边距与间距规范 (px -> 自动转 rpx) ---
+$padding-xs: 6px;              // 6rpx
+$padding-sm: 10px;             // 10rpx
+$padding-md: 15px;             // 15rpx
+$padding-lg: 20px;             // 20rpx
+$padding-xl: 30px;             // 30rpx
+
+// --- 6. 圆角规范 ---
+$radius-sm: 6px;               // 6rpx
+$radius-md: 10px;              // 10rpx
+$radius-lg: 12px;              // 12rpx
+$radius-card: 16px;            // 16rpx
+$radius-pill: 999px;           // 胶囊圆角
+
+// --- 7. 阴影规范 ---
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 6px 24px rgba(66, 184, 131, 0.15);
+
+// --- 8. 底部固定按钮栏规范 ---
+$bottom-bar-height: 70px;      // 底部操作栏高度
+$bottom-bar-bg: #ffffff;

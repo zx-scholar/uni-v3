@@ -9,6 +9,7 @@ export const routes = {
   mine: '/pages/mine/mine',
   login: '/pages/login/login',
   profile: '/pages/profile/profile',
+  template: '/pages/template/template',
 
   // === 功能分包页面 ===
   demo: '/subpkg_demo/demo/demo'
