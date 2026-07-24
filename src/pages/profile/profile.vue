@@ -17,10 +17,20 @@
   </view>
 </template>
 
-<script setup>
+<script>
 import { useAppStore } from '@/stores/app'
 
-const appStore = useAppStore()
+export default {
+  name: 'ProfilePage',
+  data() {
+    return {}
+  },
+  computed: {
+    appStore() {
+      return useAppStore()
+    }
+  }
+}
 </script>
 
 <style scoped>

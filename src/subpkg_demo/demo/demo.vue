@@ -1,18 +1,19 @@
 <template>
   <view class="page-container">
-    <NavBar
-      title="自定义导航栏 (分包Demo)"
-      color="#000"
+    <NavBar 
+      title="自定义导航栏 (Options API 示例)"
+      background="linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)"
+      color="#ffffff"
       fontSize="34rpx"
     />
-    <!-- background="linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)" -->
 
     <view class="content">
       <view class="tip-card">
-        <text class="tip-title">📦 页面位置通知：</text>
-        <text class="tip-text">此页面目前位于分包 subpkg_demo 中 (subpkg_demo/demo/demo)。</text>
-        <text class="tip-text">利用别名路由 router.push('demo') 即可无感跳转主包/分包页面！</text>
+        <text class="tip-title">📦 Vue3 选项式 API (Options API) 页面：</text>
+        <text class="tip-text">此页面已全面改造为 Options API 风格 (data, methods, computed, onLoad)。</text>
+        <text class="tip-text">可以在 Vue3 中保持完美的 Vue2 习惯，完全兼容 Pinia 与全局路由工具！</text>
       </view>
+
       <!-- 0. Iconfont 阿里巴巴字体图标展示区 -->
       <view class="card">
         <view class="card-header">0. Iconfont 图标预览测试</view>
@@ -28,11 +29,11 @@
         </view>
       </view>
 
-      <!-- 1. Vue3 基础语法练习区 -->
+      <!-- 1. Vue 选项式 API 基础练习区 -->
       <view class="card">
-        <view class="card-header">1. Vue3 基础响应式数据 (ref & reactive)</view>
+        <view class="card-header">1. Vue 选项式数据 (data & computed)</view>
         <view class="item">
-          <text class="label">计数器 (ref 定义的基本类型):</text>
+          <text class="label">计数器 (this.count):</text>
           <text class="val">{{ count }}</text>
         </view>
         <view class="item">
@@ -40,19 +41,19 @@
           <text class="val">{{ doubleCount }}</text>
         </view>
         <view class="item">
-          <text class="label">对象数据 (reactive 定义):</text>
+          <text class="label">对象数据 (this.userForm):</text>
           <text class="val">{{ userForm.name }} ({{ userForm.age }}岁)</text>
         </view>
 
         <view class="btn-group">
-          <button class="btn btn-sm" @click="handleIncrement">count + 1</button>
-          <button class="btn btn-sm btn-outline" @click="handleUpdateUser">修改 User 对象</button>
+          <button class="btn btn-sm" @click="handleIncrement">this.count++</button>
+          <button class="btn btn-sm btn-outline" @click="handleUpdateUser">修改 userForm 对象</button>
         </view>
       </view>
 
       <!-- 2. Pinia 状态管理操作区 -->
       <view class="card">
-        <view class="card-header">2. Pinia 状态管理读取与修改</view>
+        <view class="card-header">2. Options API 中使用 Pinia</view>
 
         <view class="item">
           <text class="label">Store 中的应用名称:</text>
@@ -64,18 +65,18 @@
         </view>
 
         <view class="item">
-          <text class="label">解构获得的 isLoaded 状态:</text>
-          <text class="val">{{ isLoaded ? '已成功加载' : '未加载' }}</text>
+          <text class="label">Store 加载状态:</text>
+          <text class="val">{{ appStore.isLoaded ? '已加载' : '未加载' }}</text>
         </view>
 
-        <view class="card-title-sm">修改 Pinia 的 3 种常见写法：</view>
-
+        <view class="card-title-sm">修改 Pinia 的几种常用方式：</view>
+        
         <button class="btn btn-primary" @click="handleActionUpdate">
-          方式 ①：调用 Store Actions 方法修改 (最推荐)
+          方式 ①：调用 Actions 方法 (this.appStore.setMiniAppInfo)
         </button>
-
+        
         <button class="btn btn-secondary" @click="handleDirectUpdate" style="margin-top: 16rpx;">
-          方式 ②：在组件中直接给 Store 变量赋值
+          方式 ②：直接在 methods 中给 Store 变量赋值
         </button>
 
         <button class="btn btn-outline" @click="handleResetStore" style="margin-top: 16rpx;">
@@ -95,67 +96,104 @@
   </view>
 </template>
 
-<script setup>
-import { ref, reactive, computed } from 'vue'
-import { useAppStore } from '@/stores/app'
-import { storeToRefs } from 'pinia'
+<script>
 import { queryMiniAppInfo } from '@/api'
+import { useAppStore } from '@/stores/app'
 
-const count = ref(10)
-const loading = ref(false)
-const userForm = reactive({ name: '小明', age: 18 })
+export default {
+  name: 'DemoPage',
 
-const doubleCount = computed(() => count.value * 2)
-
-const handleIncrement = () => count.value++
-const handleUpdateUser = () => {
-  userForm.age += 1
-  userForm.name = userForm.name === '小明' ? '小红' : '小明'
-}
-
-const appStore = useAppStore()
-const { isLoaded } = storeToRefs(appStore)
-
-const handleActionUpdate = () => {
-  appStore.setMiniAppInfo({
-    id: 99,
-    name: 'Action修改的小程序',
-    centerId: 88888888,
-    logo: '/static/logo.png',
-    theme: 'primary-blue'
-  })
-  uni.showToast({ title: '通过 Actions 更新成功', icon: 'none' })
-}
-
-const handleDirectUpdate = () => {
-  appStore.miniAppInfo.name = '组件直接赋值修改'
-  appStore.miniAppInfo.centerId = 99999999
-  uni.showToast({ title: '直接赋值修改成功', icon: 'none' })
-}
-
-const handleResetStore = () => {
-  appStore.clearMiniAppInfo()
-  uni.showToast({ title: 'Pinia 状态已清空', icon: 'none' })
-}
-
-const handleFetchApi = async () => {
-  loading.value = true
-  try {
-    const res = await queryMiniAppInfo()
-    if (res && res.miniApp) {
-      appStore.setMiniAppInfo(res.miniApp)
-      uni.showToast({ title: '接口数据已同步到 Pinia', icon: 'success' })
+  // 1. data 响应式状态声明 (原汁原味的 Vue2 习惯)
+  data() {
+    return {
+      count: 10,
+      loading: false,
+      userForm: {
+        name: '小明',
+        age: 18
+      }
     }
-  } catch (err) {
-    appStore.setMiniAppInfo({
-      id: 49,
-      name: '伏见桃山演示馆',
-      centerId: 10000000,
-      logo: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/images/40fd9ec75b351c5a.jpg'
-    })
-    uni.showToast({ title: '模拟数据已同步到 Pinia', icon: 'none' })
-  } finally {
-    loading.value = false
+  },
+
+  // 2. computed 计算属性
+  computed: {
+    // 映射 Pinia Store 实例
+    appStore() {
+      return useAppStore()
+    },
+    // 计算属性
+    doubleCount() {
+      return this.count * 2
+    }
+  },
+
+  // 3. methods 页面方法集
+  methods: {
+    handleIncrement() {
+      // 熟悉的 this 指针修改 data 变量
+      this.count++
+    },
+    handleUpdateUser() {
+      this.userForm.age += 1
+      this.userForm.name = this.userForm.name === '小明' ? '小红' : '小明'
+    },
+
+    // 修改 Pinia 方式 1：调用 Action
+    handleActionUpdate() {
+      this.appStore.setMiniAppInfo({
+        id: 99,
+        name: 'Action修改的小程序',
+        centerId: 88888888,
+        logo: '/static/logo.png',
+        theme: 'primary-blue'
+      })
+      uni.showToast({ title: '通过 Actions 更新成功', icon: 'none' })
+    },
+
+    // 修改 Pinia 方式 2：直接赋值
+    handleDirectUpdate() {
+      this.appStore.miniAppInfo.name = 'Options API 直接赋值修改'
+      this.appStore.miniAppInfo.centerId = 99999999
+      uni.showToast({ title: '直接赋值修改成功', icon: 'none' })
+    },
+
+    handleResetStore() {
+      this.appStore.clearMiniAppInfo()
+      uni.showToast({ title: 'Pinia 状态已清空', icon: 'none' })
+    },
+
+    // 异步接口请求
+    async handleFetchApi() {
+      this.loading = true
+      try {
+        const res = await queryMiniAppInfo()
+        if (res && res.miniApp) {
+          this.appStore.setMiniAppInfo(res.miniApp)
+          uni.showToast({ title: '接口数据已同步到 Pinia', icon: 'success' })
+        }
+      } catch (err) {
+        this.appStore.setMiniAppInfo({
+          id: 49,
+          name: '伏见桃山演示馆',
+          centerId: 10000000,
+          logo: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/images/40fd9ec75b351c5a.jpg'
+        })
+        uni.showToast({ title: '模拟数据已同步到 Pinia', icon: 'none' })
+      } finally {
+        this.loading = false
+      }
+    }
+  },
+
+  // 4. uni-app / Vue 生命周期钩子 (直接在选项根级别声明)
+  onLoad(options) {
+    console.log('Options API onLoad 接收参数:', options)
+  },
+  onShow() {
+    console.log('Options API onShow 页面显示')
+  },
+  mounted() {
+    console.log('Options API mounted 挂载完成')
   }
 }
 </script>

@@ -15,24 +15,34 @@
   </view>
 </template>
 
-<script setup>
+<script>
 import { useAppStore } from '@/stores/app'
 
-const appStore = useAppStore()
-
-const handleSimulateLogin = () => {
-  // 模拟登录，保存数据到 Pinia
-  appStore.setMiniAppInfo({
-    id: 49,
-    name: '伏见桃山演示馆',
-    centerId: 10000000,
-    logo: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/images/40fd9ec75b351c5a.jpg',
-    token: 'mock-jwt-token-123456'
-  })
-  uni.showToast({ title: '登录成功', icon: 'success' })
-  setTimeout(() => {
-    router.back()
-  }, 1000)
+export default {
+  name: 'LoginPage',
+  data() {
+    return {}
+  },
+  computed: {
+    appStore() {
+      return useAppStore()
+    }
+  },
+  methods: {
+    handleSimulateLogin() {
+      this.appStore.setMiniAppInfo({
+        id: 49,
+        name: '伏见桃山演示馆',
+        centerId: 10000000,
+        logo: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/images/40fd9ec75b351c5a.jpg',
+        token: 'mock-jwt-token-123456'
+      })
+      uni.showToast({ title: '登录成功', icon: 'success' })
+      setTimeout(() => {
+        router.back()
+      }, 1000)
+    }
+  }
 }
 </script>
 

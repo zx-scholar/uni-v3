@@ -25,91 +25,30 @@
   </view>
 </template>
 
-<script setup>
+<script>
 import { useAppStore } from '@/stores/app'
 
-const appStore = useAppStore()
-
-const handleGoDemo = () => {
-  router.push('demo')
-}
-
-const handleClear = () => {
-  appStore.clearMiniAppInfo()
-  uni.showToast({ title: '缓存已重置', icon: 'none' })
+export default {
+  name: 'MinePage',
+  data() {
+    return {}
+  },
+  computed: {
+    appStore() {
+      return useAppStore()
+    }
+  },
+  methods: {
+    handleGoDemo() {
+      router.push('demo')
+    },
+    handleClear() {
+      this.appStore.clearMiniAppInfo()
+      uni.showToast({ title: '缓存已重置', icon: 'none' })
+    }
+  }
 }
 </script>
 
-<style scoped>
-.page-container {
-  min-height: 100vh;
-  background-color: #f5f7fa;
-}
-
-.content {
-  padding: 30rpx;
-}
-
-.user-card {
-  background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
-  border-radius: 20rpx;
-  padding: 40rpx 30rpx;
-  display: flex;
-  align-items: center;
-  margin-bottom: 30rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
-}
-
-.avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 60rpx;
-  margin-right: 24rpx;
-  background-color: #ffffff;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.user-name {
-  font-size: 34rpx;
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 8rpx;
-}
-
-.user-id {
-  font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.menu-list {
-  background-color: #ffffff;
-  border-radius: 20rpx;
-  padding: 0 30rpx;
-}
-
-.menu-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30rpx 0;
-  border-bottom: 2rpx solid #f1f5f9;
-}
-
-.menu-item:last-child {
-  border-bottom: none;
-}
-
-.menu-title {
-  font-size: 28rpx;
-  color: #334155;
-}
-
-.arrow {
-  font-size: 36rpx;
-  color: #94a3b8;
-}
-</style>
+<!-- 导入独立的 mine.scss 样式文件 -->
+<style lang="scss" scoped src="./mine.scss"></style>

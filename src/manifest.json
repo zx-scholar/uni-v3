@@ -4,7 +4,7 @@
   "description": "uni-app (Vue3 + Vite + JS) 跨端框架",
   "versionName": "1.0.0",
   "versionCode": "100",
-  "transformPx": false,
+  "transformPx": true,
   "h5": {
     "title": "uni-app Vue3 Vite",
     "router": {
