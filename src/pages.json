@@ -41,6 +41,18 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{
+					"path": "browsingHistory/browsingHistory",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "eventsPlan/eventsPlan",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}

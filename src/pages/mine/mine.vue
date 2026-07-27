@@ -21,6 +21,14 @@
           <text class="menu-title">📖 Vue3 + Pinia 教程示例页</text>
           <text class="arrow">›</text>
         </view>
+        <view class="menu-item" @click="handleGoBrowsingHistory">
+          <text class="menu-title">浏览记录</text>
+          <text class="arrow">›</text>
+        </view>
+        <view class="menu-item" @click="handleGoEventsPlan">
+          <text class="menu-title">赛程总览</text>
+          <text class="arrow">›</text>
+        </view>
         <view class="menu-item" @click="handleClear">
           <text class="menu-title">🧹 清空 Pinia 状态与缓存</text>
           <text class="arrow">›</text>
@@ -73,6 +81,12 @@ export default {
     },
     handleGoDemo() {
       router.push('demo')
+    },
+    handleGoBrowsingHistory() {
+      router.push('browsingHistory')
+    },
+    handleGoEventsPlan() {
+      router.push('eventsPlan')
     },
     handleClear() {
       this.appStore.clearMiniAppInfo()

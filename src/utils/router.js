@@ -12,7 +12,9 @@ export const routes = {
   template: '/pages/template/template',
 
   // === 功能分包页面 ===
-  demo: '/subpkg_demo/demo/demo'
+  demo: '/subpkg_demo/demo/demo',
+  browsingHistory: '/subpkg_demo/browsingHistory/browsingHistory',
+  eventsPlan: '/subpkg_demo/eventsPlan/eventsPlan'
 }
 
 /**
