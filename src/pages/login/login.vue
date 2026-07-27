@@ -32,7 +32,7 @@
       </view>
 
       <button class="primary-button" :loading="uploading" :disabled="uploading" @click="confirmProfile">
-        完成授权
+        下一步
       </button>
     </view>
 
@@ -164,8 +164,8 @@ export default {
   },
   async onLoad(options = {}) {
     this.returnUrl = options.url || options.r || ''
-    this.avatarUrl = this.userStore.userInfo.avatarUrl || ''
-    this.nickName = this.userStore.userInfo.nickName || ''
+    this.avatarUrl = this.userStore.userInfo.avatarUrl || DEFAULT_LOGO
+    this.nickName = this.userStore.userInfo.nickName || '微信用户'
     this.step = this.userStore.isProfileReady ? 'methods' : 'profile'
 
     await this.ensureMiniAppInfo()
