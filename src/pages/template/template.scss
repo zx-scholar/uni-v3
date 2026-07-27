@@ -13,13 +13,43 @@
   height: 100vh;
   background-color: $bg-page;
   overflow: hidden;
+  position: relative;
+}
+
+/* ================================
+   页面背景图 (默认注释，取消注释即可启用)
+   用法：<view class="page-container page-has-bg">
+   ================================ */
+.page-has-bg {
+  background-color: $bg-page;                   // contain 模式下露底部分使用页面背景色填充
+  background-image: url('@/static/images/page-bg-temp.jpg'); // ← 替换为你的页面背景图路径
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  // 半透明遮罩层，保证内容文字清晰可读
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);          // 遮罩透明度按需调整
+    pointer-events: none;                       // 不干扰点击事件
+    z-index: 0;
+  }
+
+  // 让滚动内容区 z-index 高于遮罩
+  > .page-scroll-content,
+  > .page-bottom-bar {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 /* 中间滚动内容区域 */
 .page-scroll-content {
   flex: 1;
   overflow-y: auto;
-  padding: $padding-md;
+  padding: $padding-md 24px;   // 左右 24px (编译自动转 rpx)，卡片两侧无需再设 margin
   box-sizing: border-box;
 }
 
@@ -30,6 +60,8 @@
   padding: $padding-lg;
   margin-bottom: $padding-md;
   box-shadow: $shadow-sm;
+  position: relative;
+  overflow: hidden;
 
   .card-header {
     font-size: $font-xxl;
@@ -44,6 +76,62 @@
     font-size: $font-base;
     color: $text-sub;
     line-height: 1.6;
+  }
+}
+
+/* ================================
+   卡片背景图 (卡片上叠加图片，文字保持清晰)
+   用法：<view class="card card-has-bg">
+   ================================ */
+.card-has-bg {
+  // 去掉纯色背景，让背景图透出
+  background-color: transparent !important;
+
+  // 背景图（使用伪元素避免干扰卡片内容层级）
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('@/static/images/card-bg-temp.jpg'); // ← 替换为你的卡片背景图路径
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+
+  // 半透明遮罩，保证文字可读
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.15) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  // 卡片内容浮在背景和遮罩上方
+  > .card-header,
+  > .card-body,
+  > .item-row {
+    position: relative;
+    z-index: 2;
+  }
+
+  // 带背景图时文字颜色适配深色背景
+  .card-header {
+    color: #ffffff !important;
+    border-bottom-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .card-body {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .item-row {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+
+    .label { color: rgba(255, 255, 255, 0.7); }
+    .val   { color: #ffffff; }
   }
 }
 
@@ -74,37 +162,31 @@
 .page-bottom-bar {
   flex-shrink: 0;
   background-color: $bottom-bar-bg;
-  padding: $padding-sm $padding-md;
-  display: flex;
-  align-items: center;
-  gap: $padding-sm;
+  padding: $padding-xl 24px;          // 左右 24px 与滚动区对齐
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
 
-  /* 适配 iPhone 底部安全区 (防黑条遮挡) */
-  padding-bottom: calc(#{$padding-sm} + env(safe-area-inset-bottom));
+  /* 底部安全区垫片：避开手机底部的 Home Indicator 横条
+     - constant() 兼容 iOS 11.0 - 11.2
+     - env()      兼容 iOS 11.2+ (iPhone X 及以上机型)
+     两者都写，浏览器自动取最后一个有效值 */
+  padding-bottom: calc(#{$padding-xl} + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{$padding-xl} + env(safe-area-inset-bottom, 0px));
 
-  .btn {
-    flex: 1;
-    height: 44px;
-    line-height: 44px;
+  .btn-primary {
+    width: 100%;                      // 父容器左右 24px padding，实际宽度 = 750rpx - 48rpx = 702rpx
+    height: 90px;
+    line-height: 90px;
     font-size: $font-md;
     font-weight: 600;
-    border-radius: $radius-md;
+    color: $text-white;
+    background: $gradient-btn;
     border: none;
+    border-radius: 999px;             // 两侧全圆角
+    box-shadow: $shadow-lg;
+    text-align: center;
 
-    &.btn-secondary {
-      background-color: #f1f5f9;
-      color: $text-sub;
-    }
-
-    &.btn-primary {
-      background: $gradient-btn;
-      color: $text-white;
-      box-shadow: $shadow-lg;
-
-      &:active {
-        opacity: 0.9;
-      }
+    &:active {
+      opacity: 0.9;
     }
   }
 }

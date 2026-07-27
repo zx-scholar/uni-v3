@@ -48,10 +48,10 @@ export default {
       type: String,
       default: ''
     },
-    // 标题颜色
+    // 标题颜色（适配浅色页面背景，默认黑色；页面有深色/渐变背景时请显式传入 color="#ffffff"）
     color: {
       type: String,
-      default: '#ffffff'
+      default: '#333333'
     },
     // 标题字号
     fontSize: {
@@ -61,7 +61,7 @@ export default {
     // 标题字重
     fontWeight: {
       type: String,
-      default: '600'
+      default: '500'
     },
     // 背景样式 (支持 CSS 颜色、渐变色或 url('https://...'))
     background: {
@@ -159,7 +159,7 @@ export default {
       let rightEdge = 40
 
       try {
-        const sysInfo = (typeof uni.getWindowInfo === 'function' ? uni.getWindowInfo() : null) || 
+        const sysInfo = (typeof uni.getWindowInfo === 'function' ? uni.getWindowInfo() : null) ||
                          (typeof uni.getSystemInfoSync === 'function' ? uni.getSystemInfoSync() : null) || {}
         if (typeof sysInfo.statusBarHeight === 'number' && sysInfo.statusBarHeight >= 0) {
           statusBar = sysInfo.statusBarHeight

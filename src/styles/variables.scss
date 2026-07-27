@@ -26,7 +26,7 @@ $bg-hover: #f1f5f9;            // 点击/悬停背景
 // --- 4. 渐变色配置 ---
 $gradient-primary: linear-gradient(135deg, #42b883 0%, #35495e 100%);
 $gradient-navbar: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-$gradient-btn: linear-gradient(135deg, #42b883 0%, #3aa876 100%);
+$gradient-btn: linear-gradient(135deg, #1FA866 0%, #105C39 100%);
 
 // --- 5. 字号规范 (px -> 自动转 rpx) ---
 $font-xs: 24px;              // 辅助/小标签 (最小)
@@ -39,10 +39,10 @@ $font-xxl: 34px;             // 大标题 (正常标题)
 
 // --- 6. 边距与间距规范 (px -> 自动转 rpx) ---
 $padding-xs: 6px;              // 6rpx
-$padding-sm: 10px;             // 10rpx
-$padding-md: 15px;             // 15rpx
-$padding-lg: 20px;             // 20rpx
-$padding-xl: 30px;             // 30rpx
+$padding-sm: 12px;             // 12px
+$padding-md: 16px;             // 16px
+$padding-lg: 24px;             // 24px
+$padding-xl: 32px;             // 32px
 
 // --- 6. 圆角规范 ---
 $radius-sm: 6px;               // 6rpx

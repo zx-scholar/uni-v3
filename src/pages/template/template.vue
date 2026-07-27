@@ -1,10 +1,10 @@
 <template>
-  <view class="page-container">
-    <!-- 1. 顶部自定义导航栏组件 -->
-    <NavBar
-      title="通用标准模板"
-      background="linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)"
-    />
+  <view class="page-container page-has-bg">
+    <!-- 1. 顶部自定义导航栏组件（背景透明，文字深色，与页面背景图自然融合）
+         如需渐变/纯色背景+白色文字，传入 background 和 color：
+         <NavBar title="标题" background="#42b883" color="#ffffff" />
+    -->
+    <NavBar title="通用标准模板" color="#ffffff" />
 
     <!-- 2. 中间主体可滚动内容区 -->
     <scroll-view class="page-scroll-content" scroll-y>
@@ -36,6 +36,22 @@
         </view>
       </view>
 
+      <view class="card">
+        <view class="card-header">全局 SCSS 变量使用示例</view>
+        <view class="item-row">
+          <text class="label">品牌主色 ($primary-color):</text>
+          <text class="val" style="color: #42b883;">#42b883</text>
+        </view>
+        <view class="item-row">
+          <text class="label">卡片圆角 ($radius-card):</text>
+          <text class="val">16px (自动转 16rpx)</text>
+        </view>
+        <view class="item-row">
+          <text class="label">通用间距 ($padding-md):</text>
+          <text class="val">15px (自动转 30rpx)</text>
+        </view>
+      </view>
+
       <!-- 示例卡片 3：Pinia Store 使用演示 -->
       <view class="card">
         <view class="card-header">Pinia Store 数据示例</view>
@@ -48,12 +64,27 @@
           <text class="val">{{ appStore.centerId || '--' }}</text>
         </view>
       </view>
+
+      <!-- 示例卡片 4：卡片背景图演示 (启用 page-has-bg / card-has-bg) -->
+      <view class="card card-has-bg">
+        <view class="card-header">卡片背景图演示</view>
+        <view class="item-row">
+          <text class="label">样式类</text>
+          <text class="val">.card-has-bg</text>
+        </view>
+        <view class="item-row">
+          <text class="label">背景图</text>
+          <text class="val">contain / center top</text>
+        </view>
+        <view class="card-body" style="margin-top: 10px;">
+          页面背景由 .page-has-bg 提供，图片居中顶部 contain 显示，底部留白处自动使用 $bg-page 填充。
+        </view>
+      </view>
     </scroll-view>
 
-    <!-- 3. 底部固定动作按钮栏 -->
+    <!-- 3. 底部固定动作按钮栏（702rpx × 90rpx，两侧全圆角，渐变色） -->
     <view class="page-bottom-bar">
-      <button class="btn btn-secondary" @click="handleCancel">取消 / 返回</button>
-      <button class="btn btn-primary" @click="handleSubmit">确认提交</button>
+      <button class="btn-primary" @click="handleSubmit">确认提交</button>
     </view>
   </view>
 </template>
