@@ -6,12 +6,9 @@ import { getCodedParam } from '@/utils/crypto'
 import wechatParam from '@/config/appConfig'
 
 // 基础配置：H5 端本地开发走 Vite 代理，小程序/App 端走全路径域名
+let defaultBaseUrl = wechatParam.prefix + (wechatParam.webRoot || '')
 // #ifdef H5
-const defaultBaseUrl = wechatParam.webRoot || ''
-// #endif
-
-// #ifndef H5
-const defaultBaseUrl = wechatParam.prefix + (wechatParam.webRoot || '')
+defaultBaseUrl = wechatParam.webRoot || ''
 // #endif
 
 const config = {
@@ -28,11 +25,9 @@ const config = {
 function getServerAddress(url, requestOps = {}) {
   const { apiName, specPrefix } = requestOps
   if (apiName) {
+    let prefix = wechatParam[`${apiName}Prefix`] || ''
     // #ifdef H5
-    const prefix = ''
-    // #endif
-    // #ifndef H5
-    const prefix = wechatParam[`${apiName}Prefix`] || ''
+    prefix = ''
     // #endif
     const webRoot = wechatParam[`${apiName}WebRoot`] || ''
     return prefix + webRoot + url
@@ -175,9 +170,60 @@ const request = (options = {}) => {
   })
 }
 
+const upload = (url, filePath, data = {}, options = {}) => {
+  if (options.loading !== false) {
+    uni.showLoading({ title: '上传中...', mask: true })
+  }
+
+  const uploadOptions = requestInterceptor({
+    url,
+    method: 'POST',
+    data,
+    ...options
+  })
+
+  return new Promise((resolve, reject) => {
+    uni.uploadFile({
+      url: uploadOptions.url,
+      filePath,
+      name: options.name || 'file',
+      formData: uploadOptions.data,
+      header: uploadOptions.header,
+      timeout: uploadOptions.timeout,
+      success: (res) => {
+        if (options.loading !== false) {
+          uni.hideLoading()
+        }
+
+        try {
+          const data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data
+          const result = responseInterceptor({ ...res, data }, uploadOptions)
+          if (result && typeof result.then === 'function') {
+            result.then(resolve).catch(reject)
+          } else {
+            resolve(result)
+          }
+        } catch (error) {
+          reject(error)
+        }
+      },
+      fail: (error) => {
+        if (options.loading !== false) {
+          uni.hideLoading()
+        }
+        if (!options.hideErrorToast && !options.selfHandleError) {
+          uni.showToast({ title: error.errMsg || '文件上传失败', icon: 'none' })
+        }
+        reject(error)
+      }
+    })
+  })
+}
+
 // 快捷请求 API
 const http = {
   request,
+  upload,
   get(url, data = {}, options = {}) {
     return request({ url, method: 'GET', data, ...options })
   },

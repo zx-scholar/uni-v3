@@ -8,6 +8,7 @@
 }
 
 .user-card {
+  position: relative;
   background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
   border-radius: 20px;
   padding: 40px 30px;
@@ -25,6 +26,8 @@
   }
 
   .user-info {
+    min-width: 0;
+    flex: 1;
     display: flex;
     flex-direction: column;
 
@@ -39,6 +42,17 @@
       font-size: 24px;
       color: rgba(255, 255, 255, 0.8);
     }
+  }
+
+  .login-arrow {
+    margin-left: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 48px;
+    line-height: 1;
+  }
+
+  &.login-entry:active {
+    opacity: 0.88;
   }
 }
 

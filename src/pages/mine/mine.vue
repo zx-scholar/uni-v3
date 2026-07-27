@@ -3,12 +3,13 @@
     <NavBar title="个人中心" :showBack="false" />
 
     <view class="content">
-      <view class="user-card">
-        <image class="avatar" :src="appStore.logo || '/static/logo.png'" mode="aspectFit"></image>
+      <view class="user-card" :class="{ 'login-entry': !userStore.isLoggedIn }" @click="handleUserCardClick">
+        <image class="avatar" :src="userAvatar" mode="aspectFill"></image>
         <view class="user-info">
-          <text class="user-name">{{ appStore.appName || '未登录/未加载' }}</text>
-          <text class="user-id">CenterID: {{ appStore.centerId || '无' }}</text>
+          <text class="user-name">{{ userName }}</text>
+          <text class="user-id">{{ userDescription }}</text>
         </view>
+        <text v-if="!userStore.isLoggedIn" class="login-arrow">›</text>
       </view>
 
       <view class="menu-list">
@@ -31,6 +32,7 @@
 
 <script>
 import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 
 export default {
   name: 'MinePage',
@@ -40,9 +42,32 @@ export default {
   computed: {
     appStore() {
       return useAppStore()
+    },
+    userStore() {
+      return useUserStore()
+    },
+    userAvatar() {
+      return this.userStore.isLoggedIn
+        ? this.userStore.userInfo.avatarUrl || '/static/logo.png'
+        : '/static/logo.png'
+    },
+    userName() {
+      return this.userStore.isLoggedIn
+        ? this.userStore.userInfo.nickName || '微信用户'
+        : '点击登录'
+    },
+    userDescription() {
+      return this.userStore.isLoggedIn
+        ? `手机号：${this.userStore.phoneNum || '未绑定'}`
+        : '登录后查看个人信息'
     }
   },
   methods: {
+    handleUserCardClick() {
+      if (!this.userStore.isLoggedIn) {
+        router.push('login')
+      }
+    },
     handleGoTemplate() {
       router.push('template')
     },
