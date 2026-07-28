@@ -1,4 +1,5 @@
 @use '@/styles/variables.scss' as *;
+@use '@/styles/images/browsing' as *;
 
 .browsing-history-page {
   position: relative;
@@ -8,7 +9,7 @@
   height: 100vh;
   overflow: hidden;
   background-color: #f5f6fa;
-  background-image: url('./img/page-bg-browsing.png');
+  background-image: url($img-browsing-bg);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 100% auto;

@@ -1,0 +1,5 @@
+@use 'base' as *;
+
+// 全局通用图片
+$img-logo: '#{$img-base}logo.png';
+$img-empty: '#{$img-base}empty.png';

@@ -6,6 +6,7 @@
 
 // 独立 .scss 文件需要显式导入变量（uni.scss 的全局注入仅对内联 <style> 生效）
 @use '@/styles/variables.scss' as *;
+@use '@/styles/images/template' as *;
 
 .page-container {
   display: flex;
@@ -22,7 +23,7 @@
    ================================ */
 .page-has-bg {
   background-color: $bg-page;                   // contain 模式下露底部分使用页面背景色填充
-  background-image: url('@/static/images/page-bg-temp.jpg'); // ← 替换为你的页面背景图路径
+  background-image: url($img-page-bg); // ← 替换为 $img-page-bg 变量
   background-size: contain;
   background-position: center top;
   background-repeat: no-repeat;
@@ -92,7 +93,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('@/static/images/card-bg-temp.jpg'); // ← 替换为你的卡片背景图路径
+    background-image: url($img-card-bg); // ← 替换为 $img-card-bg 变量
     background-size: contain;
     background-position: center top;
     background-repeat: no-repeat;
