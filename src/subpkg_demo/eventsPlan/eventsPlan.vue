@@ -63,7 +63,7 @@
                 class="view-result"
                 @click="handleViewResult(match)"
               >
-                <image class="view-result-icon" src="./img/item-icon-event.png" mode="aspectFit"></image>
+                <view class="view-result-icon"></view>
                 <text class="view-result-text">查看赛果</text>
               </view>
             </view>

@@ -6,7 +6,7 @@
 
 // 独立 .scss 文件需要显式导入变量（uni.scss 的全局注入仅对内联 <style> 生效）
 @use '@/styles/variables.scss' as *;
-@use '@/styles/images' as *;
+@use '@/styles/images/template.scss' as *;
 
 .page-container {
   display: flex;

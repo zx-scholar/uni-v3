@@ -1,5 +1,5 @@
 @use "@/styles/variables.scss" as *;
-@use "@/styles/images" as *;
+@use "@/styles/images/events.scss" as *;
 
 .events-plan-page {
     position: relative;
@@ -243,6 +243,10 @@
     width: 26px;
     height: 26px;
     margin-right: 6px;
+    background-image: url($img-icon-bg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .view-result-text {
