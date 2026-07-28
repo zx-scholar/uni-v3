@@ -24,12 +24,18 @@
 				"navigationStyle": "custom"
 			}
 		},
-		{
-			"path": "pages/template/template",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		}
+		      {
+		        "path": "pages/template/template",
+		        "style": {
+		          "navigationStyle": "custom"
+		        }
+		      },
+		      {
+		        "path": "pages/uploadImage/uploadImage",
+		        "style": {
+		          "navigationStyle": "custom"
+		        }
+		      }
 	],
 	"subPackages": [
 		{

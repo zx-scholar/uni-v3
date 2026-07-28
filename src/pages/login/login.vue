@@ -159,7 +159,7 @@ export default {
       return info.initCenterId || info.centerId || ''
     },
     verifyCodeType() {
-      return this.appStore.miniAppInfo.verifyCodeType
+      return this.appStore.miniAppInfo.verifyCodeType || ''
     }
   },
   async onLoad(options = {}) {

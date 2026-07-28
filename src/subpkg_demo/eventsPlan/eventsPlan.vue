@@ -1,8 +1,9 @@
 <template>
   <view class="events-plan-page">
-    <NavBar title="赛程总览" color="#ffffff" />
+    <NavBar title="" color="#ffffff" />
 
     <scroll-view class="page-scroll" scroll-y>
+      <view class="page-content">
       <!-- 日期选择条 -->
       <scroll-view class="date-bar" scroll-x>
         <view
@@ -68,6 +69,7 @@
             </view>
           </view>
         </view>
+      </view>
       </view>
     </scroll-view>
   </view>

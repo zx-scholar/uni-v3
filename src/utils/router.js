@@ -10,6 +10,7 @@ export const routes = {
   login: '/pages/login/login',
   profile: '/pages/profile/profile',
   template: '/pages/template/template',
+  uploadImage: '/pages/uploadImage/uploadImage',
 
   // === 功能分包页面 ===
   demo: '/subpkg_demo/demo/demo',

@@ -12,6 +12,7 @@
       <button class="btn btn-demo" @click="handleGoToDemo">
         📖 打开 Vue2 转 Vue3 + Pinia 教程示例页
       </button>
+
     </view>
 
     <!-- Tech Stack Feature Badges -->
@@ -71,6 +72,7 @@ export default {
     handleGoToDemo() {
       router.push('demo', { from: 'home', time: Date.now() })
     },
+
     async handleFetchMiniApp() {
       this.loading = true
       try {

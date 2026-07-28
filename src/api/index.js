@@ -48,3 +48,12 @@ export const uploadUserAvatar = (filePath) => {
 export const getUserProfile = () => {
   return http.get('/api/user/profile')
 }
+
+// 通用文件上传
+export const uploadFile = (filePath, data = {}) => {
+  return http.upload('/api/common/uploadFile', filePath, {
+    path: 'gameImage',
+    enctype: 'multipart/form-data',
+    ...data
+  })
+}

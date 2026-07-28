@@ -29,6 +29,10 @@
           <text class="menu-title">赛程总览</text>
           <text class="arrow">›</text>
         </view>
+        <view class="menu-item" @click="handleGoUploadImage">
+          <text class="menu-title">🖼️ 图片上传</text>
+          <text class="arrow">›</text>
+        </view>
         <view class="menu-item" @click="handleClear">
           <text class="menu-title">🧹 清空 Pinia 状态与缓存</text>
           <text class="arrow">›</text>
@@ -87,6 +91,9 @@ export default {
     },
     handleGoEventsPlan() {
       router.push('eventsPlan')
+    },
+    handleGoUploadImage() {
+      router.push('uploadImage')
     },
     handleClear() {
       this.appStore.clearMiniAppInfo()
