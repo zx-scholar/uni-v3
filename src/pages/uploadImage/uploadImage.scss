@@ -80,20 +80,6 @@
   }
 }
 
-.picker-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 420rpx;
-  height: 64rpx;
-  padding: 0 20rpx;
-  font-size: $font-base;
-  color: $text-main;
-  background: #f5f6fa;
-  border-radius: $radius-sm;
-  box-sizing: border-box;
-}
-
 /* 变量名预览 */
 .var-preview {
   display: flex;

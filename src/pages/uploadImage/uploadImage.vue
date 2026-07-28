@@ -10,16 +10,11 @@
         <!-- 图片类型选择 -->
         <div class="form-row">
           <span class="form-label">图片类型</span>
-          <picker mode="selector" :range="typeOptions" @change="onTypeChange">
-            <div class="picker-box">
-              <span>{{ typeOptions[typeIndex] }}</span>
-              <span class="iconfont icon-xiala" style="font-size: 34rpx; color: #999;"></span>
-            </div>
-          </picker>
+          <Dropdown v-model="selectedType" :options="typeOptions" width="420rpx" />
         </div>
 
         <!-- 自定义变量名 -->
-        <div v-if="typeIndex === typeOptions.length - 1" class="form-row">
+        <div v-if="selectedType === '自定义'" class="form-row">
           <span class="form-label">变量名</span>
           <input class="form-input" v-model="customVar" placeholder="例如：my-banner" />
         </div>
@@ -93,6 +88,7 @@
 
 <script>
 import { uploadFile } from '@/api'
+import Dropdown from '@/components/Dropdown/Dropdown.vue'
 
 // OSS 基础地址前缀（从上传 URL 中剥离，替换为 #{$img-base}）
 const OSS_PREFIX = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/'
@@ -110,10 +106,11 @@ const TYPE_OPTIONS = [
 
 export default {
   name: 'UploadImage',
+  components: { Dropdown },
 
   data() {
     return {
-      typeIndex: 0,
+      selectedType: TYPE_OPTIONS[0],
       customVar: '',
       imageList: [],
       results: [],
@@ -128,18 +125,14 @@ export default {
 
     /** 当前变量名（不含数字后缀） */
     variableName() {
-      if (this.typeIndex === TYPE_OPTIONS.length - 1) {
+      if (this.selectedType === '自定义') {
         return this.customVar.trim() || 'custom'
       }
-      return TYPE_OPTIONS[this.typeIndex]
+      return this.selectedType
     }
   },
 
   methods: {
-    onTypeChange(e) {
-      this.typeIndex = e.detail.value
-    },
-
     chooseImage() {
       const count = 9 - this.imageList.length
       uni.chooseImage({
@@ -252,18 +245,3 @@ export default {
 </script>
 
 <style lang="scss" scoped src="./uploadImage.scss"></style>
-
-<!-- picker 内部弹窗字体过小，全局覆盖 -->
-<style lang="scss">
-.uni-picker-popup,
-.uni-picker-view,
-.uni-picker-item,
-.uni-picker-mask,
-.uni-picker-header {
-  font-size: 28rpx !important;
-}
-
-.uni-picker-item {
-  font-size: 28rpx !important;
-}
-</style>
