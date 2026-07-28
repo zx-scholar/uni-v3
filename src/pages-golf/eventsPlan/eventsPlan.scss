@@ -96,7 +96,7 @@ $img-icon-bg: '#{$img-base}gameImage2e81f06ba42643f5a5ba6dbc414527e3.png';
     font-size: 28px;
     line-height: 1;
     font-weight: 500;
-    color: $text-main-b1;
+    color: $text-main;
 }
 
 .team-filter-arrow {
@@ -129,14 +129,14 @@ $img-icon-bg: '#{$img-base}gameImage2e81f06ba42643f5a5ba6dbc414527e3.png';
     margin-right: 12px;
     font-size: 28px;
     line-height: 1;
-    color: $text-main-b1;
+    color: $text-main;
 
 }
 
 .time-range {
     font-size: 28px;
     line-height: 1;
-    color: $text-main-b1;
+    color: $text-main;
 }
 
 .match-list {
@@ -185,7 +185,7 @@ $img-icon-bg: '#{$img-base}gameImage2e81f06ba42643f5a5ba6dbc414527e3.png';
     min-width: 0;
     font-size: 28px;
     line-height: 44px;
-    color: $text-main-b1;
+    color: $text-main;
 }
 
 .team-score {
@@ -193,12 +193,12 @@ $img-icon-bg: '#{$img-base}gameImage2e81f06ba42643f5a5ba6dbc414527e3.png';
     font-size: 32px;
     line-height: 44px;
     font-weight: 500;
-    color: $text-main-b2;
+    color: $text-sub;
     text-align: right;
     box-sizing: border-box;
 
     &--win {
-        color: $text-main-b1;
+        color: $text-main;
     }
 }
 
@@ -207,11 +207,11 @@ $img-icon-bg: '#{$img-base}gameImage2e81f06ba42643f5a5ba6dbc414527e3.png';
     padding-left: 8px;
     font-size: 18px;
     line-height: 44px;
-    color: $text-main-b2;
+    color: $text-sub;
     text-align: left;
 
     &--win {
-        color: $text-main-b1;
+        color: $text-main;
         font-size: 18px;
     }
 }
@@ -228,7 +228,7 @@ $img-icon-bg: '#{$img-base}gameImage2e81f06ba42643f5a5ba6dbc414527e3.png';
 .match-status {
     font-size: 26px;
     line-height: 1;
-    color: $text-main-b2;
+    color: $text-sub;
     margin-bottom: 20px;
 
     &--pending {
@@ -255,5 +255,5 @@ $img-icon-bg: '#{$img-base}gameImage2e81f06ba42643f5a5ba6dbc414527e3.png';
 .view-result-text {
     font-size: 26px;
     line-height: 1;
-    color: $text-main-b1;
+    color: $text-main;
 }
