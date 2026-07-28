@@ -39,8 +39,8 @@
 	],
 	"subPackages": [
 		{
-			"root": "subpkg_demo",
-			"name": "subpkg_demo",
+			"root": "page-golf",
+			"name": "page-golf",
 			"pages": [
 				{
 					"path": "demo/demo",
@@ -61,12 +61,17 @@
 					}
 				}
 			]
+		},
+		{
+			"root": "page-common",
+			"name": "page-common",
+			"pages": []
 		}
 	],
 	"preloadRule": {
 		"pages/index/index": {
 			"network": "all",
-			"packages": ["subpkg_demo"]
+			"packages": ["page-golf"]
 		}
 	},
 	"globalStyle": {

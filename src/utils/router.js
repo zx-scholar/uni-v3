@@ -13,9 +13,9 @@ export const routes = {
   uploadImage: '/pages/uploadImage/uploadImage',
 
   // === 功能分包页面 ===
-  demo: '/subpkg_demo/demo/demo',
-  browsingHistory: '/subpkg_demo/browsingHistory/browsingHistory',
-  eventsPlan: '/subpkg_demo/eventsPlan/eventsPlan'
+  demo: '/page-golf/demo/demo',
+  browsingHistory: '/page-golf/browsingHistory/browsingHistory',
+  eventsPlan: '/page-golf/eventsPlan/eventsPlan'
 }
 
 /**
