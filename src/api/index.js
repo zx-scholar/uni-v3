@@ -39,8 +39,7 @@ export const bindMiniAppUser = (data) => {
 // 上传微信头像
 export const uploadUserAvatar = (filePath) => {
   return http.upload('/api/common/uploadFile', filePath, {
-    path: 'gameImage',
-    enctype: 'multipart/form-data'
+    path: 'gameImage'
   })
 }
 
@@ -53,7 +52,6 @@ export const getUserProfile = () => {
 export const uploadFile = (filePath, data = {}) => {
   return http.upload('/api/common/uploadFile', filePath, {
     path: 'gameImage',
-    enctype: 'multipart/form-data',
     ...data
   })
 }

@@ -182,6 +182,9 @@ const upload = (url, filePath, data = {}, options = {}) => {
     ...options
   })
 
+  // 上传文件是 multipart/form-data，去掉 requestInterceptor 设置的 content-type 避免干扰
+  delete uploadOptions.header['content-type']
+
   return new Promise((resolve, reject) => {
     uni.uploadFile({
       url: uploadOptions.url,
