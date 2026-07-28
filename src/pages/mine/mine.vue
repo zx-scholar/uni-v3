@@ -59,13 +59,14 @@ export default {
       return useUserStore()
     },
     userAvatar() {
+      console.log(this.userStore.userInfo,'userStore')
       return this.userStore.isLoggedIn
         ? this.userStore.userInfo.avatarUrl || '/static/logo.png'
         : '/static/logo.png'
     },
     userName() {
       return this.userStore.isLoggedIn
-        ? this.userStore.userInfo.nickName || '微信用户'
+        ? this.userStore.userInfo.name ||   '微信用户'
         : '点击登录'
     },
     userDescription() {

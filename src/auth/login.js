@@ -22,6 +22,10 @@ export default async function login() {
     return null
   }
 
+  // #ifdef H5
+  return h5MockLogin(userStore)
+  // #endif
+
   try {
     // ======================== 1. 获取微信临时登录凭证 ========================
     const wxLoginRes = await uni.login()
@@ -73,3 +77,28 @@ export default async function login() {
     return null
   }
 }
+
+/** H5 环境：使用默认测试用户数据，绕过 wx.login */
+// #ifdef H5
+function h5MockLogin(userStore) {
+  console.log('h5环境')
+  const DEFAULT_USER = {
+    netUserId: 2025092200156572,
+    name: '4552sdf.1234as5',
+    mobileNum: '18251852533',
+    email: '12453574@qq.com',
+    status: '1',
+    centerId: 10000000,
+    token: '7bd6e6ab318744288c066be0b672ff15',
+    coAccountId: 9756,
+    accessToken: '0679326dd9fccdc9dec13a5a9317554d',
+    coAppId: 1,
+  }
+
+  userStore.setLoginResult(DEFAULT_USER)
+  userStore.setNetUserId(DEFAULT_USER.netUserId)
+  userStore.setUserInfo({ ...DEFAULT_USER, avatarUrl: '' })
+  console.log('[login] H5 模式使用默认测试用户:', DEFAULT_USER.netUserId)
+  return DEFAULT_USER
+}
+// #endif

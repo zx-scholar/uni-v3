@@ -34,7 +34,7 @@ export const useUserStore = defineStore(
       mobileNum: mobileNum.value,
     }))
 
-    const isLoggedIn = computed(() => !!openId.value)
+    const isLoggedIn = computed(() => !!netUserId.value)
     const hasUserInfo = computed(() => !!netUserId.value)
 
     // ========== Actions ==========

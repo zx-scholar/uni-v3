@@ -1,6 +1,6 @@
 <template>
   <view class="browsing-history-page">
-    <NavBar title="浏览记录" color="#222222"  />
+    <NavBar title="浏览记录123" color="#222222"  />
 
     <scroll-view class="history-scroll" scroll-y>
       <view class="search-box">
