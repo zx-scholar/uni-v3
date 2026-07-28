@@ -44,17 +44,13 @@
             <view class="match-teams">
               <view class="team-row">
                 <text class="team-name">{{ match.teamA }}</text>
-                <text class="team-score" :class="{ 'team-score--win': match.winner === 'A' }">
-                  {{ match.scoreA }}
-                  <text v-if="match.winner === 'A'" class="winner-mark">◀</text>
-                </text>
+                <text class="team-score" :class="{ 'team-score--win': match.winner === 'A' }">{{ match.scoreA }}</text>
+                <text class="winner-mark" :class="{ 'winner-mark--win': match.winner === 'A' }">{{ match.winner === 'A' ? '◀' : '' }}</text>
               </view>
               <view class="team-row team-row--alt">
                 <text class="team-name">{{ match.teamB }}</text>
-                <text class="team-score" :class="{ 'team-score--win': match.winner === 'B' }">
-                  {{ match.scoreB }}
-                  <text v-if="match.winner === 'B'" class="winner-mark">◀</text>
-                </text>
+                <text class="team-score" :class="{ 'team-score--win': match.winner === 'B' }">{{ match.scoreB }}</text>
+                <text class="winner-mark" :class="{ 'winner-mark--win': match.winner === 'B' }">{{ match.winner === 'B' ? '◀' : '' }}</text>
               </view>
             </view>
 
@@ -66,7 +62,7 @@
                 class="view-result"
                 @click="handleViewResult(match)"
               >
-                <text class="iconfont icon-mingxi view-result-icon"></text>
+                <image class="view-result-icon" src="./img/item-icon-event.png" mode="aspectFit"></image>
                 <text class="view-result-text">查看赛果</text>
               </view>
             </view>
