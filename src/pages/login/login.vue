@@ -110,6 +110,7 @@ import {
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
 
+// 用户 Store 别名字段映射，方便模板中使用
 const DEFAULT_LOGO = '/static/logo.png'
 
 export default {
@@ -146,7 +147,7 @@ export default {
       return this.appStore.appName || '伏见桃山演示馆'
     },
     openId() {
-      return this.userStore.loginInfo.openId || ''
+      return this.userStore.openId || ''
     },
     codeButtonText() {
       return this.countdown > 0 ? `${this.countdown}s` : '获取验证码'
@@ -164,6 +165,7 @@ export default {
   },
   async onLoad(options = {}) {
     this.returnUrl = options.url || options.r || ''
+    // 从 store 恢复已有信息
     this.avatarUrl = this.userStore.userInfo.avatarUrl || DEFAULT_LOGO
     this.nickName = this.userStore.userInfo.nickName || '微信用户'
     this.step = this.userStore.isProfileReady ? 'methods' : 'profile'
@@ -202,9 +204,8 @@ export default {
           code: loginResult.code,
           wechatMiniAppId: this.miniAppId
         })
+        // 写入 store（持久化由 Pinia persist 自动处理）
         this.userStore.setWechatSession(session)
-        uni.setStorageSync('openId', session.openId || '')
-        uni.setStorageSync('unionId', session.unionId || '')
         return Boolean(session.openId)
       } catch (error) {
         uni.showToast({ title: error.message || error.errMsg || '无法获取微信登录凭证', icon: 'none' })

@@ -1,7 +1,10 @@
 <script>
+import initialize from '@/initialize'
+
 export default {
   onLaunch: function () {
     console.log('App Launch - uni-app Vue3 Vite Project Started')
+    initialize()
   },
   onShow: function () {
     console.log('App Show')

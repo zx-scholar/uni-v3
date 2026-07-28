@@ -39,7 +39,7 @@
         <button class="btn btn-outline" @click="handleClearPinia" style="margin-top: 16rpx;">
           清空 Pinia 状态
         </button>
-        
+
         <view v-if="requestResult" class="result-box">
           <text class="result-title">Pinia Store 当前数据：</text>
           <text class="result-content">{{ requestResult }}</text>
@@ -59,6 +59,9 @@ export default {
     return {
       loading: false
     }
+  },
+  onLoad() {
+    // this.handleFetchMiniApp()
   },
   computed: {
     appStore() {

@@ -70,7 +70,7 @@ export default {
     },
     userDescription() {
       return this.userStore.isLoggedIn
-        ? `手机号：${this.userStore.phoneNum || '未绑定'}`
+        ? `手机号：${this.userStore.mobileNum || '未绑定'}`
         : '登录后查看个人信息'
     }
   },
