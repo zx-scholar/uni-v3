@@ -1,5 +1,7 @@
 @use '@/styles/variables.scss' as *;
-@use '@/styles/images/browsing.scss' as *;
+
+// 图片变量
+$img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 
 .browsing-history-page {
   position: relative;

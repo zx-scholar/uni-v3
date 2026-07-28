@@ -6,7 +6,10 @@
 
 // 独立 .scss 文件需要显式导入变量（uni.scss 的全局注入仅对内联 <style> 生效）
 @use '@/styles/variables.scss' as *;
-@use '@/styles/images/template.scss' as *;
+
+// 图片变量
+$img-page-bg: '#{$img-base}gameImage189526e75bf748a9834c98393be93843.jpg';
+$img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
 
 .page-container {
   display: flex;
