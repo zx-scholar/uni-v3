@@ -1,7 +1,7 @@
 /* =========================================================================
    通用页面模版 SCSS 样式 (template.scss)
    支持直接复制此文件为新页面样式
-   引用 variables.scss 中的变量：$primary-color, $bg-page, $radius-card, $shadow-md 等
+   引用 variables.scss 中的变量：$color-primary, $color-bg-page, $size-radius-card, $color-shadow-md 等
    ========================================================================= */
 
 // 独立 .scss 文件需要显式导入变量（uni.scss 的全局注入仅对内联 <style> 生效）
@@ -15,7 +15,7 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: $bg-page;
+  background-color: $color-bg-page;
   overflow: hidden;
   position: relative;
 }
@@ -25,7 +25,7 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
    用法：<view class="page-container page-has-bg">
    ================================ */
 .page-has-bg {
-  background-color: $bg-page;                   // contain 模式下露底部分使用页面背景色填充
+  background-color: $color-bg-page;                   // contain 模式下露底部分使用页面背景色填充
   background-image: url($img-page-bg); // ← 替换为 $img-page-bg 变量
   background-size: contain;
   background-position: center top;
@@ -53,32 +53,32 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
 .page-scroll-content {
   flex: 1;
   overflow-y: auto;
-  padding: $padding-md 24px;   // 左右 24px (编译自动转 rpx)，卡片两侧无需再设 margin
+  padding: $size-padding-md 24px;   // 左右 24px (编译自动转 rpx)，卡片两侧无需再设 margin
   box-sizing: border-box;
 }
 
 /* 示范卡片样式 */
 .card {
-  background-color: $bg-card;
-  border-radius: $radius-card;
-  padding: $padding-lg;
-  margin-bottom: $padding-md;
-  box-shadow: $shadow-sm;
+  background-color: $color-bg-card;
+  border-radius: $size-radius-card;
+  padding: $size-padding-lg;
+  margin-bottom: $size-padding-md;
+  box-shadow: $color-shadow-sm;
   position: relative;
   overflow: hidden;
 
   .card-header {
-    font-size: $font-xxl;
+    font-size: $size-font-xxl;
     font-weight: bold;
-    color: $primary-color;
-    padding-bottom: $padding-sm;
-    margin-bottom: $padding-md;
+    color: $color-primary;
+    padding-bottom: $size-padding-sm;
+    margin-bottom: $size-padding-md;
     border-bottom: 1px dashed #e2e8f0;
   }
 
   .card-body {
-    font-size: $font-base;
-    color: $text-sub;
+    font-size: $size-font-base;
+    color: $color-text-sub;
     line-height: 1.6;
   }
 }
@@ -143,7 +143,7 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: $padding-sm 0;
+  padding: $size-padding-sm 0;
   border-bottom: 1px solid #f1f5f9;
 
   &:last-child {
@@ -151,14 +151,14 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
   }
 
   .label {
-    font-size: $font-base;
-    color: $text-sub;
+    font-size: $size-font-base;
+    color: $color-text-sub;
   }
 
   .val {
-    font-size: $font-base;
+    font-size: $size-font-base;
     font-weight: 600;
-    color: $text-main;
+    color: $color-text-primary;
   }
 }
 
@@ -197,11 +197,11 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
   height: 80rpx;
   line-height: 80rpx;
   margin-top: 24rpx;
-  font-size: $font-base;
-  color: $primary-color;
+  font-size: $size-font-base;
+  color: $color-primary;
   background: #f0f9f4;
-  border: 1rpx solid $primary-color;
-  border-radius: $radius-md;
+  border: 1rpx solid $color-primary;
+  border-radius: $size-radius-md;
   text-align: center;
 
   &:active {
@@ -244,7 +244,7 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
   line-height: 80rpx;
   font-size: 30rpx;
   font-weight: 600;
-  border-radius: $radius-circle;
+  border-radius: $size-radius-circle;
   border: none;
   text-align: center;
 }
@@ -259,7 +259,7 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
 }
 
 .modal-btn-confirm {
-  background: $gradient-btn;
+  background: $color-gradient-btn;
   color: #ffffff;
 
   &:active {
@@ -269,28 +269,28 @@ $img-card-bg: '#{$img-base}gameImage6af9d2b839474b5f804592f23b3891e7.jpg';
 
 .page-bottom-bar {
   flex-shrink: 0;
-  background-color: $bottom-bar-bg;
-  padding: $padding-xl 24px;          // 左右 24px 与滚动区对齐
+  background-color: $color-bottom-bar-bg;
+  padding: $size-padding-xl 24px;          // 左右 24px 与滚动区对齐
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
 
   /* 底部安全区垫片：避开手机底部的 Home Indicator 横条
      - constant() 兼容 iOS 11.0 - 11.2
      - env()      兼容 iOS 11.2+ (iPhone X 及以上机型)
      两者都写，浏览器自动取最后一个有效值 */
-  padding-bottom: calc(#{$padding-xl} + constant(safe-area-inset-bottom, 0px));
-  padding-bottom: calc(#{$padding-xl} + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{$size-padding-xl} + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{$size-padding-xl} + env(safe-area-inset-bottom, 0px));
 
   .btn-primary {
     width: 100%;                      // 父容器左右 24px padding，实际宽度 = 750rpx - 48rpx = 702rpx
     height: 90px;
     line-height: 90px;
-    font-size: $font-md;
+    font-size: $size-font-md;
     font-weight: 600;
-    color: $text-white;
-    background: $gradient-btn;
+    color: $color-text-white;
+    background: $color-gradient-btn;
     border: none;
     border-radius: 999px;             // 两侧全圆角
-    box-shadow: $shadow-lg;
+    box-shadow: $color-shadow-lg;
     text-align: center;
 
     &:active {

@@ -1,17 +1,26 @@
 @use '@/styles/variables.scss' as *;
 
+// 图片变量
+$img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
+
 .page-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: $bg-page;
   overflow: hidden;
+  background-color: $color-bg-page;
+  background-image: url($img-browsing-bg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+  box-sizing: border-box;
 }
 
 .page-scroll-content {
   flex: 1;
   overflow-y: auto;
-  padding: $padding-md 24px;
+  padding: $size-padding-md 24px;
   box-sizing: border-box;
 }
 
@@ -19,18 +28,18 @@
    卡片
    ================================ */
 .card {
-  background-color: $bg-card;
-  border-radius: $radius-card;
-  padding: $padding-lg;
-  margin-bottom: $padding-md;
-  box-shadow: $shadow-sm;
+  background-color: $color-bg-card;
+  border-radius: $size-radius-card;
+  padding: $size-padding-lg;
+  margin-bottom: $size-padding-md;
+  box-shadow: $color-shadow-sm;
 
   .card-header {
-    font-size: $font-xxl;
+    font-size: $size-font-xxl;
     font-weight: bold;
-    color: $primary-color;
-    padding-bottom: $padding-sm;
-    margin-bottom: $padding-md;
+    color: $color-primary;
+    padding-bottom: $size-padding-sm;
+    margin-bottom: $size-padding-md;
     border-bottom: 1px dashed #e2e8f0;
     display: flex;
     align-items: center;
@@ -38,11 +47,11 @@
   }
 
   .copy-all-btn {
-    font-size: $font-sm;
+    font-size: $size-font-sm;
     font-weight: 400;
-    color: $primary-color;
+    color: $color-primary;
     padding: 6rpx 20rpx;
-    background: $primary-light;
+    background: $color-primary-light;
     border-radius: 999px;
     cursor: pointer;
 
@@ -58,24 +67,24 @@
 .form-row {
   display: flex;
   align-items: center;
-  margin-bottom: $padding-md;
+  margin-bottom: $size-padding-md;
 
   .form-label {
     width: 160rpx;
     flex-shrink: 0;
-    font-size: $font-base;
-    color: $text-main;
+    font-size: $size-font-base;
+    color: $color-text-primary;
   }
 
   .form-input {
     flex: 1;
     height: 64rpx;
     padding: 0 20rpx;
-    font-size: $font-base;
-    color: $text-main;
+    font-size: $size-font-base;
+    color: $color-text-primary;
     background: #f5f6fa;
     border: none;
-    border-radius: $radius-sm;
+    border-radius: $size-radius-sm;
     box-sizing: border-box;
   }
 }
@@ -84,20 +93,20 @@
 .var-preview {
   display: flex;
   align-items: center;
-  padding: $padding-sm $padding-md;
-  margin-bottom: $padding-md;
+  padding: $size-padding-sm $size-padding-md;
+  margin-bottom: $size-padding-md;
   background: #f0f9f4;
-  border-radius: $radius-sm;
+  border-radius: $size-radius-sm;
 
   .var-label {
-    font-size: $font-sm;
-    color: $text-sub;
+    font-size: $size-font-sm;
+    color: $color-text-sub;
   }
 
   .var-name {
-    font-size: $font-md;
+    font-size: $size-font-md;
     font-weight: 600;
-    color: $primary-color;
+    color: $color-primary;
     font-family: monospace;
   }
 }
@@ -115,7 +124,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  border-radius: $radius-md;
+  border-radius: $size-radius-md;
   overflow: hidden;
   background-color: #f8f9fa;
 }
@@ -136,8 +145,8 @@
 }
 
 .add-text {
-  font-size: $font-xs;
-  color: $text-sub;
+  font-size: $size-font-xs;
+  color: $color-text-sub;
   margin-top: 8rpx;
 }
 
@@ -153,7 +162,7 @@
     background: rgba(0, 0, 0, 0.4);
 
     .status-text {
-      font-size: $font-sm;
+      font-size: $size-font-sm;
       color: #fff;
     }
   }
@@ -166,7 +175,7 @@
     background: rgba(239, 68, 68, 0.5);
 
     .status-text {
-      font-size: $font-sm;
+      font-size: $size-font-sm;
       color: #fff;
     }
   }
@@ -192,8 +201,8 @@
    ================================ */
 .result-item {
   display: flex;
-  gap: $padding-md;
-  padding: $padding-sm 0;
+  gap: $size-padding-md;
+  padding: $size-padding-sm 0;
   border-bottom: 1px solid #f1f5f9;
 
   &:last-child {
@@ -205,7 +214,7 @@
   flex-shrink: 0;
   width: 120rpx;
   height: 120rpx;
-  border-radius: $radius-sm;
+  border-radius: $size-radius-sm;
   overflow: hidden;
 }
 
@@ -229,7 +238,7 @@
   gap: 12rpx;
   padding: 12rpx 16rpx;
   background: #282c34;
-  border-radius: $radius-sm;
+  border-radius: $size-radius-sm;
   cursor: pointer;
 }
 
@@ -258,8 +267,8 @@
 }
 
 .result-meta {
-  font-size: $font-xs;
-  color: $text-sub;
+  font-size: $size-font-xs;
+  color: $color-text-sub;
 }
 
 /* ================================
@@ -267,23 +276,23 @@
    ================================ */
 .page-bottom-bar {
   flex-shrink: 0;
-  background-color: $bottom-bar-bg;
-  padding: $padding-xl 24px;
+  background-color: $color-bottom-bar-bg;
+  padding: $size-padding-xl 24px;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
-  padding-bottom: calc(#{$padding-xl} + constant(safe-area-inset-bottom, 0px));
-  padding-bottom: calc(#{$padding-xl} + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{$size-padding-xl} + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{$size-padding-xl} + env(safe-area-inset-bottom, 0px));
 
   .btn-primary {
     width: 100%;
     height: 90px;
     line-height: 90px;
-    font-size: $font-md;
+    font-size: $size-font-md;
     font-weight: 600;
-    color: $text-white;
-    background: $gradient-btn;
+    color: $color-text-white;
+    background: $color-gradient-btn;
     border: none;
     border-radius: 999px;
-    box-shadow: $shadow-lg;
+    box-shadow: $color-shadow-lg;
     text-align: center;
 
     &:active {

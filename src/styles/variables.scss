@@ -2,66 +2,76 @@
    全局主题与样式变量配置文件 (variables.scss)
    支持在项目中统一配置与修改颜色、边距、圆角、渐变色与阴影
    注：所有单位写 px，编译期将通过 PostCSS 自动转换为 rpx (1px -> 1rpx)
+
+   命名规范：
+   - $color-*   : 颜色类变量（品牌色、文本色、背景色、渐变色、阴影）
+   - $size-*    : 尺寸类变量（字号、间距、圆角、高度）
+   - $img-*     : 图片路径变量
+   等级后缀：xs < sm < base < md < lg < xl < xxl
    ========================================================================= */
 
 // --- 1. 品牌与主题颜色 ---
-$primary-color: #42b883; // 品牌主色 (Vue绿 / 微信主题绿)
-$primary-dark: #35495e; // 主色深色
-$primary-light: #e1f5eb; // 主色浅色背景
-$accent-color: #3b82f6; // 辅助强调色 (蓝)
-$danger-color: #ef4444; // 危险/警告色 (红)
-$warning-color: #f59e0b; // 提醒/金黄
+$color-primary: #42b883; // 品牌主色 (Vue绿 / 微信主题绿)
+$color-primary-dark: #35495e; // 主色深色
+$color-primary-light: #e1f5eb; // 主色浅色背景
+$color-accent: #3b82f6; // 辅助强调色 (蓝)
+$color-danger: #ef4444; // 危险/警告色 (红)
+$color-warning: #f59e0b; // 提醒/金黄
 
 // --- 2. 文字颜色规范 ---
-$text-main: #1c1f1e; // 标题 / 正文主色
-$text-secondary: #6b7370; // 次级正文 / 次要信息
-$text-sub: #9aa3a0; // 描述 / 辅助说明
-$text-muted: #94a3b8; // 占位符 / 禁用文本
-$text-white: #ffffff; // 白色文字
-$text-main-b1: #2b335c;
-$text-main-b2: #9AA3A0;
+$color-text-primary: #1c1f1e; // 标题 / 正文主色
+$color-text-secondary: #6b7370; // 次级正文 / 次要信息
+$color-text-sub: #9aa3a0; // 描述 / 辅助说明
+$color-text-muted: #94a3b8; // 占位符 / 禁用文本
+$color-text-white: #ffffff; // 白色文字
+$color-text-black: #000000; // 黑色文字
+
 // --- 3. 背景色规范 ---
-$bg-page: #f5f6fa; // 页面整体背景色
-$bg-card: #ffffff; // 卡片背景色
-$bg-hover: #f1f5f9; // 点击/悬停背景
+$color-bg-page: #f5f6fa; // 页面整体背景色
+$color-bg-card: #ffffff; // 卡片背景色
+$color-bg-hover: #f1f5f9; // 点击/悬停背景
 
 // --- 4. 渐变色配置 ---
-$gradient-primary: linear-gradient(135deg, #42b883 0%, #35495e 100%);
-$gradient-navbar: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-$gradient-btn: linear-gradient(135deg, #1fa866 0%, #105c39 100%);
+$color-gradient-primary: linear-gradient(135deg, #42b883 0%, #35495e 100%);
+$color-gradient-navbar: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+$color-gradient-btn: linear-gradient(135deg, #1fa866 0%, #105c39 100%);
 
 // --- 5. 字号规范 (px -> 自动转 rpx) ---
-$font-xs: 24px; // 辅助/小标签 (最小)
-$font-sm: 24px; // 次要说明文字
-$font-base: 26px; // 正文/描述
-$font-md: 28px; // 按钮文字 / 列表项
-$font-lg: 30px; // 次级标题
-$font-xl: 32px; // 页面标题 / 重要文字
-$font-xxl: 34px; // 大标题 (正常标题)
+$size-font-xs: 22px; // 辅助/小标签 (最小)
+$size-font-sm: 24px; // 次要说明文字
+$size-font-base: 26px; // 正文/描述
+$size-font-md: 28px; // 按钮文字 / 列表项
+$size-font-lg: 30px; // 次级标题
+$size-font-xl: 32px; // 页面标题 / 重要文字
+$size-font-xxl: 34px; // 大标题 (正常标题)
 
 // --- 6. 边距与间距规范 (px -> 自动转 rpx) ---
-$padding-xs: 6px; // 6rpx
-$padding-sm: 12px; // 12px
-$padding-md: 16px; // 16px
-$padding-lg: 24px; // 24px
-$padding-xl: 32px; // 32px
+$size-padding-xs: 6px; // 6rpx
+$size-padding-sm: 12px; // 12px
+$size-padding-md: 16px; // 16px
+$size-padding-lg: 24px; // 24px
+$size-padding-xl: 32px; // 32px
 
-// --- 6. 圆角规范 ---
-$radius-sm: 8px; // 6rpx
-$radius-md: 10px; // 10rpx
-$radius-lg: 12px; // 12rpx
-$radius-card: 16px; // 16rpx
-$radius-pro: 24px; // 胶囊圆角
-$radius-circle: 40px; // 圆形圆角
+// --- 7. 圆角规范 ---
+$size-radius-sm: 8px; // 8rpx
+$size-radius-md: 10px; // 10rpx
+$size-radius-lg: 12px; // 12rpx
+$size-radius-card: 16px; // 16rpx
+$size-radius-pro: 24px; // 胶囊圆角
+$size-radius-circle: 40px; // 圆形圆角
 
-// --- 7. 阴影规范 ---
-$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
-$shadow-lg: 0 6px 24px rgba(66, 184, 131, 0.15);
+// --- 8. 阴影规范 ---
+$color-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+$color-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+$color-shadow-lg: 0 6px 24px rgba(66, 184, 131, 0.15);
 
-// --- 8. 底部固定按钮栏规范 ---
-$bottom-bar-height: 70px; // 底部操作栏高度
-$bottom-bar-bg: #ffffff;
+// --- 9. 底部固定按钮栏规范 ---
+$size-bottom-bar-height: 70px; // 底部操作栏高度
+$color-bottom-bar-bg: #ffffff;
 
-// --- 9. 图片 OSS 基础路径 ---
+// --- 10. 图片 OSS 基础路径 ---
 $img-base: 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
+
+// --- 11. Tabbar 图标 ---
+$img-tabbar-icon: '#{$img-base}gameImage774424d8cd4a444e9a3107d97b014a1d.png';
+$img-tabbar-icon-mine: '#{$img-base}gameImage4a1a8e056f654c04966f57eb8d65a3b1.png';

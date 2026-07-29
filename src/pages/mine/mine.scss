@@ -72,13 +72,24 @@
       border-bottom: none;
     }
 
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 16rpx;
+
+      .iconfont {
+        font-size: 32rpx;
+        color: #42b883;
+      }
+    }
+
     .menu-title {
       font-size: 28px;
       color: #334155;
     }
 
     .arrow {
-      font-size: 36px;
+      font-size: 28rpx;
       color: #94a3b8;
     }
   }

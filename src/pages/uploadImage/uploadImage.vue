@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <NavBar title="图片上传" color="#ffffff" background="linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)" />
+    <NavBar title="图片上传" color="#222222" />
 
     <scroll-view class="page-scroll-content" scroll-y>
       <!-- 上传设置 -->

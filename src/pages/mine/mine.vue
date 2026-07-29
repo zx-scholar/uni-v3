@@ -13,29 +13,17 @@
       </view>
 
       <view class="menu-list">
-        <view class="menu-item" @click="handleGoTemplate">
-          <text class="menu-title">📄 通用标准页面模板 (顶栏+滚动+底栏)</text>
-          <text class="arrow">›</text>
-        </view>
-        <view class="menu-item" @click="handleGoDemo">
-          <text class="menu-title">📖 Vue3 + Pinia 教程示例页</text>
-          <text class="arrow">›</text>
-        </view>
-        <view class="menu-item" @click="handleGoBrowsingHistory">
-          <text class="menu-title">浏览记录</text>
-          <text class="arrow">›</text>
-        </view>
-        <view class="menu-item" @click="handleGoEventsPlan">
-          <text class="menu-title">赛程总览</text>
-          <text class="arrow">›</text>
-        </view>
-        <view class="menu-item" @click="handleGoUploadImage">
-          <text class="menu-title">🖼️ 图片上传</text>
-          <text class="arrow">›</text>
-        </view>
-        <view class="menu-item" @click="handleClear">
-          <text class="menu-title">🧹 清空 Pinia 状态与缓存</text>
-          <text class="arrow">›</text>
+        <view
+          class="menu-item"
+          v-for="(item, index) in menuList"
+          :key="index"
+          @click="handleMenuItemClick(item)"
+        >
+          <view class="menu-left">
+            <text v-if="item.icon" class="iconfont" :class="item.icon"></text>
+            <text class="menu-title">{{ item.text }}</text>
+          </view>
+          <text class="iconfont icon-you arrow"></text>
         </view>
       </view>
     </view>
@@ -49,7 +37,16 @@ import { useUserStore } from '@/stores/user'
 export default {
   name: 'MinePage',
   data() {
-    return {}
+    return {
+      menuList: [
+        { icon: 'icon-hetong', text: '通用标准页面模板 (顶栏+滚动+底栏)', routerPath: 'template' },
+        { icon: 'icon-xiugai', text: 'Vue3 + Pinia 教程示例页', routerPath: 'demo' },
+        { icon: 'icon-sousuo', text: '浏览记录', routerPath: 'browsingHistory' },
+        { icon: 'icon-shijian1', text: '赛程总览', routerPath: 'eventsPlan' },
+        { icon: 'icon-jia', text: '图片上传', routerPath: 'uploadImage' },
+        { icon: 'icon-cuowu2', text: '清空 Pinia 状态与缓存', routerPath: null },
+      ]
+    }
   },
   computed: {
     appStore() {
@@ -59,14 +56,13 @@ export default {
       return useUserStore()
     },
     userAvatar() {
-      console.log(this.userStore.userInfo,'userStore')
       return this.userStore.isLoggedIn
         ? this.userStore.userInfo.avatarUrl || '/static/logo.png'
         : '/static/logo.png'
     },
     userName() {
       return this.userStore.isLoggedIn
-        ? this.userStore.userInfo.name ||   '微信用户'
+        ? this.userStore.userInfo.name || '微信用户'
         : '点击登录'
     },
     userDescription() {
@@ -79,22 +75,16 @@ export default {
     handleUserCardClick() {
       if (!this.userStore.isLoggedIn) {
         router.push('login')
+      } else {
+        console.log('已经登录')
       }
     },
-    handleGoTemplate() {
-      router.push('template')
-    },
-    handleGoDemo() {
-      router.push('demo')
-    },
-    handleGoBrowsingHistory() {
-      router.push('browsingHistory')
-    },
-    handleGoEventsPlan() {
-      router.push('eventsPlan')
-    },
-    handleGoUploadImage() {
-      router.push('uploadImage')
+    handleMenuItemClick(item) {
+      if (item.routerPath) {
+        router.push(item.routerPath)
+      } else {
+        this.handleClear()
+      }
     },
     handleClear() {
       this.appStore.clearMiniAppInfo()

@@ -84,11 +84,15 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/gameImage774424d8cd4a444e9a3107d97b014a1d.png",
+        "selectedIconPath": "https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/gameImage774424d8cd4a444e9a3107d97b014a1d.png"
       },
       {
         "pagePath": "pages/mine/mine",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/gameImage4a1a8e056f654c04966f57eb8d65a3b1.png",
+        "selectedIconPath": "https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/gameImage4a1a8e056f654c04966f57eb8d65a3b1.png"
       }
     ]
   }
