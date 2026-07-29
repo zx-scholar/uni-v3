@@ -4,6 +4,7 @@
  */
 import { getCodedParam } from '@/utils/crypto'
 import wechatParam from '@/config/appConfig'
+import { useUserStore } from '@/stores/user'
 
 // 基础配置：H5 端本地开发走 Vite 代理，小程序/App 端走全路径域名
 let defaultBaseUrl = wechatParam.prefix + (wechatParam.webRoot || '')
@@ -74,8 +75,9 @@ const requestInterceptor = (options) => {
     options.header['content-type'] = 'application/x-www-form-urlencoded'
   }
 
-  // Token 自动携带
-  const token = uni.getStorageSync('token')
+  // Token 自动携带（从 Pinia userStore 读取持久化的 accessToken）
+  const userStore = useUserStore()
+  const token = userStore.accessToken
   if (token) {
     options.header['Authorization'] = `Bearer ${token}`
   }

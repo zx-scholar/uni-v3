@@ -1,28 +1,28 @@
 <template>
-    <div class="nav-bar-wrapper">
-        <!-- 占位 div：防止 fixed 导航栏遮挡页面内容 -->
-        <div v-if="placeholder" class="nav-bar-placeholder" :style="{ height: navBarTotalHeight + 'px' }"></div>
+    <view class="nav-bar-wrapper">
+        <!-- 占位 view：防止 fixed 导航栏遮挡页面内容 -->
+        <view v-if="placeholder" class="nav-bar-placeholder" :style="{ height: navBarTotalHeight + 'px' }"></view>
 
         <!-- 固定定位导航栏 -->
-        <div class="nav-bar-fixed" :style="navBarStyle">
+        <view class="nav-bar-fixed" :style="navBarStyle">
             <!-- 状态栏安全区 -->
-            <div :style="{ height: statusBarHeight + 'px' }"></div>
+            <view :style="{ height: statusBarHeight + 'px' }"></view>
 
             <!-- 导航栏主体 -->
-            <div class="nav-bar-content" :style="{ height: navBarHeight + 'px' }">
+            <view class="nav-bar-content" :style="{ height: navBarHeight + 'px' }">
                 <!-- 左侧：返回按钮 -->
-                <div v-if="shouldShowBack" class="nav-left" @click="handleBack">
-                    <span class="iconfont icon-zuo" :style="{ color, fontSize: '36rpx' }"></span>
-                    <span v-if="backText" class="back-text" :style="{ color }">{{ backText }}</span>
-                </div>
+                <view v-if="shouldShowBack" class="nav-left" @click="handleBack">
+                    <text class="iconfont icon-zuo" :style="{ color, fontSize: '36rpx' }"></text>
+                    <text v-if="backText" class="back-text" :style="{ color }">{{ backText }}</text>
+                </view>
 
                 <!-- 中间：标题 -->
-                <div class="nav-center">
-                    <span class="nav-title" :style="{ color, fontSize, fontWeight }">{{ title }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
+                <view class="nav-center">
+                    <text class="nav-title" :style="{ color, fontSize, fontWeight }">{{ title }}</text>
+                </view>
+            </view>
+        </view>
+    </view>
 </template>
 
 <script>

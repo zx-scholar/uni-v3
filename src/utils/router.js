@@ -110,7 +110,7 @@ export const router = {
         delta,
         success: resolve,
         fail: () => {
-          router.reLaunch('home').then(resolve)
+          router.switchTab('home').then(resolve)
         }
       })
     })

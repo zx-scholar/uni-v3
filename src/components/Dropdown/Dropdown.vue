@@ -1,16 +1,16 @@
 <template>
-  <div class="dropdown" :style="wrapperStyle" @click="toggle">
+  <view class="dropdown" :style="wrapperStyle" @click="toggle">
     <!-- 触发区域 -->
-    <div class="dropdown-trigger" :class="{ 'is-open': visible }">
-      <span class="dropdown-text" :class="{ placeholder: !selectedLabel }">
+    <view class="dropdown-trigger" :class="{ 'is-open': visible }">
+      <text class="dropdown-text" :class="{ placeholder: !selectedLabel }">
         {{ selectedLabel || placeholder }}
-      </span>
-      <span class="dropdown-arrow iconfont icon-xiala"></span>
-    </div>
+      </text>
+      <text class="dropdown-arrow iconfont icon-xiala"></text>
+    </view>
 
     <!-- 下拉列表 -->
-    <div v-if="visible" class="dropdown-menu">
-      <div
+    <view v-if="visible" class="dropdown-menu">
+      <view
         v-for="(opt, idx) in options"
         :key="idx"
         class="dropdown-item"
@@ -18,12 +18,12 @@
         @click.stop="select(opt)"
       >
         {{ opt }}
-      </div>
-    </div>
+      </view>
+    </view>
 
     <!-- 点击外部遮罩 -->
-    <div v-if="visible" class="dropdown-overlay" @click.stop="close"></div>
-  </div>
+    <view v-if="visible" class="dropdown-overlay" @click.stop="close"></view>
+  </view>
 </template>
 
 <script>

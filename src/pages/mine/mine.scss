@@ -1,6 +1,8 @@
+@use '@/styles/variables.scss' as *;
+
 .page-container {
   min-height: 100vh;
-  background-color: #f5f7fa;
+  background-color: $color-bg-page;
 }
 
 .content {
