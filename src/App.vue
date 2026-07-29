@@ -19,6 +19,9 @@ export default {
 /* 引入 Iconfont 阿里巴巴字体图标库 */
 @import '@/styles/iconfont.css';
 
+/* 引入全局工具类（flex、间距、文本等原子化样式） */
+@import '@/styles/utility.scss';
+
 /* 每个页面公共 CSS，原生 CSS + rpx 布局 */
 page {
   background-color: #f5f6fa;
@@ -31,23 +34,5 @@ page {
 
 view, text, image, input, button, scroll-view {
   box-sizing: border-box;
-}
-
-/* 全局 flex 居中通用类 */
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
 }
 </style>
