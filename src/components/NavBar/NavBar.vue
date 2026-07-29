@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-bar-wrapper" :style="wrapperCssVars">
+    <div class="nav-bar-wrapper">
         <!-- 占位 div：防止 fixed 导航栏遮挡页面内容 -->
         <div v-if="placeholder" class="nav-bar-placeholder" :style="{ height: navBarTotalHeight + 'px' }"></div>
 
@@ -42,10 +42,9 @@ export default {
     },
 
     data() {
-        const { statusBar, contentHeight } = this.calcSystemNavBarInfo();
         return {
-            statusBarHeight: statusBar,
-            autoContentHeight: contentHeight,
+            statusBarHeight: 20,
+            autoContentHeight: 44,
         };
     },
 
@@ -56,13 +55,6 @@ export default {
         },
         navBarTotalHeight() {
             return this.statusBarHeight + this.navBarHeight;
-        },
-        wrapperCssVars() {
-            return {
-                "--status-bar-height": `${this.statusBarHeight}px`,
-                "--nav-bar-height": `${this.navBarHeight}px`,
-                "--nav-bar-total-height": `${this.navBarTotalHeight}px`,
-            };
         },
         navBarStyle() {
             if (!this.background || this.background === "transparent") {
@@ -88,9 +80,8 @@ export default {
             let contentHeight = 44;
 
             try {
-                const sysInfo =
-                    (typeof uni.getWindowInfo === "function" ? uni.getWindowInfo() : null) || (typeof uni.getSystemInfoSync === "function" ? uni.getSystemInfoSync() : null) || {};
-                if (typeof sysInfo.statusBarHeight === "number" && sysInfo.statusBarHeight >= 0) {
+                const sysInfo = uni.getSystemInfoSync();
+                if (sysInfo && typeof sysInfo.statusBarHeight === "number" && sysInfo.statusBarHeight >= 0) {
                     statusBar = sysInfo.statusBarHeight;
                 }
 
@@ -121,8 +112,8 @@ export default {
 
     mounted() {
         const { statusBar, contentHeight } = this.calcSystemNavBarInfo();
-        if (statusBar !== this.statusBarHeight) this.statusBarHeight = statusBar;
-        if (contentHeight !== this.autoContentHeight) this.autoContentHeight = contentHeight;
+        this.statusBarHeight = statusBar;
+        this.autoContentHeight = contentHeight;
     },
 };
 </script>
