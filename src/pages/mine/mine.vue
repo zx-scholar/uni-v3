@@ -13,12 +13,7 @@
       </view>
 
       <view class="menu-list">
-        <view
-          class="menu-item"
-          v-for="(item, index) in menuList"
-          :key="index"
-          @click="handleMenuItemClick(item)"
-        >
+        <view class="menu-item" v-for="(item, index) in menuList" :key="index" @click="handleMenuItemClick(item)">
           <view class="menu-left">
             <text v-if="item.icon" class="iconfont" :class="item.icon"></text>
             <text class="menu-title">{{ item.text }}</text>
@@ -31,8 +26,8 @@
 </template>
 
 <script>
-import { useAppStore } from '@/stores/app'
-import { useUserStore } from '@/stores/user'
+import { useAppStore } from '@/stores/app';
+import { useUserStore } from '@/stores/user';
 
 export default {
   name: 'MinePage',
@@ -45,53 +40,47 @@ export default {
         { icon: 'icon-shijian1', text: '赛程总览', routerPath: 'eventsPlan' },
         { icon: 'icon-jia', text: '图片上传', routerPath: 'uploadImage' },
         { icon: 'icon-cuowu2', text: '清空 Pinia 状态与缓存', routerPath: null },
-      ]
-    }
+      ],
+    };
   },
   computed: {
     appStore() {
-      return useAppStore()
+      return useAppStore();
     },
     userStore() {
-      return useUserStore()
+      return useUserStore();
     },
     userAvatar() {
-      return this.userStore.isLoggedIn
-        ? this.userStore.userInfo.avatarUrl || '/static/logo.png'
-        : '/static/logo.png'
+      return this.userStore.isLoggedIn ? this.userStore.userInfo.avatarUrl || '/static/logo.png' : '/static/logo.png';
     },
     userName() {
-      return this.userStore.isLoggedIn
-        ? this.userStore.userInfo.name || '微信用户'
-        : '点击登录'
+      return this.userStore.isLoggedIn ? this.userStore.userInfo.name || '微信用户' : '点击登录';
     },
     userDescription() {
-      return this.userStore.isLoggedIn
-        ? `手机号：${this.userStore.mobileNum || '未绑定'}`
-        : '登录后查看个人信息'
-    }
+      return this.userStore.isLoggedIn ? `手机号：${this.userStore.mobileNum || '未绑定'}` : '登录后查看个人信息';
+    },
   },
   methods: {
     handleUserCardClick() {
       if (!this.userStore.isLoggedIn) {
-        router.push('login')
+        router.push('login');
       } else {
-        console.log('已经登录')
+        console.log('已经登录');
       }
     },
     handleMenuItemClick(item) {
       if (item.routerPath) {
-        router.push(item.routerPath)
+        router.push(item.routerPath);
       } else {
-        this.handleClear()
+        this.handleClear();
       }
     },
     handleClear() {
-      this.appStore.clearMiniAppInfo()
-      uni.showToast({ title: '缓存已重置', icon: 'none' })
-    }
-  }
-}
+      this.appStore.clearMiniAppInfo();
+      uni.showToast({ title: '缓存已重置', icon: 'none' });
+    },
+  },
+};
 </script>
 
 <!-- 导入独立的 mine.scss 样式文件 -->

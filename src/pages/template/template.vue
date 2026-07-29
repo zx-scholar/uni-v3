@@ -11,12 +11,7 @@
       <!-- 示例卡片 1 -->
       <view class="card">
         <view class="card-header">模版结构说明</view>
-        <view class="card-body">
-          此页面为开发新页面的标准通用模版，包含：
-          1. 顶部自定义导航栏 (支持背景图/渐变色)
-          2. 中间自适应弹性滚动区 (scroll-view)
-          3. 底部固定按钮栏 (带 iPhone 安全区避让)
-        </view>
+        <view class="card-body"> 此页面为开发新页面的标准通用模版，包含： 1. 顶部自定义导航栏 (支持背景图/渐变色) 2. 中间自适应弹性滚动区 (scroll-view) 3. 底部固定按钮栏 (带 iPhone 安全区避让) </view>
       </view>
 
       <!-- 示例卡片 2 -->
@@ -24,7 +19,7 @@
         <view class="card-header">全局 SCSS 变量使用示例</view>
         <view class="item-row">
           <text class="label">品牌主色 ($primary-color):</text>
-          <text class="val" style="color: #42b883;">#42b883</text>
+          <text class="val" style="color: #42b883">#42b883</text>
         </view>
         <view class="item-row">
           <text class="label">卡片圆角 ($radius-card):</text>
@@ -60,19 +55,14 @@
           <text class="label">背景图</text>
           <text class="val">contain / center top</text>
         </view>
-        <view class="card-body" style="margin-top: 10px;">
-          页面背景由 .page-has-bg 提供，图片居中顶部 contain 显示，底部留白处自动使用 $bg-page 填充。
-        </view>
+        <view class="card-body" style="margin-top: 10px"> 页面背景由 .page-has-bg 提供，图片居中顶部 contain 显示，底部留白处自动使用 $bg-page 填充。 </view>
       </view>
 
       <!-- 示例卡片 5：弹出框演示（底部弹出 + 居中弹窗） -->
       <view class="card">
         <view class="card-header">弹出框演示</view>
-        <view class="card-body">
-          点击底部 "确认提交" 按钮，从底部滑入弹出框。
-          支持标题栏、关闭按钮、遮罩点击关闭，内容区可滚动。
-        </view>
-        <view class="item-row" style="margin-top: 16px;">
+        <view class="card-body"> 点击底部 "确认提交" 按钮，从底部滑入弹出框。 支持标题栏、关闭按钮、遮罩点击关闭，内容区可滚动。 </view>
+        <view class="item-row" style="margin-top: 16px">
           <text class="label">全局注册组件</text>
           <text class="val">&lt;Popup /&gt;</text>
         </view>
@@ -120,7 +110,7 @@
 </template>
 
 <script>
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app';
 
 export default {
   name: 'TemplatePage',
@@ -130,53 +120,53 @@ export default {
     return {
       formData: {},
       popupVisible: false,
-      modalVisible: false
-    }
+      modalVisible: false,
+    };
   },
 
   // 2. 计算属性
   computed: {
     // 自动挂载 Pinia Store
     appStore() {
-      return useAppStore()
-    }
+      return useAppStore();
+    },
   },
 
   // 3. 业务方法集
   methods: {
     handleCancel() {
       // router 已在 main.js 中挂载为全局变量，无需 import
-      router.back()
+      router.back();
     },
     handleShowPopup() {
-      this.popupVisible = true
+      this.popupVisible = true;
     },
     handlePopupAction(text) {
-      this.popupVisible = false
-      uni.showToast({ title: `选择了：${text}`, icon: 'none' })
+      this.popupVisible = false;
+      uni.showToast({ title: `选择了：${text}`, icon: 'none' });
     },
     handleShowModal() {
-      this.modalVisible = true
+      this.modalVisible = true;
     },
     handleModalCancel() {
-      this.modalVisible = false
-      uni.showToast({ title: '点击了取消', icon: 'none' })
+      this.modalVisible = false;
+      uni.showToast({ title: '点击了取消', icon: 'none' });
     },
     handleModalConfirm() {
-      this.modalVisible = false
-      uni.showToast({ title: '点击了确认', icon: 'success' })
-    }
+      this.modalVisible = false;
+      uni.showToast({ title: '点击了确认', icon: 'success' });
+    },
   },
 
   // 4. 生命周期函数
   onLoad(options) {
-    console.log('页面 onLoad 接收参数:', options)
+    console.log('页面 onLoad 接收参数:', options);
   },
   onShow() {
     // [可选] 页面每次显示时触发（如从其他页面返回时刷新数据）
-    console.log('页面 onShow')
-  }
-}
+    console.log('页面 onShow');
+  },
+};
 </script>
 
 <!-- 引入独立的 SCSS 模块样式 -->

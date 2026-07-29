@@ -9,10 +9,7 @@
 
     <!-- Navigation Entry to Demo Page -->
     <view class="section">
-      <button class="btn btn-demo" @click="handleGoToDemo">
-        📖 打开 Vue2 转 Vue3 + Pinia 教程示例页
-      </button>
-
+      <button class="btn btn-demo" @click="handleGoToDemo">📖 打开 Vue2 转 Vue3 + Pinia 教程示例页</button>
     </view>
 
     <!-- Tech Stack Feature Badges -->
@@ -33,12 +30,8 @@
       <view class="section-title">Pinia 状态同步测试</view>
       <view class="card">
         <text class="card-desc">点击以下按钮调用接口并更新数据到 Pinia Store：</text>
-        <button class="btn btn-primary" @click="handleFetchMiniApp" :loading="loading">
-          调用接口并存入 Pinia Store
-        </button>
-        <button class="btn btn-outline" @click="handleClearPinia" style="margin-top: 16rpx;">
-          清空 Pinia 状态
-        </button>
+        <button class="btn btn-primary" @click="handleFetchMiniApp" :loading="loading">调用接口并存入 Pinia Store</button>
+        <button class="btn btn-outline" @click="handleClearPinia" style="margin-top: 16rpx">清空 Pinia 状态</button>
 
         <view v-if="requestResult" class="result-box">
           <text class="result-title">Pinia Store 当前数据：</text>
@@ -50,39 +43,39 @@
 </template>
 
 <script>
-import { queryMiniAppInfo } from '@/api'
-import { useAppStore } from '@/stores/app'
+import { queryMiniAppInfo } from '@/api';
+import { useAppStore } from '@/stores/app';
 
 export default {
   name: 'IndexPage',
   data() {
     return {
-      loading: false
-    }
+      loading: false,
+    };
   },
   onLoad() {
     // this.handleFetchMiniApp()
   },
   computed: {
     appStore() {
-      return useAppStore()
+      return useAppStore();
     },
     requestResult() {
-      return JSON.stringify(this.appStore.miniAppInfo, null, 2)
-    }
+      return JSON.stringify(this.appStore.miniAppInfo, null, 2);
+    },
   },
   methods: {
     handleGoToDemo() {
-      router.push('demo', { from: 'home', time: Date.now() })
+      router.push('demo', { from: 'home', time: Date.now() });
     },
 
     async handleFetchMiniApp() {
-      this.loading = true
+      this.loading = true;
       try {
-        const res = await queryMiniAppInfo()
+        const res = await queryMiniAppInfo();
         if (res && res.miniApp) {
-          this.appStore.setMiniAppInfo(res.miniApp)
-          uni.showToast({ title: 'Pinia 状态已同步并持久化', icon: 'success' })
+          this.appStore.setMiniAppInfo(res.miniApp);
+          uni.showToast({ title: 'Pinia 状态已同步并持久化', icon: 'success' });
         }
       } catch (err) {
         this.appStore.setMiniAppInfo({
@@ -90,19 +83,19 @@ export default {
           name: '伏见桃山演示馆',
           centerId: 10000000,
           logo: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/images/40fd9ec75b351c5a.jpg',
-          theme: 'primary-blue'
-        })
-        uni.showToast({ title: '演示数据已更新至 Pinia', icon: 'none' })
+          theme: 'primary-blue',
+        });
+        uni.showToast({ title: '演示数据已更新至 Pinia', icon: 'none' });
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
     handleClearPinia() {
-      this.appStore.clearMiniAppInfo()
-      uni.showToast({ title: 'Pinia 状态已清空', icon: 'none' })
-    }
-  }
-}
+      this.appStore.clearMiniAppInfo();
+      uni.showToast({ title: 'Pinia 状态已清空', icon: 'none' });
+    },
+  },
+};
 </script>
 
 <!-- 引入独立的 SCSS 样式文件，开启 scoped 隔离 -->

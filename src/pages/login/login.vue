@@ -22,18 +22,10 @@
 
       <view class="nickname-field">
         <text class="field-label">昵称</text>
-        <input
-          v-model.trim="nickName"
-          class="field-input"
-          type="nickname"
-          maxlength="30"
-          placeholder="请输入昵称"
-        />
+        <input v-model.trim="nickName" class="field-input" type="nickname" maxlength="30" placeholder="请输入昵称" />
       </view>
 
-      <button class="primary-button" :loading="uploading" :disabled="uploading" @click="confirmProfile">
-        下一步
-      </button>
+      <button class="primary-button" :loading="uploading" :disabled="uploading" @click="confirmProfile">下一步</button>
     </view>
 
     <view v-else class="login-section">
@@ -44,54 +36,30 @@
 
       <template v-if="step === 'methods'">
         <!-- #ifdef MP-WEIXIN -->
-        <button
-          class="wechat-button"
-          open-type="getPhoneNumber"
-          :loading="submitting"
-          :disabled="!openId || submitting"
-          @getphonenumber="handleGetPhoneNumber"
-        >
-          手机号快捷登录
-        </button>
+        <button class="wechat-button" open-type="getPhoneNumber" :loading="submitting" :disabled="!openId || submitting" @getphonenumber="handleGetPhoneNumber">手机号快捷登录</button>
         <!-- #endif -->
 
-        <button class="secondary-button" :disabled="submitting" @click="showPhoneLogin">
-          其他手机号登录
-        </button>
+        <button class="secondary-button" :disabled="submitting" @click="showPhoneLogin">其他手机号登录</button>
         <text class="login-hint">若手机号尚未注册，将自动为您创建账号</text>
       </template>
 
       <template v-else>
         <view class="form-field">
           <text class="field-label">手机号码</text>
-          <input
-            v-model="phoneNum"
-            class="field-input"
-            type="number"
-            maxlength="11"
-            placeholder="请输入手机号"
-          />
+          <input v-model="phoneNum" class="field-input" type="number" maxlength="11" placeholder="请输入手机号" />
         </view>
 
         <view class="form-field code-field">
           <view class="code-input-wrap">
             <text class="field-label">验证码</text>
-            <input
-              v-model="verifyCode"
-              class="field-input"
-              type="number"
-              maxlength="6"
-              placeholder="请输入验证码"
-            />
+            <input v-model="verifyCode" class="field-input" type="number" maxlength="6" placeholder="请输入验证码" />
           </view>
           <button class="code-button" :disabled="countdown > 0 || sendingCode" @click="sendVerifyCode">
             {{ codeButtonText }}
           </button>
         </view>
 
-        <button class="primary-button" :loading="submitting" :disabled="submitting" @click="submitPhoneLogin">
-          登录
-        </button>
+        <button class="primary-button" :loading="submitting" :disabled="submitting" @click="submitPhoneLogin">登录</button>
         <button class="text-button" :disabled="submitting" @click="step = 'methods'">返回其他登录方式</button>
         <text class="login-hint">若手机号尚未注册，将自动为您创建账号</text>
       </template>
@@ -100,18 +68,12 @@
 </template>
 
 <script>
-import {
-  bindMiniAppUser,
-  loginByWechatCode,
-  queryMiniAppInfo,
-  sendLoginVerifyCode,
-  uploadUserAvatar
-} from '@/api'
-import { useAppStore } from '@/stores/app'
-import { useUserStore } from '@/stores/user'
+import { bindMiniAppUser, loginByWechatCode, queryMiniAppInfo, sendLoginVerifyCode, uploadUserAvatar } from '@/api';
+import { useAppStore } from '@/stores/app';
+import { useUserStore } from '@/stores/user';
 
 // 用户 Store 别名字段映射，方便模板中使用
-const DEFAULT_LOGO = '/static/logo.png'
+const DEFAULT_LOGO = '/static/logo.png';
 
 export default {
   name: 'LoginPage',
@@ -127,175 +89,175 @@ export default {
       uploading: false,
       sendingCode: false,
       submitting: false,
-      returnUrl: ''
-    }
+      returnUrl: '',
+    };
   },
   computed: {
     appStore() {
-      return useAppStore()
+      return useAppStore();
     },
     userStore() {
-      return useUserStore()
+      return useUserStore();
     },
     defaultLogo() {
-      return DEFAULT_LOGO
+      return DEFAULT_LOGO;
     },
     logo() {
-      return this.appStore.logo || DEFAULT_LOGO
+      return this.appStore.logo || DEFAULT_LOGO;
     },
     appName() {
-      return this.appStore.appName || '伏见桃山演示馆'
+      return this.appStore.appName || '伏见桃山演示馆';
     },
     openId() {
-      return this.userStore.openId || ''
+      return this.userStore.openId || '';
     },
     codeButtonText() {
-      return this.countdown > 0 ? `${this.countdown}s` : '获取验证码'
+      return this.countdown > 0 ? `${this.countdown}s` : '获取验证码';
     },
     miniAppId() {
-      return this.appStore.miniAppInfo.id || ''
+      return this.appStore.miniAppInfo.id || '';
     },
     centerId() {
-      const info = this.appStore.miniAppInfo
-      return info.initCenterId || info.centerId || ''
+      const info = this.appStore.miniAppInfo;
+      return info.initCenterId || info.centerId || '';
     },
     verifyCodeType() {
-      return this.appStore.miniAppInfo.verifyCodeType || ''
-    }
+      return this.appStore.miniAppInfo.verifyCodeType || '';
+    },
   },
   async onLoad(options = {}) {
-    this.returnUrl = options.url || options.r || ''
+    this.returnUrl = options.url || options.r || '';
     // 从 store 恢复已有信息
-    this.avatarUrl = this.userStore.userInfo.avatarUrl || DEFAULT_LOGO
-    this.nickName = this.userStore.userInfo.nickName || '微信用户'
-    this.step = this.userStore.isProfileReady ? 'methods' : 'profile'
+    this.avatarUrl = this.userStore.userInfo.avatarUrl || DEFAULT_LOGO;
+    this.nickName = this.userStore.userInfo.nickName || '微信用户';
+    this.step = this.userStore.isProfileReady ? 'methods' : 'profile';
 
-    await this.ensureMiniAppInfo()
+    await this.ensureMiniAppInfo();
     // #ifdef MP-WEIXIN
-    await this.ensureWechatSession()
+    await this.ensureWechatSession();
     // #endif
   },
   onUnload() {
-    this.clearCountdown()
+    this.clearCountdown();
   },
   methods: {
     async ensureMiniAppInfo() {
-      if (this.miniAppId) return
+      if (this.miniAppId) return;
       try {
-        const data = await queryMiniAppInfo()
+        const data = await queryMiniAppInfo();
         if (data && data.miniApp) {
-          this.appStore.setMiniAppInfo(data.miniApp)
+          this.appStore.setMiniAppInfo(data.miniApp);
         }
       } catch (error) {
         // 请求层已统一提示错误，此处保留页面状态供用户重试。
       }
     },
     async ensureWechatSession(force = false) {
-      if (this.openId && !force) return true
+      if (this.openId && !force) return true;
       try {
         const loginResult = await new Promise((resolve, reject) => {
-          uni.login({ provider: 'weixin', success: resolve, fail: reject })
-        })
-        if (!loginResult.code) throw new Error('未获取到微信登录凭证')
-        if (!this.miniAppId) await this.ensureMiniAppInfo()
-        if (!this.miniAppId) throw new Error('小程序信息尚未加载')
+          uni.login({ provider: 'weixin', success: resolve, fail: reject });
+        });
+        if (!loginResult.code) throw new Error('未获取到微信登录凭证');
+        if (!this.miniAppId) await this.ensureMiniAppInfo();
+        if (!this.miniAppId) throw new Error('小程序信息尚未加载');
 
         const session = await loginByWechatCode({
           code: loginResult.code,
-          wechatMiniAppId: this.miniAppId
-        })
+          wechatMiniAppId: this.miniAppId,
+        });
         // 写入 store（持久化由 Pinia persist 自动处理）
-        this.userStore.setWechatSession(session)
-        return Boolean(session.openId)
+        this.userStore.setWechatSession(session);
+        return Boolean(session.openId);
       } catch (error) {
-        uni.showToast({ title: error.message || error.errMsg || '无法获取微信登录凭证', icon: 'none' })
-        return false
+        uni.showToast({ title: error.message || error.errMsg || '无法获取微信登录凭证', icon: 'none' });
+        return false;
       }
     },
     async handleChooseAvatar(event) {
-      const detail = event.detail || (event.mp && event.mp.detail) || {}
-      if (!detail.avatarUrl) return
-      this.uploading = true
+      const detail = event.detail || (event.mp && event.mp.detail) || {};
+      if (!detail.avatarUrl) return;
+      this.uploading = true;
       try {
-        const data = await uploadUserAvatar(detail.avatarUrl)
-        this.avatarUrl = data.url || detail.avatarUrl
+        const data = await uploadUserAvatar(detail.avatarUrl);
+        this.avatarUrl = data.url || detail.avatarUrl;
       } finally {
-        this.uploading = false
+        this.uploading = false;
       }
     },
     confirmProfile() {
       if (!this.avatarUrl) {
-        uni.showToast({ title: '请选择头像', icon: 'none' })
-        return
+        uni.showToast({ title: '请选择头像', icon: 'none' });
+        return;
       }
       if (!this.nickName) {
-        uni.showToast({ title: '请输入昵称', icon: 'none' })
-        return
+        uni.showToast({ title: '请输入昵称', icon: 'none' });
+        return;
       }
-      this.userStore.setUserInfo({ avatarUrl: this.avatarUrl, nickName: this.nickName })
-      this.step = 'methods'
+      this.userStore.setUserInfo({ avatarUrl: this.avatarUrl, nickName: this.nickName });
+      this.step = 'methods';
     },
     showPhoneLogin() {
-      this.step = 'phone'
+      this.step = 'phone';
     },
     async handleGetPhoneNumber(event) {
-      const detail = event.detail || (event.mp && event.mp.detail) || {}
+      const detail = event.detail || (event.mp && event.mp.detail) || {};
       if (detail.errMsg && !detail.errMsg.includes(':ok')) {
-        uni.showToast({ title: '需要授权手机号后才能登录', icon: 'none' })
-        return
+        uni.showToast({ title: '需要授权手机号后才能登录', icon: 'none' });
+        return;
       }
       if (!detail.encryptedData || !detail.iv) {
-        uni.showToast({ title: '未获取到手机号授权信息', icon: 'none' })
-        return
+        uni.showToast({ title: '未获取到手机号授权信息', icon: 'none' });
+        return;
       }
-      if (!(await this.ensureWechatSession())) return
-      await this.bindUser({ encryptedData: detail.encryptedData, iv: detail.iv })
+      if (!(await this.ensureWechatSession())) return;
+      await this.bindUser({ encryptedData: detail.encryptedData, iv: detail.iv });
     },
     isValidPhone() {
-      return /^1\d{10}$/.test(this.phoneNum)
+      return /^1\d{10}$/.test(this.phoneNum);
     },
     async sendVerifyCode() {
       if (!this.isValidPhone()) {
-        uni.showToast({ title: '请输入正确的手机号', icon: 'none' })
-        return
+        uni.showToast({ title: '请输入正确的手机号', icon: 'none' });
+        return;
       }
       if (!this.openId) {
         // #ifdef MP-WEIXIN
-        if (!(await this.ensureWechatSession())) return
+        if (!(await this.ensureWechatSession())) return;
         // #endif
       }
-      this.sendingCode = true
+      this.sendingCode = true;
       try {
         const data = await sendLoginVerifyCode({
           centerId: this.centerId,
           phoneNum: this.phoneNum,
-          verifyCodeType: this.verifyCodeType
-        })
-        this.startCountdown()
+          verifyCodeType: this.verifyCodeType,
+        });
+        this.startCountdown();
         if (data && data.message) {
-          uni.showToast({ title: data.message, icon: 'none' })
+          uni.showToast({ title: data.message, icon: 'none' });
         }
       } finally {
-        this.sendingCode = false
+        this.sendingCode = false;
       }
     },
     async submitPhoneLogin() {
       if (!this.isValidPhone()) {
-        uni.showToast({ title: '请输入正确的手机号', icon: 'none' })
-        return
+        uni.showToast({ title: '请输入正确的手机号', icon: 'none' });
+        return;
       }
       if (!/^\d{6}$/.test(this.verifyCode)) {
-        uni.showToast({ title: '请输入6位验证码', icon: 'none' })
-        return
+        uni.showToast({ title: '请输入6位验证码', icon: 'none' });
+        return;
       }
-      await this.bindUser({ phoneNum: this.phoneNum, code: this.verifyCode })
+      await this.bindUser({ phoneNum: this.phoneNum, code: this.verifyCode });
     },
     async bindUser(credentials) {
       if (!this.openId) {
-        uni.showToast({ title: '微信登录凭证无效，请重试', icon: 'none' })
-        return
+        uni.showToast({ title: '微信登录凭证无效，请重试', icon: 'none' });
+        return;
       }
-      this.submitting = true
+      this.submitting = true;
       try {
         const data = await bindMiniAppUser({
           openId: this.openId,
@@ -305,48 +267,48 @@ export default {
           verifyCodeType: this.verifyCodeType,
           nickName: this.userStore.userInfo.nickName,
           avatar: this.userStore.userInfo.avatarUrl,
-          ...credentials
-        })
-        this.userStore.setLoginResult(data, credentials.phoneNum || '')
-        uni.showToast({ title: data.isNewUser === 1 ? '注册成功' : '登录成功', icon: 'success' })
-        setTimeout(() => this.finishLogin(), 800)
+          ...credentials,
+        });
+        this.userStore.setLoginResult(data, credentials.phoneNum || '');
+        uni.showToast({ title: data.isNewUser === 1 ? '注册成功' : '登录成功', icon: 'success' });
+        setTimeout(() => this.finishLogin(), 800);
       } catch (error) {
         if (error && error.error === 1106) {
-          this.userStore.clearLogin()
-          uni.showToast({ title: `${error.message || '登录凭证失效'}，请重试`, icon: 'none' })
+          this.userStore.clearLogin();
+          uni.showToast({ title: `${error.message || '登录凭证失效'}，请重试`, icon: 'none' });
           // #ifdef MP-WEIXIN
-          await this.ensureWechatSession(true)
+          await this.ensureWechatSession(true);
           // #endif
         } else {
-          uni.showToast({ title: (error && (error.message || error.msg)) || '登录失败，请重试', icon: 'none' })
+          uni.showToast({ title: (error && (error.message || error.msg)) || '登录失败，请重试', icon: 'none' });
         }
       } finally {
-        this.submitting = false
+        this.submitting = false;
       }
     },
     finishLogin() {
-      const targetUrl = this.returnUrl ? decodeURIComponent(this.returnUrl) : ''
+      const targetUrl = this.returnUrl ? decodeURIComponent(this.returnUrl) : '';
       if (targetUrl.startsWith('/')) {
-        uni.redirectTo({ url: targetUrl, fail: () => router.back() })
-        return
+        uni.redirectTo({ url: targetUrl, fail: () => router.back() });
+        return;
       }
-      router.back()
+      router.back();
     },
     startCountdown() {
-      this.clearCountdown()
-      this.countdown = 60
+      this.clearCountdown();
+      this.countdown = 60;
       this.countdownTimer = setInterval(() => {
-        this.countdown -= 1
-        if (this.countdown <= 0) this.clearCountdown()
-      }, 1000)
+        this.countdown -= 1;
+        if (this.countdown <= 0) this.clearCountdown();
+      }, 1000);
     },
     clearCountdown() {
-      if (this.countdownTimer) clearInterval(this.countdownTimer)
-      this.countdownTimer = null
-      if (this.countdown < 0) this.countdown = 0
-    }
-  }
-}
+      if (this.countdownTimer) clearInterval(this.countdownTimer);
+      this.countdownTimer = null;
+      if (this.countdown < 0) this.countdown = 0;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped src="./login.scss"></style>
