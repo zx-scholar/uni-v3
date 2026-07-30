@@ -36,7 +36,9 @@
 
       <template v-if="step === 'methods'">
         <!-- #ifdef MP-WEIXIN -->
-        <button class="wechat-button" open-type="getPhoneNumber" :loading="submitting" :disabled="!openId || submitting" @getphonenumber="handleGetPhoneNumber">手机号快捷登录</button>
+        <button class="wechat-button" open-type="getPhoneNumber" :loading="submitting" :disabled="!openId || submitting" @getphonenumber="handleGetPhoneNumber">
+          手机号快捷登录
+        </button>
         <!-- #endif -->
 
         <button class="secondary-button" :disabled="submitting" @click="showPhoneLogin">其他手机号登录</button>
@@ -170,7 +172,10 @@ export default {
         this.userStore.setWechatSession(session);
         return Boolean(session.openId);
       } catch (error) {
-        uni.showToast({ title: error.message || error.errMsg || '无法获取微信登录凭证', icon: 'none' });
+        uni.showToast({
+          title: error.message || error.errMsg || '无法获取微信登录凭证',
+          icon: 'none',
+        });
         return false;
       }
     },
@@ -280,7 +285,10 @@ export default {
           await this.ensureWechatSession(true);
           // #endif
         } else {
-          uni.showToast({ title: (error && (error.message || error.msg)) || '登录失败，请重试', icon: 'none' });
+          uni.showToast({
+            title: (error && (error.message || error.msg)) || '登录失败，请重试',
+            icon: 'none',
+          });
         }
       } finally {
         this.submitting = false;

@@ -18,19 +18,19 @@
 </template>
 
 <script>
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/app';
 
 export default {
   name: 'ProfilePage',
   data() {
-    return {}
+    return {};
   },
   computed: {
     appStore() {
-      return useAppStore()
-    }
-  }
-}
+      return useAppStore();
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -27,15 +27,10 @@
 
         <!-- 上传区域 -->
         <view class="upload-grid">
-          <view
-            v-for="(item, index) in imageList"
-            :key="index"
-            class="upload-item"
-            @click="previewImage(index)"
-          >
+          <view v-for="(item, index) in imageList" :key="index" class="upload-item" @click="previewImage(index)">
             <image class="upload-thumb" :src="item.path" mode="aspectFill" />
             <view v-if="item.status === 'success'" class="upload-status success">
-              <text class="iconfont icon-check" style="font-size: 40rpx; color: #fff;"></text>
+              <text class="iconfont icon-check" style="font-size: 40rpx; color: #fff"></text>
             </view>
             <view v-else-if="item.status === 'uploading'" class="upload-status uploading">
               <text class="status-text">上传中</text>
@@ -44,12 +39,12 @@
               <text class="status-text">失败</text>
             </view>
             <view class="upload-remove" @click.stop="removeImage(index)">
-              <text class="iconfont icon-guanbi" style="color: #fff; font-size: 20rpx;"></text>
+              <text class="iconfont icon-guanbi" style="color: #fff; font-size: 20rpx"></text>
             </view>
           </view>
 
           <view v-if="imageList.length < 9" class="upload-item upload-add" @click="chooseImage">
-            <text class="iconfont icon-jia" style="font-size: 48rpx; color: #c0c4cc;"></text>
+            <text class="iconfont icon-jia" style="font-size: 48rpx; color: #c0c4cc"></text>
             <text class="add-text">{{ imageList.length }}/9</text>
           </view>
         </view>
@@ -87,22 +82,14 @@
 </template>
 
 <script>
-import { uploadFile } from '@/api'
-import Dropdown from '@/components/Dropdown/Dropdown.vue'
+import { uploadFile } from '@/api';
+import Dropdown from '@/components/Dropdown/Dropdown.vue';
 
 // OSS 基础地址前缀（从上传 URL 中剥离，替换为 #{$img-base}）
-const OSS_PREFIX = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/'
+const OSS_PREFIX = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
 
 // 图片类型选项
-const TYPE_OPTIONS = [
-  'img-page-bg',
-  'img-card-bg',
-  'img-logo',
-  'img-empty',
-  'img-browsing-bg',
-  'img-event-bg',
-  '自定义'
-]
+const TYPE_OPTIONS = ['img-page-bg', 'img-card-bg', 'img-logo', 'img-empty', 'img-browsing-bg', 'img-event-bg', '自定义'];
 
 export default {
   name: 'UploadImage',
@@ -114,27 +101,27 @@ export default {
       customVar: '',
       imageList: [],
       results: [],
-      uploading: false
-    }
+      uploading: false,
+    };
   },
 
   computed: {
     typeOptions() {
-      return TYPE_OPTIONS
+      return TYPE_OPTIONS;
     },
 
     /** 当前变量名（不含数字后缀） */
     variableName() {
       if (this.selectedType === '自定义') {
-        return this.customVar.trim() || 'custom'
+        return this.customVar.trim() || 'custom';
       }
-      return this.selectedType
-    }
+      return this.selectedType;
+    },
   },
 
   methods: {
     chooseImage() {
-      const count = 9 - this.imageList.length
+      const count = 9 - this.imageList.length;
       uni.chooseImage({
         count,
         sizeType: ['compressed'],
@@ -144,29 +131,29 @@ export default {
             path,
             url: '',
             status: 'pending',
-            name: path.split('/').pop() || `image_${Date.now()}`
-          }))
-          this.imageList.push(...newImages)
-        }
-      })
+            name: path.split('/').pop() || `image_${Date.now()}`,
+          }));
+          this.imageList.push(...newImages);
+        },
+      });
     },
 
     removeImage(index) {
-      this.imageList.splice(index, 1)
+      this.imageList.splice(index, 1);
     },
 
     previewImage(index) {
-      const urls = this.imageList.map((item) => item.path)
-      uni.previewImage({ current: urls[index], urls })
+      const urls = this.imageList.map((item) => item.path);
+      uni.previewImage({ current: urls[index], urls });
     },
 
     /** 生成 SCSS 变量代码，用 #{$img-base} 替代 OSS 域名前缀 */
     generateCode(url, index) {
-      const prefix = this.variableName
-      const varName = index === 0 ? prefix : `${prefix}-${index + 1}`
-      const relativePath = url.startsWith(OSS_PREFIX) ? url.slice(OSS_PREFIX.length) : url
-      const scssVar = '$img-base'
-      return `$${varName}: '#{${scssVar}}${relativePath}';`
+      const prefix = this.variableName;
+      const varName = index === 0 ? prefix : `${prefix}-${index + 1}`;
+      const relativePath = url.startsWith(OSS_PREFIX) ? url.slice(OSS_PREFIX.length) : url;
+      const scssVar = '$img-base';
+      return `$${varName}: '#{${scssVar}}${relativePath}';`;
     },
 
     /** 复制到剪贴板 */
@@ -174,74 +161,74 @@ export default {
       uni.setClipboardData({
         data: code,
         success: () => {
-          const item = this.results.find((r) => r.code === code)
-          if (item) item.copyCount++
-          uni.showToast({ title: '已复制', icon: 'success' })
+          const item = this.results.find((r) => r.code === code);
+          if (item) item.copyCount++;
+          uni.showToast({ title: '已复制', icon: 'success' });
         },
         fail: () => {
-          uni.showToast({ title: '复制失败', icon: 'none' })
-        }
-      })
+          uni.showToast({ title: '复制失败', icon: 'none' });
+        },
+      });
     },
 
     /** 一键复制全部 */
     copyAll() {
-      const text = this.results.map((r) => r.code).join('\n')
+      const text = this.results.map((r) => r.code).join('\n');
       uni.setClipboardData({
         data: text,
         success: () => {
-          uni.showToast({ title: '已复制全部', icon: 'success' })
+          uni.showToast({ title: '已复制全部', icon: 'success' });
         },
         fail: () => {
-          uni.showToast({ title: '复制失败', icon: 'none' })
-        }
-      })
+          uni.showToast({ title: '复制失败', icon: 'none' });
+        },
+      });
     },
 
     async handleUpload() {
-      if (this.imageList.length === 0) return
-      this.uploading = true
+      if (this.imageList.length === 0) return;
+      this.uploading = true;
 
       // 记录该批次上传的类型，连续上传同一类型时 index 递增
-      const currentVar = this.variableName
-      const existingCount = this.results.filter((r) => r.type === currentVar).length
-      let typeIndex = existingCount
+      const currentVar = this.variableName;
+      const existingCount = this.results.filter((r) => r.type === currentVar).length;
+      let typeIndex = existingCount;
 
       for (let i = 0; i < this.imageList.length; i++) {
-        const item = this.imageList[i]
-        if (item.status === 'success') continue
+        const item = this.imageList[i];
+        if (item.status === 'success') continue;
 
-        item.status = 'uploading'
+        item.status = 'uploading';
         try {
-          const res = await uploadFile(item.path)
-          item.url = res.url || ''
-          item.status = 'success'
+          const res = await uploadFile(item.path);
+          item.url = res.url || '';
+          item.status = 'success';
 
           // 生成 SCSS 代码
-          const code = this.generateCode(item.url, typeIndex)
+          const code = this.generateCode(item.url, typeIndex);
 
           this.results.push({
             type: currentVar,
             url: item.url,
             code,
-            copyCount: 0
-          })
+            copyCount: 0,
+          });
 
-          typeIndex++
+          typeIndex++;
         } catch (e) {
-          item.status = 'fail'
+          item.status = 'fail';
         }
       }
 
-      this.uploading = false
+      this.uploading = false;
 
-      const successCount = this.imageList.filter((item) => item.status === 'success').length
+      const successCount = this.imageList.filter((item) => item.status === 'success').length;
       if (successCount > 0) {
-        uni.showToast({ title: `上传完成，共 ${successCount} 张`, icon: 'success' })
+        uni.showToast({ title: `上传完成，共 ${successCount} 张`, icon: 'success' });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped src="./uploadImage.scss"></style>

@@ -11,7 +11,9 @@
       <!-- 示例卡片 1 -->
       <view class="card">
         <view class="card-header">模版结构说明</view>
-        <view class="card-body"> 此页面为开发新页面的标准通用模版，包含： 1. 顶部自定义导航栏 (支持背景图/渐变色) 2. 中间自适应弹性滚动区 (scroll-view) 3. 底部固定按钮栏 (带 iPhone 安全区避让) </view>
+        <view class="card-body">
+          此页面为开发新页面的标准通用模版，包含： 1. 顶部自定义导航栏 (支持背景图/渐变色) 2. 中间自适应弹性滚动区 (scroll-view) 3. 底部固定按钮栏 (带 iPhone 安全区避让)
+        </view>
       </view>
 
       <!-- 示例卡片 2 -->
@@ -55,13 +57,13 @@
           <text class="label">背景图</text>
           <text class="val">contain / center top</text>
         </view>
-        <view class="card-body" style="margin-top: 10px"> 页面背景由 .page-has-bg 提供，图片居中顶部 contain 显示，底部留白处自动使用 $bg-page 填充。 </view>
+        <view class="card-body" style="margin-top: 10px">页面背景由 .page-has-bg 提供，图片居中顶部 contain 显示，底部留白处自动使用 $bg-page 填充。</view>
       </view>
 
       <!-- 示例卡片 5：弹出框演示（底部弹出 + 居中弹窗） -->
       <view class="card">
         <view class="card-header">弹出框演示</view>
-        <view class="card-body"> 点击底部 "确认提交" 按钮，从底部滑入弹出框。 支持标题栏、关闭按钮、遮罩点击关闭，内容区可滚动。 </view>
+        <view class="card-body">点击底部 "确认提交" 按钮，从底部滑入弹出框。 支持标题栏、关闭按钮、遮罩点击关闭，内容区可滚动。</view>
         <view class="item-row" style="margin-top: 16px">
           <text class="label">全局注册组件</text>
           <text class="val">&lt;Popup /&gt;</text>

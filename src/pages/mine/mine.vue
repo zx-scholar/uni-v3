@@ -11,7 +11,6 @@
         </view>
         <text v-if="!userStore.isLoggedIn" class="login-arrow">›</text>
       </view>
-
       <view class="menu-list">
         <view class="menu-item" v-for="(item, index) in menuList" :key="index" @click="handleMenuItemClick(item)">
           <view class="menu-left">
