@@ -11,6 +11,13 @@
         <view class="form-row">
           <text class="form-label">图片类型</text>
           <Dropdown v-model="selectedType" :options="typeOptions" width="420rpx" />
+          <view class="copy-mode-toggle">
+            <text class="toggle-label">复制方式</text>
+            <view class="toggle-switch" :class="{ active: copyMode === 'url' }" @click="toggleCopyMode">
+              <view class="toggle-thumb"></view>
+            </view>
+            <text class="toggle-label">{{ copyMode === 'scss' ? 'SCSS变量' : '完整URL' }}</text>
+          </view>
         </view>
 
         <!-- 自定义变量名 -->
@@ -101,7 +108,7 @@ export default {
       customVar: '',
       imageList: [],
       results: [],
-      uploading: false,
+      copyMode: 'scss',
     };
   },
 
@@ -147,8 +154,16 @@ export default {
       uni.previewImage({ current: urls[index], urls });
     },
 
-    /** 生成 SCSS 变量代码，用 #{$img-base} 替代 OSS 域名前缀 */
+    /** 切换复制方式 */
+    toggleCopyMode() {
+      this.copyMode = this.copyMode === 'scss' ? 'url' : 'scss';
+    },
+
+    /** 生成代码，根据 copyMode 输出不同格式 */
     generateCode(url, index) {
+      if (this.copyMode === 'url') {
+        return url;
+      }
       const prefix = this.variableName;
       const varName = index === 0 ? prefix : `${prefix}-${index + 1}`;
       const relativePath = url.startsWith(OSS_PREFIX) ? url.slice(OSS_PREFIX.length) : url;

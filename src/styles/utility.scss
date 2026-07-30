@@ -1,50 +1,464 @@
 /* =========================================================================
    全局工具类 (utility.scss)
    提供通用的原子化样式，全项目可用
+   引用方式：在页面 <style> 中 @use '@/styles/utility.scss' as *;
+   uni-app 内联 <style> 会自动注入 uni.scss，但独立 .scss 文件需显式 @use
    ========================================================================= */
 
-/* flex 布局 */
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@use 'variables' as *;
 
-.flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+/* =========================================================================
+   1. Display 显示模式
+   ========================================================================= */
+.d-none { display: none; }
+.d-block { display: block; }
+.d-flex { display: flex; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
 
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
+/* =========================================================================
+   2. Flex 布局
+   ========================================================================= */
+.flex { display: flex; }
+.flex-1 { flex: 1; }
+.flex-none { flex: none; }
+.flex-row { display: flex; flex-direction: row; }
+.flex-column { display: flex; flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-shrink-0 { flex-shrink: 0; }
 
-/* 文本省略 */
-.text-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+/* 主轴对齐 (justify-content) */
+.flex-start { display: flex; align-items: center; justify-content: flex-start; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-end { display: flex; align-items: center; justify-content: flex-end; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-around { display: flex; align-items: center; justify-content: space-around; }
 
-/* 文本对齐 */
-.text-center {
-  text-align: center;
-}
+/* 交叉轴对齐 (align-items) */
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+.items-baseline { align-items: baseline; }
 
-.text-left {
-  text-align: left;
-}
+/* 交叉轴自我对齐 (align-self) */
+.self-start { align-self: flex-start; }
+.self-center { align-self: center; }
+.self-end { align-self: flex-end; }
+.self-stretch { align-self: stretch; }
 
-.text-right {
-  text-align: right;
-}
+/* 内容分布 (justify-content 单独使用) */
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
 
-/* 常用间距 */
-.mt-8  { margin-top: 8rpx; }
-.mt-16 { margin-top: 16rpx; }
-.mt-24 { margin-top: 24rpx; }
-.mb-8  { margin-bottom: 8rpx; }
-.mb-16 { margin-bottom: 16rpx; }
-.mb-24 { margin-bottom: 24rpx; }
+/* Gap 间距 (flex 子项间距) */
+.gap-4 { gap: 4px; }
+.gap-6 { gap: 6px; }
+.gap-8 { gap: 8px; }
+.gap-10 { gap: 10px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-20 { gap: 20px; }
+.gap-24 { gap: 24px; }
+
+/* =========================================================================
+   3. 文本工具
+   ========================================================================= */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* 字号 (与 variables.scss 变量对齐，px → 自动转 rpx) */
+.fs-xs { font-size: $size-font-xs; }
+.fs-sm { font-size: $size-font-sm; }
+.fs-base { font-size: $size-font-base; }
+.fs-md { font-size: $size-font-md; }
+.fs-lg { font-size: $size-font-lg; }
+.fs-xl { font-size: $size-font-xl; }
+.fs-xxl { font-size: $size-font-xxl; }
+
+/* 字重 */
+.fw-normal { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+.fw-bold { font-weight: 700; }
+
+/* 行高 */
+.lh-1 { line-height: 1; }
+.lh-1-2 { line-height: 1.2; }
+.lh-1-4 { line-height: 1.4; }
+.lh-1-6 { line-height: 1.6; }
+
+/* 文字颜色 (与 variables.scss 变量对齐) */
+.color-primary { color: $color-primary; }
+.color-primary-dark { color: $color-primary-dark; }
+.color-accent { color: $color-accent; }
+.color-danger { color: $color-danger; }
+.color-warning { color: $color-warning; }
+.color-text-primary { color: $color-text-primary; }
+.color-text-secondary { color: $color-text-secondary; }
+.color-text-sub { color: $color-text-sub; }
+.color-text-muted { color: $color-text-muted; }
+.color-text-white { color: $color-text-white; }
+.color-text-black { color: $color-text-black; }
+
+/* 单行文本溢出省略 */
+.text-ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 多行文本溢出省略 (需要加行数) */
+.line-clamp-1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.line-clamp-2 { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.line-clamp-3 { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+
+/* 其他文本装饰 */
+.text-nowrap { white-space: nowrap; }
+.text-break { word-break: break-all; }
+.text-uppercase { text-transform: uppercase; }
+.text-capitalize { text-transform: capitalize; }
+.text-through { text-decoration: line-through; }
+.text-underline { text-decoration: underline; }
+
+/* =========================================================================
+   4. 背景
+   ========================================================================= */
+
+/* 背景色 */
+.bg-primary { background-color: $color-primary; }
+.bg-primary-light { background-color: $color-primary-light; }
+.bg-accent { background-color: $color-accent; }
+.bg-danger { background-color: $color-danger; }
+.bg-warning { background-color: $color-warning; }
+.bg-page { background-color: $color-bg-page; }
+.bg-card { background-color: $color-bg-card; }
+.bg-hover { background-color: $color-bg-hover; }
+.bg-transparent { background-color: transparent; }
+.bg-white { background-color: #ffffff; }
+.bg-black { background-color: #000000; }
+
+/* =========================================================================
+   8. 边框
+   ========================================================================= */
+.border-none { border: none; }
+.border-0 { border: 0; }
+.border { border: 1px solid #e2e8f0; }
+.border-top { border-top: 1px solid #e2e8f0; }
+.border-bottom { border-bottom: 1px solid #e2e8f0; }
+.border-left { border-left: 1px solid #e2e8f0; }
+.border-right { border-right: 1px solid #e2e8f0; }
+
+/* =========================================================================
+   9. 定位
+   ========================================================================= */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.static { position: static; }
+.sticky { position: sticky; }
+
+/* 绝对居中 */
+.pos-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.pos-center-x { position: absolute; left: 50%; transform: translateX(-50%); }
+.pos-center-y { position: absolute; top: 50%; transform: translateY(-50%); }
+
+/* 铺满 */
+.pos-cover { position: absolute; inset: 0; }
+.pos-fill { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* z-index */
+.z-0 { z-index: 0; }
+.z-1 { z-index: 1; }
+.z-10 { z-index: 10; }
+.z-100 { z-index: 100; }
+.z-1000 { z-index: 1000; }
+.z-auto { z-index: auto; }
+
+/* =========================================================================
+   10. 宽高 / 尺寸
+   ========================================================================= */
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-screen { height: 100vh; }
+
+/* =========================================================================
+   11. 溢出 / 滚动
+   ========================================================================= */
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-scroll { overflow: scroll; }
+.overflow-visible { overflow: visible; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-y-hidden { overflow-y: hidden; }
+
+/* =========================================================================
+   12. 光标 / 交互
+   ========================================================================= */
+.pointer { cursor: pointer; }
+.pointer-none { pointer-events: none; }
+.user-select-none { user-select: none; }
+
+/* =========================================================================
+   13. 透明度
+   ========================================================================= */
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+/* =========================================================================
+   14. 阴影 (与 variables.scss 变量对齐)
+   ========================================================================= */
+.shadow-sm { box-shadow: $color-shadow-sm; }
+.shadow-md { box-shadow: $color-shadow-md; }
+.shadow-lg { box-shadow: $color-shadow-lg; }
+.shadow-none { box-shadow: none; }
+
+/* =========================================================================
+   15. 图片 / Object 适配
+   ========================================================================= */
+.object-cover { object-fit: cover; }
+.object-contain { object-fit: contain; }
+.object-fill { object-fit: fill; }
+.object-none { object-fit: none; }
+
+/* =========================================================================
+   16. 可见性
+   ========================================================================= */
+.visible { visibility: visible; }
+.invisible { visibility: hidden; }
+
+/* =========================================================================
+   17. 渐变背景 (与 variables.scss 变量对齐)
+   ========================================================================= */
+.bg-gradient-primary { background: $color-gradient-primary; }
+.bg-gradient-btn { background: $color-gradient-btn; }
+.bg-gradient-navbar { background: $color-gradient-navbar; }
+
+/* =========================================================================
+   18. 背景图
+   ========================================================================= */
+.bg-common { background-size: contain; background-position: center top; background-repeat: no-repeat; }
+.bg-cover { background-size: cover; }
+.bg-contain { background-size: contain; }
+.bg-center { background-position: center; }
+.bg-top { background-position: center top; }
+.bg-bottom { background-position: center bottom; }
+.bg-no-repeat { background-repeat: no-repeat; }
+.bg-repeat { background-repeat: repeat; }
+.bg-repeat-x { background-repeat: repeat-x; }
+.bg-repeat-y { background-repeat: repeat-y; }
+
+/* 常用组合 */
+.bg-cover-center { background: center / cover no-repeat; }
+.bg-cover-top { background: center top / cover no-repeat; }
+.bg-contain-center { background: center / contain no-repeat; }
+.bg-contain-bottom { background: center bottom / contain no-repeat; }
+/* =========================================================================
+   间距工具类 (spacing.scss)
+   命名: {m|p}{方向}-{size}
+   方向: t(上) b(下) l(左) r(右) x(左右) y(上下)
+   size: 4/6/8/10/12/16/20/24/30/32/40
+   单位: px (编译自动转 rpx)
+   ========================================================================= */
+
+/* ============================
+   Margin 外边距
+   ============================ */
+
+/* 全部方向 */
+.m-4 { margin: 4px; }
+.m-6 { margin: 6px; }
+.m-8 { margin: 8px; }
+.m-12 { margin: 12px; }
+.m-16 { margin: 16px; }
+.m-20 { margin: 20px; }
+.m-24 { margin: 24px; }
+.m-30 { margin: 30px; }
+.m-32 { margin: 32px; }
+
+/* 上 */
+.mt-4 { margin-top: 4px; }
+.mt-6 { margin-top: 6px; }
+.mt-8 { margin-top: 8px; }
+.mt-10 { margin-top: 10px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.mt-24 { margin-top: 24px; }
+.mt-30 { margin-top: 30px; }
+.mt-32 { margin-top: 32px; }
+.mt-40 { margin-top: 40px; }
+
+/* 下 */
+.mb-4 { margin-bottom: 4px; }
+.mb-6 { margin-bottom: 6px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-10 { margin-bottom: 10px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-30 { margin-bottom: 30px; }
+.mb-32 { margin-bottom: 32px; }
+.mb-40 { margin-bottom: 40px; }
+
+/* 左 */
+.ml-4 { margin-left: 4px; }
+.ml-6 { margin-left: 6px; }
+.ml-8 { margin-left: 8px; }
+.ml-10 { margin-left: 10px; }
+.ml-12 { margin-left: 12px; }
+.ml-16 { margin-left: 16px; }
+.ml-20 { margin-left: 20px; }
+.ml-24 { margin-left: 24px; }
+.ml-30 { margin-left: 30px; }
+.ml-32 { margin-left: 32px; }
+
+/* 右 */
+.mr-4 { margin-right: 4px; }
+.mr-6 { margin-right: 6px; }
+.mr-8 { margin-right: 8px; }
+.mr-10 { margin-right: 10px; }
+.mr-12 { margin-right: 12px; }
+.mr-16 { margin-right: 16px; }
+.mr-20 { margin-right: 20px; }
+.mr-24 { margin-right: 24px; }
+.mr-30 { margin-right: 30px; }
+.mr-32 { margin-right: 32px; }
+
+/* 左右 */
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mx-4 { margin-left: 4px; margin-right: 4px; }
+.mx-8 { margin-left: 8px; margin-right: 8px; }
+.mx-12 { margin-left: 12px; margin-right: 12px; }
+.mx-16 { margin-left: 16px; margin-right: 16px; }
+.mx-24 { margin-left: 24px; margin-right: 24px; }
+
+/* 上下 */
+.my-4 { margin-top: 4px; margin-bottom: 4px; }
+.my-8 { margin-top: 8px; margin-bottom: 8px; }
+.my-12 { margin-top: 12px; margin-bottom: 12px; }
+.my-16 { margin-top: 16px; margin-bottom: 16px; }
+.my-24 { margin-top: 24px; margin-bottom: 24px; }
+.my-30 { margin-top: 30px; margin-bottom: 30px; }
+.my-32 { margin-top: 32px; margin-bottom: 32px; }
+
+/* ============================
+   Padding 内边距
+   ============================ */
+
+/* 全部方向 */
+.p-4 { padding: 4px; }
+.p-6 { padding: 6px; }
+.p-8 { padding: 8px; }
+.p-12 { padding: 12px; }
+.p-16 { padding: 16px; }
+.p-20 { padding: 20px; }
+.p-24 { padding: 24px; }
+.p-30 { padding: 30px; }
+.p-32 { padding: 32px; }
+
+/* 上 */
+.pt-4 { padding-top: 4px; }
+.pt-6 { padding-top: 6px; }
+.pt-8 { padding-top: 8px; }
+.pt-10 { padding-top: 10px; }
+.pt-12 { padding-top: 12px; }
+.pt-16 { padding-top: 16px; }
+.pt-20 { padding-top: 20px; }
+.pt-24 { padding-top: 24px; }
+.pt-30 { padding-top: 30px; }
+.pt-32 { padding-top: 32px; }
+
+/* 下 */
+.pb-4 { padding-bottom: 4px; }
+.pb-6 { padding-bottom: 6px; }
+.pb-8 { padding-bottom: 8px; }
+.pb-10 { padding-bottom: 10px; }
+.pb-12 { padding-bottom: 12px; }
+.pb-16 { padding-bottom: 16px; }
+.pb-20 { padding-bottom: 20px; }
+.pb-24 { padding-bottom: 24px; }
+.pb-30 { padding-bottom: 30px; }
+.pb-32 { padding-bottom: 32px; }
+
+/* 左 */
+.pl-4 { padding-left: 4px; }
+.pl-6 { padding-left: 6px; }
+.pl-8 { padding-left: 8px; }
+.pl-10 { padding-left: 10px; }
+.pl-12 { padding-left: 12px; }
+.pl-16 { padding-left: 16px; }
+.pl-20 { padding-left: 20px; }
+.pl-24 { padding-left: 24px; }
+.pl-30 { padding-left: 30px; }
+.pl-32 { padding-left: 32px; }
+
+/* 右 */
+.pr-4 { padding-right: 4px; }
+.pr-6 { padding-right: 6px; }
+.pr-8 { padding-right: 8px; }
+.pr-10 { padding-right: 10px; }
+.pr-12 { padding-right: 12px; }
+.pr-16 { padding-right: 16px; }
+.pr-20 { padding-right: 20px; }
+.pr-24 { padding-right: 24px; }
+.pr-30 { padding-right: 30px; }
+.pr-32 { padding-right: 32px; }
+
+/* 左右 */
+.px-4 { padding-left: 4px; padding-right: 4px; }
+.px-8 { padding-left: 8px; padding-right: 8px; }
+.px-12 { padding-left: 12px; padding-right: 12px; }
+.px-16 { padding-left: 16px; padding-right: 16px; }
+.px-20 { padding-left: 20px; padding-right: 20px; }
+.px-24 { padding-left: 24px; padding-right: 24px; }
+.px-30 { padding-left: 30px; padding-right: 30px; }
+.px-32 { padding-left: 32px; padding-right: 32px; }
+
+/* 上下 */
+.py-4 { padding-top: 4px; padding-bottom: 4px; }
+.py-8 { padding-top: 8px; padding-bottom: 8px; }
+.py-12 { padding-top: 12px; padding-bottom: 12px; }
+.py-16 { padding-top: 16px; padding-bottom: 16px; }
+.py-20 { padding-top: 20px; padding-bottom: 20px; }
+.py-24 { padding-top: 24px; padding-bottom: 24px; }
+.py-30 { padding-top: 30px; padding-bottom: 30px; }
+.py-32 { padding-top: 32px; padding-bottom: 32px; }
+
+/* =========================================================================
+   圆角工具类 (radius.scss)
+   命名: radius{-方向}-{size}
+   方向: t(上) b(下)
+   size: 8 / 10 / 12 / 16 / 24 / 40 / 999(full) / 0(none)
+   单位: px (编译自动转 rpx)
+   ========================================================================= */
+
+/* 全部圆角 */
+.radius-8 { border-radius: 8px; }
+.radius-10 { border-radius: 10px; }
+.radius-12 { border-radius: 12px; }
+.radius-16 { border-radius: 16px; }
+.radius-24 { border-radius: 24px; }
+.radius-40 { border-radius: 40px; }
+.radius-full { border-radius: 999px; }
+.radius-none { border-radius: 0; }
+
+/* 上边圆角 */
+.radius-t-8 { border-radius: 8px 8px 0 0; }
+.radius-t-10 { border-radius: 10px 10px 0 0; }
+.radius-t-12 { border-radius: 12px 12px 0 0; }
+
+/* 下边圆角 */
+.radius-b-8 { border-radius: 0 0 8px 8px; }
+.radius-b-10 { border-radius: 0 0 10px 10px; }
+.radius-b-12 { border-radius: 0 0 12px 12px; }

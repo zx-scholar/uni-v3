@@ -9,7 +9,7 @@
         <!-- 标题栏 -->
         <view v-if="title" class="popup-header">
           <text class="popup-title">{{ title }}</text>
-          <text v-if="closeable" class="popup-close iconfont icon-guanbi" @click="handleClose"></text>
+          <text v-if="closeable" class="popup-close iconfont icon-cuowu2" @click="handleClose"></text>
         </view>
 
         <!-- 内容区 -->
@@ -32,28 +32,28 @@ export default {
     closeable: { type: Boolean, default: true },
     maskClosable: { type: Boolean, default: true },
     maxHeight: { type: String, default: '70vh' },
-    width: { type: String, default: '' }    // 居中模式专用：弹窗宽度（如 600rpx）
+    width: { type: String, default: '' }, // 居中模式专用：弹窗宽度（如 600rpx）
   },
   emits: ['update:visible', 'close'],
   computed: {
     contentStyle() {
-      const style = { maxHeight: this.maxHeight }
+      const style = { maxHeight: this.maxHeight };
       if (this.mode === 'center' && this.width) {
-        style.width = this.width
+        style.width = this.width;
       }
-      return style
-    }
+      return style;
+    },
   },
   methods: {
     handleOverlayClick() {
-      if (this.maskClosable) this.handleClose()
+      if (this.maskClosable) this.handleClose();
     },
     handleClose() {
-      this.$emit('update:visible', false)
-      this.$emit('close')
-    }
-  }
-}
+      this.$emit('update:visible', false);
+      this.$emit('close');
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -93,7 +93,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;        /* 让点击穿透到遮罩 */
+  pointer-events: none; /* 让点击穿透到遮罩 */
 }
 
 .popup-content-center {
@@ -104,7 +104,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  pointer-events: auto;        /* 内容区域可点击 */
+  pointer-events: auto; /* 内容区域可点击 */
   animation: scaleIn 0.3s ease;
 }
 
@@ -143,13 +143,21 @@ export default {
 
 /* ========== 动画关键帧 ========== */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes scaleIn {

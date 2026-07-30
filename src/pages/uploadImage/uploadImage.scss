@@ -87,6 +87,50 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
     border-radius: $size-radius-sm;
     box-sizing: border-box;
   }
+
+  /* 复制方式切换开关 */
+  .copy-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+    margin-left: auto;
+
+    .toggle-label {
+      font-size: $size-font-xs;
+      color: $color-text-sub;
+      white-space: nowrap;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 72rpx;
+      height: 40rpx;
+      background: #d9d9d9;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &.active {
+        background: $color-primary;
+
+        .toggle-thumb {
+          left: 36rpx;
+        }
+      }
+
+      .toggle-thumb {
+        position: absolute;
+        top: 4rpx;
+        left: 4rpx;
+        width: 32rpx;
+        height: 32rpx;
+        background: #fff;
+        border-radius: 50%;
+        transition: left 0.2s;
+        box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
 }
 
 /* 变量名预览 */

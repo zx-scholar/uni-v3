@@ -1,18 +1,18 @@
 <script>
-import initialize from '@/initialize'
+import initialize from '@/initialize';
 
 export default {
   onLaunch: function () {
-    console.log('App Launch - uni-app Vue3 Vite Project Started')
-    initialize()
+    console.log('App Launch - uni-app Vue3 Vite Project Started');
+    initialize();
   },
   onShow: function () {
-    console.log('App Show')
+    console.log('App Show');
   },
   onHide: function () {
-    console.log('App Hide')
+    console.log('App Hide');
   },
-}
+};
 </script>
 
 <style>
@@ -20,7 +20,7 @@ export default {
 @import '@/styles/iconfont.css';
 
 /* 引入全局工具类（flex、间距、文本等原子化样式） */
-@import '@/styles/utility.scss';
+@use '@/styles/utility';
 
 /* 每个页面公共 CSS，原生 CSS + rpx 布局 */
 page {
@@ -32,7 +32,12 @@ page {
   box-sizing: border-box;
 }
 
-view, text, image, input, button, scroll-view {
+view,
+text,
+image,
+input,
+button,
+scroll-view {
   box-sizing: border-box;
 }
 </style>
