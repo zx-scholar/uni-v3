@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'ProfilePage',
+  name: 'PersonInfoPage',
 
   data() {
     return {
@@ -80,4 +80,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./profile.scss"></style>
+<style lang="scss" scoped src="./personInfo.scss"></style>

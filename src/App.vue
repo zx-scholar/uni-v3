@@ -19,8 +19,8 @@ export default {
 /* 引入 Iconfont 阿里巴巴字体图标库 */
 @import '@/styles/iconfont.css';
 
-/* 引入全局工具类（flex、间距、文本等原子化样式） */
-@use '@/styles/utility';
+/* 引入全局工具类（flex、间距、圆角等原子化样式） */
+@import '@/styles/utility.scss';
 
 /* 每个页面公共 CSS，原生 CSS + rpx 布局 */
 page {

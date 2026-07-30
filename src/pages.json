@@ -62,7 +62,18 @@
         }
       ]
     },
-
+    {
+      "root": "pages-common",
+      "name": "pages-common",
+      "pages": [
+        {
+          "path": "personInfo/personInfo",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    }
   ],
   "preloadRule": {
     "pages/index/index": {

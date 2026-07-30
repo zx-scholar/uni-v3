@@ -15,30 +15,33 @@ export const routes = {
   // === 功能分包页面 ===
   demo: '/pages-golf/demo/demo',
   browsingHistory: '/pages-golf/browsingHistory/browsingHistory',
-  eventsPlan: '/pages-golf/eventsPlan/eventsPlan'
-}
+  eventsPlan: '/pages-golf/eventsPlan/eventsPlan',
+
+  // === pages-common 分包页面 ===
+  personInfo: '/pages-common/personInfo/personInfo',
+};
 
 /**
  * 辅助函数：将对象格式的 params 自动格式化为 URL Query 字符串
  */
 function buildQueryString(params = {}) {
-  const keys = Object.keys(params)
-  if (!keys.length) return ''
+  const keys = Object.keys(params);
+  if (!keys.length) return '';
   const queryStr = keys
     .map((key) => {
-      const val = params[key]
-      return `${encodeURIComponent(key)}=${encodeURIComponent(val !== undefined && val !== null ? val : '')}`
+      const val = params[key];
+      return `${encodeURIComponent(key)}=${encodeURIComponent(val !== undefined && val !== null ? val : '')}`;
     })
-    .join('&')
-  return `?${queryStr}`
+    .join('&');
+  return `?${queryStr}`;
 }
 
 /**
  * 获取目标的完整 URL（支持别名或直接路径）
  */
 function resolveUrl(nameOrPath, params = {}) {
-  const targetPath = routes[nameOrPath] || routes[nameOrPath.toLowerCase()] || nameOrPath
-  return targetPath + buildQueryString(params)
+  const targetPath = routes[nameOrPath] || routes[nameOrPath.toLowerCase()] || nameOrPath;
+  return targetPath + buildQueryString(params);
 }
 
 /**
@@ -55,11 +58,11 @@ export const router = {
         url: resolveUrl(nameOrPath, params),
         success: resolve,
         fail: (err) => {
-          console.error('路由跳转失败:', err)
-          reject(err)
-        }
-      })
-    })
+          console.error('路由跳转失败:', err);
+          reject(err);
+        },
+      });
+    });
   },
 
   /**
@@ -70,9 +73,9 @@ export const router = {
       uni.redirectTo({
         url: resolveUrl(nameOrPath, params),
         success: resolve,
-        fail: reject
-      })
-    })
+        fail: reject,
+      });
+    });
   },
 
   /**
@@ -83,9 +86,9 @@ export const router = {
       uni.reLaunch({
         url: resolveUrl(nameOrPath, params),
         success: resolve,
-        fail: reject
-      })
-    })
+        fail: reject,
+      });
+    });
   },
 
   /**
@@ -96,9 +99,9 @@ export const router = {
       uni.switchTab({
         url: resolveUrl(nameOrPath),
         success: resolve,
-        fail: reject
-      })
-    })
+        fail: reject,
+      });
+    });
   },
 
   /**
@@ -110,11 +113,11 @@ export const router = {
         delta,
         success: resolve,
         fail: () => {
-          router.switchTab('home').then(resolve)
-        }
-      })
-    })
-  }
-}
+          router.switchTab('home').then(resolve);
+        },
+      });
+    });
+  },
+};
 
-export default router
+export default router;

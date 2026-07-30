@@ -40,8 +40,7 @@
 
         <!-- 演示：带有操作按钮的卡片 -->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">操作卡片</view>
-          <view clas="icon-font icon-yanziwancheng fs-xxl mb-32">123</view>
+          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-32">操作卡片</view>
           <view class="card-body fs-base color-text-sub lh-1-6">页面内的触发按钮，非底部。</view>
           <button class="btn-card" @click="handleCardAction">点击操作</button>
         </view>

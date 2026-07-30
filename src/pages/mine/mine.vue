@@ -35,6 +35,8 @@ export default {
       menuList: [
         { icon: 'icon-hetong', text: '通用标准页面模板 (顶栏+滚动+底栏)', routerPath: 'template' },
         { icon: 'icon-xiugai', text: 'Vue3 + Pinia 教程示例页', routerPath: 'demo' },
+        { icon: 'icon-hetong', text: '个人资料(personInfo)', routerPath: 'personInfo' },
+        { icon: 'icon-hetong', text: '个人资料(profile)', routerPath: 'profile' },
         { icon: 'icon-sousuo', text: '浏览记录', routerPath: 'browsingHistory' },
         { icon: 'icon-shijian1', text: '赛程总览', routerPath: 'eventsPlan' },
         { icon: 'icon-jia', text: '图片上传', routerPath: 'uploadImage' },
