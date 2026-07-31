@@ -21,17 +21,23 @@
         </view>
       </view>
     </view>
+
+    <!-- 分享弹窗 -->
+    <ShareDialog :visible="shareVisible" @close="shareVisible = false" />
   </view>
 </template>
 
 <script>
 import { useAppStore } from '@/stores/app';
 import { useUserStore } from '@/stores/user';
+import ShareDialog from '@/components/ShareDialog/ShareDialog.vue';
 
 export default {
   name: 'MinePage',
+  components: { ShareDialog },
   data() {
     return {
+      shareVisible: false,
       menuList: [
         { icon: 'icon-hetong', text: '通用标准页面模板 (顶栏+滚动+底栏)', routerPath: 'template' },
         { icon: 'icon-xiugai', text: 'Vue3 + Pinia 教程示例页', routerPath: 'demo' },
@@ -40,6 +46,7 @@ export default {
         { icon: 'icon-sousuo', text: '浏览记录', routerPath: 'browsingHistory' },
         { icon: 'icon-shijian1', text: '赛程总览', routerPath: 'eventsPlan' },
         { icon: 'icon-jia', text: '图片上传', routerPath: 'uploadImage' },
+        { icon: 'icon-fenxiang', text: '分享', action: 'share' },
         { icon: 'icon-cuowu2', text: '清空 Pinia 状态与缓存', routerPath: null },
       ],
     };
@@ -70,6 +77,10 @@ export default {
       }
     },
     handleMenuItemClick(item) {
+      if (item.action === 'share') {
+        this.shareVisible = true;
+        return;
+      }
       if (item.routerPath) {
         router.push(item.routerPath);
       } else {
@@ -80,6 +91,12 @@ export default {
       this.appStore.clearMiniAppInfo();
       uni.showToast({ title: '缓存已重置', icon: 'none' });
     },
+  },
+  onShareAppMessage() {
+    return {
+      title: '个人中心',
+      path: '/pages/mine/mine',
+    };
   },
 };
 </script>

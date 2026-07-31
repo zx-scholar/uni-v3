@@ -1,6 +1,6 @@
 import { useAppStore } from '@/stores/app'
 import { queryMiniAppInfo } from '@/api'
-import login from '@/auth/login'
+import login from '@/utils/login'
 
 /**
  * 小程序启动初始化（App.onLaunch 时调用）

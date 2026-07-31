@@ -46,7 +46,7 @@
               <text class="status-text">失败</text>
             </view>
             <view class="upload-remove" @click.stop="removeImage(index)">
-              <text class="iconfont icon-guanbi" style="color: #fff; font-size: 20rpx"></text>
+              <text class="iconfont icon-cuowu2" style="color: #fff; font-size: 20rpx"></text>
             </view>
           </view>
 
@@ -96,7 +96,7 @@ import Dropdown from '@/components/Dropdown/Dropdown.vue';
 const OSS_PREFIX = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
 
 // 图片类型选项
-const TYPE_OPTIONS = ['img-page-bg', 'img-card-bg', 'img-logo', 'img-empty', 'img-browsing-bg', 'img-event-bg', '自定义'];
+const TYPE_OPTIONS = ['img-page-bg', 'img-card-bg', 'img-logo', 'img-icon-bg', 'img-empty', 'img-browsing-bg', 'img-event-bg', '自定义'];
 
 export default {
   name: 'UploadImage',

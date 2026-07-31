@@ -1,5 +1,5 @@
 <script>
-import initialize from '@/initialize';
+import initialize from '@/utils/initialize';
 
 export default {
   onLaunch: function () {
