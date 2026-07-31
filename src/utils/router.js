@@ -19,6 +19,7 @@ export const routes = {
 
   // === pages-common 分包页面 ===
   personInfo: '/pages-common/personInfo/personInfo',
+  userAgreement: '/pages-common/userAgreement/userAgreement',
 };
 
 /**

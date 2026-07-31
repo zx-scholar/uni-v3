@@ -1,0 +1,78 @@
+/* =========================================================================
+   用户协议页面样式 (userAgreement.scss)
+   ========================================================================= */
+
+@use '@/styles/variables.scss' as *;
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-page;
+  overflow: hidden;
+  position: relative;
+
+  /* 默认背景图（页面未指定时统一使用） */
+  &.page-has-bg {
+    background-color: $color-bg-page;
+    background-image: url($img-page-bg-default);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  /* ---- 中间可滚动内容区 ---- */
+  .page-scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 200px 24px $size-padding-md;
+    box-sizing: border-box;
+
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+  }
+}
+
+/* ============================================================
+   协议内容卡片
+   ============================================================ */
+.agreement-card {
+  background-color: $color-bg-card;
+  border-radius: $size-radius-card;
+  padding: $size-padding-xl 24px;
+  box-shadow: $color-shadow-sm;
+
+  .agreement-intro {
+    display: block;
+    font-size: $size-font-base;
+    color: $color-text-primary;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .agreement-section {
+    margin-bottom: 32px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-heading {
+      display: block;
+      font-size: $size-font-md;
+      font-weight: 600;
+      color: $color-text-primary;
+      margin-bottom: 12px;
+    }
+
+    .section-body {
+      display: block;
+      font-size: $size-font-base;
+      color: $color-text-secondary;
+      line-height: 1.6;
+    }
+  }
+}

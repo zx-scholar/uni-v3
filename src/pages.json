@@ -71,6 +71,12 @@
           "style": {
             "navigationStyle": "custom"
           }
+        },
+        {
+          "path": "userAgreement/userAgreement",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     }

@@ -46,6 +46,8 @@ export default {
         { icon: 'icon-sousuo', text: '浏览记录', routerPath: 'browsingHistory' },
         { icon: 'icon-shijian1', text: '赛程总览', routerPath: 'eventsPlan' },
         { icon: 'icon-jia', text: '图片上传', routerPath: 'uploadImage' },
+        { icon: 'icon-hetong', text: '用户协议', routerPath: 'userAgreement', params: { type: 'user' } },
+        { icon: 'icon-hetong', text: '会员服务协议', routerPath: 'userAgreement', params: { type: 'member' } },
         { icon: 'icon-fenxiang', text: '分享', action: 'share' },
         { icon: 'icon-cuowu2', text: '清空 Pinia 状态与缓存', routerPath: null },
       ],
@@ -82,7 +84,7 @@ export default {
         return;
       }
       if (item.routerPath) {
-        router.push(item.routerPath);
+        router.push(item.routerPath, item.params);
       } else {
         this.handleClear();
       }

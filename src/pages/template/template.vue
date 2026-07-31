@@ -56,6 +56,21 @@
           <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">居中弹窗</view>
           <button class="btn-card" @click="modalVisible = true">打开居中弹窗</button>
         </view>
+
+        <!-- 演示：空状态 -->
+        <view class="card">
+          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">空状态</view>
+          <view class="card-body fs-base color-text-sub lh-1-6 mb-20">无数据时展示，支持自定义文案和操作按钮。</view>
+          <Empty />
+          <Empty text="暂无赛事数据" show-action action-text="去预约" @action="handleEmptyAction" />
+        </view>
+
+        <!-- 演示：敬请期待弹窗 -->
+        <view class="card">
+          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">敬请期待弹窗</view>
+          <view class="card-body fs-base color-text-sub lh-1-6 mb-20">功能开发中提示，visible 控制显隐。</view>
+          <button class="btn-card" @click="comingSoonVisible = true">打开敬请期待弹窗</button>
+        </view>
       </view>
     </scroll-view>
 
@@ -95,17 +110,26 @@
         <button class="modal-btn flex-1 text-center border-none bg-gradient-btn color-text-white" @click="modalVisible = false">确认</button>
       </view>
     </Popup>
+
+    <!-- 敬请期待弹窗 -->
+    <ComingSoon v-model:visible="comingSoonVisible" />
   </view>
 </template>
 
 <script>
+import Empty from '@/components/Empty/Empty.vue';
+import ComingSoon from '@/components/ComingSoon/ComingSoon.vue';
+
 export default {
   name: 'TemplatePage',
+
+  components: { Empty, ComingSoon },
 
   data() {
     return {
       popupVisible: false,
       modalVisible: false,
+      comingSoonVisible: false,
     };
   },
 
@@ -117,7 +141,11 @@ export default {
 
     /* ---- 演示方法（用不到可删） ---- */
     handleCardAction() {
-      uni.showToast({ title: '点击了卡片按钮', icon: 'none' });
+      uni.showToast({ title: '点击了卡片操作', icon: 'none' });
+    },
+
+    handleEmptyAction() {
+      uni.showToast({ title: '点击了空状态按钮', icon: 'none' });
     },
 
     handlePopupSelect(text) {

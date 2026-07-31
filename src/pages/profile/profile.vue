@@ -39,6 +39,7 @@ export default {
         { label: '身份证号', value: '320614****8888' },
         { label: '手机号', value: '189****8888' },
         { label: '用户协议', action: 'agreement', arrow: true },
+        { label: '会员服务协议', action: 'memberAgreement', arrow: true },
         { label: '注销账号', value: '注销后账号无法恢复，请谨慎操作', action: 'deleteAccount', arrow: true, warning: true },
       ],
     };
@@ -49,7 +50,8 @@ export default {
       if (!action) return;
       const actions = {
         nickname: () => uni.showToast({ title: '编辑昵称', icon: 'none' }),
-        agreement: () => uni.showToast({ title: '用户协议', icon: 'none' }),
+        agreement: () => router.push('userAgreement', { type: 'user' }),
+        memberAgreement: () => router.push('userAgreement', { type: 'member' }),
         deleteAccount: () => {
           uni.showModal({
             title: '提示',
