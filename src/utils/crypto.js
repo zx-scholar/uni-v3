@@ -1,5 +1,6 @@
 import md5 from 'js-md5'
 import wechatParam from '@/config/appConfig'
+import { useAppStore } from '@/stores/app'
 
 /**
  * 根据 temp.js 规范生成带 MD5 签名的加密请求参数
@@ -33,7 +34,8 @@ export function getCodedParam(url, data = {}, apiName = '', requestOps = {}) {
     )
 
     // 处理可选的 centerId / tenantId
-    const centerId = uni.getStorageSync('centerId')
+    // centerId 唯一来源是 Pinia appStore（初始化时由 queryMiniAppInfo 写入并持久化）
+    const centerId = useAppStore().centerId
     const tenantId = uni.getStorageSync('tenantId')
 
     if (centerId && fullData.centerId === undefined && !(requestOps || {}).noCenterId) {

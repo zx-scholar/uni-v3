@@ -23,7 +23,10 @@ export default async function login() {
   }
 
   // #ifdef H5
-  return h5MockLogin(userStore);
+  // H5 端仅开发环境使用 Mock 用户（生产构建 import.meta.env.DEV 为 false，走真实登录流程）
+  if (import.meta.env.DEV) {
+    return h5MockLogin(userStore);
+  }
   // #endif
 
   try {
@@ -51,7 +54,7 @@ export default async function login() {
     }
 
     // ======================== 3. 获取用户详情（缓存命中则跳过请求） ========================
-    if (userStore.hasUserInfo) {
+    if (userStore.isLoggedIn) {
       return userStore.userInfo;
     }
 

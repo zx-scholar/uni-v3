@@ -1,3 +1,4 @@
+/// <reference types='@dcloudio/types' />
 export {};
 
 declare module "vue" {

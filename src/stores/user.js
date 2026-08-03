@@ -35,7 +35,6 @@ export const useUserStore = defineStore(
     }))
 
     const isLoggedIn = computed(() => !!netUserId.value)
-    const hasUserInfo = computed(() => !!netUserId.value)
 
     // ========== Actions ==========
 
@@ -95,7 +94,7 @@ export const useUserStore = defineStore(
       openId, unionId, accessToken, accountId, coAppId, mobileNum,
       netUserId, userInfo, isProfileReady,
       // getters
-      loginInfo, isLoggedIn, hasUserInfo,
+      loginInfo, isLoggedIn,
       // actions
       setWechatSession, setUserInfo, setLoginResult, setNetUserId, clearLogin,
     }

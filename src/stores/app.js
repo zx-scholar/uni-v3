@@ -21,17 +21,11 @@ export const useAppStore = defineStore(
     function setMiniAppInfo(info = {}) {
       miniAppInfo.value = info
       isLoaded.value = true
-
-      // 如果有 centerId，同步保持到本地独立的 centerId 缓存（供请求加密拦截使用）
-      if (info.centerId) {
-        uni.setStorageSync('centerId', info.centerId)
-      }
     }
 
     function clearMiniAppInfo() {
       miniAppInfo.value = {}
       isLoaded.value = false
-      uni.removeStorageSync('centerId')
     }
 
     return {

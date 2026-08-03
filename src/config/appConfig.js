@@ -8,14 +8,11 @@ export const wechatParam = {
   apiKey: '9f1c9242486b564f',
   apiSecret: 'e3b35fcbfc4c9aa5',
   tencentMapKey: 'PIEBZ-B5QRV-QAQPF-UJ7T3-SELT7-KXBMC',
-  origin: 'https://webtest.wishare.com.cn',
   prefix: 'https://webtest.wishare.com.cn',
-  testPrefix: 'http://localhost:8081/',
   webRoot: '/aisports-api',
   ossUrl: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/',
   imgUrl: 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/',
   relativePath: 'dev/public/miniapp/material/',
-  tabBarList: ['qdgxHome', 'qdgxMemberNew', 'qdgxMine'],
 }
 
 export default wechatParam

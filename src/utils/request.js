@@ -5,6 +5,43 @@
 import { getCodedParam } from '@/utils/crypto'
 import wechatParam from '@/config/appConfig'
 import { useUserStore } from '@/stores/user'
+import router from '@/utils/router'
+
+// 全局 loading 计数器:并发请求时只显示一次,全部结束后再隐藏
+let loadingCount = 0
+function showLoading(title = '加载中...') {
+  loadingCount++
+  if (loadingCount === 1) {
+    uni.showLoading({ title, mask: true })
+  }
+}
+function hideLoading() {
+  loadingCount = Math.max(0, loadingCount - 1)
+  if (loadingCount === 0) {
+    uni.hideLoading()
+  }
+}
+
+/**
+ * 统一处理登录失效(401):清空用户态并跳转登录页
+ * 登录页自身不跳转,避免死循环
+ */
+function handleUnauthorized(message = '') {
+  const userStore = useUserStore()
+  userStore.clearLogin()
+  uni.removeStorageSync('token')
+
+  uni.showToast({
+    title: message || '登录失效，请重新登录',
+    icon: 'none'
+  })
+
+  const pages = getCurrentPages()
+  const current = pages[pages.length - 1]
+  if (!current || current.route !== 'pages/login/login') {
+    router.reLaunch('login')
+  }
+}
 
 // 基础配置：H5 端本地开发走 Vite 代理，小程序/App 端走全路径域名
 let defaultBaseUrl = wechatParam.prefix + (wechatParam.webRoot || '')
@@ -100,11 +137,7 @@ const responseInterceptor = (response, options) => {
       if (isSuccess) {
         return data
       } else if (data.code === 401 || data.error === 401) {
-        uni.showToast({
-          title: data.message || data.msg || '登录失效，请重新登录',
-          icon: 'none'
-        })
-        uni.removeStorageSync('token')
+        handleUnauthorized(data.message || data.msg)
         return Promise.reject(data)
       } else {
         if (!options.hideErrorToast && !options.selfHandleError) {
@@ -118,6 +151,11 @@ const responseInterceptor = (response, options) => {
     }
     return data
   } else {
+    // HTTP 状态码 401 同样按登录失效处理
+    if (statusCode === 401) {
+      handleUnauthorized()
+      return Promise.reject(response)
+    }
     if (!options.hideErrorToast && !options.selfHandleError) {
       uni.showToast({
         title: `网络请求错误 (${statusCode})`,
@@ -132,8 +170,9 @@ const responseInterceptor = (response, options) => {
  * 核心 request 方法
  */
 const request = (options = {}) => {
-  if (options.loading !== false) {
-    uni.showLoading({ title: '加载中...', mask: true })
+  const withLoading = options.loading !== false
+  if (withLoading) {
+    showLoading()
   }
 
   const finalOptions = requestInterceptor(options)
@@ -142,8 +181,8 @@ const request = (options = {}) => {
     uni.request({
       ...finalOptions,
       success: (res) => {
-        if (options.loading !== false) {
-          uni.hideLoading()
+        if (withLoading) {
+          hideLoading()
         }
         try {
           const result = responseInterceptor(res, finalOptions)
@@ -157,8 +196,8 @@ const request = (options = {}) => {
         }
       },
       fail: (err) => {
-        if (options.loading !== false) {
-          uni.hideLoading()
+        if (withLoading) {
+          hideLoading()
         }
         if (!finalOptions.hideErrorToast && !finalOptions.selfHandleError) {
           uni.showToast({
@@ -173,8 +212,9 @@ const request = (options = {}) => {
 }
 
 const upload = (url, filePath, data = {}, options = {}) => {
-  if (options.loading !== false) {
-    uni.showLoading({ title: '上传中...', mask: true })
+  const withLoading = options.loading !== false
+  if (withLoading) {
+    showLoading('上传中...')
   }
 
   const uploadOptions = requestInterceptor({
@@ -196,8 +236,8 @@ const upload = (url, filePath, data = {}, options = {}) => {
       header: uploadOptions.header,
       timeout: uploadOptions.timeout,
       success: (res) => {
-        if (options.loading !== false) {
-          uni.hideLoading()
+        if (withLoading) {
+          hideLoading()
         }
 
         try {
@@ -213,8 +253,8 @@ const upload = (url, filePath, data = {}, options = {}) => {
         }
       },
       fail: (error) => {
-        if (options.loading !== false) {
-          uni.hideLoading()
+        if (withLoading) {
+          hideLoading()
         }
         if (!options.hideErrorToast && !options.selfHandleError) {
           uni.showToast({ title: error.errMsg || '文件上传失败', icon: 'none' })
