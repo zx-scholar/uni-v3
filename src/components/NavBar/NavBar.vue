@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import router from '@/utils/router';
+
 export default {
     name: "NavBar",
     emits: ["back"],
@@ -101,12 +103,7 @@ export default {
 
         handleBack() {
             this.$emit("back");
-            const pages = getCurrentPages();
-            if (pages && pages.length > 1) {
-                uni.navigateBack();
-            } else {
-                uni.switchTab({ url: "/pages/index/index" });
-            }
+            router.back();
         },
     },
 

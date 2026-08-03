@@ -5,7 +5,7 @@
 import { getCodedParam } from '@/utils/crypto'
 import wechatParam from '@/config/appConfig'
 import { useUserStore } from '@/stores/user'
-import router from '@/utils/router'
+import router, { getCurrentPageUrl } from '@/utils/router'
 
 // 全局 loading 计数器:并发请求时只显示一次,全部结束后再隐藏
 let loadingCount = 0
@@ -39,7 +39,8 @@ function handleUnauthorized(message = '') {
   const pages = getCurrentPages()
   const current = pages[pages.length - 1]
   if (!current || current.route !== 'pages/login/login') {
-    router.reLaunch('login')
+    // redirectTo 保留页面栈并携带来源页, 登录成功后跳回原页面
+    router.redirectTo('login', { returnUrl: getCurrentPageUrl() })
   }
 }
 

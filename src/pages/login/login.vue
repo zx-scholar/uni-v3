@@ -73,6 +73,7 @@
 import { bindMiniAppUser, loginByWechatCode, queryMiniAppInfo, sendLoginVerifyCode, uploadUserAvatar } from '@/api';
 import { useAppStore } from '@/stores/app';
 import { useUserStore } from '@/stores/user';
+import { parseParams } from '@/utils/router';
 
 // 用户 Store 别名字段映射，方便模板中使用
 const DEFAULT_LOGO = '/static/logo.png';
@@ -128,7 +129,8 @@ export default {
     },
   },
   async onLoad(options = {}) {
-    this.returnUrl = options.url || options.r || '';
+    const params = parseParams(options);
+    this.returnUrl = params.returnUrl || params.url || params.r || '';
     // 从 store 恢复已有信息
     this.avatarUrl = this.userStore.userInfo.avatarUrl || DEFAULT_LOGO;
     this.nickName = this.userStore.userInfo.nickName || '微信用户';
@@ -295,8 +297,13 @@ export default {
       }
     },
     finishLogin() {
-      const targetUrl = this.returnUrl ? decodeURIComponent(this.returnUrl) : '';
+      const targetUrl = (this.returnUrl || '').trim();
       if (targetUrl.startsWith('/')) {
+        // tabBar 页面必须用 switchTab, 其余用 redirectTo (均保留页面栈)
+        if (router.isTabPage(targetUrl)) {
+          uni.switchTab({ url: targetUrl.split('?')[0], fail: () => router.back() });
+          return;
+        }
         uni.redirectTo({ url: targetUrl, fail: () => router.back() });
         return;
       }

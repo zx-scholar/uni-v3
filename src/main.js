@@ -7,12 +7,18 @@ import App from './App.vue'
 import NavBar from '@/components/NavBar/NavBar.vue'
 import Popup from '@/components/Popup/Popup.vue'
 import router from '@/utils/router'
+import { checkRoutesConsistency } from '@/utils/routeCheck'
 
 // 挂载全局 router 变量，使全项目所有 <script setup> 无需 import router 即可使用 router.push(...)
 globalThis.router = router
 
 export function createApp() {
   const app = createSSRApp(App)
+
+  // dev 环境校验 routes.js 与 pages.json 一致性 (仅警告)
+  if (import.meta.env.DEV) {
+    checkRoutesConsistency()
+  }
 
   // 1. 全局注册 NavBar、Popup 组件 (全项目模板无需 import 即可直接使用)
   app.component('NavBar', NavBar)

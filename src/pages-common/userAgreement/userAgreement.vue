@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { parseParams } from '@/utils/router';
 // 协议内容本地配置（按 type 区分；当前为占位内容，后续替换为正式条款）
 const AGREEMENTS = {
   user: {
@@ -90,8 +91,9 @@ export default {
   },
 
   onLoad(options) {
-    if (options && options.type && this.agreements[options.type]) {
-      this.type = options.type;
+    const params = parseParams(options);
+    if (params.type && this.agreements[params.type]) {
+      this.type = params.type;
     }
   },
 };

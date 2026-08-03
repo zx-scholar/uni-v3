@@ -118,6 +118,7 @@
 
 <script>
 import Empty from '@/components/Empty/Empty.vue';
+import { parseParams } from '@/utils/router';
 import ComingSoon from '@/components/ComingSoon/ComingSoon.vue';
 
 export default {
@@ -156,7 +157,7 @@ export default {
 
   /* ---- 生命周期（按需保留） ---- */
   onLoad(options) {
-    console.log('页面 onLoad 接收参数:', options);
+    console.log('页面 onLoad 接收参数:', parseParams(options));
   },
   onShow() {
     // 页面每次显示时触发
