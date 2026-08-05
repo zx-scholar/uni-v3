@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
 
 /**
@@ -27,24 +27,29 @@ const pxToRpxPlugin = (options = {}) => {
 pxToRpxPlugin.postcss = true;
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [uni()],
-  css: {
-    postcss: {
-      plugins: [
-        pxToRpxPlugin({ multiplier: 1 }), // 1px -> 1rpx 精准编译转换 (基于 750px 设计稿)
-      ],
-    },
-  },
-  server: {
-    host: '0.0.0.0',
-    port: 5173,
-    proxy: {
-      '/aisports-api': {
-        target: 'https://webtest.wishare.com.cn',
-        changeOrigin: true,
-        secure: false,
+export default defineConfig(({ mode }) => {
+  // 读取当前环境的 .env 文件，用于代理目标等配置
+  const env = loadEnv(mode, process.cwd(), 'VITE_');
+
+  return {
+    plugins: [uni()],
+    css: {
+      postcss: {
+        plugins: [
+          pxToRpxPlugin({ multiplier: 1 }), // 1px -> 1rpx 精准编译转换 (基于 750px 设计稿)
+        ],
       },
     },
-  },
+    server: {
+      host: '0.0.0.0',
+      port: 5173,
+      proxy: {
+        '/aisports-api': {
+          target: env.VITE_APP_PREFIX || 'https://webtest.wishare.com.cn',
+          changeOrigin: true,
+          secure: false,
+        },
+      },
+    },
+  };
 });

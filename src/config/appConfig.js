@@ -1,31 +1,26 @@
 /**
- * 小程序项目基础参数配置 (提取自 temp.js)
+ * 项目环境配置:从 Vite 环境变量加载 (.env.development / .env.production / 自定义 mode)
+ *
+ * 切换环境:
+ *   - 开发环境: npm run dev:*     → 读取 .env.development (青岛国信测试)
+ *   - 生产环境: npm run build:*   → 读取 .env.production (杭州奥体)
+ *   - 自定义环境: npm run dev:mp-weixin -- --mode hangzhou → 读取 .env.hangzhou
+ *
+ * 注意:VITE_ 前缀变量会被编译期静态注入 import.meta.env,未配置时返回 undefined
  */
 export const wechatParam = {
-  title: '伏见桃山演示馆-青岛国信测试',
-  name: 'xports-qdgx-test',
-  appid: 'wx74ff1858ef8d829a',
-  apiKey: '9f1c9242486b564f',
-  apiSecret: 'e3b35fcbfc4c9aa5',
-  tencentMapKey: 'PIEBZ-B5QRV-QAQPF-UJ7T3-SELT7-KXBMC',
-  prefix: 'https://webtest.wishare.com.cn',
-  webRoot: '/aisports-api',
-  ossUrl: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/',
-  imgUrl: 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/',
-  relativePath: 'dev/public/miniapp/material/',
-}
-const hangzhou = {
-  title: '杭州奥体',
-  name: 'xports-yayun',
-  appid: 'wx2c234fd4676fa1df',
-  apiKey: '9646fof078ec397e',
-  apiSecret: '18cbe869ch60dca1',
-  origin: 'https://www.hzatcenter.com',
-  prefix: 'https://www.hzatcenter.com',
-  webRoot: '/aisports-api',
-  ossUrl: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/',
-  imgUrl: 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/',
-  relativePath: 'dev/public/miniapp/material/',
+  title: import.meta.env.VITE_APP_TITLE || '',
+  name: import.meta.env.VITE_APP_NAME || '',
+  appid: import.meta.env.VITE_APP_APPID || '',
+  apiKey: import.meta.env.VITE_APP_API_KEY || '',
+  apiSecret: import.meta.env.VITE_APP_API_SECRET || '',
+  tencentMapKey: import.meta.env.VITE_APP_TENCENT_MAP_KEY || '',
+  origin: import.meta.env.VITE_APP_ORIGIN || '',
+  prefix: import.meta.env.VITE_APP_PREFIX || '',
+  webRoot: import.meta.env.VITE_APP_WEB_ROOT || '',
+  ossUrl: import.meta.env.VITE_APP_OSS_URL || '',
+  imgUrl: import.meta.env.VITE_APP_IMG_URL || '',
+  relativePath: import.meta.env.VITE_APP_RELATIVE_PATH || '',
 }
 
 export default wechatParam

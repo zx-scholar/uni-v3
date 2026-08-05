@@ -1,6 +1,7 @@
 /**
  * 引入项目自定义全局 SCSS 变量库 (variables.scss)
  * uni-app 会自动将本文件注入所有组件的 <style>,因此
- * variables.scss 中的 $color-* / $size-* 变量全项目可用。
+ * 注意：必须用 @/ 别名而非相对路径——uni-app 会将本文件内容注入到
+ * 各页面样式顶部，相对路径会基于页面所在目录解析而失效。
  */
-@use 'styles/variables.scss' as *;
+@use '@/styles/variables.scss' as *;
