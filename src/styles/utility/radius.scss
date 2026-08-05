@@ -1,0 +1,27 @@
+/* =========================================================================
+   圆角工具类
+   命名: radius{-方向}-{size}
+   方向: t(上) b(下)
+   size: 8 / 10 / 12 / 16 / 24 / 40 / 999(full) / 0(none)
+   单位: px (编译自动转 rpx)
+   ========================================================================= */
+
+/* 全部圆角 */
+.radius-8 { border-radius: 8px; }
+.radius-10 { border-radius: 10px; }
+.radius-12 { border-radius: 12px; }
+.radius-16 { border-radius: 16px; }
+.radius-24 { border-radius: 24px; }
+.radius-40 { border-radius: 40px; }
+.radius-full { border-radius: 999px; }
+.radius-none { border-radius: 0; }
+
+/* 上边圆角 */
+.radius-t-8 { border-radius: 8px 8px 0 0; }
+.radius-t-10 { border-radius: 10px 10px 0 0; }
+.radius-t-12 { border-radius: 12px 12px 0 0; }
+
+/* 下边圆角 */
+.radius-b-8 { border-radius: 0 0 8px 8px; }
+.radius-b-10 { border-radius: 0 0 10px 8px; }
+.radius-b-12 { border-radius: 0 0 12px 12px; }

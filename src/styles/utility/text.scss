@@ -1,0 +1,57 @@
+/* =========================================================================
+   文本工具类 (与 variables.scss 字号/颜色变量对齐)
+   ========================================================================= */
+@use '../variables.scss' as *;
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* 字号 (px → 自动转 rpx) */
+.fs-xs { font-size: $size-font-xs; }
+.fs-sm { font-size: $size-font-sm; }
+.fs-base { font-size: $size-font-base; }
+.fs-md { font-size: $size-font-md; }
+.fs-lg { font-size: $size-font-lg; }
+.fs-xl { font-size: $size-font-xl; }
+.fs-xxl { font-size: $size-font-xxl; }
+
+/* 字重 */
+.fw-normal { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+.fw-bold { font-weight: 700; }
+
+/* 行高 */
+.lh-1 { line-height: 1; }
+.lh-1-2 { line-height: 1.2; }
+.lh-1-4 { line-height: 1.4; }
+.lh-1-6 { line-height: 1.6; }
+
+/* 文字颜色 */
+.color-primary { color: $color-primary; }
+.color-primary-dark { color: $color-primary-dark; }
+.color-accent { color: $color-accent; }
+.color-danger { color: $color-danger; }
+.color-warning { color: $color-warning; }
+.color-text-primary { color: $color-text-primary; }
+.color-text-secondary { color: $color-text-secondary; }
+.color-text-sub { color: $color-text-sub; }
+.color-text-muted { color: $color-text-muted; }
+.color-text-white { color: $color-text-white; }
+.color-text-black { color: $color-text-black; }
+
+/* 单行/多行省略 */
+.text-ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.line-clamp-1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.line-clamp-2 { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.line-clamp-3 { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+
+/* 其他文本装饰 */
+.text-nowrap { white-space: nowrap; }
+.text-break { word-break: break-all; }
+.text-uppercase { text-transform: uppercase; }
+.text-capitalize { text-transform: capitalize; }
+.text-through { text-decoration: line-through; }
+.text-underline { text-decoration: underline; }

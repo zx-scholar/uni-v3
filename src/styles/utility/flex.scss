@@ -1,0 +1,55 @@
+/* =========================================================================
+   Flex 布局工具类
+   ========================================================================= */
+
+.d-flex { display: flex; }
+.d-none { display: none; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+
+.flex { display: flex; }
+.flex-1 { flex: 1; }
+.flex-none { flex: none; }
+.flex-row { display: flex; flex-direction: row; }
+.flex-column { display: flex; flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+/* 主轴对齐 (justify-content) */
+.flex-start { display: flex; align-items: center; justify-content: flex-start; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-end { display: flex; align-items: center; justify-content: flex-end; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-around { display: flex; align-items: center; justify-content: space-around; }
+
+/* 交叉轴对齐 (align-items) */
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+.items-baseline { align-items: baseline; }
+
+/* 交叉轴自我对齐 (align-self) */
+.self-start { align-self: flex-start; }
+.self-center { align-self: flex-center; }
+.self-end { align-self: flex-end; }
+.self-stretch { align-self: stretch; }
+
+/* 内容分布 (justify-content 单独使用) */
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+/* Gap 间距 (flex 子项间距) */
+.gap-4 { gap: 4px; }
+.gap-6 { gap: 6px; }
+.gap-8 { gap: 8px; }
+.gap-10 { gap: 10px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-20 { gap: 20px; }
+.gap-24 { gap: 24px; }

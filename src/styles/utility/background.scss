@@ -1,0 +1,40 @@
+/* =========================================================================
+   背景工具类 (含背景色、渐变、背景图)
+   ========================================================================= */
+@use '../variables.scss' as *;
+
+/* 背景色 */
+.bg-primary { background-color: $color-primary; }
+.bg-primary-light { background-color: $color-primary-light; }
+.bg-accent { background-color: $color-accent; }
+.bg-danger { background-color: $color-danger; }
+.bg-warning { background-color: $color-warning; }
+.bg-page { background-color: $color-bg-page; }
+.bg-card { background-color: $color-bg-card; }
+.bg-hover { background-color: $color-bg-hover; }
+.bg-transparent { background-color: transparent; }
+.bg-white { background-color: #ffffff; }
+.bg-black { background-color: #000000; }
+
+/* 渐变背景 */
+.bg-gradient-primary { background: $color-gradient-primary; }
+.bg-gradient-btn { background: $color-gradient-btn; }
+.bg-gradient-navbar { background: $color-gradient-navbar; }
+
+/* 背景图 size / position / repeat */
+.bg-common { background-size: contain; background-position: center top; background-repeat: no-repeat; }
+.bg-cover { background-size: cover; }
+.bg-contain { background-size: contain; }
+.bg-center { background-position: center; }
+.bg-top { background-position: center top; }
+.bg-bottom { background-position: center bottom; }
+.bg-no-repeat { background-repeat: no-repeat; }
+.bg-repeat { background-repeat: repeat; }
+.bg-repeat-x { background-repeat: repeat-x; }
+.bg-repeat-y { background-repeat: repeat-y; }
+
+/* 常用组合 */
+.bg-cover-center { background: center / cover no-repeat; }
+.bg-cover-top { background: center top / cover no-repeat; }
+.bg-contain-center { background: center / contain no-repeat; }
+.bg-contain-bottom { background: center bottom / contain no-repeat; }

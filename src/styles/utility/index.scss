@@ -1,0 +1,23 @@
+/* =========================================================================
+   全局工具类汇总 (utility/index.scss)
+   提供通用的原子化样式，全项目可用
+   引用方式：在页面 <style> 中 @use '@/styles/utility/index.scss' as *;
+   uni-app 内联 <style> 会自动注入 uni.scss，但独立 .scss 文件需显式 @use
+
+   拆分结构:
+   - flex.scss      Flex / Display / Gap
+   - text.scss      文本对齐 / 字号 / 字重 / 行高 / 颜色 / 省略
+   - background.scss 背景色 / 渐变 / 背景图
+   - border.scss    边框
+   - spacing.scss   margin / padding
+   - radius.scss    圆角
+   - misc.scss      定位 / 宽高 / 溢出 / 阴影 / 透明度 / 可见性 / 安全区
+   ========================================================================= */
+
+@forward 'flex';
+@forward 'text';
+@forward 'background';
+@forward 'border';
+@forward 'spacing';
+@forward 'radius';
+@forward 'misc';

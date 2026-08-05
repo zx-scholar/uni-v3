@@ -14,5 +14,18 @@ export const wechatParam = {
   imgUrl: 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/',
   relativePath: 'dev/public/miniapp/material/',
 }
+const hangzhou = {
+  title: '杭州奥体',
+  name: 'xports-yayun',
+  appid: 'wx2c234fd4676fa1df',
+  apiKey: '9646fof078ec397e',
+  apiSecret: '18cbe869ch60dca1',
+  origin: 'https://www.hzatcenter.com',
+  prefix: 'https://www.hzatcenter.com',
+  webRoot: '/aisports-api',
+  ossUrl: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/',
+  imgUrl: 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/',
+  relativePath: 'dev/public/miniapp/material/',
+}
 
 export default wechatParam
