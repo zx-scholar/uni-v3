@@ -22,4 +22,5 @@ export const routes = {
   // === pages-common 分包页面 ===
   personInfo: { path: '/pages-common/personInfo/personInfo' },
   userAgreement: { path: '/pages-common/userAgreement/userAgreement' },
+  insuranceService: { path: '/pages-common/insuranceService/insuranceService' },
 }

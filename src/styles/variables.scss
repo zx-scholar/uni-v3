@@ -35,6 +35,7 @@ $color-bg-hover: #f1f5f9; // 点击/悬停背景
 $color-gradient-primary: linear-gradient(135deg, #42b883 0%, #35495e 100%);
 $color-gradient-navbar: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
 $color-gradient-btn: linear-gradient(135deg, #1fa866 0%, #105c39 100%);
+$color-gradient-btn-blue:linear-gradient(90deg, #1186ff 0%, #4ecbfd 100%);
 
 // --- 5. 字号规范 (px -> 自动转 rpx) ---
 $size-font-xs: 22px; // 辅助/小标签 (最小)
@@ -71,11 +72,12 @@ $color-bottom-bar-bg: #ffffff;
 
 // --- 10. 图片 OSS 基础路径 ---
 $img-base: 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
+$img-base2: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/';
 
 // --- 11. Tabbar 图标 ---
 $img-tabbar-icon: '#{$img-base}gameImage774424d8cd4a444e9a3107d97b014a1d.png';
 $img-tabbar-icon-mine: '#{$img-base}gameImage4a1a8e056f654c04966f57eb8d65a3b1.png';
-$img-page-bg-default: '#{$img-base}gameImage0d2572f9ca1e49b3ba6937e62471bfac.png';
+$img-page-bg-default: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 
 // --- 12. 卡片背景图（空状态默认图） ---
 $img-card-bg: '#{$img-base}gameImage0a0d1b36b4274705b37b90d303862704.png';

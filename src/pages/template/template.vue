@@ -7,7 +7,7 @@
        ============================================================ -->
   <view class="page-container page-has-bg">
     <!-- NavBar：支持背景色/渐变/透明，见组件文档 -->
-    <NavBar title="页面标题" color="#ffffff" />
+    <NavBar title="页面标题" color="#000" />
 
     <scroll-view class="page-scroll-content" scroll-y>
       <view class="scroll-wrapper">

@@ -77,6 +77,12 @@
           "style": {
             "navigationStyle": "custom"
           }
+        },
+        {
+          "path": "insuranceService/insuranceService",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     }

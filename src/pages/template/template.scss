@@ -10,7 +10,7 @@
 @use '@/styles/variables.scss' as *;
 
 // 背景图变量（替换为自己的图片路径即可）
-$img-page-bg: '#{$img-base}gameImage189526e75bf748a9834c98393be93843.jpg';
+$img-page-bg: '#{$img-page-bg-default}';
 
 /* ============================================================
    page-container

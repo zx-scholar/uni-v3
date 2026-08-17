@@ -93,7 +93,8 @@ import { uploadFile } from '@/api';
 import Dropdown from '@/components/Dropdown/Dropdown.vue';
 
 // OSS 基础地址前缀（从上传 URL 中剥离，替换为 #{$img-base}）
-const OSS_PREFIX = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
+// const OSS_PREFIX = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
+const OSS_PREFIX = 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd';
 
 // 图片类型选项
 const TYPE_OPTIONS = ['img-page-bg', 'img-card-bg', 'img-logo', 'img-icon-bg', 'img-empty', 'img-browsing-bg', 'img-event-bg', '自定义'];
