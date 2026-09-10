@@ -3,7 +3,13 @@
     <!-- 顶部用户信息 -->
     <view class="card-header">
       <view class="user">
-        <image class="user__avatar" :src="avatar" mode="aspectFill" />
+        <view class="user__avatar-wrap">
+          <view
+            class="user__avatar-ring"
+            :style="{ '--progress': progress }"
+          ></view>
+           <image class="user__avatar" :src="avatar" mode="aspectFill" />
+        </view>
         <view class="user__info">
           <text class="user__name">{{ name }}</text>
           <view class="user__rating">
@@ -13,8 +19,8 @@
         </view>
       </view>
       <view class="deposit">
-        <text class="deposit__label">订金</text>
-        <text class="deposit__amount">¥{{ deposit }}</text>
+        <text class="deposit__label">订金¥</text>
+        <text class="deposit__amount">{{ deposit }}</text>
       </view>
     </view>
 
@@ -50,21 +56,34 @@
     <view class="card-bottom">
       <view class="participants">
         <view class="participants__avatars">
-          <image
-            v-for="(url, idx) in displayParticipants"
-            :key="idx"
-            class="participants__avatar"
-            :src="url"
-            mode="aspectFill"
-            :style="{ zIndex: displayParticipants.length - idx }"
-          />
+          <template v-for="(item, idx) in visibleItems">
+            <image
+              v-if="item.type === 'avatar'"
+              :key="'avatar-' + idx"
+              class="participants__avatar"
+              :src="item.url"
+              mode="aspectFill"
+              :style="{ zIndex: visibleItems.length - idx }"
+            />
+            <view
+              v-else
+              :key="'overflow-' + idx"
+              class="participants__overflow"
+            >
+              <text class="participants__overflow-text">···</text>
+            </view>
+          </template>
         </view>
         <text class="participants__text">
           <text class="participants__count">{{ joinedCount }}/{{ totalCount }}</text>
           <text class="participants__suffix">人已成团</text>
         </text>
       </view>
-      <view class="join-btn" @click="handleJoin">加入球局</view>
+      <button
+             disabled
+              class="join-btn"
+              @click="handleJoin"
+            >加入球局</button>
     </view>
   </view>
 </template>
@@ -88,12 +107,29 @@ export default {
   },
   emits: ['join'],
   computed: {
-    displayParticipants() {
-      return this.participants.slice(0, 4);
+    visibleItems() {
+      const items = this.participants.slice(0, 3).map((url) => ({
+        type: 'avatar',
+        url,
+      }));
+      if (this.participants.length > 3) {
+        items.push({ type: 'overflow' });
+      }
+      return items;
+    },
+    progress() {
+      const total = Number(this.totalCount) || 0;
+      if (total <= 0) return 0;
+      const joined = Math.min(Number(this.joinedCount) || 0, total);
+      return joined / total;
+    },
+    isFull() {
+      return this.progress >= 1;
     },
   },
   methods: {
     handleJoin() {
+      if (this.isFull) return;
       this.$emit('join');
     },
   },
@@ -135,12 +171,33 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   flex: 1;
   min-width: 0;
 
-  &__avatar {
+  &__avatar-wrap {
+    position: relative;
     flex-shrink: 0;
+    width: 74px;
+    height: 74px;
+  }
+
+  &__avatar-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 270deg,
+      #159a62 calc(var(--progress) * 360deg),
+      #F1F4F8 0
+    );
+  }
+
+  &__avatar {
+    position: absolute;
+    top: 3px;
+    left: 3px;
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background-color: #ffffff;
     box-sizing: border-box;
   }
 
@@ -153,9 +210,9 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   }
 
   &__name {
-    font-size: 26px;
-    font-weight: 600;
-    color: #333333;
+    font-size: 30px;
+    font-weight: 500;
+    color: #1c1f1e;
     line-height: 1.2;
   }
 
@@ -168,16 +225,17 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
 }
 
 .rating__icon {
-  font-size: 20px;
+  font-size: 24px;
   line-height: 1;
-  color: #d8a43a;
+  color: #d9b45b;
 }
 
 .rating__text {
   margin-left: 6px;
-  font-size: 18px;
+  font-size: 24px;
+  font-weight: 400;
   line-height: 1;
-  color: #d8a43a;
+  color: #d9b45b;
 }
 
 .deposit {
@@ -187,28 +245,29 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   flex-shrink: 0;
 
   &__label {
-    font-size: 17px;
+    font-size: 24px;
+    font-weight: 400;
     line-height: 1;
-    color: #7d8585;
+    color: #c98b32;
   }
 
   &__amount {
     margin-left: 4px;
-    font-size: 25px;
-    font-weight: 600;
+    font-size: 36px;
+    font-weight: 500;
     line-height: 1;
-    color: #ff7a45;
+    color: #c98b32;
   }
 }
 
 /* ---- 活动标题 ---- */
 .card-title {
   display: block;
-  margin-top: 18px;
-  font-size: 25px;
-  font-weight: 600;
+  margin: 24px 0 16px;
+  font-size: 34px;
+  font-weight: 500;
   line-height: 1.3;
-  color: #333333;
+  color: #1c1f1e;
 }
 
 /* ---- 标签 ---- */
@@ -217,14 +276,13 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 14px;
+  margin: 16px 0;
 }
 
 .card-tag {
-  height: 28px;
-  line-height: 28px;
-  padding: 0 10px;
-  font-size: 14px;
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 400;
   border-radius: 4px;
 
   & + & {
@@ -232,13 +290,13 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   }
 
   &--green {
-    color: #55a878;
-    background-color: #e8f7ef;
+    color: #167a4a;
+    background-color: #e8f5ee;
   }
 
   &--pink {
-    color: #ff6b8a;
-    background-color: #fff0f4;
+    color: #ff537b;
+    background-color: #ffedf2;
   }
 }
 
@@ -247,31 +305,28 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 12px;
+  margin-bottom: 16px;
 
   &__icon {
     flex-shrink: 0;
-    font-size: 22px;
+    font-size: 26px;
     line-height: 1;
-    color: #8a9393;
+    color: #6b7370;
   }
 
   &__text {
     margin-left: 8px;
-    font-size: 18px;
+    font-size: 26px;
+    font-weight: 400;
     line-height: 1.2;
-    color: #7d8585;
+    color: #6b7370;
   }
-}
-
-.card-row + .card-row {
-  margin-top: 10px;
 }
 
 /* ---- 分割线 ---- */
 .card-divider {
   height: 1px;
-  margin: 18px 0 14px;
+  margin: 0;
   background-color: #e8e8e8;
 }
 
@@ -281,6 +336,7 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding-top: 20px;
 }
 
 .participants {
@@ -297,47 +353,82 @@ $img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   }
 
   &__avatar {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
     background-color: #e1e5eb;
     box-sizing: border-box;
   }
 
   &__avatar + &__avatar {
-    margin-left: -10px;
+    margin-left: -12px;
+  }
+
+  &__overflow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-left: -12px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    background-color: #e8f5ee;
+    box-sizing: border-box;
+  }
+
+  &__overflow-text {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 42px;
+    text-align: center;
+    color: #167a4a;
   }
 
   &__text {
     margin-left: 12px;
-    font-size: 17px;
+    font-size: 24px;
+    font-weight: 400;
     line-height: 1;
   }
 
   &__count {
-    color: #159a62;
+    color: #167a4a;
   }
 
   &__suffix {
-    color: #8a9393;
+    color: #6b7370;
   }
 }
 
 .join-btn {
+  /* 重置 button 默认样式 */
+  margin: 0;
+  border: none;
+  background: transparent;
+  /* 自定义样式 */
   flex-shrink: 0;
-  width: 120px;
-  height: 48px;
-  line-height: 48px;
-  text-align: center;
-  font-size: 18px;
+  width: 160px;
+  height: 60px;
+  padding: 16px 24px;
+  border-radius: 36px;
+  background: $color-gradient-btn;
+  font-size: 28px;
   font-weight: 500;
+  line-height: 28px;
+  text-align: center;
   color: #ffffff;
-  background-color: #159a62;
-  border-radius: 24px;
+  box-sizing: border-box;
 
-  &:active {
-    opacity: 0.85;
+  // &:active {
+  //   opacity: 0.85;
+  // }
+
+  &[disabled] {
+    opacity: 0.5;
+    color: #ffffff;
   }
 }
 </style>

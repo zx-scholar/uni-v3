@@ -25,6 +25,11 @@
           <SearchBar v-model="keyword" placeholder="搜索球友/球局/门店" @confirm="handleSearch" />
         </view>
 
+        <!-- 筛选面板 -->
+        <view class="filter-panel-wrap">
+          <FilterPanel v-model="filterValue" @confirm="handleFilterConfirm" />
+        </view>
+
         <!-- 活动卡片 -->
         <view class="activity-card-wrap">
           <ActivityCard
@@ -51,10 +56,11 @@
 <script>
 import SearchBar from '@/components/SearchBar/SearchBar.vue';
 import ActivityCard from '@/components/ActivityCard/ActivityCard.vue';
+import FilterPanel from '@/components/FilterPanel/FilterPanel.vue';
 
 export default {
   name: 'BasicTemplatePage',
-  components: { SearchBar, ActivityCard },
+  components: { SearchBar, ActivityCard, FilterPanel },
 
   data() {
     return {
@@ -93,9 +99,17 @@ export default {
           '/static/logo.png',
           '/static/logo.png',
           '/static/logo.png',
+          '/static/logo.png',
         ],
         joinedCount: 3,
         totalCount: 4,
+      },
+      // 筛选面板状态
+      filterValue: {
+        date: '',
+        handicap: '',
+        gender: '',
+        smoking: '',
       },
     };
   },
@@ -135,6 +149,12 @@ export default {
     handleJoinActivity() {
       // TODO: 接入加入球局逻辑
       console.log('加入球局');
+    },
+
+    // 筛选确认
+    handleFilterConfirm(value) {
+      console.log('筛选条件:', value);
+      // TODO: 根据筛选条件请求列表数据
     },
   },
 };
