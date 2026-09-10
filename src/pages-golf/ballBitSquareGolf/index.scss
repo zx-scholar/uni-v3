@@ -40,9 +40,88 @@ $img-card-bg-item: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   margin: 24px 24px 0;
 }
 
-// 筛选面板：位于搜索区下方
-.filter-panel-wrap {
+// 筛选头部：日期选项 + 筛选按钮
+.filter-bar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
   margin: 24px 0 0;
+  padding: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #ececec;
+  box-sizing: border-box;
+}
+
+.filter-bar__date {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 26px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+}
+
+.filter-bar__date-icon {
+  margin-left: 6px;
+  font-size: 12px;
+  color: #6b7370;
+  line-height: 1;
+}
+
+.filter-bar__date-options {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+}
+
+.filter-bar__date-option {
+  flex-shrink: 0;
+  font-size: 26px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+
+  &.is-selected {
+    color: #167a4a;
+  }
+}
+
+.filter-bar__filter {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 26px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+}
+
+.filter-bar__filter-icon {
+  margin-left: 6px;
+  font-size: 22px;
+  color: #6b7370;
+  line-height: 1;
+}
+
+// 筛选下拉展开区：绝对定位浮在内容之上，不占文档流空间
+.filter-expanded {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  padding: 0;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
 // 活动卡片：位于搜索区下方，左右留 24px

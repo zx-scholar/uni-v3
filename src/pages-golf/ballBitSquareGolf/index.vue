@@ -25,9 +25,30 @@
           <SearchBar v-model="keyword" placeholder="搜索球友/球局/门店" @confirm="handleSearch" />
         </view>
 
-        <!-- 筛选面板 -->
-        <view class="filter-panel-wrap">
-          <FilterPanel v-model="filterValue" @confirm="handleFilterConfirm" />
+        <!-- 筛选头部（日期选项 + 筛选按钮） -->
+        <view class="filter-bar">
+          <view class="filter-bar__date" @click="openDate">
+            <text>日期</text>
+            <text class="iconfont icon-paixuxia filter-bar__date-icon"></text>
+          </view>
+          <view class="filter-bar__date-options">
+            <view
+              v-for="opt in dateOptions"
+              :key="opt.value"
+              class="filter-bar__date-option"
+              :class="{ 'is-selected': filterValue.date === opt.value }"
+              @click="selectDate(opt.value)"
+            >{{ opt.text }}</view>
+          </view>
+          <view class="filter-bar__filter" @click="toggleFilter">
+            <text>筛选</text>
+            <text class="iconfont icon-shaixuan1 filter-bar__filter-icon"></text>
+          </view>
+
+          <!-- 筛选下拉展开区（绝对定位贴 filter-bar 下方，不占文档流） -->
+          <view v-if="filterExpanded" class="filter-expanded">
+            <FilterPanel v-model="filterValue" @confirm="handleFilterConfirm" />
+          </view>
         </view>
 
         <!-- 活动卡片 -->
@@ -50,6 +71,15 @@
         </view>
       </view>
     </scroll-view>
+
+    <!-- 日期选择弹层 -->
+    <Popup v-model:visible="dateVisible" :title="''" :max-height="'80vh'">
+      <Calendar
+        v-model="filterValue.date"
+        @select="handleDateSelect"
+        @close="dateVisible = false"
+      />
+    </Popup>
   </view>
 </template>
 
@@ -57,10 +87,11 @@
 import SearchBar from '@/components/SearchBar/SearchBar.vue';
 import ActivityCard from '@/components/ActivityCard/ActivityCard.vue';
 import FilterPanel from '@/components/FilterPanel/FilterPanel.vue';
+import Calendar from '@/components/Calendar/Calendar.vue';
 
 export default {
   name: 'BasicTemplatePage',
-  components: { SearchBar, ActivityCard, FilterPanel },
+  components: { SearchBar, ActivityCard, FilterPanel, Calendar },
 
   data() {
     return {
@@ -111,6 +142,15 @@ export default {
         gender: '',
         smoking: '',
       },
+      // 筛选下拉展开状态
+      filterExpanded: false,
+      // 日期弹层显隐
+      dateVisible: false,
+      // 日期子项配置
+      dateOptions: [
+        { text: '今天', value: 'today' },
+        { text: '明天', value: 'tomorrow' },
+      ],
     };
   },
 
@@ -151,10 +191,33 @@ export default {
       console.log('加入球局');
     },
 
-    // 筛选确认
+    // 筛选确认（点确定后收起展开区）
     handleFilterConfirm(value) {
       console.log('筛选条件:', value);
       // TODO: 根据筛选条件请求列表数据
+      this.filterExpanded = false;
+    },
+
+    // 切换筛选下拉展开
+    toggleFilter() {
+      this.filterExpanded = !this.filterExpanded;
+    },
+
+    // 选中日期子项
+    selectDate(value) {
+      this.filterValue = { ...this.filterValue, date: value };
+      console.log('filterValue:', this.filterValue);
+      console.log('filterValue:', value);
+    },
+
+    // 打开日期选择弹层
+    openDate() {
+      this.dateVisible = true;
+    },
+
+    // 选中日期后关闭弹层
+    handleDateSelect() {
+      this.dateVisible = false;
     },
   },
 };

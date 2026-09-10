@@ -1,26 +1,5 @@
 <template>
   <view class="filter-panel">
-    <!-- 顶部 -->
-    <view class="filter-panel__header">
-      <view class="filter-panel__date">
-        <text>日期</text>
-        <text class="iconfont icon-paixuxia filter-panel__date-icon"></text>
-      </view>
-      <view class="filter-panel__date-options">
-        <view
-          v-for="opt in dateOptions"
-          :key="opt.value"
-          class="filter-panel__date-option"
-          :class="{ 'is-selected': modelValue.date === opt.value }"
-          @click="select('date', opt.value)"
-        >{{ opt.text }}</view>
-      </view>
-      <view class="filter-panel__filter" @click="$emit('filter')">
-        <text>筛选</text>
-        <text class="iconfont icon-shaixuan1 filter-panel__filter-icon"></text>
-      </view>
-    </view>
-
     <!-- 主体 -->
     <view class="filter-panel__body">
       <view
@@ -62,18 +41,10 @@ export default {
     modelValue: {
       type: Object,
       default: () => ({
-        date: '',
         handicap: '',
         gender: '',
         smoking: '',
       }),
-    },
-    dateOptions: {
-      type: Array,
-      default: () => [
-        { text: '今天', value: 'today' },
-        { text: '明天', value: 'tomorrow' },
-      ],
     },
     groups: {
       type: Array,
@@ -107,7 +78,7 @@ export default {
       ],
     },
   },
-  emits: ['update:modelValue', 'confirm', 'reset', 'filter'],
+  emits: ['update:modelValue', 'confirm', 'reset'],
   methods: {
     select(key, value) {
       const next = { ...this.modelValue, [key]: value };
@@ -118,7 +89,6 @@ export default {
       for (const group of this.groups) {
         reset[group.key] = '';
       }
-      reset.date = '';
       this.$emit('update:modelValue', reset);
       this.$emit('reset');
     },
@@ -271,11 +241,11 @@ export default {
 
 .filter-panel__btn {
   flex: 1;
-  height: 88px;
-  line-height: 88px;
+  height: 98px;
+  line-height: 98px;
   text-align: center;
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 34px;
+  font-weight: 400;
   border-radius: 0;
   box-sizing: border-box;
 
