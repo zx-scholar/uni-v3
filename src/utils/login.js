@@ -82,16 +82,18 @@ export default async function login() {
 function h5MockLogin(userStore) {
   console.log('h5环境');
   const DEFAULT_USER = {
-    netUserId: 2025092200156572,
-    name: '4552sdf.1234as5',
-    mobileNum: '18251852533',
-    email: '12453574@qq.com',
-    status: '1',
+    avatar: "http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/venueImage/00f1b345a4d644b4a088b862d8d847b4.png",
     centerId: 10000000,
-    token: '7bd6e6ab318744288c066be0b672ff15',
-    coAccountId: 9756,
-    accessToken: '0679326dd9fccdc9dec13a5a9317554d',
-    coAppId: 1,
+    createTime: "2024-01-16 14:12:49",
+    gender: "0",
+    mobileNum: "18251852533",
+    name: "18251852533",
+    netUserId: 2024011600001334,
+    nickName: "%E5%BE%AE%E4%BF%A1%E7%94%A8%E6%88%B7112",
+    status: "1",
+    token: "88093e4c626180d8d0dbf0ad71b05d47",
+    tokenTime: "2024-01-16 14:12:49",
+    updateTime: "2024-01-16 14:12:49"
   };
 
   userStore.setLoginResult(DEFAULT_USER);

@@ -12,6 +12,7 @@
             :key="item.id"
             class="entry-card"
             :class="['entry-card--' + item.theme]"
+            @click="handleEntryCardClick(item)"
           >
             <view class="entry-card__text">
               <text class="entry-card__title">{{ item.title }}</text>
@@ -84,6 +85,31 @@
         @close="dateVisible = false"
       />
     </Popup>
+
+    <!-- 先预约场地提示弹层 -->
+    <ReservePrompt
+      v-model:visible="reservePromptVisible"
+      @confirm="handleReserveConfirm"
+      @cancel="reservePromptVisible = false"
+    />
+
+    <!-- 选择已预订场地弹层 -->
+    <SelectCourt
+      v-model:visible="selectCourtVisible"
+      v-model="filterValue.courtId"
+      :list="courtList"
+      @rebook="handleRebook"
+      @confirm="handleCourtConfirm"
+    />
+
+    <!-- 发起约球弹层（确定选场后进入） -->
+    <CreateGame
+      v-model:visible="createGameVisible"
+      v-model="createGameValue"
+      @back="handleCreateGameBack"
+      @close="createGameVisible = false"
+      @submit="handleCreateGameSubmit"
+    />
   </view>
 </template>
 
@@ -92,10 +118,13 @@ import SearchBar from '@/components/SearchBar/SearchBar.vue';
 import ActivityCard from '@/components/ActivityCard/ActivityCard.vue';
 import FilterPanel from '@/components/FilterPanel/FilterPanel.vue';
 import Calendar from '@/components/Calendar/Calendar.vue';
+import ReservePrompt from '@/components/ReservePrompt/ReservePrompt.vue';
+import SelectCourt from '@/components/SelectCourt/SelectCourt.vue';
+import CreateGame from '@/components/CreateGame/CreateGame.vue';
 
 export default {
   name: 'BasicTemplatePage',
-  components: { SearchBar, ActivityCard, FilterPanel, Calendar },
+  components: { SearchBar, ActivityCard, FilterPanel, Calendar, ReservePrompt, SelectCourt, CreateGame },
 
   data() {
     return {
@@ -145,11 +174,39 @@ export default {
         handicap: '',
         gender: '',
         smoking: '',
+        courtId: '',
       },
       // 筛选下拉展开状态
       filterExpanded: false,
       // 日期弹层显隐
       dateVisible: false,
+      // 先预约场地提示弹层显隐
+      reservePromptVisible: false,
+      // 选择已预订场地弹层显隐
+      selectCourtVisible: false,
+      // 发起约球弹层显隐
+      createGameVisible: false,
+      // 发起约球表单草稿（不与筛选共享）
+      createGameValue: {
+        handicap: '',
+        gender: '',
+        smoking: '',
+      },
+      // 已预订场地示例列表（后续接接口）
+      courtList: [
+        {
+          id: 'c1',
+          title: '102包厢（14:00–16:00）',
+          dateTime: '08/08 周六 14:00–16:00',
+          location: 'GOLFZON PARK 南京旗舰店',
+        },
+        {
+          id: 'c2',
+          title: '102包厢（14:00–16:00）',
+          dateTime: '08/08 周六 14:00–16:00',
+          location: 'GOLFZON PARK 南京旗舰店',
+        },
+      ],
     };
   },
 
@@ -193,8 +250,54 @@ export default {
 
     // 加入球局
     handleJoinActivity() {
-      // TODO: 接入加入球局逻辑
-      console.log('加入球局');
+      // TODO: 判断用户是否已预约场地，未预约则提示弹层
+      this.reservePromptVisible = true;
+    },
+
+    // 入口卡片点击
+    handleEntryCardClick(item) {
+      if (item.id === 'go') {
+        // 发起约球：弹出预约场地提示 selectCourtVisible
+        // this.reservePromptVisible = true;
+        this.selectCourtVisible = true;
+      } else if (item.id === 'my') {
+        // 我的约球：后续跳转我的约球页面
+        // TODO: 跳转到我的约球页
+        console.log('点击了我的约球');
+      }
+    },
+
+    // 跳转到预约场地页面
+    handleReserveConfirm() {
+      this.reservePromptVisible = false;
+      // TODO: 跳转到预约场地页面
+      console.log('跳转到预约场地');
+    },
+
+    // 选择场地后确认：关闭选场弹层，打开发起约球弹层
+    handleCourtConfirm(courtId) {
+      console.log('选中场地:', courtId);
+      this.selectCourtVisible = false;
+      this.createGameVisible = true;
+    },
+
+    // 发起约球弹层返回：回到选场弹层
+    handleCreateGameBack() {
+      this.createGameVisible = false;
+      this.selectCourtVisible = true;
+    },
+
+    // 发起约球提交
+    handleCreateGameSubmit(value) {
+      console.log('发起约球:', value);
+      this.createGameVisible = false;
+      // TODO: 接入发起约球接口
+    },
+
+    // 重新预约
+    handleRebook() {
+      console.log('重新预约');
+      // TODO: 跳转到预约场地页
     },
 
     // 筛选确认（点确定后收起展开区）

@@ -32,7 +32,7 @@ export default {
     closeable: { type: Boolean, default: true },
     maskClosable: { type: Boolean, default: true },
     maxHeight: { type: String, default: '70vh' },
-    width: { type: String, default: '' }, // 居中模式专用：弹窗宽度（如 600rpx）
+    width: { type: String, default: '' }, // 居中模式专用：弹窗宽度（如 600px）
   },
   emits: ['update:visible', 'close'],
   computed: {
@@ -78,7 +78,7 @@ export default {
 
 .popup-content-bottom {
   background: #ffffff;
-  border-radius: 24rpx 24rpx 0 0;
+  border-radius: 24px 24px 0 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -98,9 +98,9 @@ export default {
 
 .popup-content-center {
   width: 85%;
-  max-width: 600rpx;
+  max-width: 600px;
   background: #ffffff;
-  border-radius: 24rpx;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -113,32 +113,32 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30rpx 24rpx;
+  padding: 30px 24px;
   position: relative;
-  border-bottom: 1rpx solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
   flex-shrink: 0;
 }
 
 .popup-title {
-  font-size: 32rpx;
+  font-size: 32px;
   font-weight: 600;
   color: #1c1f1e;
 }
 
 .popup-close {
   position: absolute;
-  right: 24rpx;
+  right: 24px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 28rpx;
+  font-size: 28px;
   color: #94a3b8;
-  padding: 10rpx;
+  padding: 10px;
 }
 
 /* ========== 内容区 ========== */
 .popup-body {
   flex: 1;
-  padding: 24rpx;
+  padding: 24px 0;
 }
 
 /* ========== 动画关键帧 ========== */
