@@ -6,21 +6,19 @@
         <text>日期</text>
         <text class="iconfont icon-paixuxia filter-panel__date-icon"></text>
       </view>
+      <view class="filter-panel__date-options">
+        <view
+          v-for="opt in dateOptions"
+          :key="opt.value"
+          class="filter-panel__date-option"
+          :class="{ 'is-selected': modelValue.date === opt.value }"
+          @click="select('date', opt.value)"
+        >{{ opt.text }}</view>
+      </view>
       <view class="filter-panel__filter" @click="$emit('filter')">
         <text>筛选</text>
         <text class="iconfont icon-shaixuan1 filter-panel__filter-icon"></text>
       </view>
-    </view>
-
-    <!-- 日期子项 -->
-    <view class="filter-panel__sub">
-      <view
-        v-for="opt in dateOptions"
-        :key="opt.value"
-        class="filter-panel__chip"
-        :class="{ 'is-selected': modelValue.date === opt.value }"
-        @click="select('date', opt.value)"
-      >{{ opt.text }}</view>
     </view>
 
     <!-- 主体 -->
@@ -132,15 +130,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/variables.scss' as *;
+
 .filter-panel {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 702px;
+  max-width: 750px;
   margin: 0 auto;
-  padding: 24px;
-  border-radius: 16px;
+  // padding: 24px;
+  // border-radius: 16px;
   background-color: #ffffff;
   box-sizing: border-box;
 }
@@ -150,80 +150,102 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  height: 60px;
-}
-
-.filter-panel__date {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 28px;
-  font-weight: 500;
-  color: #1c1f1e;
-  line-height: 1;
-}
-
-.filter-panel__date-icon {
-  margin-left: 8px;
-  font-size: 24px;
-  color: #1c1f1e;
-  line-height: 1;
-}
-
-.filter-panel__filter {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 28px;
-  font-weight: 500;
-  color: #1c1f1e;
-  line-height: 1;
-}
-
-.filter-panel__filter-icon {
-  margin-left: 8px;
-  font-size: 28px;
-  color: #1c1f1e;
-  line-height: 1;
-}
-
-/* ---- 日期子行 / 主体 chips ---- */
-.filter-panel__sub,
-.filter-panel__group-options {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.filter-panel__sub {
+  gap: 24px;
+  padding: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid #ececec;
 }
 
-.filter-panel__chip {
-  height: 56px;
-  line-height: 56px;
-  padding: 0 24px;
-  margin-right: 16px;
-  margin-bottom: 16px;
+.filter-panel__date {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   font-size: 26px;
   font-weight: 400;
-  color: #5c6366;
-  background-color: #f1f2f4;
+  color: #6b7370;
+  line-height: 1;
+}
+
+.filter-panel__date-icon {
+  margin-left: 6px;
+  font-size: 22px;
+  color: #6b7370;
+  line-height: 1;
+}
+
+.filter-panel__date-options {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+}
+
+.filter-panel__date-option {
+  flex-shrink: 0;
+  font-size: 26px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+
+  &.is-selected {
+    color: #167a4a;
+  }
+}
+
+.filter-panel__filter {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 26px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+}
+
+.filter-panel__filter-icon {
+  margin-left: 6px;
+  font-size: 22px;
+  color: #6b7370;
+  line-height: 1;
+}
+
+/* ---- 主体 chips ---- */
+
+.filter-panel__chip {
+  width: 168px;
+  height: 64px;
+  line-height: 64px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #1c1f1e;
+  background-color: #f1f4f8;
   border-radius: 8px;
+  text-align: center;
   box-sizing: border-box;
 
   &.is-selected {
     color: #167a4a;
-    background-color: #e5f4ec;
+    background-color: #e8f5ee;
   }
+}
+
+.filter-panel__group-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
 }
 
 /* ---- 主体 group ---- */
 .filter-panel__body {
-  padding-top: 16px;
+  padding: 24px 24px 0 ;
+
 }
 
 .filter-panel__group {
@@ -254,11 +276,11 @@ export default {
   text-align: center;
   font-size: 28px;
   font-weight: 500;
-  border-radius: 16px;
+  border-radius: 0;
   box-sizing: border-box;
 
   & + & {
-    margin-left: 16px;
+    margin-left: 0;
   }
 
   &--reset {
@@ -269,7 +291,7 @@ export default {
 
   &--confirm {
     color: #ffffff;
-    background-color: #159a62;
+    background: $color-gradient-btn;
   }
 }
 </style>
