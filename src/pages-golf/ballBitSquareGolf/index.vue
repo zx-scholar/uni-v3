@@ -27,8 +27,12 @@
 
         <!-- 筛选头部（日期选项 + 筛选按钮） -->
         <view class="filter-bar">
-          <view class="filter-bar__date" @click="openDate">
-            <text>日期</text>
+          <view
+            class="filter-bar__date"
+            :class="{ 'is-selected': !!filterValue.date }"
+            @click="openDate"
+          >
+            <text>{{ filterValue.date ? formatDisplayDate(filterValue.date) : '日期' }}</text>
             <text class="iconfont icon-paixuxia filter-bar__date-icon"></text>
           </view>
           <view class="filter-bar__date-options">
@@ -36,7 +40,7 @@
               v-for="opt in dateOptions"
               :key="opt.value"
               class="filter-bar__date-option"
-              :class="{ 'is-selected': filterValue.date === opt.value }"
+              :class="{ 'is-selected': filterValue.date === opt.dateStr }"
               @click="selectDate(opt.value)"
             >{{ opt.text }}</view>
           </view>
@@ -146,12 +150,14 @@ export default {
       filterExpanded: false,
       // 日期弹层显隐
       dateVisible: false,
-      // 日期子项配置
-      dateOptions: [
-        { text: '今天', value: 'today' },
-        { text: '明天', value: 'tomorrow' },
-      ],
     };
+  },
+
+  computed: {
+    // 始终反映“今天/明天”的实时日期字符串
+    dateOptions() {
+      return this.buildDateOptions();
+    },
   },
 
   onLoad() {
@@ -203,11 +209,41 @@ export default {
       this.filterExpanded = !this.filterExpanded;
     },
 
-    // 选中日期子项
+    // 选中日期子项（今天/明天），将特殊值转为具体日期字符串
     selectDate(value) {
-      this.filterValue = { ...this.filterValue, date: value };
-      console.log('filterValue:', this.filterValue);
-      console.log('filterValue:', value);
+      let dateStr = '';
+      const today = new Date();
+      if (value === 'today') {
+        dateStr = this.formatDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+      } else if (value === 'tomorrow') {
+        const t = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        dateStr = this.formatDate(t.getFullYear(), t.getMonth() + 1, t.getDate());
+      }
+      this.filterValue = { ...this.filterValue, date: dateStr };
+    },
+
+    // 拼接 YYYY-MM-DD
+    formatDate(y, m, d) {
+      return `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    },
+
+    // 把 YYYY-MM-DD 转为 MM.DD 格式，用于页面上紧凑展示
+    formatDisplayDate(dateStr) {
+      if (!dateStr) return '';
+      const [, m, d] = dateStr.split('-');
+      return `${m}.${d}`;
+    },
+
+    // 构建"今天/明天"选项列表（dateStr 实时计算）
+    buildDateOptions() {
+      const today = new Date();
+      const todayStr = this.formatDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+      const t = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+      const tomorrowStr = this.formatDate(t.getFullYear(), t.getMonth() + 1, t.getDate());
+      return [
+        { text: '今天', value: 'today', dateStr: todayStr },
+        { text: '明天', value: 'tomorrow', dateStr: tomorrowStr },
+      ];
     },
 
     // 打开日期选择弹层

@@ -63,6 +63,14 @@ $img-card-bg-item: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   font-weight: 400;
   color: #6b7370;
   line-height: 1;
+
+  &.is-selected {
+    color: #167a4a;
+
+    .filter-bar__date-icon {
+      color: #167a4a;
+    }
+  }
 }
 
 .filter-bar__date-icon {

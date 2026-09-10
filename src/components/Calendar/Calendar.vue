@@ -87,19 +87,18 @@ export default {
       const startWeekday = firstDay.getDay();
       // 当月总天数
       const daysInMonth = new Date(this.year, this.month, 0).getDate();
-      // 上月最后一天
-      const prevMonthLastDay = new Date(this.year, this.month - 1, 0).getDate();
 
       const days = [];
 
-      // 上月填充
-      for (let i = startWeekday - 1; i >= 0; i--) {
+      // 月头空位（不填充上月日期，只占位让 1 号对齐）
+      for (let i = 0; i < startWeekday; i++) {
         days.push({
-          text: prevMonthLastDay - i,
-          otherMonth: true,
+          text: '',
+          otherMonth: false,
           isSelected: false,
           isToday: false,
           date: '',
+          empty: true,
         });
       }
 
@@ -112,19 +111,7 @@ export default {
           isSelected: this.selectedDate === dateStr,
           isToday: this.isRealToday(d),
           date: dateStr,
-        });
-      }
-
-      // 下月填充（补齐到 6 行 = 42 格）
-      const totalCells = 42;
-      const remaining = totalCells - days.length;
-      for (let d = 1; d <= remaining; d++) {
-        days.push({
-          text: d,
-          otherMonth: true,
-          isSelected: false,
-          isToday: false,
-          date: '',
+          empty: false,
         });
       }
 
@@ -172,7 +159,7 @@ export default {
       }
     },
     selectDay(day) {
-      if (day.otherMonth) return;
+      if (day.otherMonth || day.empty) return;
       // 1. v-model 双向绑定:通知父级更新选中日期
       this.$emit('update:modelValue', day.date);
       // 2. select 事件:通知父级执行后续动作（如关闭弹层）
