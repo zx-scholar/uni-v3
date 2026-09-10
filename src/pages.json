@@ -59,6 +59,12 @@
           "style": {
             "navigationStyle": "custom"
           }
+        },
+        {
+          "path": "ballBitSquareGolf/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     },

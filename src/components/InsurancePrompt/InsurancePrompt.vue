@@ -63,8 +63,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/variables.scss' as *;
-
 /* ========== 遮罩层 ========== */
 .insurance-prompt-overlay {
   position: fixed;
@@ -85,9 +83,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $color-bg-card;
-  border-radius: $size-radius-pro;
-  box-shadow: $color-shadow-md;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   animation: scaleIn 0.25s ease-out;
   box-sizing: border-box;
 
@@ -112,14 +110,14 @@ export default {
     margin-top: 32px;
     font-size: 32px;
     font-weight: 600;
-    color: $color-text-primary;
+    color: #1c1f1e;
     text-align: center;
   }
 
   .insurance-prompt-desc {
     margin-top: 16px;
     font-size: 26px;
-    color: $color-text-secondary;
+    color: #6b7370;
     line-height: 1.6;
     text-align: center;
   }
@@ -156,7 +154,7 @@ export default {
     /* 立即购买按钮：仅背景与文字色不同 */
     &.insurance-prompt-btn--primary {
       background: linear-gradient(90deg, #1186ff 0%, #4ecbfd 100%);
-      color: $color-text-white;
+      color: #ffffff;
     }
 
     .insurance-prompt-btn-text {

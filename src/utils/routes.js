@@ -18,6 +18,8 @@ export const routes = {
   demo: { path: '/pages-golf/demo/demo' },
   browsingHistory: { path: '/pages-golf/browsingHistory/browsingHistory' },
   eventsPlan: { path: '/pages-golf/eventsPlan/eventsPlan' },
+  ballBitSquareGolf: { path: '/pages-golf/ballBitSquareGolf/index' },
+
 
   // === pages-common 分包页面 ===
   personInfo: { path: '/pages-common/personInfo/personInfo' },

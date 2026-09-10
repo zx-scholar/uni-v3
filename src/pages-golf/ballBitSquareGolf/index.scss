@@ -1,0 +1,110 @@
+@use '@/styles/variables.scss' as *;
+
+$img-page-bg: '#{$img-base}/gameImage3658c51db2b64e72aa6f329d9918dd2b.png';
+$img-card-bg-myball: '#{$img-base}/gameImagec588066e9eaf49bc86fd40b92638daba.png';
+$img-card-bg-goball: '#{$img-base}/gameImage49ecacb7122f4e4294f6082d48d29c7a.png';
+$img-card-bg-item: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
+// 页面根节点：全屏 flex 纵向布局，背景色取自全局变量
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区：占满剩余高度并允许纵向滚动
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  // padding: $size-padding-lg;
+  box-sizing: border-box;
+
+  .page-content {
+    // 内容容器：可在此加卡片背景、圆角等，例如
+    // background-color: $color-bg-card;
+    // border-radius: $size-radius-card;
+    // padding: $size-padding-lg;
+    display: flow-root;
+  }
+}
+
+// 搜索区：位于入口卡片下方
+.search-wrap {
+  margin: 24px 24px 0;
+}
+
+// 活动卡片：位于搜索区下方，左右留 24px
+.activity-card-wrap {
+  margin: 24px 24px 0;
+}
+
+// 入口卡片：左右两张（我的约球 / 发起约球）
+.entry-card-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 104px 24px 0;
+  box-sizing: border-box;
+}
+
+.entry-card {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 343px;
+  height: 160px;
+  padding-left: 136px;
+  box-sizing: border-box;
+  border-radius: $size-radius-card;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  &__desc {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+    color: $color-text-secondary;
+  }
+
+  &--my {
+    background-image: url($img-card-bg-myball);
+
+    .entry-card__title {
+      color: #195028;
+    }
+  }
+
+  &--go {
+    background-image: url($img-card-bg-goball);
+
+    .entry-card__title {
+      color: #724C01;
+    }
+  }
+}

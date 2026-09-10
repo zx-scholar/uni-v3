@@ -49,6 +49,7 @@ export default {
         { icon: 'icon-hetong', text: '用户协议', routerPath: 'userAgreement', params: { type: 'user' } },
         { icon: 'icon-hetong', text: '会员服务协议', routerPath: 'userAgreement', params: { type: 'member' } },
         { icon: 'icon-hetong', text: '保险服务', routerPath: 'insuranceService' },
+        { icon: 'icon-shequhuodong', text: '约球广场', routerPath: 'ballBitSquareGolf' },
         { icon: 'icon-fenxiang', text: '分享', action: 'share' },
         { icon: 'icon-cuowu2', text: '清空 Pinia 状态与缓存', routerPath: null },
       ],
