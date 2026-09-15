@@ -7,7 +7,7 @@
     <view v-if="visible" class="popup-wrapper" :class="'popup-mode-' + mode" @touchmove.prevent>
       <view class="popup-content" :class="'popup-content-' + mode" :style="contentStyle">
         <!-- 标题栏 -->
-        <view v-if="title" class="popup-header">
+        <view v-if="title !== null" class="popup-header">
           <text class="popup-title">{{ title }}</text>
           <text v-if="closeable" class="popup-close iconfont icon-cuowu2" @click="handleClose"></text>
         </view>
@@ -23,12 +23,12 @@
 
 <script>
 export default {
-  name: 'Popup',
+  name: 'BasePopup',
   props: {
     visible: { type: Boolean, default: false },
     // bottom - 底部滑出 | center - 居中弹窗
     mode: { type: String, default: 'bottom' },
-    title: { type: String, default: '' },
+    title: { type: String, default: null },
     closeable: { type: Boolean, default: true },
     maskClosable: { type: Boolean, default: true },
     maxHeight: { type: String, default: '70vh' },

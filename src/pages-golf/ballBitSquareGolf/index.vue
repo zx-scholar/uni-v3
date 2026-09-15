@@ -78,37 +78,40 @@
     </scroll-view>
 
     <!-- 日期选择弹层 -->
-    <Popup v-model:visible="dateVisible" :title="''" :max-height="'80vh'">
+    <BasePopup :visible="dateVisible" :max-height="'80vh'" @update:visible="dateVisible = $event">
       <Calendar
         v-model="filterValue.date"
         @select="handleDateSelect"
         @close="dateVisible = false"
       />
-    </Popup>
+    </BasePopup>
 
     <!-- 先预约场地提示弹层 -->
     <ReservePrompt
-      v-model:visible="reservePromptVisible"
+      :visible="reservePromptVisible"
       @confirm="handleReserveConfirm"
       @cancel="reservePromptVisible = false"
+      @update:visible="reservePromptVisible = $event"
     />
 
     <!-- 选择已预订场地弹层 -->
     <SelectCourt
-      v-model:visible="selectCourtVisible"
+      :visible="selectCourtVisible"
       v-model="filterValue.courtId"
       :list="courtList"
       @rebook="handleRebook"
       @confirm="handleCourtConfirm"
+      @update:visible="selectCourtVisible = $event"
     />
 
     <!-- 发起约球弹层（确定选场后进入） -->
     <CreateGame
-      v-model:visible="createGameVisible"
+      :visible="createGameVisible"
       v-model="createGameValue"
       @back="handleCreateGameBack"
       @close="createGameVisible = false"
       @submit="handleCreateGameSubmit"
+      @update:visible="createGameVisible = $event"
     />
   </view>
 </template>
@@ -121,6 +124,9 @@ import Calendar from '@/components/Calendar/Calendar.vue';
 import ReservePrompt from '@/components/ReservePrompt/ReservePrompt.vue';
 import SelectCourt from '@/components/SelectCourt/SelectCourt.vue';
 import CreateGame from '@/components/CreateGame/CreateGame.vue';
+
+// 业务接口
+import { queryUserTicketsWithFriend } from './api';
 
 export default {
   name: 'BasicTemplatePage',
@@ -225,10 +231,12 @@ export default {
     // 拉取数据示例
     async fetchList() {
       try {
-        // TODO: 在这里调用接口获取数据，例如：
-        // const res = await xxxApi();
-        // this.list = res.list;
-        this.list = [];
+        const res = await queryUserTicketsWithFriend({});
+        this.list = (res && res.tradeTickets) || [];
+        // 后端主动给出的业务提示（如"只支持羽毛球场地"）
+        if (res && res.prompt) {
+          uni.showToast({ title: res.prompt, icon: 'none' });
+        }
       } catch (err) {
         console.error('获取数据失败:', err);
       }

@@ -5,7 +5,7 @@ import App from './App.vue'
 
 // 引入全局组件与路由工具
 import NavBar from '@/components/NavBar/NavBar.vue'
-import Popup from '@/components/Popup/Popup.vue'
+import BasePopup from '@/components/BasePopup/BasePopup.vue'
 import router from '@/utils/router'
 import { checkRoutesConsistency } from '@/utils/routeCheck'
 
@@ -20,9 +20,9 @@ export function createApp() {
     checkRoutesConsistency()
   }
 
-  // 1. 全局注册 NavBar、Popup 组件 (全项目模板无需 import 即可直接使用)
+  // 1. 全局注册 NavBar、BasePopup 组件 (全项目模板无需 import 即可直接使用)
   app.component('NavBar', NavBar)
-  app.component('Popup', Popup)
+  app.component('BasePopup', BasePopup)
 
   // 2. 全局挂载 $router 属性
   app.config.globalProperties.$router = router

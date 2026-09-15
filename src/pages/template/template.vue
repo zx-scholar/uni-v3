@@ -83,8 +83,8 @@
          弹出框组件（可选，用不到可删除）
          ============================================================ -->
 
-    <!-- 底部弹出框 Popup -->
-    <Popup v-model:visible="popupVisible" mode="bottom" title="操作列表">
+    <!-- 底部弹出框 BasePopup -->
+    <BasePopup :visible="popupVisible" mode="bottom" title="操作列表" @update:visible="popupVisible = $event">
       <view class="popup-item flex items-center" @click="handlePopupSelect('选项一')">
         <text class="popup-item-icon mr-20">📋</text>
         <text class="popup-item-text">选项一</text>
@@ -97,10 +97,10 @@
         <text class="popup-item-icon mr-20">📄</text>
         <text class="popup-item-text">选项三</text>
       </view>
-    </Popup>
+    </BasePopup>
 
-    <!-- 居中弹窗 Popup -->
-    <Popup v-model:visible="modalVisible" mode="center" title="提示" width="620rpx" closeable>
+    <!-- 居中弹窗 BasePopup -->
+    <BasePopup :visible="modalVisible" mode="center" title="提示" width="620rpx" closeable @update:visible="modalVisible = $event">
       <view class="modal-body flex-column items-center py-20">
         <text class="modal-icon mb-20">🎉</text>
         <text class="modal-desc text-center lh-1-6">确认执行此操作？</text>
@@ -109,10 +109,10 @@
         <button class="modal-btn flex-1 text-center border-none bg-hover color-text-sub" @click="modalVisible = false">取消</button>
         <button class="modal-btn flex-1 text-center border-none bg-gradient-btn color-text-white" @click="modalVisible = false">确认</button>
       </view>
-    </Popup>
+    </BasePopup>
 
     <!-- 敬请期待弹窗 -->
-    <ComingSoon v-model:visible="comingSoonVisible" />
+    <ComingSoon :visible="comingSoonVisible" @update:visible="comingSoonVisible = $event" />
   </view>
 </template>
 

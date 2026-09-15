@@ -15,7 +15,7 @@
       <image class="banner-image" :src="bannerImage" mode="widthFix" />
     </view>
 
-    <InsurancePrompt v-model:visible="promptVisible" @confirm="handleConfirm" @cancel="handleCancel" />
+    <InsurancePrompt :visible="promptVisible" @confirm="handleConfirm" @cancel="handleCancel" @update:visible="promptVisible = $event" />
   </view>
 </template>
 
