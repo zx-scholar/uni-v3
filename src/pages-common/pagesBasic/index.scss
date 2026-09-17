@@ -1,0 +1,75 @@
+/* =========================================================================
+   页面模板样式 (pagesBasic/index.scss)
+   =========================================================================
+   - 颜色变量保留（方便主题切换）
+   - 尺寸变量已全部替换为 px 值（不再依赖 $size-*）
+   ========================================================================= */
+
+@use '@/styles/variables.scss' as *;
+
+// 背景图变量（已展开为完整 URL）
+$img-page-bg: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prdgameImage3a09555474d04967934ce16e691e3524.png';
+
+/* ============================================================
+   page-container
+   ============================================================ */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-page;
+  overflow: hidden;
+  position: relative;
+
+  /* 页面背景图（按需启用） */
+  &.page-has-bg {
+    background-color: $color-bg-page;
+    background-image: url($img-page-bg);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  /* ---- 中间可滚动内容区 ---- */
+  .page-scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 0 0;
+    box-sizing: border-box;
+
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+  }
+
+  /* ---- 底部固定按钮栏（含 iPhone 安全区） ---- */
+  .page-bottom-bar {
+    flex-shrink: 0;
+    background-color: $color-bottom-bar-bg;
+    padding: 32px 24px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+    padding-bottom: calc(32px + constant(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+
+    .btn-primary {
+      width: 100%;
+      height: 90px;
+      line-height: 90px;
+      font-size: 28px;
+      font-weight: 600;
+      color: $color-text-white;
+      background: $color-gradient-btn;
+      border: none;
+      border-radius: 999px;
+      box-shadow: $color-shadow-lg;
+      text-align: center;
+
+      &:active {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+

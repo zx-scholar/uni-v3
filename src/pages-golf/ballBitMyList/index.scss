@@ -1,0 +1,172 @@
+@use '@/styles/variables.scss' as *;
+
+$img-page-bg: '#{$img-base}/gameImageeec4f8d06f66439cb16f0f027a6d4b62.png';
+
+// 页面根节点
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+
+  .page-content {
+    display: flow-root;
+  }
+}
+
+/* ============================================================
+   Tab 切换栏
+   ============================================================ */
+.my-tab {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 88px;
+  background-color: #ffffff;
+
+  &__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &--active .my-tab__text {
+      color: #333333;
+      font-weight: 500;
+      font-size: 34px;
+    }
+  }
+
+  &__text {
+    color: #666666;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  &__line {
+    width: 60px;
+    height: 6px;
+    margin-top: 8px;
+    background-color: #167A4A;
+    border-radius: 3px;
+  }
+}
+
+/* ============================================================
+   约球卡片
+   ============================================================ */
+.my-card {
+  position: relative;
+  width: 100%;
+  max-width: 702px;
+  margin: 24px 24px 0;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__row + &__row {
+    margin-top: 16px;
+  }
+
+  &__title-wrap {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.4;
+  }
+
+  &__status {
+    flex-shrink: 0;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.4;
+
+    &--green {
+      color: #167A4A;
+    }
+
+    &--default {
+      color: #666666;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    font-size: 24px;
+    line-height: 1;
+    color: #999999;
+  }
+
+  &__desc {
+    margin-left: 12px;
+    font-size: 26px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1.4;
+  }
+
+  &__footer {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    height: 56px;
+    font-size: 26px;
+    font-weight: 400;
+    color: #167A4A;
+    background-color: #ffffff;
+    border: 2px solid #167A4A;
+    border-radius: 28px;
+    line-height: 1;
+  }
+}
+
+/* ============================================================
+   空状态
+   ============================================================ */
+.my-empty {
+  padding: 120px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__text {
+    font-size: 28px;
+    color: #9AA3A0;
+  }
+}

@@ -1,0 +1,315 @@
+@use '@/styles/variables.scss' as *;
+
+$img-page-bg: '#{$img-base}/gameImageee5023d6de9a4ffeb3212195a0cfef08.png';
+// 顶部积分卡背景图（仅本页使用）
+$img-card-bg: '#{$img-base}/gameImaged27b4bf69f6e4c80a9b61d3413d92037.png';
+// 页面根节点
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+
+  .page-content {
+    display: flow-root;
+  }
+}
+
+/* ============================================================
+   顶部积分可抵金额卡（702 × 315，子卡 686 × 126 叠在内部）
+   ============================================================ */
+.points-hero {
+  position: relative;
+  width: 702px;
+  height: 315px;
+  margin: 24px auto 0;
+  border-radius: 16px;
+  background-color: transparent;
+  background-color: transparent;
+  background-image: url($img-card-bg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  // 上半区：“积分可抵金额 / 10元”
+  &__top {
+    position: relative;
+    width: 100%;
+    height: 189px;
+    padding: 32px;
+    box-sizing: border-box;
+  }
+
+  &__top-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__label {
+    font-size: 26px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.4;
+  }
+
+  &__amount {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-top: 16px;
+    color: #ffffff;
+  }
+
+  &__amount-num {
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  &__amount-unit {
+    margin-left: 8px;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  // 下半区：子卡（叠在大卡内部底部）
+  &__sub {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 686px;
+    height: 126px;
+    margin: 0 auto;
+    padding: 0 32px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+
+  &__sub-cell {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    &--right {
+      justify-content: flex-end;
+    }
+  }
+
+  &__sub-text {
+    font-size: 26px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1;
+  }
+
+  &__sub-num {
+    margin-left: 8px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #1c1f1e;
+    line-height: 1;
+  }
+
+  &__sub-unit {
+    font-size: 24px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1;
+  }
+
+  &__sub-divider {
+    width: 1px;
+    height: 32px;
+    margin: 0 24px;
+    background-color: #e8e8e8;
+  }
+}
+
+/* ============================================================
+   顶部 Tab + 筛选
+   ============================================================ */
+.points-header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 88px;
+  background-color: #ffffff;
+}
+
+.points-tab {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  height: 88px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px;
+
+    &--active .points-tab__text {
+      color: #333333;
+      font-weight: 500;
+      font-size: 34px;
+    }
+  }
+
+  &__text {
+    color: #666666;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  &__line {
+    width: 60px;
+    height: 6px;
+    margin-top: 8px;
+    background-color: #167A4A;
+    border-radius: 3px;
+  }
+}
+
+.points-filter {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__icon {
+    font-size: 28px;
+    color: #333333;
+    line-height: 1;
+  }
+
+  &__text {
+    margin-left: 6px;
+    font-size: 26px;
+    font-weight: 400;
+    color: #333333;
+    line-height: 1;
+  }
+}
+
+/* ============================================================
+   流水列表（按月份分组）
+   ============================================================ */
+.points-list {
+  padding: 0 0 32px;
+}
+
+.points-group {
+  &__month {
+    padding: 24px 24px 16px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #9AA3A0;
+    line-height: 1.4;
+  }
+
+  &__items {
+    margin: 0 24px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+}
+
+.points-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+
+  & + & {
+    border-top: 1px solid #f0f0f0;
+  }
+
+  &__left {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.4;
+  }
+
+  &__date {
+    margin-top: 8px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #9AA3A0;
+    line-height: 1.4;
+  }
+
+  &__score {
+    flex-shrink: 0;
+    margin-left: 16px;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.4;
+
+    &--income {
+      color: #167A4A;
+    }
+
+    &--expense {
+      color: #999999;
+    }
+  }
+}
+
+/* ============================================================
+   空状态
+   ============================================================ */
+.points-empty {
+  padding: 120px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__text {
+    font-size: 28px;
+    color: #9AA3A0;
+  }
+}

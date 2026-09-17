@@ -1,0 +1,293 @@
+@use '@/styles/variables.scss' as *;
+
+$img-page-bg: '#{$img-base}/gameImage0e3dace5f01f470886d80b92204ed9e1.png';
+$img-page-bg: '#{$img-base}/gameImage9a68697b6d0e48fdbe3f05063175d8ce.png';
+// 页面根节点：全屏 flex 纵向布局
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+
+  .page-content {
+    display: flow-root;
+  }
+}
+
+/* ============================================================
+   评价卡片
+   ============================================================ */
+.evaluate-card {
+  position: relative;
+  width: 100%;
+  max-width: 702px;
+  margin: 24px 24px 0;
+  padding: 24px 24px 32px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__avatar-wrap {
+    flex-shrink: 0;
+    width: 88px;
+    height: 88px;
+  }
+
+  &__avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background-color: #e1e5eb;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+  }
+
+  &__avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background-color: #F8F8F8;
+    border: 1px solid #EAEAEA;
+    box-sizing: border-box;
+
+    .iconfont {
+      font-size: 44px;
+      color: #9AA3A0;
+      display: inline-block;
+      line-height: 1;
+    }
+  }
+
+  &__user-info {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 28px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.2;
+    max-width: 360px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__user-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #d9b45b;
+    line-height: 1;
+
+    .iconfont {
+      margin-right: 4px;
+      font-size: 22px;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    margin: 24px 0 32px;
+    background-color: #e8e8e8;
+  }
+
+  &__rate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__rate-label {
+    font-size: 26px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  &__stars {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 16px;
+    gap: 16px;
+  }
+
+  &__star {
+    .iconfont {
+      font-size: 56px;
+      color: #d9d9d9;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    &--active .iconfont {
+      color: #d9b45b;
+    }
+  }
+
+  &__rate-text {
+    margin-top: 16px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #167A4A;
+    line-height: 1.4;
+    text-align: center;
+    min-height: 30px;
+  }
+
+  /* ---- 两个状态卡片通用：角色标签（如“发起人”） ---- */
+
+  // 标签：90x40 圆角胶囊，浅绿底 + 深绿字
+  &__role {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 40px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #167A4A;
+    background-color: #E8F5EE;
+    border-radius: 20px;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  /* ---- 已评价卡片（只读）专用 ---- */
+
+  // 只读评价区：一行三段（“我的评价” + 小星星 + 等级）
+  &__readonly {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__readonly-label {
+    flex-shrink: 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: #1c1f1e;
+    line-height: 1.2;
+  }
+
+  &__readonly-stars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 16px;
+    gap: 8px;
+  }
+
+  &__readonly-star {
+    .iconfont {
+      font-size: 28px;
+      color: #d9d9d9;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    &--active .iconfont {
+      color: #d9b45b;
+    }
+  }
+
+  &__readonly-text {
+    flex: 1;
+    margin-left: 16px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #167A4A;
+    line-height: 1.4;
+    text-align: right;
+  }
+}
+
+/* ============================================================
+   底部固定按钮栏
+   ============================================================ */
+.page-bottom-bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  padding-bottom: calc(32px + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  background-color: #ffffff;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    border-radius: 45px;
+    box-sizing: border-box;
+    border: none;
+
+    &--solid {
+      background: $color-gradient-btn;
+      color: #ffffff;
+    }
+
+    // 渐变按钮（无描边、无阴影）——评价页专用
+    &--gradient {
+      background: $color-gradient-btn;
+      color: #ffffff;
+    }
+
+    // 单按钮场景：铺满内容区宽度（702px）
+    &--full {
+      width: 702px;
+    }
+  }
+}

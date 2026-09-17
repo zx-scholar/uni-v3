@@ -1,0 +1,299 @@
+@use '@/styles/variables.scss' as *;
+
+$img-page-bg: '#{$img-base}/gameImage3658c51db2b64e72aa6f329d9918dd2b.png';
+
+// 商品类别图标
+$img-logo-1: '#{$img-base}/gameImage68d0413337e2457facbcbcbd620956be.png';  // 约球
+$img-logo-2: '#{$img-base}/gameImagea01fff0870454ce995150bbb7e13acbb.png';  // 优惠券
+$img-logo-3: '#{$img-base}/gameImagee65e567023384abdbce6ca7bb8088442.png';  // 赛事
+$img-logo-4: '#{$img-base}/gameImagea17ad29606ee4ce6b3e2662101ef1dc4.png';  // 卡
+$img-logo-5: '#{$img-base}/gameImage560fc2ebc1394f9498a2c48626b1548a.png';  // 课程
+$img-logo-6: '#{$img-base}/gameImagead77d2b8c1f243adbab7f0a29149bc0f.png';  // 订场
+$img-logo-7: '#{$img-base}/gameImageef698e59824c4bcc9cd52cac6369de42.png';  // 停车
+
+// 商品小图占位
+$img-goods-1: '#{$img-base}/gameImage23a4e1bd5c7b4f3b8a35c2f6e3f7c4d3.png';  // 抵扣券黄图
+$img-goods-2: '#{$img-base}/gameImage45b8c2f9d6a74e8a9c4d5e7b3a1f6e8c.png';  // 高尔夫绿地图
+
+// 页面根节点
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+
+  .page-content {
+    display: flow-root;
+  }
+}
+
+/* ============================================================
+   Tab 切换栏（全部 / 待支付 / 已支付 / 已取消）
+   ============================================================ */
+.order-tab {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 88px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+  box-sizing: border-box;
+
+  &__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &--active .order-tab__text {
+      color: #333333;
+      font-weight: 500;
+      font-size: 34px;
+    }
+  }
+
+  &__text {
+    color: #666666;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  &__line {
+    width: 60px;
+    height: 6px;
+    margin-top: 8px;
+    background-color: #167A4A;
+    border-radius: 3px;
+  }
+}
+
+/* ============================================================
+   订单卡片
+   ============================================================ */
+.order-card {
+  position: relative;
+  width: 100%;
+  max-width: 702px;
+  margin: 24px 24px 0;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+
+  // 门店行：icon + 门店名 + 右上角状态
+  &__shop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__shop-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__shop-name {
+    margin-left: 8px;
+    font-size: 28px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.4;
+  }
+
+  &__status {
+    margin-left: auto;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.4;
+
+    &--wait {
+      color: #167A4A;
+    }
+
+    &--done {
+      color: #999999;
+    }
+  }
+
+  // 商品行：左侧商品图，右侧标题/价格/数量
+  &__goods {
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+  }
+
+  &__goods-img {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+    background-color: #f8f8f8;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    // 七种商品类目背景图
+    &--1 { background-image: url($img-logo-1); }
+    &--2 { background-image: url($img-logo-2); }
+    &--3 { background-image: url($img-logo-3); }
+    &--4 { background-image: url($img-logo-4); }
+    &--5 { background-image: url($img-logo-5); }
+    &--6 { background-image: url($img-logo-6); }
+    &--7 { background-image: url($img-logo-7); }
+  }
+
+  &__goods-info {
+    flex: 1;
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  &__goods-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__goods-meta {
+    font-size: 24px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  &__goods-price-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 8px;
+  }
+
+  &__price {
+    font-size: 30px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.4;
+  }
+
+  &__qty {
+    font-size: 24px;
+    font-weight: 400;
+    color: #9AA3A0;
+    line-height: 1.4;
+  }
+
+  // 价格合计行
+  &__total {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: baseline;
+  }
+
+  &__total-text {
+    font-size: 26px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1.4;
+  }
+
+  &__total-label {
+    margin-left: 16px;
+    font-size: 26px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1.4;
+  }
+
+  &__total-amount {
+    margin-left: 8px;
+    font-size: 32px;
+    font-weight: 600;
+    color: #1c1f1e;
+    line-height: 1.4;
+  }
+
+  // 底部操作按钮
+  &__actions {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    padding: 0 24px;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1;
+    border-radius: 32px;
+    box-sizing: border-box;
+
+    &--outline {
+      color: #167A4A;
+      background-color: #ffffff;
+      border: 1px solid #167A4A;
+    }
+
+    &--solid {
+      color: #ffffff;
+      background: $color-gradient-btn;
+      border: none;
+    }
+  }
+}
+
+/* ============================================================
+   空状态
+   ============================================================ */
+.order-empty {
+  padding: 120px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__text {
+    font-size: 28px;
+    color: #9AA3A0;
+  }
+}

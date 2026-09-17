@@ -1,0 +1,410 @@
+@use '@/styles/variables.scss' as *;
+
+// $img-page-bg: '#{$img-base}/gameImage3658c51db2b64e72aa6f329d9918dd2b.png';
+$img-card-bg: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
+$img-page-bg: '#{$img-base}/gameImage39a3cd9985e3448fa7a27924529ef355.png';
+// 页面根节点：全屏 flex 纵向布局，背景色取自全局变量
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区：占满剩余高度并允许纵向滚动
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+
+  .page-content {
+    display: flow-root;
+  }
+}
+
+/* ============================================================
+   卡片通用样式（活动信息 / 球友信息共用）
+   ============================================================ */
+.info-card,
+.players-card {
+  position: relative;
+  width: 100%;
+  max-width: 702px;
+  margin: 24px 24px 0;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background-color: #fff;
+  background-image: url($img-card-bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   卡片 1：活动信息
+   ============================================================ */
+.info-card {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 40px;
+    color: #333333;
+  }
+
+  &__title-sep {
+    color: #1c1f1e;
+  }
+
+  &__deposit {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    &-label {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 24px;
+      color: #c98b32;
+    }
+
+    &-amount {
+      margin-left: 4px;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 36px;
+      color: #c98b32;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 16px;
+
+    &-icon {
+      flex-shrink: 0;
+      font-size: 26px;
+      line-height: 1;
+      color: #167A4A;
+      opacity: 1;
+    }
+
+    &-text {
+      margin-left: 8px;
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: #6B7370;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    margin: 24px 0 16px;
+    background-color: #e8e8e8;
+  }
+
+  &__tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 4px;
+
+    & + & {
+      margin-left: 10px;
+    }
+
+    &--green {
+      color: #167a4a;
+      background-color: #e8f5ee;
+    }
+
+    &--pink {
+      color: #ff537b;
+      background-color: #ffedf2;
+    }
+  }
+}
+
+/* ============================================================
+   卡片 2：球友信息
+   ============================================================ */
+.players-card {
+  &__title {
+    font-size: 34px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.2;
+  }
+
+  &__count {
+    color: #167a4a;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  &__item {
+    // 固定宽度，每行 4 个：(100% - 4*16px) / 4 = 25% - 16px
+    flex: 0 0 calc(25% - 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    margin: 8px;
+    box-sizing: border-box;
+  }
+
+  &__avatar-wrap {
+    position: relative;
+    width: 88px;
+    height: 88px;
+  }
+
+  &__avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background-color: #e1e5eb;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+
+    &--starter {
+      border: 2px solid #167A4A;
+    }
+  }
+
+  &__avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background-color: #F8F8F8;
+    border: 1px solid #EAEAEA;
+    box-sizing: border-box;
+
+    .iconfont {
+      font-size: 40px;
+      color: #9AA3A0;
+      display: inline-block;
+      line-height: 1;
+    }
+  }
+
+  &__role {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 12px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #ffffff;
+    background: $color-gradient-btn;
+    border-radius: 16px;
+    white-space: nowrap;
+    line-height: 1.4;
+
+    // 其他角色（如"我"）的样式：浅绿底 + 深绿边
+    &--outline {
+      color: #167A4A;
+      background: #E8F5EE;
+      border: 1px solid #167A4A;
+    }
+  }
+
+  &__name {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #1c1f1e;
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &--placeholder {
+      color: #9AA3A0;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #d9b45b;
+    line-height: 1;
+
+    .iconfont {
+      margin-right: 2px;
+      font-size: 24px;
+    }
+  }
+}
+
+/* ============================================================
+   底部固定按钮栏
+   ============================================================ */
+.page-bottom-bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+  padding-bottom: calc(32px + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  background-color: #ffffff;
+
+  &__btn {
+    width: 339px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    border-radius: 45px;
+    border: 2px solid #167A4A;
+    box-sizing: border-box;
+
+    // 清除 button 默认的伪元素边框
+    &::after {
+      border: none;
+    }
+
+    &--outline {
+      background-color: #ffffff;
+      color: #167A4A;
+    }
+
+    &--solid {
+      background-color: #167A4A;
+      color: #ffffff;
+    }
+
+    // 单按钮场景：铺满内容区宽度（702px）
+    &--full {
+      width: 702px;
+    }
+  }
+}
+
+/* ============================================================
+   状态提示条（“还差 x 位成团” / “球局已自动失效”）
+   ============================================================ */
+.info-tip {
+  margin-bottom: 40px;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* ============================================================
+   取消约球确认弹窗（内容区）
+   ============================================================ */
+// 覆盖 BasePopup 默认的 24px 圆角为 16px（当前弹窗专用）
+.cancel-popup :deep(.popup-content-center) {
+  border-radius: 16px;
+}
+
+.cancel-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 24px;
+
+  &__text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 168px;
+    font-size: 30px;
+    font-weight: 400;
+    color: #1C1F1E;
+    text-align: center;
+  }
+
+  &__btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+    padding-top: 16px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    height: 72px;
+    margin: 0;
+    padding: 0;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    border-radius: 36px;
+    box-sizing: border-box;
+
+    &::after {
+      border: none;
+    }
+
+    &--cancel {
+      color: #999999;
+      background-color: #EAEAEA;
+    }
+
+    &--confirm {
+      color: #ffffff;
+      background: linear-gradient(135deg, #1fa866 0%, #105c39 100%);
+    }
+  }
+}

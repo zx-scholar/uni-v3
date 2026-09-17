@@ -19,10 +19,18 @@ export const routes = {
   browsingHistory: { path: '/pages-golf/browsingHistory/browsingHistory' },
   eventsPlan: { path: '/pages-golf/eventsPlan/eventsPlan' },
   ballBitSquareGolf: { path: '/pages-golf/ballBitSquareGolf/index' },
+  ballBitDetail: { path: '/pages-golf/ballBitDetail/index' },
+  ballBitEvaluateGolf: { path: '/pages-golf/ballBitEvaluateGolf/index' },
+  ballBitMyList: { path: '/pages-golf/ballBitMyList/index' },
+  myPoints: { path: '/pages-golf/myPoints/index' },
+    paymentSuccess: { path: '/pages-golf/paymentSuccess/index' },
+      orderInfo: { path: '/pages-golf/orderInfo/index' },
+        orderDetail: { path: '/pages-golf/orderDetail/index' },
 
 
   // === pages-common 分包页面 ===
   personInfo: { path: '/pages-common/personInfo/personInfo' },
   userAgreement: { path: '/pages-common/userAgreement/userAgreement' },
   insuranceService: { path: '/pages-common/insuranceService/insuranceService' },
+  pagesBasic: { path: '/pages-common/pagesBasic/index' },
 }

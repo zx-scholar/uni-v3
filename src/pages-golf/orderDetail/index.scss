@@ -1,0 +1,286 @@
+@use '@/styles/variables.scss' as *;
+
+$img-page-bg: '#{$img-base}/gameImage3551d958c1ac4ab58bf6019b20f06651.png';
+// 商品类目 logo（与 orderInfo 共用同一套图）
+$img-logo-1: '#{$img-base}/gameImage68d0413337e2457facbcbcbd620956be.png';
+$img-logo-2: '#{$img-base}/gameImagea01fff0870454ce995150bbb7e13acbb.png';
+$img-logo-3: '#{$img-base}/gameImagee65e567023384abdbce6ca7bb8088442.png';
+$img-logo-4: '#{$img-base}/gameImagea17ad29606ee4ce6b3e2662101ef1dc4.png';
+$img-logo-5: '#{$img-base}/gameImage560fc2ebc1394f9498a2c48626b1548a.png';
+$img-logo-6: '#{$img-base}/gameImagead77d2b8c1f243adbab7f0a29149bc0f.png';
+$img-logo-7: '#{$img-base}/gameImageef698e59824c4bcc9cd52cac6369de42.png';
+
+// 页面根节点
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+
+  .page-content {
+    display: flow-root;
+  }
+}
+
+/* ============================================================
+   详情卡片通用（赛事信息 / 订单信息 / 押金明细 共用）
+   ============================================================ */
+.detail-card {
+  position: relative;
+  width: 100%;
+  max-width: 702px;
+  margin: 24px 24px 0;
+  padding: 30px 20px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+
+  &__title {
+    align-self: flex-start;
+    margin-bottom: 20px;
+    font-size: 34px;
+    font-weight: 500;
+    color: #1C1F1E;
+    line-height: 1.4;
+  }
+
+  &__shop {
+    margin-top: 8px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1.4;
+  }
+
+  // 商品区：左图 + 右标题/价格/时间
+  &__goods {
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+  }
+
+  &__goods-img {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+    background-color: #f8f8f8;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    // 七种商品类目背景图（与 orderInfo 保持一致）
+    &--1 { background-image: url($img-logo-1); }
+    &--2 { background-image: url($img-logo-2); }
+    &--3 { background-image: url($img-logo-3); }
+    &--4 { background-image: url($img-logo-4); }
+    &--5 { background-image: url($img-logo-5); }
+    &--6 { background-image: url($img-logo-6); }
+    &--7 { background-image: url($img-logo-7); }
+  }
+
+  &__goods-info {
+    flex: 1;
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  &__goods-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__goods-title {
+    flex: 1;
+    margin-right: 16px;
+    font-size: 28px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__goods-price {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__price {
+    font-size: 28px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.4;
+  }
+
+  &__qty {
+    margin-top: 4px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #9AA3A0;
+    line-height: 1.4;
+  }
+
+  &__goods-meta {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #9AA3A0;
+    line-height: 1.4;
+  }
+
+  // "退款" 按钮：右对齐
+  &__actions {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 24px;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1;
+    border-radius: 28px;
+    box-sizing: border-box;
+
+    &--outline {
+      color: #167A4A;
+      background-color: #ffffff;
+      border: 1px solid #167A4A;
+    }
+
+    &--solid {
+      color: #ffffff;
+      background: $color-gradient-btn;
+      border: none;
+    }
+  }
+
+  // 分隔线（在 "退款按钮" 与 "价格明细" 之间）
+  &__divider {
+    height: 1px;
+    margin-top: 24px;
+    background-color: #f0f0f0;
+  }
+
+  // 价格明细行：左 label + 右 value
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+
+    & + & {
+      margin-top: 16px;
+    }
+  }
+
+  &__row-label {
+    font-size: 26px;
+    font-weight: 400;
+    color: #6B7370;
+    line-height: 1.4;
+  }
+
+  &__row-value {
+    font-size: 28px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1.4;
+
+    &--discount {
+      color: #1c1f1e;
+    }
+
+    &--paid {
+      color: #c98b32;
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
+
+  // 到店核销卡片专用：flex 列居中，但标题/描述单独左对齐
+  &--verify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+}
+
+// 核销卡描述文字（覆盖父容器的 align-items: center，左对齐）
+.detail-card__desc {
+  align-self: flex-start;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #6B7370;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   二维码双层盒
+   ============================================================ */
+.qrcode-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 284px;
+  height: 284px;
+  border-radius: 24px;
+  background-color: #F4FAF6;
+}
+
+.qrcode-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: 260px;
+  border-radius: 16px;
+  background-color: #FFFFFF;
+}
+
+.qrcode-img {
+  width: 212px;
+  height: 212px;
+}
+
+.qrcode-tip {
+  margin-top: 24px;
+  font-size: 26px;
+  font-weight: 400;
+  color: #6B7370;
+  line-height: 1.4;
+  text-align: center;
+}

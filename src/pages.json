@@ -65,6 +65,48 @@
           "style": {
             "navigationStyle": "custom"
           }
+        },
+        {
+          "path": "ballBitDetail/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "ballBitEvaluateGolf/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "ballBitMyList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "myPoints/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "paymentSuccess/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "orderInfo/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "orderDetail/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     },
@@ -86,6 +128,12 @@
         },
         {
           "path": "insuranceService/insuranceService",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "pagesBasic/index",
           "style": {
             "navigationStyle": "custom"
           }

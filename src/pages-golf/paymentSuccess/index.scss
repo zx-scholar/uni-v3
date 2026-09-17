@@ -1,0 +1,123 @@
+@use '@/styles/variables.scss' as *;
+
+$img-page-bg: '#{$img-base}/gameImage5eae642ac732458983070329e60af572.png';
+$img-success-bg: '#{$img-base}/gameImage1375c0db001241709b36606cb8f72102.png';
+$img-banner-bg: '#{$img-base}/gameImage36bde19c48b94b269a54813515f21b13.png';
+// 页面根节点
+.basic-template-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  background-color: $color-bg-page;
+  background-image: url($img-page-bg);
+  background-repeat: no-repeat;
+}
+
+// 主体滚动区
+.page-scroll {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+
+  .page-content {
+    display: flow-root;
+  }
+}
+
+/* ============================================================
+   支付成功内容
+   ============================================================ */
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+  padding: 200px 24px 0;
+
+  &__icon {
+    width: 280px;
+    height: 280px;
+    background-image: url($img-success-bg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__title {
+    margin-top: 32px;
+    font-size: 34px;
+    font-weight: 400;
+    color: #333333;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  &__actions {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  // 通用按钮：320 × 90 圆角 45
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    height: 90px;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    border-radius: 45px;
+    box-sizing: border-box;
+  }
+
+  // 主按钮：渐变绿底 + 白字
+  &__btn--primary {
+    color: #ffffff;
+    background: $color-gradient-btn;
+  }
+
+  // 次按钮：白底 + 1px 绿描边 + 绿字
+  &__btn--outline {
+    color: #167A4A;
+    background-color: #ffffff;
+    border: 1px solid #167A4A;
+  }
+}
+
+/* ============================================================
+   底部广告区域（固定定位，始终在页面底部）
+   ============================================================ */
+.ads {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: calc(60px + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+
+  &__banner {
+    width: 702px;
+    height: 140px;
+    margin-bottom: 24px;
+    background-color: transparent;
+    background-image: url($img-banner-bg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

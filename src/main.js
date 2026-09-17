@@ -6,6 +6,7 @@ import App from './App.vue'
 // 引入全局组件与路由工具
 import NavBar from '@/components/NavBar/NavBar.vue'
 import BasePopup from '@/components/BasePopup/BasePopup.vue'
+import MonthSelect from '@/components/MonthSelect/MonthSelect.vue'
 import router from '@/utils/router'
 import { checkRoutesConsistency } from '@/utils/routeCheck'
 
@@ -23,6 +24,7 @@ export function createApp() {
   // 1. 全局注册 NavBar、BasePopup 组件 (全项目模板无需 import 即可直接使用)
   app.component('NavBar', NavBar)
   app.component('BasePopup', BasePopup)
+  app.component('MonthSelect', MonthSelect)
 
   // 2. 全局挂载 $router 属性
   app.config.globalProperties.$router = router

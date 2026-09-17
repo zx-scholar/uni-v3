@@ -100,7 +100,7 @@
     </BasePopup>
 
     <!-- 居中弹窗 BasePopup -->
-    <BasePopup :visible="modalVisible" mode="center" title="提示" width="620rpx" closeable @update:visible="modalVisible = $event">
+    <BasePopup :visible="modalVisible" mode="center" title="提示" width="620px" closeable @update:visible="modalVisible = $event">
       <view class="modal-body flex-column items-center py-20">
         <text class="modal-icon mb-20">🎉</text>
         <text class="modal-desc text-center lh-1-6">确认执行此操作？</text>
@@ -118,7 +118,6 @@
 
 <script>
 import Empty from '@/components/Empty/Empty.vue';
-import { parseParams } from '@/utils/router';
 import ComingSoon from '@/components/ComingSoon/ComingSoon.vue';
 
 export default {
@@ -157,7 +156,7 @@ export default {
 
   /* ---- 生命周期（按需保留） ---- */
   onLoad(options) {
-    console.log('页面 onLoad 接收参数:', parseParams(options));
+    console.log('页面 onLoad 接收参数:');
   },
   onShow() {
     // 页面每次显示时触发
