@@ -20,7 +20,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 .page-scroll-content {
   flex: 1;
   overflow-y: auto;
-  padding: $size-padding-md 24px;
+  padding: 16px 24px;
   box-sizing: border-box;
 }
 
@@ -29,17 +29,17 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
    ================================ */
 .card {
   background-color: $color-bg-card;
-  border-radius: $size-radius-card;
-  padding: $size-padding-lg;
-  margin-bottom: $size-padding-md;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
   box-shadow: $color-shadow-sm;
 
   .card-header {
-    font-size: $size-font-xxl;
+    font-size: 34px;
     font-weight: bold;
     color: $color-primary;
-    padding-bottom: $size-padding-sm;
-    margin-bottom: $size-padding-md;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
     border-bottom: 1px dashed #e2e8f0;
     display: flex;
     align-items: center;
@@ -47,7 +47,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
   }
 
   .copy-all-btn {
-    font-size: $size-font-sm;
+    font-size: 24px;
     font-weight: 400;
     color: $color-primary;
     padding: 6rpx 20rpx;
@@ -67,12 +67,12 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 .form-row {
   display: flex;
   align-items: center;
-  margin-bottom: $size-padding-md;
+  margin-bottom: 16px;
 
   .form-label {
     width: 160rpx;
     flex-shrink: 0;
-    font-size: $size-font-base;
+    font-size: 26px;
     color: $color-text-primary;
   }
 
@@ -80,11 +80,11 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
     flex: 1;
     height: 64rpx;
     padding: 0 20rpx;
-    font-size: $size-font-base;
+    font-size: 26px;
     color: $color-text-primary;
     background: #f5f6fa;
     border: none;
-    border-radius: $size-radius-sm;
+    border-radius: 8px;
     box-sizing: border-box;
   }
 
@@ -96,7 +96,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
     margin-left: auto;
 
     .toggle-label {
-      font-size: $size-font-xs;
+      font-size: 22px;
       color: $color-text-sub;
       white-space: nowrap;
     }
@@ -137,18 +137,18 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 .var-preview {
   display: flex;
   align-items: center;
-  padding: $size-padding-sm $size-padding-md;
-  margin-bottom: $size-padding-md;
+  padding: 12px 16px;
+  margin-bottom: 16px;
   background: #f0f9f4;
-  border-radius: $size-radius-sm;
+  border-radius: 8px;
 
   .var-label {
-    font-size: $size-font-sm;
+    font-size: 24px;
     color: $color-text-sub;
   }
 
   .var-name {
-    font-size: $size-font-md;
+    font-size: 28px;
     font-weight: 600;
     color: $color-primary;
     font-family: monospace;
@@ -168,7 +168,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  border-radius: $size-radius-md;
+  border-radius: 10px;
   overflow: hidden;
   background-color: #f8f9fa;
 }
@@ -189,7 +189,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 }
 
 .add-text {
-  font-size: $size-font-xs;
+  font-size: 22px;
   color: $color-text-sub;
   margin-top: 8rpx;
 }
@@ -206,7 +206,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
     background: rgba(0, 0, 0, 0.4);
 
     .status-text {
-      font-size: $size-font-sm;
+      font-size: 24px;
       color: #fff;
     }
   }
@@ -219,7 +219,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
     background: rgba(239, 68, 68, 0.5);
 
     .status-text {
-      font-size: $size-font-sm;
+      font-size: 24px;
       color: #fff;
     }
   }
@@ -245,8 +245,8 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
    ================================ */
 .result-item {
   display: flex;
-  gap: $size-padding-md;
-  padding: $size-padding-sm 0;
+  gap: 16px;
+  padding: 12px 0;
   border-bottom: 1px solid #f1f5f9;
 
   &:last-child {
@@ -258,7 +258,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
   flex-shrink: 0;
   width: 120rpx;
   height: 120rpx;
-  border-radius: $size-radius-sm;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -282,7 +282,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
   gap: 12rpx;
   padding: 12rpx 16rpx;
   background: #282c34;
-  border-radius: $size-radius-sm;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -311,7 +311,7 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 }
 
 .result-meta {
-  font-size: $size-font-xs;
+  font-size: 22px;
   color: $color-text-sub;
 }
 
@@ -321,16 +321,16 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 .page-bottom-bar {
   flex-shrink: 0;
   background-color: $color-bottom-bar-bg;
-  padding: $size-padding-xl 24px;
+  padding: 32px 24px;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
-  padding-bottom: calc(#{$size-padding-xl} + constant(safe-area-inset-bottom, 0px));
-  padding-bottom: calc(#{$size-padding-xl} + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{32px} + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{32px} + env(safe-area-inset-bottom, 0px));
 
   .btn-primary {
     width: 100%;
     height: 90px;
     line-height: 90px;
-    font-size: $size-font-md;
+    font-size: 28px;
     font-weight: 600;
     color: $color-text-white;
     background: $color-gradient-btn;

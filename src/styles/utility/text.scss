@@ -9,13 +9,13 @@
 .text-justify { text-align: justify; }
 
 /* 字号 (px → 自动转 rpx) */
-.fs-xs { font-size: $size-font-xs; }
-.fs-sm { font-size: $size-font-sm; }
-.fs-base { font-size: $size-font-base; }
-.fs-md { font-size: $size-font-md; }
-.fs-lg { font-size: $size-font-lg; }
-.fs-xl { font-size: $size-font-xl; }
-.fs-xxl { font-size: $size-font-xxl; }
+.fs-xs { font-size: 22px; }
+.fs-sm { font-size: 24px; }
+.fs-base { font-size: 26px; }
+.fs-md { font-size: 28px; }
+.fs-lg { font-size: 30px; }
+.fs-xl { font-size: 32px; }
+.fs-xxl { font-size: 34px; }
 
 /* 字重 */
 .fw-normal { font-weight: 400; }

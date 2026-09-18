@@ -44,7 +44,7 @@ export default {
 
   .empty-text {
     margin-top: 24px;
-    font-size: $size-font-base;
+    font-size: 26px;
     color: $color-text-sub;
   }
 
@@ -53,7 +53,7 @@ export default {
     height: 64px;
     line-height: 64px;
     padding: 0 48px;
-    font-size: $size-font-sm;
+    font-size: 24px;
     font-weight: 500;
     color: $color-text-white;
     background: $color-gradient-btn;

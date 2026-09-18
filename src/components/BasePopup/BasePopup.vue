@@ -33,13 +33,17 @@ export default {
     maskClosable: { type: Boolean, default: true },
     maxHeight: { type: String, default: '70vh' },
     width: { type: String, default: '' }, // 居中模式专用：弹窗宽度（如 600px）
+    radius: { type: String, default: '24px' }, // 居中模式专用：弹窗圆角（如 16px）
+    bgColor: { type: String, default: '#ffffff' }, // 居中模式专用：弹窗背景色（如 transparent）
   },
   emits: ['update:visible', 'close'],
   computed: {
     contentStyle() {
       const style = { maxHeight: this.maxHeight };
-      if (this.mode === 'center' && this.width) {
-        style.width = this.width;
+      if (this.mode === 'center') {
+        if (this.width) style.width = this.width;
+        if (this.radius) style.borderRadius = this.radius;
+        if (this.bgColor) style.backgroundColor = this.bgColor;
       }
       return style;
     },

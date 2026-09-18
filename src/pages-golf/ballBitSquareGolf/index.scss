@@ -23,14 +23,14 @@ $img-card-bg-item: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
 .page-scroll {
   flex: 1;
   min-height: 0;
-  // padding: $size-padding-lg;
+  // padding: 24px;
   box-sizing: border-box;
 
   .page-content {
     // 内容容器：可在此加卡片背景、圆角等，例如
     // background-color: $color-bg-card;
-    // border-radius: $size-radius-card;
-    // padding: $size-padding-lg;
+    // border-radius: 16px;
+    // padding: 24px;
     display: flow-root;
   }
 }
@@ -158,7 +158,7 @@ $img-card-bg-item: '#{$img-base}/gameImage6210d826692f45f9bb2797c21e41f5a8.png';
   height: 160px;
   padding-left: 136px;
   box-sizing: border-box;
-  border-radius: $size-radius-card;
+  border-radius: 16px;
   background-repeat: no-repeat;
   background-size: cover;
 

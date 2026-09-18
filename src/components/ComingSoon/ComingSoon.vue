@@ -65,7 +65,7 @@ export default {
   flex-direction: column;
   align-items: center;
   background-color: $color-bg-card;
-  border-radius: $size-radius-pro;
+  border-radius: 24px;
   box-shadow: $color-shadow-md;
   animation: scaleIn 0.25s ease-out;
   box-sizing: border-box;
@@ -77,14 +77,14 @@ export default {
 
   .coming-soon-title {
     margin-top: 20px;
-    font-size: $size-font-xxl;
+    font-size: 34px;
     font-weight: 600;
     color: $color-text-primary;
   }
 
   .coming-soon-text {
     margin-top: 12px;
-    font-size: $size-font-base;
+    font-size: 26px;
     color: $color-text-secondary;
     line-height: 1.6;
     text-align: center;
@@ -104,7 +104,7 @@ export default {
     }
 
     .coming-soon-btn-text {
-      font-size: $size-font-md;
+      font-size: 28px;
       font-weight: 600;
       color: $color-text-white;
     }

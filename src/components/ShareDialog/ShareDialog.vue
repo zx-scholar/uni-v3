@@ -227,13 +227,13 @@ export default {
   margin-bottom: 48px;
 
   .panel-title {
-    font-size: $size-font-xl;
+    font-size: 32px;
     font-weight: 600;
     color: $color-text-primary;
   }
 
   .panel-close {
-    font-size: $size-font-xl;
+    font-size: 32px;
     color: $color-text-sub;
     padding: 8px;
 
@@ -279,7 +279,7 @@ export default {
     }
 
     .channel-label {
-      font-size: $size-font-sm;
+      font-size: 24px;
       color: $color-text-secondary;
       font-weight: 500;
     }

@@ -37,30 +37,6 @@ $color-gradient-navbar: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
 $color-gradient-btn: linear-gradient(135deg, #1fa866 0%, #105c39 100%);
 $color-gradient-btn-blue:linear-gradient(90deg, #1186ff 0%, #4ecbfd 100%);
 
-// --- 5. 字号规范 (px -> 自动转 rpx) ---
-$size-font-xs: 22px; // 辅助/小标签 (最小)
-$size-font-sm: 24px; // 次要说明文字
-$size-font-base: 26px; // 正文/描述
-$size-font-md: 28px; // 按钮文字 / 列表项
-$size-font-lg: 30px; // 次级标题
-$size-font-xl: 32px; // 页面标题 / 重要文字
-$size-font-xxl: 34px; // 大标题 (正常标题)
-
-// --- 6. 边距与间距规范 (px -> 自动转 rpx) ---
-$size-padding-xs: 6px; // 6rpx
-$size-padding-sm: 12px; // 12px
-$size-padding-md: 16px; // 16px
-$size-padding-lg: 24px; // 24px
-$size-padding-xl: 32px; // 32px
-
-// --- 7. 圆角规范 ---
-$size-radius-sm: 8px; // 8rpx
-$size-radius-md: 10px; // 10rpx
-$size-radius-lg: 12px; // 12rpx
-$size-radius-card: 16px; // 16rpx
-$size-radius-pro: 24px; // 胶囊圆角
-$size-radius-circle: 40px; // 圆形圆角
-
 // --- 8. 阴影规范 ---
 $color-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
 $color-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
@@ -72,12 +48,11 @@ $color-bottom-bar-bg: #ffffff;
 
 // --- 10. 图片 OSS 基础路径 ---
 $img-base: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd';
-$img-base2: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/';
 
 // --- 11. Tabbar 图标 ---
-$img-tabbar-icon: '#{$img-base}gameImage774424d8cd4a444e9a3107d97b014a1d.png';
-$img-tabbar-icon-mine: '#{$img-base}gameImage4a1a8e056f654c04966f57eb8d65a3b1.png';
-$img-page-bg-default: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
+$img-tabbar-icon: '#{$img-base}/gameImage774424d8cd4a444e9a3107d97b014a1d.png';
+$img-tabbar-icon-mine: '#{$img-base}/gameImage4a1a8e056f654c04966f57eb8d65a3b1.png';
+$img-page-bg-default: '#{$img-base}/gameImage3a09555474d04967934ce16e691e3524.png';
 
 // --- 12. 卡片背景图（空状态默认图） ---
 $img-card-bg: '#{$img-base}gameImage0a0d1b36b4274705b37b90d303862704.png';

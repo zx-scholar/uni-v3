@@ -24,8 +24,8 @@ export const routes = {
   ballBitMyList: { path: '/pages-golf/ballBitMyList/index' },
   myPoints: { path: '/pages-golf/myPoints/index' },
     paymentSuccess: { path: '/pages-golf/paymentSuccess/index' },
-      orderInfo: { path: '/pages-golf/orderInfo/index' },
-        orderDetail: { path: '/pages-golf/orderDetail/index' },
+      orderInfo: { path: '/pages-golf/orderInfoGolf/index' },
+        orderDetail: { path: '/pages-golf/orderDetailGolf/index' },
 
 
   // === pages-common 分包页面 ===

@@ -53,9 +53,9 @@ $img-page-bg: '#{$img-page-bg-default}';
       /* 卡片 */
       .card {
         background-color: $color-bg-card;
-        border-radius: $size-radius-card;
-        padding: $size-padding-lg;
-        margin-bottom: $size-padding-md;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 16px;
         box-shadow: $color-shadow-sm;
       }
 
@@ -65,11 +65,11 @@ $img-page-bg: '#{$img-page-bg-default}';
         height: 80px;
         line-height: 80px;
         margin-top: 24px;
-        font-size: $size-font-base;
+        font-size: 26px;
         color: $color-primary;
         background: #f0f9f4;
         border: 1px solid $color-primary;
-        border-radius: $size-radius-md;
+        border-radius: 10px;
         text-align: center;
 
         &:active {
@@ -92,16 +92,16 @@ $img-page-bg: '#{$img-page-bg-default}';
   .page-bottom-bar {
     flex-shrink: 0;
     background-color: $color-bottom-bar-bg;
-    padding: $size-padding-xl 24px;
+    padding: 32px 24px;
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
-    padding-bottom: calc(#{$size-padding-xl} + constant(safe-area-inset-bottom, 0px));
-    padding-bottom: calc(#{$size-padding-xl} + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(#{32px} + constant(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(#{32px} + env(safe-area-inset-bottom, 0px));
 
     .btn-primary {
       width: 100%;
       height: 90px;
       line-height: 90px;
-      font-size: $size-font-md;
+      font-size: 28px;
       font-weight: 600;
       color: $color-text-white;
       background: $color-gradient-btn;
@@ -161,5 +161,5 @@ $img-page-bg: '#{$img-page-bg-default}';
   line-height: 80px;
   font-size: 30px;
   font-weight: 600;
-  border-radius: $size-radius-circle;
+  border-radius: 40px;
 }

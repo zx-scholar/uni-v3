@@ -27,7 +27,7 @@ $img-profile-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 .page-scroll-content {
   flex: 1;
   overflow-y: auto;
-  padding: 200px 24px $size-padding-md;
+  padding: 200px 24px 16px;
   box-sizing: border-box;
 }
 
@@ -57,9 +57,9 @@ $img-profile-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 .info-card {
   width: 100%;
   background-color: #ffffff;
-  border-radius: $size-radius-card;
+  border-radius: 16px;
   box-shadow: $color-shadow-sm;
-  padding: 0 $size-padding-lg;
+  padding: 0 24px;
 }
 
 .info-row {
@@ -70,7 +70,7 @@ $img-profile-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
   }
 
   .info-label {
-    font-size: $size-font-base;
+    font-size: 26px;
     color: $color-text-primary;
     flex-shrink: 0;
   }
@@ -81,7 +81,7 @@ $img-profile-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
   }
 
   .info-value {
-    font-size: $size-font-base;
+    font-size: 26px;
     color: $color-text-sub;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -89,7 +89,7 @@ $img-profile-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
   }
 
   .info-value-warn {
-    font-size: $size-font-xs;
+    font-size: 22px;
     color: $color-danger;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -110,16 +110,16 @@ $img-profile-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
 .page-bottom-bar {
   flex-shrink: 0;
   background-color: $color-bottom-bar-bg;
-  padding: $size-padding-xl 24px;
+  padding: 32px 24px;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
-  padding-bottom: calc(#{$size-padding-xl} + constant(safe-area-inset-bottom, 0px));
-  padding-bottom: calc(#{$size-padding-xl} + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{32px} + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(#{32px} + env(safe-area-inset-bottom, 0px));
 
   .btn-primary {
     width: 100%;
     height: 90px;
     line-height: 90px;
-    font-size: $size-font-md;
+    font-size: 28px;
     font-weight: 600;
     color: #ffffff;
     background: #00875a;

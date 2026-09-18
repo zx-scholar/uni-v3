@@ -118,6 +118,7 @@ export default {
 <style scoped>
 .nav-bar-wrapper {
     width: 100%;
+    padding: 100px 0 0;
 }
 
 .nav-bar-fixed {

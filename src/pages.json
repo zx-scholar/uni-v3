@@ -97,13 +97,13 @@
           }
         },
         {
-          "path": "orderInfo/index",
+          "path": "orderInfoGolf/index",
           "style": {
             "navigationStyle": "custom"
           }
         },
         {
-          "path": "orderDetail/index",
+          "path": "orderDetailGolf/index",
           "style": {
             "navigationStyle": "custom"
           }

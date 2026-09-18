@@ -3,17 +3,17 @@
     <!-- 顶部自定义导航栏 -->
     <NavBar title="我的订单" color="#1c1f1e" :showBack="true" />
 
+    <!-- Tab 切换栏（固定在顶部，不参与滚动） -->
+    <view class="order-tab">
+      <view v-for="tab in tabs" :key="tab.key" class="order-tab__item" :class="{ 'order-tab__item--active': activeTab === tab.key }" @click="activeTab = tab.key">
+        <text class="order-tab__text">{{ tab.text }}</text>
+        <view v-if="activeTab === tab.key" class="order-tab__line"></view>
+      </view>
+    </view>
+
     <!-- 主体滚动区域 -->
     <scroll-view class="page-scroll" scroll-y>
       <view class="page-content">
-        <!-- Tab 切换栏 -->
-        <view class="order-tab">
-          <view v-for="tab in tabs" :key="tab.key" class="order-tab__item" :class="{ 'order-tab__item--active': activeTab === tab.key }" @click="activeTab = tab.key">
-            <text class="order-tab__text">{{ tab.text }}</text>
-            <view v-if="activeTab === tab.key" class="order-tab__line"></view>
-          </view>
-        </view>
-
         <!-- 订单列表 -->
         <view v-if="currentList.length > 0">
           <view v-for="(order, idx) in currentList" :key="idx" class="order-card">

@@ -1,6 +1,7 @@
 @use '@/styles/variables.scss' as *;
 
 $img-page-bg: '#{$img-base}/gameImage3551d958c1ac4ab58bf6019b20f06651.png';
+$img-popup-bg: '#{$img-base}/gameImage0d30084687f1409b94c4bbf988f57640.png';
 // 商品类目 logo（与 orderInfo 共用同一套图）
 $img-logo-1: '#{$img-base}/gameImage68d0413337e2457facbcbcbd620956be.png';
 $img-logo-2: '#{$img-base}/gameImagea01fff0870454ce995150bbb7e13acbb.png';
@@ -9,6 +10,54 @@ $img-logo-4: '#{$img-base}/gameImagea17ad29606ee4ce6b3e2662101ef1dc4.png';
 $img-logo-5: '#{$img-base}/gameImage560fc2ebc1394f9498a2c48626b1548a.png';
 $img-logo-6: '#{$img-base}/gameImagead77d2b8c1f243adbab7f0a29149bc0f.png';
 $img-logo-7: '#{$img-base}/gameImageef698e59824c4bcc9cd52cac6369de42.png';
+
+/* ============================================================
+   顶部订单状态横幅（透明背景，靠页面底图出对比）
+   ============================================================ */
+.status-banner {
+  width: 100%;
+  max-width: 702px;
+  margin: 24px 24px 0;
+  padding: 32px 24px 20px;
+  border-radius: 16px;
+  background-color: transparent;
+  box-sizing: border-box;
+
+  // 图标 + 标题（同一行）
+  &__text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  // 图标样式
+  .iconfont {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 40px;
+    color: #ffffff;
+  }
+
+  &__title {
+    margin-left: 16px;
+    font-size: 40px;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 40px;
+  }
+
+  // 描述（独占一行）
+  &__desc {
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.4;
+  }
+}
 
 // 页面根节点
 .basic-template-page {
@@ -30,7 +79,8 @@ $img-logo-7: '#{$img-base}/gameImageef698e59824c4bcc9cd52cac6369de42.png';
   flex: 1;
   min-height: 0;
   box-sizing: border-box;
-
+  padding-bottom: calc(32px + constant(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   .page-content {
     display: flow-root;
   }
@@ -165,18 +215,18 @@ $img-logo-7: '#{$img-base}/gameImageef698e59824c4bcc9cd52cac6369de42.png';
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 56px;
-    padding: 0 24px;
-    font-size: 26px;
+    width: 116px;
+    height: 48px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 1;
-    border-radius: 28px;
+    border-radius: 36px;
     box-sizing: border-box;
 
     &--outline {
-      color: #167A4A;
+      color: #1C1F1E;
       background-color: #ffffff;
-      border: 1px solid #167A4A;
+      border: 1px solid #1C1F1E;
     }
 
     &--solid {
@@ -283,4 +333,80 @@ $img-logo-7: '#{$img-base}/gameImageef698e59824c4bcc9cd52cac6369de42.png';
   color: #6B7370;
   line-height: 1.4;
   text-align: center;
+}
+
+/* ============================================================
+   押金规则弹窗（居中弹窗，复用 BasePopup）
+   - BasePopup 外层透明背景（bg-color="transparent"）
+   - 内部 wrapper 里包含一张绝对定位的图片 + 一个白色提示盒
+   - 提示盒 600×435，border-radius 16px
+   - 图片 322×222，使用 $img-popup-bg
+   - 图片与提示盒有重叠：图片底部延伸进提示盒顶部（约 77px）
+   ============================================================ */
+.deposit-rule {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  height: 580px;
+}
+
+.deposit-rule__image {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 322px;
+  height: 222px;
+  background-image: url($img-popup-bg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 2;
+}
+
+.deposit-rule__box {
+  position: relative;
+  width: 600px;
+  height: 435px;
+  margin-top: 145px;
+  border-radius: 16px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 137px 48px 0;
+  box-sizing: border-box;
+}
+
+.deposit-rule__title {
+  font-size: 34px;
+  font-weight: 500;
+  color: #1C1F1E;
+  line-height: 1.4;
+}
+
+.deposit-rule__desc {
+  margin-top: 12px;
+  font-size: 26px;
+  font-weight: 400;
+  color: #9AA3A0;
+  line-height: 34px;
+  text-align: center;
+}
+
+.deposit-rule__btn {
+  margin-top: auto;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 72px;
+  border-radius: 36px;
+  font-size: 28px;
+  font-weight: 500;
+  color: #ffffff;
+  background: $color-gradient-btn;
 }
