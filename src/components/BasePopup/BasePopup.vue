@@ -102,7 +102,7 @@ export default {
 
 .popup-content-center {
   width: 85%;
-  max-width: 600px;
+  max-width: 640px;
   background: #ffffff;
   border-radius: 24px;
   display: flex;

@@ -57,6 +57,7 @@ export default {
         { icon: 'icon-jifen', text: '我的积分', routerPath: 'myPoints' },
                 { icon: 'icon-zhifuchenggong', text: '支付成功', routerPath: 'paymentSuccess' },
                         { icon: 'icon-dingdan', text: '我的订单', routerPath: 'orderInfo' },
+        { icon: 'icon-hetong', text: '我的票券', routerPath: 'myTicketList' },
         { icon: 'icon-fenxiang', text: '分享', action: 'share' },
         { icon: 'icon-cuowu2', text: '清空 Pinia 状态与缓存', routerPath: null },
       ],

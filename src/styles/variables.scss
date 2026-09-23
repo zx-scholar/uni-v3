@@ -11,7 +11,7 @@
    ========================================================================= */
 
 // --- 1. 品牌与主题颜色 ---
-$color-primary: #42b883; // 品牌主色 (Vue绿 / 微信主题绿)
+$color-primary: #167A4A; // 品牌主色 (Vue绿 / 微信主题绿)
 $color-primary-dark: #35495e; // 主色深色
 $color-primary-light: #e1f5eb; // 主色浅色背景
 $color-accent: #3b82f6; // 辅助强调色 (蓝)
@@ -55,4 +55,5 @@ $img-tabbar-icon-mine: '#{$img-base}/gameImage4a1a8e056f654c04966f57eb8d65a3b1.p
 $img-page-bg-default: '#{$img-base}/gameImage3a09555474d04967934ce16e691e3524.png';
 
 // --- 12. 卡片背景图（空状态默认图） ---
-$img-card-bg: '#{$img-base}gameImage0a0d1b36b4274705b37b90d303862704.png';
+$img-card-bg: '#{$img-base}/gameImagef2456b5285d9448da357d27c1d103d7a.png';
+$size-empty-image: 300px; // 空状态图片展示尺寸

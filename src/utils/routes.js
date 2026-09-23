@@ -26,6 +26,8 @@ export const routes = {
     paymentSuccess: { path: '/pages-golf/paymentSuccess/index' },
       orderInfo: { path: '/pages-golf/orderInfoGolf/index' },
         orderDetail: { path: '/pages-golf/orderDetailGolf/index' },
+  myTicketList: { path: '/pages-golf/myTicketList/index' },
+  myTicketDetail: { path: '/pages-golf/myTicketDetail/index' },
 
 
   // === pages-common 分包页面 ===

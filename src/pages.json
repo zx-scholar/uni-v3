@@ -107,6 +107,18 @@
           "style": {
             "navigationStyle": "custom"
           }
+        },
+        {
+          "path": "myTicketList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "myTicketDetail/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     },
