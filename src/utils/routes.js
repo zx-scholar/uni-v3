@@ -28,6 +28,11 @@ export const routes = {
         orderDetail: { path: '/pages-golf/orderDetailGolf/index' },
   myTicketList: { path: '/pages-golf/myTicketList/index' },
   myTicketDetail: { path: '/pages-golf/myTicketDetail/index' },
+  eventList: { path: '/pages-golf/eventList/index' },
+  eventRanking: { path: '/pages-golf/eventRanking/index' },
+  playerHome: { path: '/pages-golf/playerHome/index' },
+  pointsDetail: { path: '/pages-golf/pointsDetail/index' },
+  eventProject: { path: '/pages-golf/eventProject/index' },
 
 
   // === pages-common 分包页面 ===

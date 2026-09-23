@@ -1,59 +1,52 @@
 /* =========================================================================
    全局主题与样式变量配置文件 (variables.scss)
-   支持在项目中统一配置与修改颜色、边距、圆角、渐变色与阴影
-   注：所有单位写 px，编译期将通过 PostCSS 自动转换为 rpx (1px -> 1rpx)
+   - 颜色变量保留（方便主题切换），尺寸一律写 px 字面值（$size-* 已废弃删除）
+   - 所有单位写 px，编译期将通过 PostCSS 自动转换为 rpx (1px -> 1rpx)
 
    命名规范：
-   - $color-*   : 颜色类变量（品牌色、文本色、背景色、渐变色、阴影）
-   - $size-*    : 尺寸类变量（字号、间距、圆角、高度）
-   - $img-*     : 图片路径变量
-   等级后缀：xs < sm < base < md < lg < xl < xxl
+   - $color-* : 颜色类变量（品牌色、文本色、背景色、边框色、渐变色、阴影）
+   - $img-*   : 图片路径变量
    ========================================================================= */
 
-// --- 1. 品牌与主题颜色 ---
-$color-primary: #167A4A; // 品牌主色 (Vue绿 / 微信主题绿)
-$color-primary-dark: #35495e; // 主色深色
+// --- 1. 品牌与主题颜色（主色 #167A4A，渐变 / 阴影均由此派生） ---
+$color-primary: #167A4A; // 品牌主色
 $color-primary-light: #e1f5eb; // 主色浅色背景
-$color-accent: #3b82f6; // 辅助强调色 (蓝)
 $color-danger: #ef4444; // 危险/警告色 (红)
-$color-warning: #f59e0b; // 提醒/金黄
 
 // --- 2. 文字颜色规范 ---
 $color-text-primary: #1c1f1e; // 标题 / 正文主色
 $color-text-secondary: #6b7370; // 次级正文 / 次要信息
 $color-text-sub: #9aa3a0; // 描述 / 辅助说明
-$color-text-muted: #94a3b8; // 占位符 / 禁用文本
 $color-text-white: #ffffff; // 白色文字
-$color-text-black: #000000; // 黑色文字
 
 // --- 3. 背景色规范 ---
 $color-bg-page: #f5f6fa; // 页面整体背景色
 $color-bg-card: #ffffff; // 卡片背景色
-$color-bg-hover: #f1f5f9; // 点击/悬停背景
 
-// --- 4. 渐变色配置 ---
-$color-gradient-primary: linear-gradient(135deg, #42b883 0%, #35495e 100%);
-$color-gradient-navbar: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-$color-gradient-btn: linear-gradient(135deg, #1fa866 0%, #105c39 100%);
-$color-gradient-btn-blue:linear-gradient(90deg, #1186ff 0%, #4ecbfd 100%);
+// --- 4. 边框色规范 ---
+$color-border: #e2e8f0; // 默认边框线 (utility/border.scss 在用)
 
-// --- 8. 阴影规范 ---
+// --- 5. 渐变色配置（均基于品牌主色 #167A4A） ---
+$color-gradient-btn: linear-gradient(135deg, #1b8a54 0%, #0d4a2d 100%);
+$color-gradient-btn-blue: linear-gradient(90deg, #1186ff 0%, #4ecbfd 100%);
+
+// --- 6. 阴影规范 ---
 $color-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
 $color-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
-$color-shadow-lg: 0 6px 24px rgba(66, 184, 131, 0.15);
+$color-shadow-lg: 0 6px 24px rgba(22, 122, 74, 0.15);
 
-// --- 9. 底部固定按钮栏规范 ---
-$size-bottom-bar-height: 70px; // 底部操作栏高度
+// --- 7. 底部固定按钮栏规范 ---
 $color-bottom-bar-bg: #ffffff;
 
-// --- 10. 图片 OSS 基础路径 ---
+// --- 8. 图片 OSS 基础路径（生产域） ---
 $img-base: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd';
 
-// --- 11. Tabbar 图标 ---
+// --- 9. Tabbar 图标 ---
 $img-tabbar-icon: '#{$img-base}/gameImage774424d8cd4a444e9a3107d97b014a1d.png';
 $img-tabbar-icon-mine: '#{$img-base}/gameImage4a1a8e056f654c04966f57eb8d65a3b1.png';
+
+// --- 10. 页面默认背景图 ---
 $img-page-bg-default: '#{$img-base}/gameImage3a09555474d04967934ce16e691e3524.png';
 
-// --- 12. 卡片背景图（空状态默认图） ---
+// --- 11. 卡片背景图（空状态默认图） ---
 $img-card-bg: '#{$img-base}/gameImagef2456b5285d9448da357d27c1d103d7a.png';
-$size-empty-image: 300px; // 空状态图片展示尺寸

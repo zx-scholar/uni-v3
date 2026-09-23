@@ -1,0 +1,100 @@
+/* =========================================================================
+   赛事项目页面样式 (eventProject/index.scss)
+   以 pagesBasic 为骨架：无背景图、无底部按钮栏（报名按钮在卡片内）
+   铁律：颜色用 $color-* 变量，尺寸写 px 字面值
+   ========================================================================= */
+
+@use '@/styles/variables.scss' as *;
+
+/* ============================================================
+   page-container
+   ============================================================ */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-page;
+  overflow: hidden;
+  position: relative;
+
+  /* ---- 中间可滚动内容区 ---- */
+  .page-scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 0 0;
+    box-sizing: border-box;
+
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding-bottom: calc(32px + constant(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}
+
+/* ============================================================
+   赛事卡片
+   ============================================================ */
+.event-card {
+  background-color: $color-bg-card;
+  border-radius: 24px;
+  padding: 28px 24px;
+  margin: 0 24px 20px;
+  box-shadow: $color-shadow-sm;
+
+  /* 奖杯图标 */
+  .event-trophy {
+    font-size: 36px;
+    color: $color-primary;
+  }
+
+  /* 信息行：左标签定宽，右值自适应 */
+  .event-label {
+    width: 150px;
+    flex-shrink: 0;
+    font-size: 26px;
+    color: $color-text-sub;
+  }
+
+  .event-value {
+    flex: 1;
+    font-size: 26px;
+    color: $color-text-primary;
+  }
+
+  /* 分隔线 */
+  .event-divider {
+    height: 2px;
+    background-color: $color-border;
+    margin: 24px 0;
+  }
+
+  /* 价格（设计稿特殊橙色，非主题色，单独注明） */
+  .event-price-symbol {
+    font-size: 22px;
+    color: #f2992e;
+    margin-right: 4px;
+  }
+
+  .event-price-num {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1;
+    color: #f2992e;
+  }
+
+  /* 报名按钮 */
+  .event-signup-btn {
+    height: 64px;
+    line-height: 64px;
+    padding: 0 36px;
+    border-radius: 999px;
+    background: $color-gradient-btn;
+    box-shadow: $color-shadow-lg;
+    text-align: center;
+
+    &:active { opacity: 0.9; }
+  }
+}

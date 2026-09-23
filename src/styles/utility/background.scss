@@ -3,23 +3,19 @@
    ========================================================================= */
 @use '../variables.scss' as *;
 
-/* 背景色 */
+/* 背景色 (与 variables.scss 变量一一对应) */
 .bg-primary { background-color: $color-primary; }
 .bg-primary-light { background-color: $color-primary-light; }
-.bg-accent { background-color: $color-accent; }
 .bg-danger { background-color: $color-danger; }
-.bg-warning { background-color: $color-warning; }
 .bg-page { background-color: $color-bg-page; }
 .bg-card { background-color: $color-bg-card; }
-.bg-hover { background-color: $color-bg-hover; }
 .bg-transparent { background-color: transparent; }
-.bg-white { background-color: #ffffff; }
+.bg-white { background-color: $color-text-white; }
 .bg-black { background-color: #000000; }
 
 /* 渐变背景 */
-.bg-gradient-primary { background: $color-gradient-primary; }
 .bg-gradient-btn { background: $color-gradient-btn; }
-.bg-gradient-navbar { background: $color-gradient-navbar; }
+.bg-gradient-btn-blue { background: $color-gradient-btn-blue; }
 
 /* 背景图 size / position / repeat */
 .bg-common { background-size: contain; background-position: center top; background-repeat: no-repeat; }

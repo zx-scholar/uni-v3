@@ -9,25 +9,12 @@
 
       <!-- 滚轮选择区 -->
       <view class="ms-picker-wrap">
-        <picker-view
-          class="ms-picker"
-          indicator-style="height: 50px;"
-          :value="wheelValue"
-          @change="onWheelChange"
-        >
+        <picker-view class="ms-picker" indicator-style="height: 50px;" :value="wheelValue" @change="onWheelChange">
           <picker-view-column>
-            <view
-              v-for="(item, index) in yearList"
-              :key="`y-${index}`"
-              class="ms-item"
-            >{{ item }}年</view>
+            <view v-for="(item, index) in yearList" :key="`y-${index}`" class="ms-item">{{ item }}年</view>
           </picker-view-column>
-          <picker-view-column>
-            <view
-              v-for="(item, index) in monthList"
-              :key="`m-${index}`"
-              class="ms-item"
-            >{{ item }}月</view>
+          <picker-view-column v-if="mode === 'year-month'">
+            <view v-for="(item, index) in monthList" :key="`m-${index}`" class="ms-item">{{ item }}月</view>
           </picker-view-column>
         </picker-view>
       </view>
@@ -55,6 +42,8 @@ export default {
 
   props: {
     visible: { type: Boolean, default: false },
+    // 选择模式：'year-month'（年月双列，默认）| 'year'（仅年份单列）
+    mode: { type: String, default: 'year-month' },
     // 初始选中的年份（不传则默认当前年）
     defaultYear: { type: Number, default: 0 },
     // 初始选中的月份（1~12，不传则默认当前月）
@@ -92,8 +81,12 @@ export default {
     // 根据 defaultYear / defaultMonth 初始化 wheelValue，未传则默认当前年月
     resetToDefault() {
       const y = this.defaultYear || currentYear;
-      const m = this.defaultMonth || new Date().getMonth() + 1;
       const yIdx = Math.max(0, this.yearList.indexOf(y));
+      if (this.mode === 'year') {
+        this.wheelValue = [yIdx];
+        return;
+      }
+      const m = this.defaultMonth || new Date().getMonth() + 1;
       const mIdx = Math.max(0, Math.min(this.monthList.length - 1, m - 1));
       this.wheelValue = [yIdx, mIdx];
     },
@@ -126,9 +119,13 @@ export default {
       const [yIdx, mIdx] = this.wheelValue;
       const yearIndex = yIdx >= this.yearList.length ? this.yearList.length - 1 : yIdx;
       const year = this.yearList[yearIndex];
-      const monthNum = this.monthList[mIdx];
-      const month = monthNum < 10 ? '0' + monthNum : '' + monthNum;
-      this.$emit('confirm', { year, month, monthNum });
+      if (this.mode === 'year') {
+        this.$emit('confirm', { year, month: '', monthNum: null });
+      } else {
+        const monthNum = this.monthList[mIdx];
+        const month = monthNum < 10 ? '0' + monthNum : '' + monthNum;
+        this.$emit('confirm', { year, month, monthNum });
+      }
       this.$emit('update:visible', false);
     },
   },

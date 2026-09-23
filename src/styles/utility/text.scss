@@ -29,18 +29,13 @@
 .lh-1-4 { line-height: 1.4; }
 .lh-1-6 { line-height: 1.6; }
 
-/* 文字颜色 */
+/* 文字颜色 (与 variables.scss 变量一一对应) */
 .color-primary { color: $color-primary; }
-.color-primary-dark { color: $color-primary-dark; }
-.color-accent { color: $color-accent; }
 .color-danger { color: $color-danger; }
-.color-warning { color: $color-warning; }
 .color-text-primary { color: $color-text-primary; }
 .color-text-secondary { color: $color-text-secondary; }
 .color-text-sub { color: $color-text-sub; }
-.color-text-muted { color: $color-text-muted; }
 .color-text-white { color: $color-text-white; }
-.color-text-black { color: $color-text-black; }
 
 /* 单行/多行省略 */
 .text-ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

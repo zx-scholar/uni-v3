@@ -1,0 +1,212 @@
+@use '@/styles/variables.scss' as *;
+$img-page-bg: '#{$img-base}/gameImageee5023d6de9a4ffeb3212195a0cfef08.png';
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f6fa;
+  overflow: hidden;
+
+  /* 页面背景图（默认背景图） */
+  &.page-has-bg {
+    background-color: $color-bg-page;
+    background-image: url($img-page-bg);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+}
+
+/* ============================================================
+   顶部卡片（白色圆角）
+   ============================================================ */
+.points-card {
+  flex-shrink: 0;
+  margin: 24px;
+  border-radius: 24px;
+  background-color: #ffffff;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   顶部：年度/月度切换 + 周期选择
+   ============================================================ */
+.points-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.points-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f1f4f8;
+  border-radius: 30px;
+  padding: 6px;
+}
+
+.points-tabs__item {
+  padding: 10px 32px;
+  font-size: 28px;
+  font-weight: 400;
+  color: #333333;
+  line-height: 1;
+  border-radius: 30px;
+
+  &.is-active {
+    color: #ffffff;
+    font-weight: 500;
+    background-color: #167a4a;
+  }
+}
+
+.points-period {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.points-period__text {
+  font-size: 28px;
+  font-weight: 500;
+  color: #1c1f1e;
+  line-height: 1;
+}
+
+.points-period__arrow {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #1c1f1e;
+  line-height: 1;
+}
+
+/* ============================================================
+   积分数额区块
+   ============================================================ */
+.points-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.points-total__label {
+  font-size: 24px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+}
+
+/* 积分大数字 + 单位 同行，左对齐 */
+.points-total__value-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-top: 16px;
+}
+
+.points-total__value {
+  font-size: 88px;
+  font-weight: 600;
+  color: #167a4a;
+  line-height: 1;
+}
+
+.points-total__unit {
+  margin-left: 8px;
+  font-size: 32px;
+  font-weight: 500;
+  color: #167a4a;
+  line-height: 1;
+}
+
+.points-total__meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.points-total__desc {
+  font-size: 24px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+}
+
+.points-total__rules {
+  font-size: 24px;
+  font-weight: 400;
+  color: #167a4a;
+  line-height: 1;
+}
+
+/* ============================================================
+   积分记录标题
+   ============================================================ */
+.points-list-header {
+  flex-shrink: 0;
+  padding: 8px 24px 32px;
+  font-size: 30px;
+  font-weight: 500;
+  color: #1c1f1e;
+  line-height: 1;
+}
+
+/* ============================================================
+   积分记录列表
+   ============================================================ */
+.points-scroll {
+  flex: 1;
+  min-height: 0;
+}
+
+.points-list {
+  padding: 0 24px 24px;
+}
+
+.points-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.points-item__title {
+  font-size: 28px;
+  font-weight: 400;
+  color: #1c1f1e;
+  line-height: 1.4;
+}
+
+.points-item__bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.points-item__time {
+  font-size: 22px;
+  font-weight: 400;
+  color: #9aa3a0;
+  line-height: 1;
+}
+
+.points-item__value {
+  font-size: 32px;
+  font-weight: 500;
+  color: #167a4a;
+  line-height: 1;
+}

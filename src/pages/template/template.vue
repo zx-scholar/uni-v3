@@ -106,7 +106,7 @@
         <text class="modal-desc text-center lh-1-6">确认执行此操作？</text>
       </view>
       <view class="modal-actions flex gap-20 pt-24">
-        <button class="modal-btn flex-1 text-center border-none bg-hover color-text-sub" @click="modalVisible = false">取消</button>
+        <button class="modal-btn flex-1 text-center border-none bg-page color-text-sub" @click="modalVisible = false">取消</button>
         <button class="modal-btn flex-1 text-center border-none bg-gradient-btn color-text-white" @click="modalVisible = false">确认</button>
       </view>
     </BasePopup>

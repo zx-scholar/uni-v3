@@ -1,11 +1,12 @@
 /* =========================================================================
-   边框工具类
+   边框工具类 (边框色统一走 $color-border)
    ========================================================================= */
+@use '../variables.scss' as *;
 
 .border-none { border: none; }
 .border-0 { border: 0; }
-.border { border: 1px solid #e2e8f0; }
-.border-top { border-top: 1px solid #e2e8f0; }
-.border-bottom { border-bottom: 1px solid #e2e8f0; }
-.border-left { border-left: 1px solid #e2e8f0; }
-.border-right { border-right: 1px solid #e2e8f0; }
+.border { border: 1px solid $color-border; }
+.border-top { border-top: 1px solid $color-border; }
+.border-bottom { border-bottom: 1px solid $color-border; }
+.border-left { border-left: 1px solid $color-border; }
+.border-right { border-right: 1px solid $color-border; }

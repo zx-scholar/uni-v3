@@ -1,0 +1,249 @@
+@use '@/styles/variables.scss' as *;
+$img-page-bg: '#{$img-base}/gameImage70ed7974526743c9b666a7e1733f2343.png';
+$img-rank-1: '#{$img-base}/gameImage9cda4d3377954518ad767cc38308d04b.png';
+$img-rank-2: '#{$img-base}/gameImageb679c8bac2ea4017b24535a4c1afaea1.png';
+$img-rank-3: '#{$img-base}/gameImage443531149ec2421895e586b060b9e94c.png';
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f6fa;
+  overflow: hidden;
+
+  /* 页面背景图 */
+  &.page-has-bg {
+    background-color: $color-bg-page;
+    background-image: url($img-page-bg);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+}
+
+/* ============================================================
+   顶部分类标签（可横向滚动）
+   ============================================================ */
+.ranking-tabs {
+  flex-shrink: 0;
+  background-color: #ffffff;
+  white-space: nowrap;
+  padding: 0 24px;
+  margin-top: 205px;
+  border-radius: 24px 24px 0px 0px;
+}
+
+.ranking-tabs__item {
+  position: relative;
+  display: inline-block;
+  padding: 24px 0 20px;
+  margin-right: 48px;
+  font-size: 28px;
+  font-weight: 400;
+  color: #333333;
+  line-height: 1;
+  vertical-align: top;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.is-active {
+    color: #167a4a;
+    font-weight: 500;
+
+    /* 选中态底部绿色指示条：60×6，圆角 3 */
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: #167a4a;
+    }
+  }
+}
+
+/* ============================================================
+   年度选择
+   ============================================================ */
+.ranking-year {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24px;
+  background-color: #ffffff;
+}
+
+.ranking-year__text {
+  font-size: 28px;
+  font-weight: 500;
+  color: #1c1f1e;
+  line-height: 1;
+}
+
+.ranking-year__arrow {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #1c1f1e;
+  line-height: 1;
+}
+
+/* ============================================================
+   榜单表格
+   ============================================================ */
+.ranking-scroll {
+  flex: 1;
+  min-height: 0;
+  background-color: #ffffff;
+}
+
+.ranking-table {
+  width: 702px;
+  margin: 0 auto;
+}
+
+/* ---- 表头 ---- */
+.ranking-table__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 18px 16px;
+  border-radius: 8px;
+  background-color: #f9fbfe;
+  box-sizing: border-box;
+}
+
+.ranking-table__col {
+  font-size: 24px;
+  font-weight: 400;
+  color: #6b7370;
+  line-height: 1;
+
+  &--rank {
+    flex: 0 0 100px;
+    text-align: left;
+  }
+
+  &--player {
+    flex: 1;
+  }
+
+  &--strokes {
+    flex: 0 0 100px;
+    text-align: center;
+  }
+
+  &--score {
+    flex: 0 0 100px;
+    text-align: center;
+  }
+
+  &--points {
+    flex: 0 0 160px;
+    text-align: center;
+  }
+
+  &--bestStrokes {
+    flex: 1;
+    text-align: center;
+  }
+
+  &--participation {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+/* ---- 表体行 ---- */
+.ranking-table__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 98px;
+  padding: 18px 16px;
+  border-bottom: 1px solid #f1f4f8;
+  box-sizing: border-box;
+
+  /* 前三名背景渐变 */
+  &--1 {
+    background: linear-gradient(270deg, rgba(255, 255, 255, 1) 0%, rgba(255, 248, 234, 1) 100%);
+  }
+
+  &--2 {
+    background: linear-gradient(270deg, rgba(255, 255, 255, 1) 0%, rgba(244, 247, 250, 1) 100%);
+  }
+
+  &--3 {
+    background: linear-gradient(270deg, rgba(255, 255, 255, 1) 0%, rgba(252, 245, 239, 1) 100%);
+  }
+}
+
+.ranking-table__row .ranking-table__col {
+  font-size: 28px;
+  font-weight: 400;
+  color: #1c1f1e;
+}
+
+/* 特殊榜单高亮列（神射手杆数 / 勤奋奖次数） */
+.ranking-table__row .ranking-table__col.is-highlight {
+  font-weight: 500;
+  color: #167a4a;
+}
+
+/* 前三名名次徽章（48×48 背景图） */
+.ranking-table__rank-badge {
+  width: 48px;
+  height: 48px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &--1 {
+    background-image: url($img-rank-1);
+  }
+
+  &--2 {
+    background-image: url($img-rank-2);
+  }
+
+  &--3 {
+    background-image: url($img-rank-3);
+  }
+}
+
+/* 成绩：负数绿色，正数红色 */
+.ranking-table__row .ranking-table__col--score {
+  &[v-positive] {
+    color: #ef4444;
+  }
+}
+
+/* 积分列：支持换行（积分值 + 标签） */
+.ranking-table__row .ranking-table__col--points {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ranking-table__points-value {
+  font-size: 28px;
+  font-weight: 500;
+  color: #167a4a;
+  line-height: 1;
+}
+
+.ranking-table__pass-tag {
+  padding: 4px 10px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #167a4a;
+  background-color: #e8f5ee;
+  border-radius: 4px;
+  line-height: 1;
+}

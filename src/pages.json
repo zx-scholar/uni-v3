@@ -119,6 +119,36 @@
           "style": {
             "navigationStyle": "custom"
           }
+        },
+        {
+          "path": "eventList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "eventRanking/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "playerHome/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "pointsDetail/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "eventProject/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     },

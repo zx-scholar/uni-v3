@@ -63,6 +63,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/variables.scss' as *;
+
 /* ========== 遮罩层 ========== */
 .insurance-prompt-overlay {
   position: fixed;
@@ -153,7 +155,7 @@ export default {
 
     /* 立即购买按钮：仅背景与文字色不同 */
     &.insurance-prompt-btn--primary {
-      background: linear-gradient(90deg, #1186ff 0%, #4ecbfd 100%);
+      background: $color-gradient-btn-blue;
       color: #ffffff;
     }
 
