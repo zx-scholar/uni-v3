@@ -9,8 +9,8 @@
 
 @use '@/styles/variables.scss' as *;
 
-// 背景图变量（替换为自己的图片路径即可）
-$img-page-bg: '#{$img-page-bg-default}';
+// 背景图直接用全局 $img-page-bg；要自定义时再加一行同名局部变量覆盖：
+// $img-page-bg: '#{$img-base}/xxx.png';
 
 /* ============================================================
    page-container

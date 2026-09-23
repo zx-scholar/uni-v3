@@ -16,7 +16,7 @@
      用法：<view class="page-container page-has-bg"> */
   &.page-has-bg {
     background-color: $color-bg-page;
-    background-image: url($img-page-bg-default);
+    background-image: url($img-page-bg);
     background-size: contain;
     background-position: center top;
     background-repeat: no-repeat;

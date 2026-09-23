@@ -15,7 +15,7 @@
   /* 默认背景图（页面未指定时统一使用） */
   &.page-has-bg {
     background-color: $color-bg-page;
-    background-image: url($img-page-bg-default);
+    background-image: url($img-page-bg);
     background-size: contain;
     background-position: center top;
     background-repeat: no-repeat;

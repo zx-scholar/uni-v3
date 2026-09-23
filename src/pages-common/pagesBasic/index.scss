@@ -7,8 +7,8 @@
 
 @use '@/styles/variables.scss' as *;
 
-// 背景图变量（已展开为完整 URL）
-$img-page-bg: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prdgameImage3a09555474d04967934ce16e691e3524.png';
+// 背景图变量（局部覆盖全局 $img-page-bg，用 $img-base 拼接，不写完整 URL）
+$img-page-bg: '#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png';
 
 /* ============================================================
    page-container

@@ -17,6 +17,15 @@
   overflow: hidden;
   position: relative;
 
+  /* 页面背景图（默认全局 $img-page-bg；自定义则在本文件顶部加同名变量覆盖，不要则删 vue 里 page-has-bg 类） */
+  &.page-has-bg {
+    background-color: $color-bg-page;
+    background-image: url($img-page-bg);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
   /* ---- 中间可滚动内容区 ---- */
   .page-scroll-content {
     flex: 1;
@@ -71,10 +80,10 @@
     margin: 24px 0;
   }
 
-  /* 价格（设计稿特殊橙色，非主题色，单独注明） */
+  /* 价格（金额色变量） */
   .event-price-symbol {
     font-size: 22px;
-    color: #f2992e;
+    color: $color-price;
     margin-right: 4px;
   }
 
@@ -82,7 +91,7 @@
     font-size: 40px;
     font-weight: 600;
     line-height: 1;
-    color: #f2992e;
+    color: $color-price;
   }
 
   /* 报名按钮 */

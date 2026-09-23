@@ -12,6 +12,7 @@
 $color-primary: #167A4A; // 品牌主色
 $color-primary-light: #e1f5eb; // 主色浅色背景
 $color-danger: #ef4444; // 危险/警告色 (红)
+$color-price: #C98B32; // 金额/价格色 (金棕)
 
 // --- 2. 文字颜色规范 ---
 $color-text-primary: #1c1f1e; // 标题 / 正文主色
@@ -46,7 +47,6 @@ $img-tabbar-icon: '#{$img-base}/gameImage774424d8cd4a444e9a3107d97b014a1d.png';
 $img-tabbar-icon-mine: '#{$img-base}/gameImage4a1a8e056f654c04966f57eb8d65a3b1.png';
 
 // --- 10. 页面默认背景图 ---
-$img-page-bg-default: '#{$img-base}/gameImage3a09555474d04967934ce16e691e3524.png';
-
+$img-page-bg: '#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png';
 // --- 11. 卡片背景图（空状态默认图） ---
 $img-card-bg: '#{$img-base}/gameImagef2456b5285d9448da357d27c1d103d7a.png';

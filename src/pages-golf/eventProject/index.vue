@@ -1,5 +1,5 @@
 <template>
-  <view class="page-container">
+  <view class="page-container page-has-bg">
     <NavBar title="赛事项目" color="#000" />
 
     <scroll-view class="page-scroll-content" scroll-y>
