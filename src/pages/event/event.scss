@@ -1,0 +1,24 @@
+@use '@/styles/variables.scss' as *;
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-page;
+  overflow: hidden;
+  position: relative;
+
+  .page-scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      // 留出 CustomTabBar 高度空间，避免内容被遮挡
+      padding: 20px 0 calc(140px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}
