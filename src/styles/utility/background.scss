@@ -6,12 +6,20 @@
 /* 背景色 (与 variables.scss 变量一一对应) */
 .bg-primary { background-color: $color-primary; }
 .bg-primary-light { background-color: $color-primary-light; }
+.bg-primary-dark { background-color: $color-primary-dark; }
 .bg-danger { background-color: $color-danger; }
+.bg-success { background-color: $color-success; }
+.bg-warning { background-color: $color-warning; }
+.bg-info { background-color: $color-info; }
 .bg-page { background-color: $color-bg-page; }
+.bg-page-light { background-color: $color-bg-page-light; }
 .bg-card { background-color: $color-bg-card; }
+.bg-hover { background-color: $color-bg-hover; }
+.bg-disabled { background-color: $color-bg-disabled; }
+.bg-mask { background-color: $color-bg-mask; }
 .bg-transparent { background-color: transparent; }
 .bg-white { background-color: $color-text-white; }
-.bg-black { background-color: #000000; }
+.bg-black { background-color: $color-text-black; }
 
 /* 渐变背景 */
 .bg-gradient-btn { background: $color-gradient-btn; }

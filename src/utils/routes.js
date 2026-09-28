@@ -13,6 +13,7 @@ export const routes = {
   profile: { path: '/pages/profile/profile' },
   template: { path: '/pages/template/template' },
   uploadImage: { path: '/pages/uploadImage/uploadImage' },
+  event: { path: '/pages/event/event', tab: true },
 
   // === 功能分包页面 ===
   demo: { path: '/pages-golf/demo/demo' },

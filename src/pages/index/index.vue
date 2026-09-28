@@ -39,15 +39,19 @@
         </view>
       </view>
     </view>
+  <!-- 自定义底部 TabBar -->
+    <CustomTabBar />
   </view>
 </template>
 
 <script>
 import { queryMiniAppInfo } from '@/api';
 import { useAppStore } from '@/stores/app';
+import CustomTabBar from '@/components/CustomTabBar/CustomTabBar.vue';
 
 export default {
   name: 'IndexPage',
+  components: { CustomTabBar },
   data() {
     return {
       loading: false,

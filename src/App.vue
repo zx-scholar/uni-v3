@@ -5,9 +5,16 @@ export default {
   onLaunch: function () {
     console.log('App Launch - uni-app Vue3 Vite Project Started');
     initialize();
+    // 使用自定义 TabBar 后，兜底隐藏原生 TabBar（避免双层显示）
+    // #ifdef MP-WEIXIN
+    uni.hideTabBar({ animation: false });
+    // #endif
   },
   onShow: function () {
     console.log('App Show');
+    // #ifdef MP-WEIXIN
+    uni.hideTabBar({ animation: false });
+    // #endif
   },
   onHide: function () {
     console.log('App Hide');

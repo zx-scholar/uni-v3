@@ -7,6 +7,8 @@
 
 .content {
   padding: 30px;
+  // 底部留出 CustomTabBar 高度空间，避免内容被遮挡
+  padding-bottom: 140px;
 }
 
 .user-card {
@@ -61,38 +63,35 @@
 .menu-list {
   background-color: #ffffff;
   border-radius: 20px;
-  padding: 0 30px;
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
 
   .menu-item {
+    width: 25%;
+    box-sizing: border-box;
+    padding: 12px 0;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 30px 0;
-    border-bottom: 2px solid #f1f5f9;
 
-    &:last-child {
-      border-bottom: none;
-    }
-
-    .menu-left {
+    .menu-item__icon {
+      width: 86px;
+      height: 86px;
       display: flex;
       align-items: center;
-      gap: 16rpx;
-
-      .iconfont {
-        font-size: 32rpx;
-        color: #42b883;
-      }
+      justify-content: center;
+      font-size: 56px;
+      line-height: 1;
+      color: #167a4a;
     }
 
-    .menu-title {
-      font-size: 28px;
+    .menu-item__title {
+      margin-top: 12px;
+      font-size: 24px;
+      line-height: 1.2;
+      text-align: center;
       color: #334155;
-    }
-
-    .arrow {
-      font-size: 28rpx;
-      color: #94a3b8;
     }
   }
 }

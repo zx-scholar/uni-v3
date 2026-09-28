@@ -39,8 +39,8 @@ function handleUnauthorized(message = '') {
   const pages = getCurrentPages()
   const current = pages[pages.length - 1]
   if (!current || current.route !== 'pages/login/login') {
-    // redirectTo 保留页面栈并携带来源页, 登录成功后跳回原页面
-    router.redirectTo('login', { returnUrl: getCurrentPageUrl() })
+    // replace 底层即 uni.redirectTo, 保留页面栈并携带来源页, 登录成功后跳回原页面
+    router.replace('login', { returnUrl: getCurrentPageUrl() })
   }
 }
 

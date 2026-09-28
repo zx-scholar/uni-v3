@@ -39,21 +39,24 @@
             <text class="summary-card__label">{{ viewMode === 'year' ? '年度积分' : '月度积分' }}</text>
           </view>
           <view class="summary-card__points-row">
-            <text class="summary-card__points">{{ summary.points }}分</text>
-            <text class="summary-card__detail" @click="handlePointsDetail">明细 ›</text>
+            <text class="summary-card__points">{{ summary.points }}<text class="summary-card__points-unit">分</text></text>
+            <view class="summary-card__detail" @click="handlePointsDetail">
+              <text>明细</text>
+              <text class="iconfont icon-you summary-card__detail-arrow"></text>
+            </view>
           </view>
           <view class="summary-card__metrics">
-            <view class="summary-card__metric">
-              <text class="summary-card__metric-value">{{ summary.rank }}</text>
-              <text class="summary-card__metric-label">周期排名</text>
-            </view>
-            <view class="summary-card__metric">
-              <text class="summary-card__metric-value">{{ summary.bestStrokes }}</text>
-              <text class="summary-card__metric-label">最佳总杆数</text>
-            </view>
-            <view class="summary-card__metric">
-              <text class="summary-card__metric-value">{{ summary.parDiff }}</text>
-              <text class="summary-card__metric-label">标准杆差</text>
+            <view
+              v-for="(m, i) in summary.metrics"
+              :key="i"
+              class="summary-card__metric"
+            >
+              <view class="summary-card__metric-value">
+                <view class="summary-card__metric-value-prefix">{{ m.prefix }}</view>
+                <view class="summary-card__metric-value-num">{{ m.value }}</view>
+                <view class="summary-card__metric-value-suffix">{{ m.suffix }}</view>
+              </view>
+              <text class="summary-card__metric-label">{{ m.label }}</text>
             </view>
           </view>
         </view>
@@ -70,14 +73,16 @@
             :key="i"
             class="scorecard-item"
           >
-            <view class="scorecard-item__main">
-              <text class="scorecard-item__title">{{ card.title }}</text>
-              <text class="scorecard-item__info">球场: {{ card.course }} · 标准杆{{ card.par }}</text>
-              <text class="scorecard-item__info">完赛时间: {{ card.time }}</text>
-            </view>
-            <view class="scorecard-item__score">
-              <text class="scorecard-item__strokes">{{ card.strokes }}杆</text>
-              <text class="scorecard-item__diff">({{ card.diff > 0 ? '+' : '' }}{{ card.diff }})</text>
+            <text class="scorecard-item__title">{{ card.title }}</text>
+            <view class="scorecard-item__body">
+              <view class="scorecard-item__main">
+                <text class="scorecard-item__info">球场: {{ card.course }} · 标准杆{{ card.par }}</text>
+                <text class="scorecard-item__info">完赛时间: {{ card.time }}</text>
+              </view>
+              <view class="scorecard-item__score">
+                <text class="scorecard-item__strokes">{{ card.strokes }}杆</text>
+                <text class="scorecard-item__diff">({{ card.diff > 0 ? '+' : '' }}{{ card.diff }})</text>
+              </view>
             </view>
           </view>
         </view>
@@ -120,9 +125,11 @@ export default {
       // 积分汇总（示例数据）
       summary: {
         points: '1250',
-        rank: '第1名',
-        bestStrokes: '67杆',
-        parDiff: '-5',
+        metrics: [
+          { value: '1', prefix: '第', suffix: '名', label: '周期排名' },
+          { value: '67', prefix: '', suffix: '杆', label: '最佳总杆数' },
+          { value: '-5', prefix: '', suffix: '', label: '标准杆差' },
+        ],
       },
       // 计分卡列表（示例数据）
       scorecards: [

@@ -17,8 +17,8 @@
 
         <!-- 演示：基础卡片（最常用）-->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">卡片标题</view>
-          <view class="card-body fs-base color-text-sub lh-1-6">
+          <view class="card-header fz-34 fw-7 c-primary pb-8 mb-16">卡片标题</view>
+          <view class="card-body fz-26 c-t-sub lh-1-6">
             卡片正文内容，支持多行文本。
             <br />
             tabbar 图标可参照 $img-tabbar-icon-* 变量命名。
@@ -27,48 +27,48 @@
 
         <!-- 演示：表单行列表 -->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">列表布局</view>
+          <view class="card-header fz-34 fw-7 c-primary pb-8 mb-16">列表布局</view>
           <view class="item-row flex-between py-8">
-            <text class="fs-base color-text-sub">标签</text>
-            <text class="fs-base fw-600 color-text-primary">值</text>
+            <text class="fz-26 c-t-sub">标签</text>
+            <text class="fz-26 fw-6 c-t-primary">值</text>
           </view>
           <view class="item-row flex-between py-8">
-            <text class="fs-base color-text-sub">标签</text>
-            <text class="fs-base fw-600 color-text-primary">值</text>
+            <text class="fz-26 c-t-sub">标签</text>
+            <text class="fz-26 fw-6 c-t-primary">值</text>
           </view>
         </view>
 
         <!-- 演示：带有操作按钮的卡片 -->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-32">操作卡片</view>
-          <view class="card-body fs-base color-text-sub lh-1-6">页面内的触发按钮，非底部。</view>
+          <view class="card-header fz-34 fw-7 c-primary pb-8 mb-32">操作卡片</view>
+          <view class="card-body fz-26 c-t-sub lh-1-6">页面内的触发按钮，非底部。</view>
           <button class="btn-card" @click="handleCardAction">点击操作</button>
         </view>
 
         <!-- 演示：底部弹出框 -->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">弹出框</view>
-          <view class="card-body fs-base color-text-sub lh-1-6">底部的 "确认提交" 按钮会弹出底部弹出框。</view>
+          <view class="card-header fz-34 fw-7 c-primary pb-8 mb-16">弹出框</view>
+          <view class="card-body fz-26 c-t-sub lh-1-6">底部的 "确认提交" 按钮会弹出底部弹出框。</view>
         </view>
 
         <!-- 演示：居中弹窗 -->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">居中弹窗</view>
+          <view class="card-header fz-34 fw-7 c-primary pb-8 mb-16">居中弹窗</view>
           <button class="btn-card" @click="modalVisible = true">打开居中弹窗</button>
         </view>
 
         <!-- 演示：空状态 -->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">空状态</view>
-          <view class="card-body fs-base color-text-sub lh-1-6 mb-20">无数据时展示，支持自定义文案和操作按钮。</view>
+          <view class="card-header fz-34 fw-7 c-primary pb-8 mb-16">空状态</view>
+          <view class="card-body fz-26 c-t-sub lh-1-6 mb-20">无数据时展示，支持自定义文案和操作按钮。</view>
           <Empty />
           <Empty text="暂无赛事数据" show-action action-text="去预约" @action="handleEmptyAction" />
         </view>
 
         <!-- 演示：敬请期待弹窗 -->
         <view class="card">
-          <view class="card-header fs-xxl fw-bold color-primary pb-8 mb-16">敬请期待弹窗</view>
-          <view class="card-body fs-base color-text-sub lh-1-6 mb-20">功能开发中提示，visible 控制显隐。</view>
+          <view class="card-header fz-34 fw-7 c-primary pb-8 mb-16">敬请期待弹窗</view>
+          <view class="card-body fz-26 c-t-sub lh-1-6 mb-20">功能开发中提示，visible 控制显隐。</view>
           <button class="btn-card" @click="comingSoonVisible = true">打开敬请期待弹窗</button>
         </view>
       </view>
@@ -106,8 +106,8 @@
         <text class="modal-desc text-center lh-1-6">确认执行此操作？</text>
       </view>
       <view class="modal-actions flex gap-20 pt-24">
-        <button class="modal-btn flex-1 text-center border-none bg-page color-text-sub" @click="modalVisible = false">取消</button>
-        <button class="modal-btn flex-1 text-center border-none bg-gradient-btn color-text-white" @click="modalVisible = false">确认</button>
+        <button class="modal-btn flex-1 text-center border-none bg-page c-t-sub" @click="modalVisible = false">取消</button>
+        <button class="modal-btn flex-1 text-center border-none bg-gradient-btn c-t-white" @click="modalVisible = false">确认</button>
       </view>
     </BasePopup>
 

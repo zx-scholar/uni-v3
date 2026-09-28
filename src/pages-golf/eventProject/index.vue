@@ -9,9 +9,9 @@
           <view class="flex-between">
             <view class="flex items-center gap-8">
               <text class="iconfont icon-jiangbei1 event-trophy"></text>
-              <text class="fs-lg fw-600 color-text-primary">{{ event.title }}</text>
+              <text class="fz-30 fw-6 c-t-primary">{{ event.title }}</text>
             </view>
-            <text class="fs-base color-primary">{{ event.status }}</text>
+            <text class="fz-26 c-primary">{{ event.status }}</text>
           </view>
 
           <!-- 信息行 -->
@@ -47,7 +47,7 @@
               <text class="event-price-num">{{ event.price }}</text>
             </view>
             <view class="event-signup-btn" @click="handleSignup(event)">
-              <text class="fs-md color-text-white">立即报名</text>
+              <text class="fz-28 c-t-white">立即报名</text>
             </view>
           </view>
         </view>

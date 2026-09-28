@@ -31,7 +31,10 @@
         </view>
         <view class="points-total__meta">
           <text class="points-total__desc">积分由参赛及赛事奖励累计获得</text>
-          <text class="points-total__rules" @click="handleRulesClick">积分规则 ›</text>
+          <view class="points-total__rules" @click="handleRulesClick">
+            <text>积分规则</text>
+            <text class="iconfont icon-you points-total__rules-arrow"></text>
+          </view>
         </view>
       </view>
     </view>

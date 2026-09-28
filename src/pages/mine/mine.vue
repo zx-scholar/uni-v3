@@ -12,18 +12,23 @@
         <text v-if="!userStore.isLoggedIn" class="login-arrow">›</text>
       </view>
       <view class="menu-list">
-        <view class="menu-item" v-for="(item, index) in menuList" :key="index" @click="handleMenuItemClick(item)">
-          <view class="menu-left">
-            <text v-if="item.icon" class="iconfont" :class="item.icon"></text>
-            <text class="menu-title">{{ item.text }}</text>
-          </view>
-          <text class="iconfont icon-you arrow"></text>
+        <view
+          v-for="(item, index) in menuList"
+          :key="index"
+          class="menu-item"
+          @click="handleMenuItemClick(item)"
+        >
+          <text class="menu-item__icon iconfont" :class="item.icon"></text>
+          <text class="menu-item__title">{{ item.text }}</text>
         </view>
       </view>
     </view>
 
     <!-- 分享弹窗 -->
     <ShareDialog :visible="shareVisible" @close="shareVisible = false" />
+
+    <!-- 自定义底部 TabBar -->
+    <CustomTabBar />
   </view>
 </template>
 
@@ -31,17 +36,18 @@
 import { useAppStore } from '@/stores/app';
 import { useUserStore } from '@/stores/user';
 import ShareDialog from '@/components/ShareDialog/ShareDialog.vue';
+import CustomTabBar from '@/components/CustomTabBar/CustomTabBar.vue';
 
 export default {
   name: 'MinePage',
-  components: { ShareDialog },
+  components: { ShareDialog, CustomTabBar },
   data() {
     return {
       shareVisible: false,
       menuList: [
-        { icon: 'icon-hetong', text: '通用标准页面模板 (顶栏+滚动+底栏)', routerPath: 'template' },
+        { icon: 'icon-hetong', text: '通用标准页面', routerPath: 'template' },
         { icon: 'icon-hetong', text: '小程序模板页面', routerPath: 'pagesBasic' },
-        { icon: 'icon-xiugai', text: 'Vue3 + Pinia 教程示例页', routerPath: 'demo' },
+        { icon: 'icon-xiugai', text: 'Pinia', routerPath: 'demo' },
         { icon: 'icon-hetong', text: '个人资料(personInfo)', routerPath: 'personInfo' },
         { icon: 'icon-hetong', text: '个人资料(profile)', routerPath: 'profile' },
         { icon: 'icon-sousuo', text: '浏览记录', routerPath: 'browsingHistory' },
@@ -55,9 +61,10 @@ export default {
         { icon: 'icon-shequhuodong', text: '约球详情', routerPath: 'ballBitDetail' },
         { icon: 'icon-wujiaoxing1', text: '评价球友', routerPath: 'ballBitEvaluateGolf' },
         { icon: 'icon-shequhuodong', text: '我的约球', routerPath: 'ballBitMyList' },
-        { icon: 'icon-jifen', text: '我的积分', routerPath: 'myPoints' },
-                { icon: 'icon-zhifuchenggong', text: '支付成功', routerPath: 'paymentSuccess' },
-                        { icon: 'icon-dingdan', text: '我的订单', routerPath: 'orderInfo' },
+        { icon: 'icon-jifen1', text: '我的积分', routerPath: 'myPoints' },
+        { icon: 'icon-jifen1', text: '积分明细', routerPath: 'pointsDetail' },
+        { icon: 'icon-renzheng', text: '支付成功', routerPath: 'paymentSuccess' },
+        { icon: 'icon-fenxiang', text: '我的订单', routerPath: 'orderInfo' },
         { icon: 'icon-hetong', text: '我的票券', routerPath: 'myTicketList' },
         { icon: 'icon-jiangbei1', text: '赛事活动', routerPath: 'eventList' },
         { icon: 'icon-jiangbei1', text: '赛事榜单', routerPath: 'eventRanking' },

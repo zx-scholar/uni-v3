@@ -1,17 +1,20 @@
 /* =========================================================================
-   页面模板样式 (pagesBasic/index.scss)
+   页面样板 (pagesBasic/index.scss)
    =========================================================================
-   - 颜色变量保留（方便主题切换）
-   - 尺寸变量已全部替换为 px 值（不再依赖 $size-*）
+   配套 pagesBasic/index.vue —— 给 AI 看的"工具类使用样板"。
+
+   ★ 原则 ★
+     - 颜色：永远用 $color-* 变量，不写 #xxxxxx
+     - 尺寸：utility class 优先（mt-16 / p-24 / radius-16 ...）
+     - <style> 只写：① @use 变量引入；② utility 难表达的复杂样式
+
+   下方按区块组织，每个自定义类都有简短注释说明用途。
    ========================================================================= */
 
 @use '@/styles/variables.scss' as *;
 
-// 背景图变量（局部覆盖全局 $img-page-bg，用 $img-base 拼接，不写完整 URL）
-$img-page-bg: '#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png';
-
 /* ============================================================
-   page-container
+   页面骨架（不要改，与模板一一对应）
    ============================================================ */
 .page-container {
   display: flex;
@@ -21,16 +24,13 @@ $img-page-bg: '#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png';
   overflow: hidden;
   position: relative;
 
-  /* 页面背景图（按需启用） */
   &.page-has-bg {
-    background-color: $color-bg-page;
-    background-image: url($img-page-bg);
+    background-image: url('#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png');
     background-size: contain;
     background-position: center top;
     background-repeat: no-repeat;
   }
 
-  /* ---- 中间可滚动内容区 ---- */
   .page-scroll-content {
     flex: 1;
     overflow-y: auto;
@@ -41,36 +41,97 @@ $img-page-bg: '#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png';
       display: flex;
       flex-direction: column;
       min-height: 100%;
-      padding-bottom: calc(32px + constant(safe-area-inset-bottom, 0px));
       padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
     }
   }
 
-  /* ---- 底部固定按钮栏（含 iPhone 安全区） ---- */
   .page-bottom-bar {
     flex-shrink: 0;
     background-color: $color-bottom-bar-bg;
     padding: 32px 24px;
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
-    padding-bottom: calc(32px + constant(safe-area-inset-bottom, 0px));
     padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  }
+}
 
-    .btn-primary {
-      width: 100%;
-      height: 90px;
-      line-height: 90px;
-      font-size: 28px;
-      font-weight: 600;
-      color: $color-text-white;
-      background: $color-gradient-btn;
-      border: none;
-      border-radius: 999px;
-      box-shadow: $color-shadow-lg;
-      text-align: center;
+/* ============================================================
+   通用按钮 —— 从 .page-bottom-bar 抽出来，页面内任意位置可用
+   ============================================================ */
+.btn-primary {
+  width: 100%;
+  height: 88px;
+  line-height: 88px;
+  background: $color-gradient-btn;
+  color: $color-text-white;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 999px;
+  box-shadow: $color-shadow-lg;
 
-      &:active {
-        opacity: 0.9;
-      }
-    }
+  &:active { opacity: 0.9; }
+}
+
+.btn-secondary {
+  height: 88px;
+  line-height: 88px;
+  background: $color-bg-card;
+  color: $color-primary;
+  font-size: 28px;
+  text-align: center;
+  border: 1px solid $color-primary;
+  border-radius: 999px;
+
+  &:active { opacity: 0.7; }
+}
+
+/* ============================================================
+   头像（特殊固定尺寸，utility 没有）
+   ============================================================ */
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: $color-bg-page;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   分隔线
+   ============================================================ */
+.list-divider {
+  height: 1px;
+  background: $color-border;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 48px;
+  background: $color-border;
+}
+
+/* ============================================================
+   表单行（带底分割线）
+   ============================================================ */
+.form-row {
+  height: 96px;
+}
+
+/* ============================================================
+   标签（多状态，utility 难表达）
+   ============================================================ */
+.tag {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 24px;
+  background: $color-bg-page;
+  color: $color-text-secondary;
+
+  &--active {
+    background: $color-primary-light;
+    color: $color-primary;
+    font-weight: 600;
   }
 }

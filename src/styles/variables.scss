@@ -11,42 +11,56 @@
 // --- 1. 品牌与主题颜色（主色 #167A4A，渐变 / 阴影均由此派生） ---
 $color-primary: #167A4A; // 品牌主色
 $color-primary-light: #e1f5eb; // 主色浅色背景
+$color-primary-dark: #0d4a2d; // 主色深色（按钮按压 / 渐变末端）
 $color-danger: #ef4444; // 危险/警告色 (红)
 $color-price: #C98B32; // 金额/价格色 (金棕)
 
-// --- 2. 文字颜色规范 ---
+// --- 2. 语义色（业务状态色，独立于品牌色） ---
+$color-success: #22c55e; // 成功（绿）
+$color-warning: #f59e0b; // 警告（橙）
+$color-info: #3b82f6; // 信息（蓝）
+
+// --- 3. 文字颜色规范 ---
 $color-text-primary: #1c1f1e; // 标题 / 正文主色
 $color-text-secondary: #6b7370; // 次级正文 / 次要信息
 $color-text-sub: #9aa3a0; // 描述 / 辅助说明
+$color-text-disabled: #cbd5e1; // 禁用 / 不可点击文字
 $color-text-white: #ffffff; // 白色文字
+$color-text-black: #000000; // 纯黑文字（顶部导航默认色）
 
-// --- 3. 背景色规范 ---
+// --- 4. 背景色规范 ---
 $color-bg-page: #f5f6fa; // 页面整体背景色
+$color-bg-page-light: #f8f9fa; // 页面背景淡变体（部分区块）
 $color-bg-card: #ffffff; // 卡片背景色
+$color-bg-hover: #f8fafc; // 元素 hover 态
+$color-bg-disabled: #f1f5f9; // 禁用态背景
+$color-bg-mask: rgba(0, 0, 0, 0.5); // 弹窗蒙层
 
-// --- 4. 边框色规范 ---
+// --- 5. 边框色规范 ---
 $color-border: #e2e8f0; // 默认边框线 (utility/border.scss 在用)
+$color-border-light: #f1f5f9; // 极淡边框（卡片内分隔线）
+$color-border-primary: $color-primary; // 主色边框（强调边框 / 按钮描边）
 
-// --- 5. 渐变色配置（均基于品牌主色 #167A4A） ---
+// --- 6. 渐变色配置（均基于品牌主色 #167A4A） ---
 $color-gradient-btn: linear-gradient(135deg, #1b8a54 0%, #0d4a2d 100%);
 $color-gradient-btn-blue: linear-gradient(90deg, #1186ff 0%, #4ecbfd 100%);
 
-// --- 6. 阴影规范 ---
+// --- 7. 阴影规范 ---
 $color-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
 $color-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
 $color-shadow-lg: 0 6px 24px rgba(22, 122, 74, 0.15);
 
-// --- 7. 底部固定按钮栏规范 ---
+// --- 8. 底部固定按钮栏规范 ---
 $color-bottom-bar-bg: #ffffff;
 
-// --- 8. 图片 OSS 基础路径（生产域） ---
+// --- 9. 图片 OSS 基础路径（生产域） ---
 $img-base: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd';
 
-// --- 9. Tabbar 图标 ---
+// --- 10. Tabbar 图标 ---
 $img-tabbar-icon: '#{$img-base}/gameImage774424d8cd4a444e9a3107d97b014a1d.png';
 $img-tabbar-icon-mine: '#{$img-base}/gameImage4a1a8e056f654c04966f57eb8d65a3b1.png';
 
-// --- 10. 页面默认背景图 ---
+// --- 11. 页面默认背景图 ---
 $img-page-bg: '#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png';
-// --- 11. 卡片背景图（空状态默认图） ---
+// --- 12. 卡片背景图（空状态默认图） ---
 $img-card-bg: '#{$img-base}/gameImagef2456b5285d9448da357d27c1d103d7a.png';

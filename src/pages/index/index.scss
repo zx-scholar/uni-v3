@@ -1,5 +1,7 @@
 .container {
   padding: 30px;
+  // 底部留出 CustomTabBar 高度空间，避免内容被遮挡
+  padding-bottom: 140px;
 }
 
 .header-card {
