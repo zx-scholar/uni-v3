@@ -17,8 +17,10 @@
     "dev:mp-weixin:qdgx": "uni -p mp-weixin --mode qdgx",
     "dev:mp-weixin:hangzhou": "uni -p mp-weixin --mode hangzhou",
     "dev:mp-weixin:sportsdev": "uni -p mp-weixin --mode sportsdev",
+    "dev:mp-weixin:tangfang": "uni -p mp-weixin --mode tangfang",
     "dev:h5:qdgx": "uni --mode qdgx",
     "dev:h5:hangzhou": "uni --mode hangzhou",
+    "dev:h5:tangfang": "uni --mode tangfang",
     "dev:mp-xhs": "uni -p mp-xhs",
     "dev:quickapp-webview": "uni -p quickapp-webview",
     "dev:quickapp-webview-huawei": "uni -p quickapp-webview-huawei",
@@ -38,6 +40,7 @@
     "build:mp-weixin:qdgx": "uni build -p mp-weixin --mode qdgx",
     "build:mp-weixin:hangzhou": "uni build -p mp-weixin --mode hangzhou",
     "build:mp-weixin:sportsdev": "uni build -p mp-weixin --mode sportsdev",
+    "build:mp-weixin:tangfang": "uni build -p mp-weixin --mode tangfang",
     "build:mp-xhs": "uni build -p mp-xhs",
     "build:quickapp-webview": "uni build -p quickapp-webview",
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
@@ -67,7 +70,7 @@
     "vue-i18n": "^9.1.9"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.4.8",
+    "@dcloudio/types": "^3.4.32",
     "@dcloudio/uni-automator": "3.0.0-5010520260709002",
     "@dcloudio/uni-cli-shared": "3.0.0-5010520260709002",
     "@dcloudio/uni-stacktracey": "3.0.0-5010520260709002",
@@ -76,7 +79,9 @@
     "prettier": "^3.9.6",
     "rollup": "4.14.3",
     "sass": "^1.101.7",
-    "vite": "5.2.8"
+    "typescript": "^7.0.2",
+    "vite": "5.2.8",
+    "vue-tsc": "^3.3.11"
   },
   "volta": {
     "node": "22.23.3"

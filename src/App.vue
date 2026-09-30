@@ -7,8 +7,8 @@ export default {
     initialize();
     // 使用自定义 TabBar 后，兜底隐藏原生 TabBar（避免双层显示）
     // #ifdef MP-WEIXIN
-    uni.hideTabBar({ animation: false });
     // #endif
+    uni.hideTabBar({ animation: false });
   },
   onShow: function () {
     console.log('App Show');
@@ -35,7 +35,7 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #2c3e50;
   font-size: 28rpx;
-  line-height: 1.5;
+  line-height: 1;
   box-sizing: border-box;
 }
 

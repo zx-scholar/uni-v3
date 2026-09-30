@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import type { MiniAppInfo } from '@/types'
+import { env } from '@/config/appConfig'
 
 /**
  * 应用全局基础信息 Store
@@ -7,18 +9,21 @@ import { ref, computed } from 'vue'
 export const useAppStore = defineStore(
   'app',
   () => {
-    // 状态定义
-    const miniAppInfo = ref({})
-    const isLoaded = ref(false)
+    // 1. 挂载不可变的环境配置单例 (供 Vue 页面/模板响应式读取)
+    const envConfig = env
 
-    // 计算属性 Getters
+    // 2. 状态定义
+    const miniAppInfo = ref<MiniAppInfo>({})
+    const isLoaded = ref<boolean>(false)
+
+    // 3. 计算属性 Getters
     const centerId = computed(() => miniAppInfo.value.centerId || '')
-    const appName = computed(() => miniAppInfo.value.name || '')
+    const appName = computed(() => miniAppInfo.value.name || envConfig.title || '')
     const logo = computed(() => miniAppInfo.value.logo || '')
     const theme = computed(() => miniAppInfo.value.theme || 'primary-blue')
 
-    // 动作 Actions
-    function setMiniAppInfo(info = {}) {
+    // 4. 动作 Actions
+    function setMiniAppInfo(info: MiniAppInfo = {}) {
       miniAppInfo.value = info
       isLoaded.value = true
     }
@@ -29,6 +34,7 @@ export const useAppStore = defineStore(
     }
 
     return {
+      envConfig,
       miniAppInfo,
       isLoaded,
       centerId,
@@ -40,9 +46,9 @@ export const useAppStore = defineStore(
     }
   },
   {
-    // 启用自动持久化存储（借助 main.js 配置的 uni-storage 适配器）
     persist: {
-      key: 'app-store-state'
+      key: 'app-store-state',
+      paths: ['miniAppInfo', 'isLoaded']
     }
   }
 )

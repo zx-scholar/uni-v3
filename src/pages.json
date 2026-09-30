@@ -19,182 +19,12 @@
       }
     },
     {
-      "path": "pages/profile/profile",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/template/template",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/uploadImage/uploadImage",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
       "path": "pages/event/event",
       "style": {
         "navigationStyle": "custom"
       }
     }
   ],
-  "subPackages": [
-    {
-      "root": "pages-golf",
-      "name": "pages-golf",
-      "pages": [
-        {
-          "path": "demo/demo",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "browsingHistory/browsingHistory",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "eventsPlan/eventsPlan",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "ballBitSquareGolf/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "ballBitDetail/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "ballBitEvaluateGolf/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "ballBitMyList/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "myPoints/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "paymentSuccess/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "orderInfoGolf/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "orderDetailGolf/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "myTicketList/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "myTicketDetail/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "eventList/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "eventRanking/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "playerHome/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "pointsDetail/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "eventProject/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        }
-      ]
-    },
-    {
-      "root": "pages-common",
-      "name": "pages-common",
-      "pages": [
-        {
-          "path": "personInfo/personInfo",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "userAgreement/userAgreement",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "insuranceService/insuranceService",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "pagesBasic/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        }
-      ]
-    }
-  ],
-  "preloadRule": {
-    "pages/index/index": {
-      "network": "all",
-      "packages": ["pages-golf"]
-    }
-  },
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
@@ -221,5 +51,249 @@
         "text": "我的"
       }
     ]
+  },
+  "subPackages": [
+    {
+      "root": "pages-common",
+      "name": "pages-common",
+      "pages": [
+        {
+          "path": "personInfo/personInfo",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "userAgreement/userAgreement",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "insuranceService/insuranceService",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "profile/profile",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "uploadImage/uploadImage",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-event",
+      "name": "pages-event",
+      "pages": [
+        {
+          "path": "eventList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "eventProject/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "eventRanking/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "eventsPlan/eventsPlan",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-golf",
+      "name": "pages-golf",
+      "pages": [
+        {
+          "path": "browsingHistory/browsingHistory",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "playerHome/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-pay",
+      "name": "pages-pay",
+      "pages": [
+        {
+          "path": "orderDetailGolf/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "orderInfoGolf/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "paymentSuccess/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-point",
+      "name": "pages-point",
+      "pages": [
+        {
+          "path": "myPoints/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "pointsDetail/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-template",
+      "name": "pages-template",
+      "pages": [
+        {
+          "path": "demo/demo",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "pagesBasic/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "template/template",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-venue",
+      "name": "pages-venue",
+      "pages": [
+        {
+          "path": "venueList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-venueball",
+      "name": "pages-venueball",
+      "pages": [
+        {
+          "path": "ballBitDetail/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "ballBitEvaluateGolf/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "ballBitMyList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "ballBitSquareGolf/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-venuecard",
+      "name": "pages-venuecard",
+      "pages": [
+        {
+          "path": "cardList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-venuecourse",
+      "name": "pages-venuecourse",
+      "pages": [
+        {
+          "path": "courseList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages-venueticket",
+      "name": "pages-venueticket",
+      "pages": [
+        {
+          "path": "myTicketDetail/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "myTicketList/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "pages-golf"
+      ]
+    }
   }
 }

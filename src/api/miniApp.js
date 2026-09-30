@@ -9,6 +9,8 @@ export const queryMiniAppInfo = (data = {}) => {
     miniAppType: 'wechat',
     appId: wechatParam.appid,
     ...data
+  }, {
+    noCenterId: true,
   })
 }
 

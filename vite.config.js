@@ -1,5 +1,28 @@
 import { defineConfig, loadEnv } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
+import { generatePagesJson } from './scripts/gen-pages.mjs';
+
+/**
+ * 自定义 Vite 插件：与环境 mode 联动的可插拔模块化编译插件
+ * - 自动识别当前环境模式 (qdgx / hangzhou / sportsdev / development / production)
+ * - 动态匹配 src/config/features.config.ts 生成对应环境的 src/pages.json 和 src/utils/routes.ts
+ */
+const pluggablePagesPlugin = (mode) => ({
+  name: 'vite-plugin-pluggable-pages',
+  async buildStart() {
+    await generatePagesJson(mode);
+  },
+  async handleHotUpdate({ file }) {
+    if (
+      file.includes('features.config.ts') ||
+      file.includes('features.config.js') ||
+      file.includes('pages.base.json') ||
+      file.includes('pages.config.mjs')
+    ) {
+      await generatePagesJson(mode);
+    }
+  },
+});
 
 /**
  * 自定义 PostCSS 插件：自动将 CSS 中的 px 单位编译转换为 uni-app 的 rpx 单位
@@ -32,7 +55,10 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
 
   return {
-    plugins: [uni()],
+    plugins: [
+      pluggablePagesPlugin(mode),
+      uni(),
+    ],
     css: {
       postcss: {
         plugins: [
@@ -45,7 +71,7 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       proxy: {
         '/aisports-api': {
-          target: env.VITE_APP_PREFIX || 'https://webtest.wishare.com.cn',
+          target: env.VITE_APP_PREFIX || 'https://web.xports.cn',
           changeOrigin: true,
           secure: false,
         },

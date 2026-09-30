@@ -1,0 +1,329 @@
+@use '@/styles/variables.scss' as *;
+
+// 页面背景图
+$img-page-bg: '#{$img-base}/gameImageb61620d77b734020b644b078a2f58929.png';
+
+/* ============================================================
+   page-container
+   ============================================================ */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-page;
+  overflow: hidden;
+  position: relative;
+
+  /* 页面背景图 */
+  &.page-has-bg {
+    background-color: $color-bg-page;
+    background-image: url($img-page-bg);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  /* ---- 筛选区（固定在滚动区上方） ---- */
+  .event-filter-area {
+    flex-shrink: 0;
+    padding-top: 20px;
+  }
+
+  /* ---- 可滚动卡片列表区 ---- */
+  .page-scroll-content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background-color: #ffffff;
+
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 20px 0 calc(32px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}
+
+/* ============================================================
+   顶部：门店 + 赛事榜单
+   ============================================================ */
+.event-top-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  margin-bottom: 20px;
+
+  &__store {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__store-name {
+    font-size: 30px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 1;
+  }
+
+  &__arrow {
+    margin-left: 8px;
+    font-size: 16px;
+    color: #1c1f1e;
+    line-height: 1;
+  }
+
+  &__rank {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__rank-icon {
+    font-size: 30px;
+    color: #167a4a;
+    line-height: 1;
+  }
+
+  &__rank-text {
+    margin-left: 6px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #1c1f1e;
+    line-height: 1;
+  }
+
+  &__rank-arrow {
+    margin-left: 4px;
+    font-size: 28px;
+    color: #1c1f1e;
+    line-height: 1;
+  }
+}
+
+/* ============================================================
+   搜索区
+   ============================================================ */
+.event-search-wrap {
+  padding: 0 24px;
+  margin-bottom: 24px;
+}
+
+/* ============================================================
+   分类标签
+   ============================================================ */
+.event-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 16px;
+  background-color: #ffffff;
+  border-radius: 32px 32px 0px 0px;
+
+  &__item {
+    flex-shrink: 0;
+    height: 60px;
+    padding: 16px 32px;
+    box-sizing: border-box;
+    font-size: 28px;
+    font-weight: 400;
+    color: #333333;
+    line-height: 1;
+    border-radius: 30px;
+
+    &.is-active {
+      font-weight: 500;
+      color: #167a4a;
+      background-color: #e8f5ee;
+    }
+  }
+}
+
+/* ============================================================
+   筛选行
+   ============================================================ */
+.event-filter {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px 20px;
+  gap: 32px;
+  background-color: #ffffff;
+
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 26px;
+    font-weight: 400;
+    color: #6b7370;
+    line-height: 1;
+  }
+
+  &__arrow {
+    margin-left: 6px;
+    font-size: 12px;
+    color: #6b7370;
+    line-height: 1;
+  }
+
+  // 筛选展开面板（绝对定位浮在内容之上）
+  &__expanded {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    padding: 16px 0;
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  &__option {
+    padding: 16px 24px;
+    font-size: 26px;
+    font-weight: 400;
+    color: #6b7370;
+    line-height: 1;
+
+    &.is-active {
+      color: #167a4a;
+    }
+  }
+}
+
+/* ============================================================
+   赛事卡片列表
+   ============================================================ */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  gap: 24px;
+}
+
+.event-card {
+  background-color: #ffffff;
+  overflow: hidden;
+  border-bottom: 1px solid #979797;
+
+  // 横幅图
+  &__banner {
+    position: relative;
+    width: 702px;
+    height: 234px;
+    border-radius: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  // 报名中徽标
+  &__badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 104px;
+    height: 30px;
+    opacity: 0.45;
+    background-color: #000000;
+    border-radius: 15px;
+  }
+
+  &__badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #42d68a;
+  }
+
+  // 报名中：绿色
+  &__badge--signing .event-card__badge-dot {
+    background-color: #42d68a;
+  }
+
+  // 进行中：橙色
+  &__badge--ongoing .event-card__badge-dot {
+    background-color: #f5a623;
+  }
+
+  // 待开始：蓝色
+  &__badge--upcoming .event-card__badge-dot {
+    background-color: #7fa8d8;
+  }
+
+  // 已结束：蓝色
+  &__badge--ended .event-card__badge-dot {
+    background-color: #7fa8d8;
+  }
+
+  &__badge-text {
+    margin-left: 6px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+  }
+
+  // 卡片正文
+  &__body {
+    padding: 20px 24px 24px;
+  }
+
+  &__title {
+    display: block;
+    font-size: 34px;
+    font-weight: 500;
+    color: #1c1f1e;
+    line-height: 34px;
+  }
+
+  &__meta {
+    margin-top: 16px;
+  }
+
+  &__meta-text {
+    font-size: 24px;
+    font-weight: 400;
+    color: #6b7370;
+    line-height: 24px;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  &__tag {
+    height: 30px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 400;
+    color: #167a4a;
+    border: 1px solid #167a4a;
+    border-radius: 4px;
+    line-height: 1;
+  }
+
+  &__count {
+    font-size: 24px;
+    font-weight: 400;
+    color: #9aa3a0;
+    line-height: 1;
+  }
+}

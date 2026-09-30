@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import type { UserInfo, WechatSession } from '@/types'
 
 /**
  * 用户认证与个人信息 Store（登录/用户数据的唯一数据源）
@@ -12,17 +13,17 @@ export const useUserStore = defineStore(
   'user',
   () => {
     // ========== 持久化状态（登录凭证） ==========
-    const openId = ref('')
-    const unionId = ref('')
-    const accessToken = ref('')
-    const accountId = ref('')
-    const coAppId = ref('')
-    const mobileNum = ref('')
+    const openId = ref<string>('')
+    const unionId = ref<string>('')
+    const accessToken = ref<string>('')
+    const accountId = ref<string>('')
+    const coAppId = ref<string>('')
+    const mobileNum = ref<string>('')
 
     // ========== 非持久化状态（用户详情） ==========
-    const netUserId = ref('')
-    const userInfo = ref({})           // { avatarUrl, nickName, ... }
-    const isProfileReady = ref(false)  // 是否已完成头像昵称设置
+    const netUserId = ref<number | string>('')
+    const userInfo = ref<UserInfo>({})
+    const isProfileReady = ref<boolean>(false)
 
     // ========== Getters ==========
     const loginInfo = computed(() => ({
@@ -39,7 +40,7 @@ export const useUserStore = defineStore(
     // ========== Actions ==========
 
     /** 设置登录凭证（wx.login 换取后调用） */
-    function setWechatSession(session = {}) {
+    function setWechatSession(session: WechatSession = {}) {
       if (session.openId !== undefined) openId.value = session.openId
       if (session.unionId !== undefined) unionId.value = session.unionId
       if (session.accessToken !== undefined) accessToken.value = session.accessToken
@@ -49,7 +50,7 @@ export const useUserStore = defineStore(
     }
 
     /** 设置用户个人信息（头像、昵称等） */
-    function setUserInfo(info = {}) {
+    function setUserInfo(info: UserInfo = {}) {
       userInfo.value = { ...userInfo.value, ...info }
       if (info.avatarUrl && info.nickName) {
         isProfileReady.value = true
@@ -57,7 +58,7 @@ export const useUserStore = defineStore(
     }
 
     /** 登录成功后设置完整用户数据（兼容 initialize 静默登录 + 页面绑定登录） */
-    function setLoginResult(data = {}, phone = '') {
+    function setLoginResult(data: Record<string, any> = {}, phone = '') {
       if (data.openId) openId.value = data.openId
       if (data.unionId) unionId.value = data.unionId
       if (data.accessToken) accessToken.value = data.accessToken
@@ -71,7 +72,7 @@ export const useUserStore = defineStore(
     }
 
     /** 设置后端用户 ID（queryUserinfoByUnionId 返回后调用） */
-    function setNetUserId(id) {
+    function setNetUserId(id: number | string) {
       netUserId.value = id
       userInfo.value = { ...userInfo.value, netUserId: id }
     }
