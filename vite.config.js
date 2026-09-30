@@ -1,10 +1,11 @@
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
 import { generatePagesJson } from './scripts/gen-pages.mjs';
+import { ENV_DICTIONARY } from './src/config/environments';
 
 /**
  * 自定义 Vite 插件：与环境 mode 联动的可插拔模块化编译插件
- * - 自动识别当前环境模式 (qdgx / hangzhou / sportsdev / development / production)
+ * - 自动识别当前环境模式 (--mode qdgx / hangzhou / sportsdev / tangfang 等)
  * - 动态匹配 src/config/features.config.ts 生成对应环境的 src/pages.json 和 src/utils/routes.ts
  */
 const pluggablePagesPlugin = (mode) => ({
@@ -51,8 +52,10 @@ pxToRpxPlugin.postcss = true;
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // 读取当前环境的 .env 文件，用于代理目标等配置
-  const env = loadEnv(mode, process.cwd(), 'VITE_');
+  // 从集中式多环境字典 src/config/environments.ts 读取当前 mode 的代理配置
+  const targetEnv = ENV_DICTIONARY[mode] || ENV_DICTIONARY['development'];
+  const webRoot = targetEnv.webRoot || '/aisports-api';
+  const targetPrefix = targetEnv.prefix || targetEnv.origin || 'https://web.xports.cn';
 
   return {
     plugins: [
@@ -70,8 +73,8 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       port: 5173,
       proxy: {
-        '/aisports-api': {
-          target: env.VITE_APP_PREFIX || 'https://web.xports.cn',
+        [webRoot]: {
+          target: targetPrefix,
           changeOrigin: true,
           secure: false,
         },

@@ -1,6 +1,6 @@
 /**
  * ⚠️ 本文件由 scripts/gen-routes.mjs 根据 src/pages.json 自动编译生成，请勿手动修改！
- * 自动生成时间: 2026/9/30 16:45:05
+ * 自动生成时间: 2026/9/30 16:53:28
  */
 
 export interface RouteItem {
