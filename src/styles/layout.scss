@@ -1,0 +1,95 @@
+@use './variables.scss' as *;
+
+/* =========================================================================
+   全局页面骨架 (layout.scss)
+   =========================================================================
+   每页通用的骨架样式，App.vue 已全局引入，模板直接用类名即可：
+     .page-container      页面根容器（flex column / 100vh / 页面底色）
+     .page-has-bg         默认页面背景图（$img-page-bg，contain 顶部居中）
+     .page-scroll-content 中间可滚动区（scroll-view）
+     .scroll-wrapper      滚动区内容列（含底部安全区留白）
+     .page-bottom-bar     底部固定按钮栏（含 iPhone 安全区）
+     .btn-primary         主按钮（页面内任意位置可用）
+     .btn-secondary       次按钮（页面内任意位置可用）
+
+   ★ 页面 scss 不要复制这些骨架，只写本页特有样式 ★
+
+   自定义页面背景图（默认图无需任何代码），在页面 scss 同名覆盖：
+     .page-container.page-has-bg {
+       background-image: url('#{$img-base}/xxx.png');
+     }
+   ========================================================================= */
+
+/* ============================================================
+   页面骨架
+   ============================================================ */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-page;
+  overflow: hidden;
+  position: relative;
+
+  &.page-has-bg {
+    /* 背景图 url 在 App.vue 顶层规则中设置：
+       uni-app 会把 @use 模块内的绝对 URL 错误拼接成相对路径（styles/https://...） */
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  .page-scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 0 0;
+    box-sizing: border-box;
+
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  .page-bottom-bar {
+    flex-shrink: 0;
+    background-color: $color-bottom-bar-bg;
+    padding: 32px 24px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ============================================================
+   通用按钮（页面内任意位置可用，不嵌在 bottom-bar 里）
+   ============================================================ */
+.btn-primary {
+  width: 100%;
+  height: 88px;
+  line-height: 88px;
+  background: $color-gradient-btn;
+  color: $color-text-white;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 44px; /* 胶囊：高度 88px 的一半 */
+  box-shadow: $color-shadow-lg;
+
+  &:active { opacity: 0.9; }
+}
+
+.btn-secondary {
+  height: 88px;
+  line-height: 88px;
+  background: $color-bg-card;
+  color: $color-primary;
+  font-size: 28px;
+  text-align: center;
+  border: 1px solid $color-primary;
+  border-radius: 44px; /* 胶囊：高度 88px 的一半 */
+
+  &:active { opacity: 0.7; }
+}

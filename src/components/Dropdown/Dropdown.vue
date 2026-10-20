@@ -75,10 +75,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72rpx;
-  padding: 0 24rpx;
+  height: 72px;
+  padding: 0 24px;
   background: #f5f6fa;
-  border-radius: 10rpx;
+  border-radius: 10px;
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
@@ -89,7 +89,7 @@ export default {
 
 .dropdown-text {
   flex: 1;
-  font-size: 30rpx;
+  font-size: 30px;
   color: #1c1f1e;
   white-space: nowrap;
   overflow: hidden;
@@ -102,8 +102,8 @@ export default {
 
 .dropdown-arrow {
   flex-shrink: 0;
-  margin-left: 12rpx;
-  font-size: 24rpx;
+  margin-left: 12px;
+  font-size: 24px;
   color: #999;
   transition: transform 0.2s;
 }
@@ -114,20 +114,20 @@ export default {
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 8rpx);
+  top: calc(100% + 8px);
   left: 0;
   right: 0;
-  max-height: 400rpx;
+  max-height: 400px;
   overflow-y: auto;
   background: #ffffff;
-  border-radius: 10rpx;
-  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   z-index: 1001;
 }
 
 .dropdown-item {
-  padding: 20rpx 24rpx;
-  font-size: 28rpx;
+  padding: 20px 24px;
+  font-size: 28px;
   color: #1c1f1e;
   transition: background 0.15s;
 }

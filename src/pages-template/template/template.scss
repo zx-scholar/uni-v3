@@ -106,7 +106,7 @@
       color: $color-text-white;
       background: $color-gradient-btn;
       border: none;
-      border-radius: 999px;
+      border-radius: 45px; /* 胶囊：高度 90px 的一半 */
       box-shadow: $color-shadow-lg;
       text-align: center;
 

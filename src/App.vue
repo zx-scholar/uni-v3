@@ -23,18 +23,33 @@ export default {
 </script>
 
 <style>
-/* 引入 Iconfont 阿里巴巴字体图标库 */
+/* Iconfont 为纯 CSS，保持原生引入（postcss 直接内联） */
 @import '@/styles/iconfont.css';
+</style>
 
-/* 引入全局工具类（flex、间距、圆角等原子化样式） */
-@import '@/styles/utility.scss';
+<style lang="scss">
+/* 全局工具类与页面骨架必须走 Sass 编译（@forward / 变量才会展开） */
+@use '@/styles/utility.scss';
+@use '@/styles/layout.scss';
+@use '@/styles/variables.scss' as *;
 
-/* 每个页面公共 CSS，原生 CSS + rpx 布局 */
+/* 默认页面背景图：必须直接写在 App.vue 顶层规则——
+   uni-app 会把 @use 模块内的绝对 URL 错误拼接为相对路径（styles/https://...） */
+.page-container.page-has-bg {
+  background-image: url($img-page-bg);
+}
+
+/* 微信小程序 button 自带 ::after 边框，全局去除（项目按钮均为自定义样式） */
+button::after {
+  border: none;
+}
+
+/* 每个页面公共样式，原生 CSS + rpx 布局 */
 page {
   background-color: #f5f6fa;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #2c3e50;
-  font-size: 28rpx;
+  font-size: 28px;
   line-height: 1;
   box-sizing: border-box;
 }

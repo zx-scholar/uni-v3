@@ -1,7 +1,7 @@
 <template>
   <view class="page-container page-has-bg">
     <!-- 顶部导航栏 -->
-    <NavBar title="赛事榜单" color="#1c1f1e" :showBack="true" />
+    <!-- <NavBar title="赛事榜单" color="#1c1f1e" :showBack="true" /> -->
 
     <!-- 顶部分类标签（可横向滚动） -->
     <scroll-view class="ranking-tabs" scroll-x :show-scrollbar="false">

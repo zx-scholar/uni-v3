@@ -82,7 +82,15 @@
               class="event-card__banner"
               :style="{ backgroundImage: `url(${item.banner})` }"
             >
-              <view class="event-card__badge" :class="`event-card__badge--${item.status}`">
+              <view
+                class="event-card__badge"
+                :class="{
+                  'event-card__badge--signing': item.status === 'signing',
+                  'event-card__badge--ongoing': item.status === 'ongoing',
+                  'event-card__badge--upcoming': item.status === 'upcoming',
+                  'event-card__badge--ended': item.status === 'ended',
+                }"
+              >
                 <text class="event-card__badge-dot"></text>
                 <text class="event-card__badge-text">{{ statusMap[item.status] }}</text>
               </view>

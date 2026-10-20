@@ -205,27 +205,27 @@ export default {
 }
 
 .content {
-  padding: 30rpx;
+  padding: 30px;
 }
 
 .tip-card {
   background-color: #eff6ff;
-  border: 2rpx solid #bfdbfe;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  margin-bottom: 30rpx;
+  border: 2px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
 }
 
 .tip-title {
-  font-size: 28rpx;
+  font-size: 28px;
   font-weight: bold;
   color: #1e40af;
   display: block;
-  margin-bottom: 12rpx;
+  margin-bottom: 12px;
 }
 
 .tip-text {
-  font-size: 24rpx;
+  font-size: 24px;
   color: #3b82f6;
   display: block;
   line-height: 1.6;
@@ -233,33 +233,33 @@ export default {
 
 .card {
   background-color: #ffffff;
-  border-radius: 20rpx;
-  padding: 30rpx;
-  margin-bottom: 30rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .card-header {
-  font-size: 30rpx;
+  font-size: 30px;
   font-weight: bold;
   color: #2563eb;
-  padding-bottom: 16rpx;
-  margin-bottom: 20rpx;
-  border-bottom: 2rpx dashed #e2e8f0;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 2px dashed #e2e8f0;
 }
 
 .card-title-sm {
-  font-size: 26rpx;
+  font-size: 26px;
   font-weight: 600;
   color: #475569;
-  margin-top: 24rpx;
-  margin-bottom: 16rpx;
+  margin-top: 24px;
+  margin-bottom: 16px;
 }
 
 .card-desc {
-  font-size: 26rpx;
+  font-size: 26px;
   color: #64748b;
-  margin-bottom: 20rpx;
+  margin-bottom: 20px;
   display: block;
 }
 
@@ -267,8 +267,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16rpx;
-  font-size: 26rpx;
+  margin-bottom: 16px;
+  font-size: 26px;
 }
 
 .label {
@@ -286,15 +286,15 @@ export default {
 
 .btn-group {
   display: flex;
-  gap: 16rpx;
-  margin-top: 24rpx;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .btn {
-  font-size: 26rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  border-radius: 12rpx;
+  font-size: 26px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 12px;
   border: none;
 }
 
@@ -320,13 +320,13 @@ export default {
 .btn-outline {
   background-color: #f8fafc;
   color: #475569;
-  border: 2rpx solid #cbd5e1;
+  border: 2px solid #cbd5e1;
 }
 
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20rpx;
+  gap: 20px;
   text-align: center;
 }
 
@@ -335,19 +335,19 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16rpx 0;
+  padding: 16px 0;
   background-color: #f8fafc;
-  border-radius: 12rpx;
+  border-radius: 12px;
 }
 
 .icon-box .iconfont {
-  font-size: 48rpx;
+  font-size: 48px;
   color: #2563eb;
-  margin-bottom: 8rpx;
+  margin-bottom: 8px;
 }
 
 .icon-name {
-  font-size: 22rpx;
+  font-size: 22px;
   color: #64748b;
 }
 </style>

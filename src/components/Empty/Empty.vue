@@ -78,7 +78,7 @@ export default {
     color: $color-text-white;
     background: $color-gradient-btn;
     border: none;
-    border-radius: 999px;
+    border-radius: 32px; /* 胶囊：高度 64px 的一半 */
 
     &::after {
       border: none;

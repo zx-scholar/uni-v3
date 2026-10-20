@@ -44,7 +44,7 @@ export default {
   margin: 0 auto;
   padding: 0 24px;
   background-color: #ffffff;
-  border-radius: 999px;
+  border-radius: 36px; /* 胶囊：高度 72px 的一半 */
   box-sizing: border-box;
 
   &__icon {

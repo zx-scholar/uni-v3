@@ -134,13 +134,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 24rpx;
+    padding: 0 24px;
     box-sizing: border-box;
 }
 
 .nav-left {
     position: absolute;
-    left: 24rpx;
+    left: 24px;
     display: flex;
     align-items: center;
     height: 100%;
@@ -148,7 +148,7 @@ export default {
 }
 
 .back-text {
-    font-size: 28rpx;
+    font-size: 28px;
 }
 
 .nav-center {
@@ -156,7 +156,7 @@ export default {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 0 80rpx;
+    padding: 0 80px;
 }
 
 .nav-title {

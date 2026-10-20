@@ -1,98 +1,35 @@
+@use '@/styles/variables.scss' as *;
+
 /* =========================================================================
    页面样板 (pagesBasic/index.scss)
    =========================================================================
    配套 pagesBasic/index.vue —— 给 AI 看的"工具类使用样板"。
 
    ★ 原则 ★
+     - 页面骨架已全局化到 src/styles/layout.scss（App.vue 自动引入）：
+       page-container / page-has-bg / page-scroll-content / scroll-wrapper /
+       page-bottom-bar / btn-primary / btn-secondary
+       **页面 scss 不要再复制骨架，只写本页特有样式**
      - 颜色：永远用 $color-* 变量，不写 #xxxxxx
-     - 尺寸：utility class 优先（mt-16 / p-24 / radius-16 ...）
-     - <style> 只写：① @use 变量引入；② utility 难表达的复杂样式
+     - 尺寸：utility class 优先（mt-16 / p-24 / w-80 / radius-full ...）
+     - 本文件只写 utility 难表达的复杂样式（固定尺寸、分割线、多状态标签）
+
+   ★ 自定义页面背景图 ★
+     默认背景图（$img-page-bg）由骨架直接提供，页面无需任何代码；
+     需要换图时在本文件同名覆盖：
+       .page-container.page-has-bg {
+         background-image: url('#{$img-base}/xxx.png');
+       }
 
    下方按区块组织，每个自定义类都有简短注释说明用途。
    ========================================================================= */
 
-@use '@/styles/variables.scss' as *;
-
 /* ============================================================
-   页面骨架（不要改，与模板一一对应）
-   ============================================================ */
-.page-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: $color-bg-page;
-  overflow: hidden;
-  position: relative;
-
-  &.page-has-bg {
-    background-image: url('#{$img-base}/gameImage4d0058a629444bf593da57b474d20d78.png');
-    background-size: contain;
-    background-position: center top;
-    background-repeat: no-repeat;
-  }
-
-  .page-scroll-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px 0 0;
-    box-sizing: border-box;
-
-    .scroll-wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-      padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
-    }
-  }
-
-  .page-bottom-bar {
-    flex-shrink: 0;
-    background-color: $color-bottom-bar-bg;
-    padding: 32px 24px;
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
-    padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* ============================================================
-   通用按钮 —— 从 .page-bottom-bar 抽出来，页面内任意位置可用
-   ============================================================ */
-.btn-primary {
-  width: 100%;
-  height: 88px;
-  line-height: 88px;
-  background: $color-gradient-btn;
-  color: $color-text-white;
-  font-size: 28px;
-  font-weight: 600;
-  text-align: center;
-  border: none;
-  border-radius: 999px;
-  box-shadow: $color-shadow-lg;
-
-  &:active { opacity: 0.9; }
-}
-
-.btn-secondary {
-  height: 88px;
-  line-height: 88px;
-  background: $color-bg-card;
-  color: $color-primary;
-  font-size: 28px;
-  text-align: center;
-  border: 1px solid $color-primary;
-  border-radius: 999px;
-
-  &:active { opacity: 0.7; }
-}
-
-/* ============================================================
-   头像（特殊固定尺寸，utility 没有）
+   头像（固定 96px 尺寸不在 utility 档位内；圆形交给模板的 radius-full）
    ============================================================ */
 .avatar {
   width: 96px;
   height: 96px;
-  border-radius: 50%;
   background: $color-bg-page;
   flex-shrink: 0;
 }
@@ -112,7 +49,7 @@
 }
 
 /* ============================================================
-   表单行（带底分割线）
+   表单行（定高行，label 宽度用 utility w-80）
    ============================================================ */
 .form-row {
   height: 96px;
@@ -124,7 +61,7 @@
 .tag {
   display: inline-block;
   padding: 8px 20px;
-  border-radius: 999px;
+  border-radius: 999px; /* 高度随内容变化，用超大值保证胶囊 */
   font-size: 24px;
   background: $color-bg-page;
   color: $color-text-secondary;

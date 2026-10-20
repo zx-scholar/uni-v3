@@ -139,7 +139,7 @@ export default {
     height: 72px;
     line-height: 72px;
     text-align: center;
-    border-radius: 999px;
+    border-radius: 36px; /* 胶囊：高度 72px 的一半 */
     box-sizing: border-box;
 
     /* 按钮通用交互态 */

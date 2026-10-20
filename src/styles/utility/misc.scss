@@ -35,6 +35,25 @@
 .h-auto { height: auto; }
 .h-screen { height: 100vh; }
 
+/* 定宽 / 定高 (常用档位，px → 自动转 rpx) */
+.w-40 { width: 40px; }
+.w-60 { width: 60px; }
+.w-80 { width: 80px; }
+.w-100 { width: 100px; }
+.w-120 { width: 120px; }
+.w-140 { width: 140px; }
+.w-160 { width: 160px; }
+.w-200 { width: 200px; }
+
+.h-40 { height: 40px; }
+.h-60 { height: 60px; }
+.h-80 { height: 80px; }
+.h-100 { height: 100px; }
+.h-120 { height: 120px; }
+.h-140 { height: 140px; }
+.h-160 { height: 160px; }
+.h-200 { height: 200px; }
+
 /* 溢出 / 滚动 */
 .overflow-hidden { overflow: hidden; }
 .overflow-auto { overflow: auto; }

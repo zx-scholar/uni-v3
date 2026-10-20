@@ -97,7 +97,7 @@ export default {
     line-height: 72px;
     text-align: center;
     background: $color-gradient-btn;
-    border-radius: 999px;
+    border-radius: 36px; /* 胶囊：高度 72px 的一半 */
 
     &:active {
       opacity: 0.9;

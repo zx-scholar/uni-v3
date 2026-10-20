@@ -5,7 +5,7 @@
 
 .profile-section,
 .login-section {
-  padding: 72rpx 48rpx 48rpx;
+  padding: 72px 48px 48px;
 }
 
 .profile-section {
@@ -13,9 +13,9 @@
 }
 
 .authorize-image {
-    width: 260rpx;
-  height: 260rpx;
-  margin: 72rpx auto 36rpx;
+    width: 260px;
+  height: 260px;
+  margin: 72px auto 36px;
 }
 
 .profile-title,
@@ -27,26 +27,26 @@
 
 .profile-title {
   color: #111827;
-  font-size: 34rpx;
+  font-size: 34px;
   font-weight: 600;
 }
 
 .profile-desc {
-  margin-top: 12rpx;
+  margin-top: 12px;
   color: #6b7280;
-  font-size: 26rpx;
+  font-size: 26px;
 }
 
 .avatar-picker {
   display: flex;
-  width: 160rpx;
-  height: 160rpx;
-  margin: 48rpx auto;
+  width: 160px;
+  height: 160px;
+  margin: 48px auto;
   padding: 0;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1rpx solid #e5e7eb;
+  border: 1px solid #e5e7eb;
   border-radius: 50%;
   background: #f9fafb;
 }
@@ -72,51 +72,51 @@
 
 .avatar-placeholder {
   color: #6b7280;
-  font-size: 24rpx;
+  font-size: 24px;
 }
 
 .nickname-field,
 .form-field {
   display: flex;
-  min-height: 104rpx;
+  min-height: 104px;
   align-items: center;
-  border-bottom: 1rpx solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
   text-align: left;
 }
 
 .field-label {
-  width: 150rpx;
-  flex: 0 0 150rpx;
+  width: 150px;
+  flex: 0 0 150px;
   color: #374151;
-  font-size: 28rpx;
+  font-size: 28px;
 }
 
 .field-input {
   min-width: 0;
-  height: 88rpx;
+  height: 88px;
   flex: 1;
   color: #111827;
-  font-size: 30rpx;
+  font-size: 30px;
 }
 
 .brand {
   display: flex;
-  margin: 72rpx 0 96rpx;
+  margin: 72px 0 96px;
   flex-direction: column;
   align-items: center;
 }
 
 .brand-logo {
-  width: 180rpx;
-  height: 180rpx;
-  border: 1rpx solid #e5e7eb;
+  width: 180px;
+  height: 180px;
+  border: 1px solid #e5e7eb;
   border-radius: 50%;
 }
 
 .brand-name {
-  margin-top: 28rpx;
+  margin-top: 28px;
   color: #111827;
-  font-size: 36rpx;
+  font-size: 36px;
   font-weight: 600;
 }
 
@@ -124,11 +124,11 @@
 .secondary-button,
 .wechat-button {
   width: 100%;
-  height: 92rpx;
-  margin-top: 32rpx;
-  border-radius: 8rpx;
-  font-size: 30rpx;
-  line-height: 92rpx;
+  height: 92px;
+  margin-top: 32px;
+  border-radius: 8px;
+  font-size: 30px;
+  line-height: 92px;
 }
 
 .primary-button,
@@ -138,15 +138,15 @@
 }
 
 .secondary-button {
-  border: 1rpx solid #d1d5db;
+  border: 1px solid #d1d5db;
   background: #ffffff;
   color: #374151;
 }
 
 .login-hint {
-  margin-top: 28rpx;
+  margin-top: 28px;
   color: #9ca3af;
-  font-size: 24rpx;
+  font-size: 24px;
   text-align: center;
 }
 
@@ -162,16 +162,16 @@
 }
 
 .code-button {
-  width: 190rpx;
-  height: 64rpx;
+  width: 190px;
+  height: 64px;
   margin: 0;
-  padding: 0 16rpx;
-  border: 1rpx solid #16a34a;
-  border-radius: 6rpx;
+  padding: 0 16px;
+  border: 1px solid #16a34a;
+  border-radius: 6px;
   background: #ffffff;
   color: #15803d;
-  font-size: 24rpx;
-  line-height: 62rpx;
+  font-size: 24px;
+  line-height: 62px;
 }
 
 .code-button[disabled] {
@@ -180,8 +180,8 @@
 }
 
 .text-button {
-  margin-top: 24rpx;
+  margin-top: 24px;
   background: transparent;
   color: #4b5563;
-  font-size: 26rpx;
+  font-size: 26px;
 }
