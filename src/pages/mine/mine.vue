@@ -2,35 +2,43 @@
   <view class="page-container">
     <NavBar title="个人中心" :showBack="false" />
 
-    <view class="content">
-      <!-- 用户基础信息卡片 -->
-      <view class="user-card" :class="{ 'login-entry': !userStore.isLoggedIn }" @click="handleUserCardClick">
-        <image class="avatar" :src="userAvatar" mode="aspectFill"></image>
-        <view class="user-info">
-          <text class="user-name">{{ userName }}</text>
-          <text class="user-id">{{ userDescription }}</text>
-        </view>
-        <text v-if="!userStore.isLoggedIn" class="login-arrow">›</text>
-      </view>
+    <scroll-view class="page-scroll-content scrollbar-hide" scroll-y>
+      <view class="scroll-wrapper mine-wrapper px-30 pt-10">
 
-      <!-- 按功能分类展示的路由菜单组 -->
-      <view v-for="(group, gIndex) in computedCategories" :key="gIndex" class="menu-group">
-        <view class="group-header">
-          <text class="group-title">{{ group.title }}</text>
+        <!-- 用户基础信息卡片 -->
+        <view
+          class="user-card bg-gradient-btn flex items-center px-30 py-40 mb-30 radius-20 shadow-2 tappable"
+          :class="{ 'login-entry': !userStore.isLoggedIn }"
+          @click="handleUserCardClick"
+        >
+          <image class="w-120 h-120 radius-full flex-shrink-0 bg-card mr-24" :src="userAvatar" mode="aspectFill" />
+          <view class="flex-1 flex-column overflow-hidden">
+            <text class="fz-34 fw-7 c-t-white text-1line">{{ userName }}</text>
+            <text class="fz-24 c-t-white opacity-75 mt-8 text-1line">{{ userDescription }}</text>
+          </view>
+          <text v-if="!userStore.isLoggedIn" class="user-card__arrow c-t-white lh-1 ml-16">›</text>
         </view>
-        <view class="menu-list">
-          <view
-            v-for="(item, index) in group.items"
-            :key="index"
-            class="menu-item"
-            @click="handleMenuItemClick(item)"
-          >
-            <text class="menu-item__icon iconfont" :class="item.icon"></text>
-            <text class="menu-item__title">{{ item.text }}</text>
+
+        <!-- 按功能分类展示的路由菜单组 -->
+        <view v-for="(group, gIndex) in computedCategories" :key="gIndex" class="mb-30">
+          <view class="px-8 pb-16">
+            <text class="fz-28 fw-6 c-t-primary">{{ group.title }}</text>
+          </view>
+          <view class="menu-list bg-card radius-20 py-24 px-16 flex flex-wrap">
+            <view
+              v-for="(item, index) in group.items"
+              :key="index"
+              class="menu-item flex-column items-center py-16 tappable"
+              @click="handleMenuItemClick(item)"
+            >
+              <text class="menu-item__icon iconfont c-primary lh-1 w-80 h-80 center" :class="item.icon"></text>
+              <text class="menu-item__title fz-24 lh-1-2 text-center c-t-primary mt-10">{{ item.text }}</text>
+            </view>
           </view>
         </view>
+
       </view>
-    </view>
+    </scroll-view>
 
     <!-- 分享弹窗 -->
     <ShareDialog :visible="shareVisible" @close="shareVisible = false" />

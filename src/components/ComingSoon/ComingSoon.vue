@@ -12,8 +12,10 @@
 </template>
 
 <script>
+import { env } from '@/config/appConfig';
+
 // OSS 基础地址前缀（与 variables.scss 中 $img-base 保持一致）
-const OSS_PREFIX = 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
+const OSS_PREFIX = env.ossPrefix;
 
 // 默认敬请期待图片（对应 variables.scss 中 $img-card-bg）
 const DEFAULT_IMAGE = `${OSS_PREFIX}gameImage0a0d1b36b4274705b37b90d303862704.png`;

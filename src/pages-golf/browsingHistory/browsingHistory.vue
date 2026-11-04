@@ -44,12 +44,14 @@
 </template>
 
 <script>
+import { env } from '@/config/appConfig';
+
 const featuredVideo = {
   title: '首轮精彩集锦｜巅峰对决燃爆全场',
   duration: '2:34',
   views: 1234,
   likes: 1234,
-  cover: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/temp/aa179011ebe34bbaac2ef68b8034fe27.png'
+  cover: `${env.ossPrefix}center/10000000/temp/aa179011ebe34bbaac2ef68b8034fe27.png`
 }
 
 export default {
@@ -70,7 +72,7 @@ export default {
               duration: '2:34',
               views: 1234,
               likes: 1234,
-              cover: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/temp/aa179011ebe34bbaac2ef68b8034fe27.png'
+              cover: `${env.ossPrefix}center/10000000/temp/aa179011ebe34bbaac2ef68b8034fe27.png`
             }
           ]
         },

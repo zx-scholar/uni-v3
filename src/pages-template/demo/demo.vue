@@ -99,6 +99,7 @@
 <script>
 import { queryMiniAppInfo } from '@/api'
 import { useAppStore } from '@/stores/app'
+import { env } from '@/config/appConfig'
 
 export default {
   name: 'DemoPage',
@@ -176,7 +177,7 @@ export default {
           id: 49,
           name: '伏见桃山演示馆',
           centerId: 10000000,
-          logo: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/images/40fd9ec75b351c5a.jpg'
+          logo: `${env.ossPrefix}center/10000000/images/40fd9ec75b351c5a.jpg`
         })
         uni.showToast({ title: '模拟数据已同步到 Pinia', icon: 'none' })
       } finally {

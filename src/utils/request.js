@@ -45,7 +45,7 @@ function handleUnauthorized(message = '') {
 }
 
 // 基础配置：H5 端本地开发走 Vite 代理，小程序/App 端走全路径域名
-let defaultBaseUrl = wechatParam.prefix + (wechatParam.webRoot || '')
+let defaultBaseUrl = wechatParam.origin + (wechatParam.webRoot || '')
 // #ifdef H5
 defaultBaseUrl = wechatParam.webRoot || ''
 // #endif
@@ -61,19 +61,7 @@ const config = {
 /**
  * 获取完整服务器请求地址
  */
-function getServerAddress(url, requestOps = {}) {
-  const { apiName, specPrefix } = requestOps
-  if (apiName) {
-    let prefix = wechatParam[`${apiName}Prefix`] || ''
-    // #ifdef H5
-    prefix = ''
-    // #endif
-    const webRoot = wechatParam[`${apiName}WebRoot`] || ''
-    return prefix + webRoot + url
-  }
-  if (specPrefix) {
-    return wechatParam['specPrefix'] + (wechatParam.webRoot || '') + url
-  }
+function getServerAddress(url) {
   if (url.startsWith('http://') || url.startsWith('https://')) {
     return url
   }
@@ -83,10 +71,7 @@ function getServerAddress(url, requestOps = {}) {
 /**
  * 获取相对路径（用于签名计算）
  */
-function getRelativeAddress(url, apiName = '') {
-  if (apiName) {
-    return (wechatParam[`${apiName}WebRoot`] || '') + url
-  }
+function getRelativeAddress(url) {
   return (wechatParam.webRoot || '') + url
 }
 
@@ -94,16 +79,16 @@ function getRelativeAddress(url, apiName = '') {
  * 请求拦截器：对参数进行 MD5 签名加密
  */
 const requestInterceptor = (options) => {
-  const { url, data = {}, apiName, method = 'GET' } = options
+  const { url, data = {}, method = 'GET' } = options
 
   // 计算拼接后的请求地址
-  options.url = getServerAddress(url, options)
+  options.url = getServerAddress(url)
 
   // 对请求数据计算签名（获取相对路径参与加密算法）
-  const relativeUrl = getRelativeAddress(url, apiName)
-  
+  const relativeUrl = getRelativeAddress(url)
+
   // 核心签名注入
-  options.data = getCodedParam(relativeUrl, data, apiName, options)
+  options.data = getCodedParam(relativeUrl, data, options)
 
   // Header 补全
   options.header = Object.assign({}, config.header, options.header)

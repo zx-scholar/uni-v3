@@ -13,12 +13,7 @@
       <!-- 图标区：根据配置渲染 image / iconfont / 文本 三种模式 -->
       <view class="custom-tabbar__icon">
         <!-- 模式 1：image（支持选中态切换） -->
-        <image
-          v-if="item.image || item.imageActive"
-          class="custom-tabbar__image"
-          :src="currentIndex === index ? (item.imageActive || item.image) : item.image"
-          mode="aspectFit"
-        />
+        <image v-if="item.image || item.imageActive" class="custom-tabbar__image" :src="currentIndex === index ? item.imageActive || item.image : item.image" mode="aspectFit" />
         <!-- 模式 2：iconfont（class 切换实现选中态） -->
         <text
           v-else-if="item.iconfont"

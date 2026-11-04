@@ -39,8 +39,10 @@
 </template>
 
 <script>
+import { env } from '@/config/appConfig';
+
 // OSS 基础地址前缀（与 variables.scss 中 $img-base 保持一致）
-const OSS_PREFIX = 'https://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
+const OSS_PREFIX = env.ossPrefix;
 
 // 分享相关图片（网络图片）
 const SHARE_IMAGES = {

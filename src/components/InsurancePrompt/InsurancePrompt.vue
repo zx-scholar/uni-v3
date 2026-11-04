@@ -24,8 +24,10 @@
 </template>
 
 <script>
-// OSS 基础地址前缀（生产环境）
-const OSS_PREFIX = 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/';
+import { env } from '@/config/appConfig';
+
+// OSS 基础地址前缀（与 variables.scss 中 $img-base 保持一致）
+const OSS_PREFIX = env.ossPrefix;
 
 // 保险引导默认图片（对应需求中的盾牌插画）
 const DEFAULT_IMAGE = `${OSS_PREFIX}gameImage672761d851fd476493632384e96f6626.png`;

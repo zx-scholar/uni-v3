@@ -48,6 +48,7 @@
 import { queryMiniAppInfo } from '@/api';
 import { useAppStore } from '@/stores/app';
 import CustomTabBar from '@/components/CustomTabBar/CustomTabBar.vue';
+import { env } from '@/config/appConfig';
 
 export default {
   name: 'IndexPage',
@@ -86,7 +87,7 @@ export default {
           id: 49,
           name: '伏见桃山演示馆',
           centerId: 10000000,
-          logo: 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/images/40fd9ec75b351c5a.jpg',
+          logo: `${env.ossPrefix}center/10000000/images/40fd9ec75b351c5a.jpg`,
           theme: 'primary-blue',
         });
         uni.showToast({ title: '演示数据已更新至 Pinia', icon: 'none' });

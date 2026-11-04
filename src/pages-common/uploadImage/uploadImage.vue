@@ -91,10 +91,10 @@
 <script>
 import { uploadFile } from '@/api';
 import Dropdown from '@/components/Dropdown/Dropdown.vue';
+import { env } from '@/config/appConfig';
 
 // OSS 基础地址前缀（从上传 URL 中剥离，替换为 #{$img-base}）
-// const OSS_PREFIX = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/';
-const OSS_PREFIX = 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd';
+const OSS_PREFIX = env.ossPrefix;
 
 // 图片类型选项
 const TYPE_OPTIONS = ['img-page-bg', 'img-card-bg', 'img-logo', 'img-icon-bg', 'img-empty', 'img-browsing-bg', 'img-event-bg', '自定义'];
@@ -167,7 +167,8 @@ export default {
       }
       const prefix = this.variableName;
       const varName = index === 0 ? prefix : `${prefix}-${index + 1}`;
-      const relativePath = url.startsWith(OSS_PREFIX) ? url.slice(OSS_PREFIX.length) : url;
+      // OSS_PREFIX 以 / 结尾，切片后补回前导 /，保证生成 '#{$img-base}/xxx.png'
+      const relativePath = url.startsWith(OSS_PREFIX) ? '/' + url.slice(OSS_PREFIX.length) : url;
       const scssVar = '$img-base';
       return `$${varName}: '#{${scssVar}}${relativePath}';`;
     },

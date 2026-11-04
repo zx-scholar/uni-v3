@@ -6,20 +6,11 @@ import { useAppStore } from '@/stores/app'
  * 根据 temp.js 规范生成带 MD5 签名的加密请求参数
  * @param {string} url - 相对路径
  * @param {Object} data - 请求业务数据
- * @param {string} [apiName] - 模块 API 名称 (如 community)
- * @param {Object} [requestOps] - 扩展控制配置
+ * @param {Object} [requestOps] - 扩展控制配置 (如 noCenterId)
  */
-export function getCodedParam(url, data = {}, apiName = '', requestOps = {}) {
+export function getCodedParam(url, data = {}, requestOps = {}) {
   try {
-    let apiKey
-    let apiSecret
-    if (apiName) {
-      apiKey = wechatParam[`${apiName}ApiKey`]
-      apiSecret = wechatParam[`${apiName}ApiSecret`]
-    } else {
-      apiKey = wechatParam.apiKey
-      apiSecret = wechatParam.apiSecret
-    }
+    const { apiKey, apiSecret } = wechatParam
 
     const timestamp = new Date().getTime()
 

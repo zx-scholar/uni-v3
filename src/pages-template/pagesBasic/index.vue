@@ -19,7 +19,7 @@
          flex-* / items-*  flex布局   flex-between / items-center / flex-column
          gap-{n}           子项间距   gap-12 (含 4/6/8/10/12/16/20/24/30/32/40)
          bg-{name}         背景色     bg-card / bg-primary / bg-page / bg-gradient-btn
-         radius-{n}        圆角       radius-8 / radius-16 / radius-full / radius-t-24
+         radius-{n}        圆角       radius-8 / radius-16 / radius-20 / radius-full
          shadow-{0|1|2|3}  阴影       shadow-1 轻 / shadow-2 中 / shadow-3 重
          text-{n}line      文本截断   text-1line / text-2line / text-3line
          center            居中容器   等价 flex + center + center

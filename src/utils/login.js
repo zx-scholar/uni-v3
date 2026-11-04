@@ -1,6 +1,7 @@
 import { useAppStore } from '@/stores/app';
 import { useUserStore } from '@/stores/user';
 import { loginByWechatCode, queryUserinfoByUnionId } from '@/api';
+import { env } from '@/config/appConfig';
 
 /**
  * 小程序初始化时执行静默登录，获取微信用户信息
@@ -82,7 +83,7 @@ export default async function login() {
 function h5MockLogin(userStore) {
   console.log('h5环境');
   const DEFAULT_USER = {
-    avatar: "http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/venueImage/00f1b345a4d644b4a088b862d8d847b4.png",
+    avatar: `${env.ossPrefix}center/10000000/venueImage/00f1b345a4d644b4a088b862d8d847b4.png`,
     centerId: 10000000,
     createTime: "2024-01-16 14:12:49",
     gender: "0",

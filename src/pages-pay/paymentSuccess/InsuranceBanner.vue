@@ -3,8 +3,10 @@
 </template>
 
 <script>
+import { env } from '@/config/appConfig';
+
 // 默认广告图片（写死测试，后续由后端配置）
-const DEFAULT_IMAGE = 'http://xports-test.oss-cn-hangzhou.aliyuncs.com/dev/center/10000000/temp/cfe03f7a9b624eb4923894ae3239a157.png';
+const DEFAULT_IMAGE = `${env.ossPrefix}center/10000000/temp/cfe03f7a9b624eb4923894ae3239a157.png`;
 
 // 运享通小程序跳转参数（与 InsurancePrompt 组件保持一致；后续按产品接入动态生成）
 const INSURANCE_MINIPROGRAM = {

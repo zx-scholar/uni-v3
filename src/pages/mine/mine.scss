@@ -1,113 +1,39 @@
 @use '@/styles/variables.scss' as *;
 
-.page-container {
-  min-height: 100vh;
-  background-color: $color-bg-page;
+/* =========================================================================
+   个人中心 (mine.scss)
+   =========================================================================
+   骨架（page-container / page-scroll-content / scroll-wrapper）与按钮
+   已全局化到 src/styles/layout.scss，本文件只写页面特有样式：
+
+     - .mine-wrapper       底部留白避让 fixed 的 CustomTabBar
+     - .user-card__arrow   登录箭头字号（fz 档位无 48）
+     - .menu-item          四列网格，百分比宽度
+     - .menu-item__icon    菜单图标字号（fz 档位无 52）
+   ========================================================================= */
+
+/* CustomTabBar 是 fixed 定位，需要额外底部留白（含安全区） */
+.page-container .scroll-wrapper.mine-wrapper {
+  padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px));
 }
 
-.content {
-  padding: 30px;
-  // 底部留出 CustomTabBar 高度空间，避免内容被遮挡
-  padding-bottom: 140px;
+/* 未登录时整卡可点，给予按压反馈 */
+.user-card.login-entry:active {
+  opacity: 0.88;
 }
 
-.user-card {
-  position: relative;
-  background: $color-gradient-btn;
-  border-radius: 20px;
-  padding: 40px 30px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-
-  .avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 60px;
-    margin-right: 24px;
-    background-color: #ffffff;
-  }
-
-  .user-info {
-    min-width: 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    .user-name {
-      font-size: 34px;
-      font-weight: bold;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-
-    .user-id {
-      font-size: 24px;
-      color: rgba(255, 255, 255, 0.8);
-    }
-  }
-
-  .login-arrow {
-    margin-left: 16px;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 48px;
-    line-height: 1;
-  }
-
-  &.login-entry:active {
-    opacity: 0.88;
-  }
+/* 登录箭头：48px 不在 utility 字号档位内 */
+.user-card__arrow {
+  font-size: 48px;
 }
 
-.menu-group {
-  margin-bottom: 30px;
+/* 菜单项：四列网格，宽度用百分比 utility 未覆盖 */
+.menu-item {
+  width: 25%;
+  box-sizing: border-box;
+}
 
-  .group-header {
-    padding: 0 8px 16px 8px;
-    display: flex;
-    align-items: center;
-
-    .group-title {
-      font-size: 28px;
-      font-weight: 600;
-      color: #334155;
-    }
-  }
-
-  .menu-list {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 24px 16px;
-    display: flex;
-    flex-wrap: wrap;
-
-    .menu-item {
-      width: 25%;
-      box-sizing: border-box;
-      padding: 16px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .menu-item__icon {
-        width: 80px;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 52px;
-        line-height: 1;
-        color: #167a4a;
-      }
-
-      .menu-item__title {
-        margin-top: 10px;
-        font-size: 24px;
-        line-height: 1.2;
-        text-align: center;
-        color: #334155;
-      }
-    }
-  }
+/* 菜单图标：52px 不在 utility 字号档位内 */
+.menu-item__icon {
+  font-size: 52px;
 }

@@ -2,7 +2,7 @@
    圆角工具类
    命名: radius{-方向}-{size}
    方向: t(上) b(下) l(左) r(右)
-   size: 8 / 10 / 12 / 16 / 24 / 40 / full / none
+   size: 8 / 10 / 12 / 16 / 20 / 24 / 40 / full / none
    单位: px (编译自动转 rpx)
    ========================================================================= */
 
@@ -11,6 +11,7 @@
 .radius-10 { border-radius: 10px; }
 .radius-12 { border-radius: 12px; }
 .radius-16 { border-radius: 16px; }
+.radius-20 { border-radius: 20px; }
 .radius-24 { border-radius: 24px; }
 .radius-40 { border-radius: 40px; }
 .radius-full { border-radius: 50%; }
@@ -21,6 +22,7 @@
 .radius-t-10 { border-radius: 10px 10px 0 0; }
 .radius-t-12 { border-radius: 12px 12px 0 0; }
 .radius-t-16 { border-radius: 16px 16px 0 0; }
+.radius-t-20 { border-radius: 20px 20px 0 0; }
 .radius-t-24 { border-radius: 24px 24px 0 0; }
 
 /* 下边圆角 */
@@ -28,6 +30,7 @@
 .radius-b-10 { border-radius: 0 0 10px 10px; }
 .radius-b-12 { border-radius: 0 0 12px 12px; }
 .radius-b-16 { border-radius: 0 0 16px 16px; }
+.radius-b-20 { border-radius: 0 0 20px 20px; }
 .radius-b-24 { border-radius: 0 0 24px 24px; }
 
 /* 左边圆角 */
@@ -35,6 +38,7 @@
 .radius-l-10 { border-radius: 10px 0 0 10px; }
 .radius-l-12 { border-radius: 12px 0 0 12px; }
 .radius-l-16 { border-radius: 16px 0 0 16px; }
+.radius-l-20 { border-radius: 20px 0 0 20px; }
 .radius-l-24 { border-radius: 24px 0 0 24px; }
 
 /* 右边圆角 */
@@ -42,4 +46,5 @@
 .radius-r-10 { border-radius: 0 10px 10px 0; }
 .radius-r-12 { border-radius: 0 12px 12px 0; }
 .radius-r-16 { border-radius: 0 16px 16px 0; }
+.radius-r-20 { border-radius: 0 20px 20px 0; }
 .radius-r-24 { border-radius: 0 24px 24px 0; }

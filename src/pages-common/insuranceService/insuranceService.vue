@@ -20,11 +20,12 @@
 </template>
 
 <script>
-// OSS 生产域前缀
-const OSS_PREFIX = 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/';
-const BANNER_IMAGE = `${OSS_PREFIX}gameImage95c75c9a22094b3ca23976705b65644d.png`;
-
 import InsurancePrompt from '@/components/InsurancePrompt/InsurancePrompt.vue';
+import { env } from '@/config/appConfig';
+
+// OSS 基础地址前缀（与 variables.scss 中 $img-base 保持一致）
+const OSS_PREFIX = env.ossPrefix;
+const BANNER_IMAGE = `${OSS_PREFIX}gameImage95c75c9a22094b3ca23976705b65644d.png`;
 
 export default {
   name: 'InsuranceServicePage',

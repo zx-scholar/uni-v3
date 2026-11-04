@@ -20,3 +20,25 @@ export const queryMiniAppInfo = (data = {}) => {
 export const getBannerList = (params) => {
   return http.get('/api/banners', params)
 }
+
+/**
+ * 查询h5信息
+ */
+export function getAppInfo(data, callback) {
+  return http.get(
+    "/api/app/appInfo", {
+    ...data,
+  },
+    callback
+  );
+}
+
+//登录接口
+export function appLogin(data, callback) {
+  return http.post(
+    "/api/user/appLogin", {
+    ...data,
+  },
+    callback
+  );
+}

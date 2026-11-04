@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
-import { generatePagesJson } from './scripts/gen-pages.mjs';
+import { generatePagesJson, watchAutoScanPages } from './scripts/gen-pages.mjs';
 import { ENV_DICTIONARY } from './src/config/environments';
 
 /**
@@ -8,19 +8,28 @@ import { ENV_DICTIONARY } from './src/config/environments';
  * - 自动识别当前环境模式 (--mode qdgx / hangzhou / sportsdev / tangfang 等)
  * - 动态匹配 src/config/features.config.ts 生成对应环境的 src/pages.json 和 src/utils/routes.ts
  */
-const pluggablePagesPlugin = (mode) => ({
+const pluggablePagesPlugin = (mode, command) => ({
   name: 'vite-plugin-pluggable-pages',
+  // 构建场景安全网：build --watch 下每次重建重新生成（幂等）。
+  // 首次生成已在 defineConfig 回调体最开头完成（早于 uni 插件的所有钩子）。
   async buildStart() {
-    await generatePagesJson(mode);
+    if (command === 'build') {
+      await generatePagesJson(mode, command)
+    }
+  },
+  // dev 场景：自动扫描型分包（无 pages.config.mjs）的 .vue 增删联动重新生成
+  configureServer(server) {
+    watchAutoScanPages(server, mode);
   },
   async handleHotUpdate({ file }) {
     if (
-      file.includes('features.config.ts') ||
-      file.includes('features.config.js') ||
+      file.includes('features.config.mjs') ||
+      file.includes('routes-alias.mjs') ||
       file.includes('pages.base.json') ||
       file.includes('pages.config.mjs')
     ) {
-      await generatePagesJson(mode);
+      // dev 场景：配置热更新时重新生成，失败仅警告不中断
+      await generatePagesJson(mode, 'serve')
     }
   },
 });
@@ -51,18 +60,41 @@ const pxToRpxPlugin = (options = {}) => {
 pxToRpxPlugin.postcss = true;
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode, command }) => {
+  // ⏱ 尽早生成 pages.json：用户 config 函数先于所有插件钩子执行，
+  // 确保 uni CLI/插件首次读取 src/pages.json 时已是本次环境的最新内容。
+  // （此前挂在 buildStart 里，uni 早期阶段读到的是上一次运行留下的旧文件）
+  await generatePagesJson(mode, command);
+
   // 从集中式多环境字典 src/config/environments.ts 读取当前 mode 的代理配置
-  const targetEnv = ENV_DICTIONARY[mode] || ENV_DICTIONARY['development'];
-  const webRoot = targetEnv.webRoot || '/aisports-api';
-  const targetPrefix = targetEnv.prefix || targetEnv.origin || 'https://web.xports.cn';
+  // 未知 mode / 缺少必填字段一律抛错：绝不静默回退到默认环境或生产域名
+  const targetEnv = ENV_DICTIONARY[mode];
+  if (!targetEnv) {
+    throw new Error(
+      `[vite] 未知构建环境 mode="${mode}"，未在 src/config/environments.ts 的 ENV_DICTIONARY 中注册。` +
+        `可用环境: [${Object.keys(ENV_DICTIONARY).join(', ')}]`
+    );
+  }
+  const { origin, webRoot } = targetEnv;
+  if (!origin || !webRoot) {
+    throw new Error(
+      `[vite] 环境 [${mode}] 缺少代理必需配置 origin / webRoot，请在 src/config/environments.ts 中补齐`
+    );
+  }
 
   return {
     plugins: [
-      pluggablePagesPlugin(mode),
+      pluggablePagesPlugin(mode, command),
       uni(),
     ],
     css: {
+      preprocessorOptions: {
+        scss: {
+          // Vite 5.x 仍通过 Dart Sass 的 legacy API 编译 scss，
+          // 这里静音其弃用提示（仅关闭提示，不影响编译结果）
+          silenceDeprecations: ['legacy-js-api'],
+        },
+      },
       postcss: {
         plugins: [
           pxToRpxPlugin({ multiplier: 1 }), // 1px -> 1rpx 精准编译转换 (基于 750px 设计稿)
@@ -74,7 +106,7 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       proxy: {
         [webRoot]: {
-          target: targetPrefix,
+          target: origin,
           changeOrigin: true,
           secure: false,
         },
