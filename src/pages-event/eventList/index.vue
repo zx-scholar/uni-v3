@@ -68,12 +68,17 @@
     </BasePopup>
 
     <!-- 赛事卡片列表（可滚动） -->
-    <scroll-view class="page-scroll-content" scroll-y>
+    <scroll-view
+      class="page-scroll-content"
+      scroll-y
+      :lower-threshold="120"
+      @scrolltolower="handleLoadMore"
+    >
       <view class="scroll-wrapper">
         <view class="event-list">
           <view
-            v-for="item in eventList"
-            :key="item.id"
+            v-for="(item, index) in eventList"
+            :key="item.id || index"
             class="event-card"
             @click="handleCardClick(item)"
           >
@@ -109,6 +114,11 @@
             </view>
           </view>
         </view>
+
+        <!-- 列表状态：加载中 / 无数据 / 加载到底（字段映射完成前先保留，便于确认接口连通） -->
+        <view v-if="loading" class="event-list-state">加载中...</view>
+        <view v-else-if="!eventList.length" class="event-list-state">暂无赛事</view>
+        <view v-else-if="isFinished" class="event-list-state">没有更多了</view>
       </view>
     </scroll-view>
   </view>
@@ -118,6 +128,19 @@
 import SearchBar from '@/components/SearchBar/SearchBar.vue';
 import Calendar from '@/components/Calendar/Calendar.vue';
 import BasePopup from '@/components/BasePopup/BasePopup.vue';
+import router from '@/utils/router';
+import env from '@/config/appConfig';
+import { getCampaignList } from '@/api';
+
+/** 服务端固定每页 10 条（pageSize 传了不生效），仅用于"最后一页不满"的判断 */
+const PAGE_SIZE = 10;
+
+/** 赛事类型 campType 文案映射（接口不返回 campTypeName，本地兜底） */
+const CAMP_TYPE_MAP = {
+  1: '卫星赛',
+  2: '月赛',
+  3: '年终总决赛',
+};
 
 export default {
   name: 'EventListPage',
@@ -168,49 +191,15 @@ export default {
         upcoming: '待开始',
         ended: '已结束',
       },
-      //$img-page-bg-2: '#{$img-base}/gameImage3ac72c2d13e34667ab60230e3ae6cc27.png';
-      eventList: [
-        {
-          id: 1,
-          banner: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/gameImage3ac72c2d13e34667ab60230e3ae6cc27.png',
-          title: '日常练习球·卫星赛（3月期）',
-          dateRange: '2026.06.23–2026.07.04',
-          location: '南京旗舰店',
-          tag: '月赛',
-          status: 'signing',
-          signUpCount: '59,062',
-        },
-        {
-          id: 2,
-          banner: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/gameImage3ac72c2d13e34667ab60230e3ae6cc27.png',
-          title: '2026年度高尔夫月赛（6月场）',
-          dateRange: '2026.06.15–2026.06.30',
-          location: '南京旗舰店',
-          tag: '月赛',
-          status: 'ongoing',
-          signUpCount: '12,340',
-        },
-        {
-          id: 3,
-          banner: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/gameImage3ac72c2d13e34667ab60230e3ae6cc27.png',
-          title: '2026年终总决赛资格赛',
-          dateRange: '2026.10.01–2026.10.15',
-          location: '南京旗舰店',
-          tag: '年终总决赛',
-          status: 'upcoming',
-          signUpCount: '8,520',
-        },
-        {
-          id: 4,
-          banner: 'https://xports-prd.oss-cn-hangzhou.aliyuncs.com/prd/gameImage3ac72c2d13e34667ab60230e3ae6cc27.png',
-          title: '2026年5月卫星赛',
-          dateRange: '2026.05.01–2026.05.10',
-          location: '南京旗舰店',
-          tag: '卫星赛',
-          status: 'ended',
-          signUpCount: '45,210',
-        },
-      ],
+
+      // ===== 接口数据 =====
+      // 接口返回的 campaignList 经 normalizeCampaign 映射成卡片所需字段
+      eventList: [],
+      rawResponse: null,
+      loading: false,
+      finished: false,
+      pageNo: 1,
+      totalPage: 0,
     };
   },
 
@@ -219,9 +208,139 @@ export default {
       const opt = this.filterGroups[0].options.find((o) => o.value === this.filterValue.status);
       return opt ? opt.text : '全部状态';
     },
+    isFinished() {
+      return this.finished || (this.totalPage > 0 && this.pageNo >= this.totalPage);
+    },
+  },
+
+  onLoad() {
+    this.fetchList({ reset: true });
   },
 
   methods: {
+    /**
+     * 组装列表请求参数（字段名均为实测确认）
+     *  - 分页：pageNo（pageSize 传了不生效，服务端固定 10 条/页）
+     *  - 搜索：title
+     *  - 时间范围：campStartDate / campEndDate，先不启用
+     * 状态 / 赛事分类的入参字段名试过 campType / campTypes / campTypeList / type /
+     * enrollStatus 等均无效，暂不传，等后端补文档
+     */
+    buildParams() {
+      const params = {
+        pageNo: this.pageNo,
+      };
+      if (this.keyword) {
+        params.title = this.keyword;
+      }
+      return params;
+    },
+
+    /**
+     * 封面图地址：接口可能返回相对路径（prd-venue/center/xxx.jpg）或完整 URL
+     * 相对路径用环境配置的业务资源桶拼完整
+     */
+    resolveImage(path) {
+      if (!path) return '';
+      if (/^(https?:)?\/\//.test(path)) return path;
+      const base = env.ossUrl || env.ossPrefix || '';
+      if (!base) return path;
+      return base.replace(/\/?$/, '/') + path.replace(/^\//, '');
+    },
+
+    /** yyyy-MM-dd HH:mm:ss -> yyyy.MM.dd */
+    formatDate(value) {
+      if (!value) return '';
+      const date = String(value).slice(0, 10);
+      return date.replace(/-/g, '.');
+    },
+
+    /** 由赛事时间 + 报名状态推导卡片角标状态（signing / ongoing / upcoming / ended） */
+    resolveStatus(item) {
+      const now = Date.now();
+      const start = item.campStartDate ? new Date(String(item.campStartDate).replace(/-/g, '/')).getTime() : 0;
+      const end = item.campEndDate ? new Date(String(item.campEndDate).replace(/-/g, '/')).getTime() : 0;
+
+      if (end && end < now) return 'ended';
+      if (start && start > now) return 'upcoming';
+      // enroll_status: 0 报名中 / 1 报名已结束
+      if (String(item.enroll_status) === '0') return 'signing';
+      return 'ongoing';
+    },
+
+    /** 接口原始项 -> 卡片渲染所需字段 */
+    normalizeCampaign(item = {}) {
+      const start = this.formatDate(item.campStartDate);
+      const end = this.formatDate(item.campEndDate);
+      return {
+        id: item.campId,
+        banner: this.resolveImage(item.coverImg),
+        title: item.title || '',
+        dateRange: start && end ? `${start}–${end}` : start || end || '',
+        // 门店/球场名优先，其次场地、中心名
+        location: item.venueName || item.place || item.centerName || '',
+        tag: CAMP_TYPE_MAP[item.campType] || '',
+        status: this.resolveStatus(item),
+        signUpCount: item.enrolledNum ?? 0,
+        raw: item,
+      };
+    },
+
+    /** 列表数组：接口字段名是 campaignList */
+    pickList(res) {
+      if (!res) return [];
+      if (Array.isArray(res.campaignList)) return res.campaignList;
+      if (Array.isArray(res.list)) return res.list;
+      if (Array.isArray(res.data)) return res.data;
+      return [];
+    },
+
+    /** 总页数：根节点 totalPage */
+    pickTotalPage(res) {
+      if (!res) return 0;
+      const total = res.totalPage ?? res.data?.totalPage;
+      return Number(total) || 0;
+    },
+
+    /** 拉取赛事列表，reset=true 表示重置分页重新拉 */
+    async fetchList({ reset = false } = {}) {
+      if (this.loading) return;
+      if (!reset && this.isFinished) return;
+
+      if (reset) {
+        this.pageNo = 1;
+        this.totalPage = 0;
+        this.finished = false;
+      }
+
+      this.loading = true;
+      try {
+        const res = await getCampaignList(this.buildParams(), { loading: false });
+        // 原始响应留档，方便后续核对字段
+        this.rawResponse = res;
+
+        const list = this.pickList(res).map((item) => this.normalizeCampaign(item));
+        this.totalPage = this.pickTotalPage(res);
+        this.eventList = reset ? list : this.eventList.concat(list);
+
+        // 没有 totalPage 时用"本次返回不足一页"判断到底
+        this.finished = this.totalPage ? this.pageNo >= this.totalPage : list.length < PAGE_SIZE;
+      } catch (err) {
+        // 错误提示已由 request 拦截器统一 toast，这里只留日志
+        console.error('[eventList] 赛事列表请求失败:', err);
+        this.finished = true;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    /** 触底加载下一页 */
+    handleLoadMore() {
+      if (this.loading || this.isFinished) return;
+      this.pageNo += 1;
+      this.fetchList();
+    },
+
     // 门店选择
     handleStoreSelect() {
       // TODO: 打开门店选择弹层
@@ -233,11 +352,12 @@ export default {
     },
     // 搜索
     handleSearch() {
-      console.log('搜索赛事:', this.keyword);
+      this.fetchList({ reset: true });
     },
     // 分类切换
     handleCategoryChange(value) {
       this.activeCategory = value;
+      this.fetchList({ reset: true });
     },
     // 切换筛选面板
     toggleFilterPanel() {
@@ -247,21 +367,20 @@ export default {
     selectStatus(value) {
       this.filterValue.status = value;
       this.filterExpanded = false;
-      // TODO: 根据筛选条件请求列表数据
+      this.fetchList({ reset: true });
     },
     // 打开日期选择
     openDate() {
       this.dateVisible = true;
     },
-    // 选中日期
+    // 选中日期（时间范围筛选暂不参与请求）
     handleDateSelect() {
       this.dateVisible = false;
-      // TODO: 根据 filterValue.date 请求列表数据
     },
     // 点击赛事卡片
     handleCardClick(item) {
       // TODO: 跳转赛事详情
-      console.log('点击赛事:', item.id);
+      console.log('点击赛事:', item);
     },
   },
 };

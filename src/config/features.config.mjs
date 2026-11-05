@@ -23,6 +23,10 @@ export default {
     tangfang: ['common', 'event', 'golf', 'pay', 'point', 'template', 'venue', 'venueball', 'venuecard', 'venuecourse', 'venueticket'],
     // 兰州奥体环境 (--mode lanzhou)
     lanzhou: ['common', 'event', 'golf', 'pay', 'point', 'template', 'venue', 'venueball', 'venuecard', 'venuecourse', 'venueticket'],
+    // 尊享体育高尔夫环境 (--mode golf)
+    golf: ['common', 'event', 'golf', 'pay', 'point', 'template', 'venue', 'venueball', 'venuecard', 'venuecourse', 'venueticket'],
+    // 尊享体育高尔夫测试环境 (--mode golf-test)
+    'golf-test': ['common', 'event', 'golf', 'pay', 'point', 'template', 'venue', 'venueball', 'venuecard', 'venuecourse', 'venueticket'],
   },
 
   // 分包预下载规则 (可选)：键为主包页面路径，值为 uni-app preloadRule 条目；

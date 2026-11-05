@@ -19,5 +19,9 @@ export default {
       path: 'uploadImage/uploadImage',
       style: { navigationStyle: 'custom' },
     },
+    {
+      path: 'imageRecord/imageRecord',
+      style: { navigationStyle: 'custom' },
+    },
   ],
 };

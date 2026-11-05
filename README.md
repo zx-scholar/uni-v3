@@ -70,7 +70,7 @@ pnpm dev:mp-weixin:lanzhou    # 兰州奥体
 
 一个 `--mode` 需要**两处注册**，缺一不可：
 
-1. **`src/config/environments.ts`**：后端域名（`origin`）、API 路径前缀（`webRoot`，同时是 dev 代理的匹配路径）、微信 appid、apiKey/apiSecret、腾讯地图 key、OSS 地址等。运行时代码通过 `import { env } from '@/config/appConfig'` 读取（冻结对象）。
+1. **`src/config/environments.ts`**：后端域名（`origin`）、API 路径前缀（`webRoot`，同时是 dev 代理的匹配路径）、微信 appid、apiKey/apiSecret、腾讯地图 key、OSS 地址等。运行时代码通过 `import { env } from '@/config/appConfig'` 读取（冻结对象）。多数环境相同的字段在 `DEFAULT_ENV_CONFIG` 收口，环境条目用 `defineEnv()` 只写差异项（身份字段 `title` / `name` / `appid` / `apiKey` / `apiSecret` 必填，漏写会直接报 TS 错误）。
 2. **`src/config/features.config.mjs`**：该环境打入哪些子包（`environments[mode]` 数组），以及分包预下载规则 `preloadRule`。
 
 > ⚠️ **mode 任一侧未注册都会直接失败**，绝不会静默回退到别的环境：
@@ -86,8 +86,6 @@ Vite dev 代理按 `webRoot → origin` 自动配置（见 `vite.config.js`）�
 - **JS / Vue 里取图**：`import { env } from '@/config/appConfig'` 后用 `` `${env.ossPrefix}gameImagexxx.png` ``，不要再硬编码 OSS 域名。
 - **SCSS 里取图**：用 `$img-base`（`src/styles/variables.scss`，无尾斜杠，拼接时补 `/`），例如 `url('#{$img-base}/gameImagexxx.png')`。⚠️ `$img-base` 与 `env.ossPrefix` 是两套编译期/运行期常量，改一处必须同步另一处。
 - **上传图片**：走后端 `/api/common/uploadFile`，客户端不直连 OSS。
-
-> 📌 已知待办：`environments.ts` 已有 `lanzhou`（兰州）环境，但尚未在 `features.config.mjs` 注册白名单，`--mode lanzhou` 当前会报错；启用前需补注册。
 
 > ⚠️ 仓库根目录的 `.env.development` / `.env.production` 是**失效的并行配置**（代码里没有任何 `loadEnv` / `import.meta.env.VITE_*` 引用），真实来源只有 `environments.ts`。且 `.env.production` 的 appid/域名与真实配置不一致，勿据此判断环境参数。
 

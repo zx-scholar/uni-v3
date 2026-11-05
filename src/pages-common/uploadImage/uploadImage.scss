@@ -344,3 +344,51 @@ $img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
     }
   }
 }
+
+/* ================================
+   图片记录入口
+   ================================ */
+.record-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px;
+  padding: 0 24px;
+  margin-bottom: 16px;
+  background-color: $color-bg-card;
+  border-radius: 16px;
+  box-shadow: $color-shadow-sm;
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  &__left,
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    margin-right: 12px;
+    font-size: 32px;
+    color: $color-primary;
+  }
+
+  &__text {
+    font-size: 28px;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  &__count {
+    margin-right: 8px;
+    font-size: 24px;
+    color: $color-text-sub;
+  }
+
+  &__arrow {
+    font-size: 24px;
+    color: $color-text-sub;
+  }
+}

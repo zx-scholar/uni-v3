@@ -1,6 +1,6 @@
 /**
  * ⚠️ 本文件由 scripts/gen-routes.mjs 根据 src/pages.json 自动编译生成，请勿手动修改！
- * 自动生成时间: 2026/10/20 17:16:17
+ * 自动生成时间: 2026/11/5 18:01:49
  */
 
 export interface RouteItem {
@@ -42,6 +42,9 @@ export const routes = {
   },
   "uploadImage": {
     "path": "/pages-common/uploadImage/uploadImage"
+  },
+  "imageRecord": {
+    "path": "/pages-common/imageRecord/imageRecord"
   },
   "eventList": {
     "path": "/pages-event/eventList/index"

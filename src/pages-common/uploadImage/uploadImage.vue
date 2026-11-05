@@ -3,6 +3,18 @@
     <NavBar title="图片上传" color="#222222" />
 
     <scroll-view class="page-scroll-content" scroll-y>
+      <!-- 图片记录入口 -->
+      <view class="record-entry" @click="goImageRecord">
+        <view class="record-entry__left">
+          <text class="iconfont icon-saishihuodong record-entry__icon"></text>
+          <text class="record-entry__text">图片记录</text>
+        </view>
+        <view class="record-entry__right">
+          <text class="record-entry__count">{{ recordCount }} 张</text>
+          <text class="iconfont icon-you1 record-entry__arrow"></text>
+        </view>
+      </view>
+
       <!-- 上传设置 -->
       <view class="card">
         <view class="card-header">上传设置</view>
@@ -91,7 +103,9 @@
 <script>
 import { uploadFile } from '@/api';
 import Dropdown from '@/components/Dropdown/Dropdown.vue';
+import router from '@/utils/router';
 import { env } from '@/config/appConfig';
+import { addImageRecord, getImageRecords } from '@/utils/imageRecords';
 
 // OSS 基础地址前缀（从上传 URL 中剥离，替换为 #{$img-base}）
 const OSS_PREFIX = env.ossPrefix;
@@ -110,7 +124,15 @@ export default {
       imageList: [],
       results: [],
       copyMode: 'scss',
+      uploading: false,
+      // 已保存的图片记录条数（仅用于入口处展示）
+      recordCount: 0,
     };
+  },
+
+  // 从图片记录页返回时刷新条数
+  onShow() {
+    this.recordCount = getImageRecords().length;
   },
 
   computed: {
@@ -128,6 +150,11 @@ export default {
   },
 
   methods: {
+    /** 跳转图片记录页 */
+    goImageRecord() {
+      router.push('imageRecord');
+    },
+
     chooseImage() {
       const count = 9 - this.imageList.length;
       uni.chooseImage({
@@ -230,6 +257,13 @@ export default {
             code,
             copyCount: 0,
           });
+
+          // 记录到本地，图片记录页可查看 / 点击复制地址
+          this.recordCount = addImageRecord({
+            url: item.url,
+            name: item.name,
+            type: currentVar,
+          }).length;
 
           typeIndex++;
         } catch (e) {
