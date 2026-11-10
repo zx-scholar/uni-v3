@@ -1,0 +1,118 @@
+@use '@/styles/variables.scss' as *;
+
+/* ============================================================
+   文件记录页特有样式
+   （页面骨架由 styles/layout.scss 全局定义，此处不重复声明）
+   ============================================================ */
+
+/* 顶部统计 + 清空 */
+.record-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 24px 16px;
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__count {
+    font-size: 28px;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  &__tip {
+    margin-top: 6px;
+    font-size: 22px;
+    color: $color-text-sub;
+  }
+
+  &__clear {
+    height: 48px;
+    line-height: 48px;
+    padding: 0 24px;
+    font-size: 24px;
+    color: $color-danger;
+    background-color: rgba(239, 68, 68, 0.08);
+    border-radius: 999px;
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+}
+
+/* 记录列表 */
+.record-list {
+  padding: 0 24px;
+}
+
+.record-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background-color: $color-bg-card;
+  border-radius: 16px;
+  box-shadow: $color-shadow-sm;
+
+  &:active {
+    opacity: 0.85;
+  }
+
+  &__icon-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    background-color: $color-primary-light;
+    border-radius: 12px;
+  }
+
+  &__icon {
+    font-size: 36px;
+    color: $color-primary;
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__type {
+    max-width: 60%;
+    padding: 2px 10px;
+    overflow: hidden;
+    font-size: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: $color-primary;
+    background-color: $color-primary-light;
+    border-radius: 6px;
+  }
+
+  &__remove {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: $color-bg-disabled;
+    border-radius: 50%;
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &__remove-icon {
+    font-size: 22px;
+    color: $color-text-sub;
+  }
+}

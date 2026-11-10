@@ -23,5 +23,13 @@ export default {
       path: 'imageRecord/imageRecord',
       style: { navigationStyle: 'custom' },
     },
+    {
+      path: 'uploadFile/index',
+      style: { navigationStyle: 'custom' },
+    },
+    {
+      path: 'fileRecord/index',
+      style: { navigationStyle: 'custom' },
+    },
   ],
 };

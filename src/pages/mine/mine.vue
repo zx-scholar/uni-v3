@@ -112,6 +112,7 @@ export default {
             { icon: 'icon-hetong', text: '小程序模板', routerPath: 'pagesBasic' },
             { icon: 'icon-xiugai', text: 'Pinia 示例', routerPath: 'demo' },
             { icon: 'icon-jia', text: '图片上传', routerPath: 'uploadImage' },
+            { icon: 'icon-jia', text: '文件上传', routerPath: 'uploadFile' },
             { icon: 'icon-fenxiang', text: '分享组件', action: 'share' },
             { icon: 'icon-cuowu2', text: '重置缓存', routerPath: null },
           ],

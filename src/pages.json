@@ -92,6 +92,18 @@
           "style": {
             "navigationStyle": "custom"
           }
+        },
+        {
+          "path": "uploadFile/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "fileRecord/index",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     },
@@ -210,18 +222,6 @@
       ]
     },
     {
-      "root": "pages-venue",
-      "name": "pages-venue",
-      "pages": [
-        {
-          "path": "venueList/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        }
-      ]
-    },
-    {
       "root": "pages-venueball",
       "name": "pages-venueball",
       "pages": [
@@ -245,30 +245,6 @@
         },
         {
           "path": "ballBitSquareGolf/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        }
-      ]
-    },
-    {
-      "root": "pages-venuecard",
-      "name": "pages-venuecard",
-      "pages": [
-        {
-          "path": "cardList/index",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        }
-      ]
-    },
-    {
-      "root": "pages-venuecourse",
-      "name": "pages-venuecourse",
-      "pages": [
-        {
-          "path": "courseList/index",
           "style": {
             "navigationStyle": "custom"
           }

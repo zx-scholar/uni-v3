@@ -1,5 +1,5 @@
 <template>
-  <view class="page-container">
+  <view class="page-container page-has-bg">
     <NavBar title="图片上传" color="#222222" />
 
     <scroll-view class="page-scroll-content" scroll-y>

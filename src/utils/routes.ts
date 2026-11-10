@@ -1,6 +1,6 @@
 /**
  * ⚠️ 本文件由 scripts/gen-routes.mjs 根据 src/pages.json 自动编译生成，请勿手动修改！
- * 自动生成时间: 2026/11/5 18:01:49
+ * 自动生成时间: 2026/11/10 10:43:48
  */
 
 export interface RouteItem {
@@ -46,6 +46,12 @@ export const routes = {
   "imageRecord": {
     "path": "/pages-common/imageRecord/imageRecord"
   },
+  "uploadFile": {
+    "path": "/pages-common/uploadFile/index"
+  },
+  "fileRecord": {
+    "path": "/pages-common/fileRecord/index"
+  },
   "eventList": {
     "path": "/pages-event/eventList/index"
   },
@@ -88,9 +94,6 @@ export const routes = {
   "template": {
     "path": "/pages-template/template/template"
   },
-  "venueList": {
-    "path": "/pages-venue/venueList/index"
-  },
   "ballBitDetail": {
     "path": "/pages-venueball/ballBitDetail/index"
   },
@@ -102,12 +105,6 @@ export const routes = {
   },
   "ballBitSquareGolf": {
     "path": "/pages-venueball/ballBitSquareGolf/index"
-  },
-  "cardList": {
-    "path": "/pages-venuecard/cardList/index"
-  },
-  "courseList": {
-    "path": "/pages-venuecourse/courseList/index"
   },
   "myTicketDetail": {
     "path": "/pages-venueticket/myTicketDetail/index"

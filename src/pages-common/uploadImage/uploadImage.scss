@@ -1,22 +1,5 @@
 @use '@/styles/variables.scss' as *;
 
-// 图片变量
-$img-browsing-bg: '#{$img-base}gameImage3a09555474d04967934ce16e691e3524.png';
-
-.page-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-  background-color: $color-bg-page;
-  background-image: url($img-browsing-bg);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 100% auto;
-  box-sizing: border-box;
-}
-
 .page-scroll-content {
   flex: 1;
   overflow-y: auto;
