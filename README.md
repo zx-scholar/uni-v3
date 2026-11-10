@@ -37,6 +37,7 @@ pnpm dev:mp-weixin:lanzhou    # 兰州奥体
 ```
 ├─ scripts/
 │  ├─ gen-pages.mjs        # 核心：按环境组装 src/pages.json（详见下文）
+│  ├─ gen-manifest.mjs     # 按环境覆写 src/manifest.json 的 mp-weixin.appid
 │  └─ gen-routes.mjs       # 根据 pages.json 生成 src/utils/routes.ts 别名字典
 ├─ vite.config.js          # 路由生成插件挂载 + px→rpx PostCSS + 环境代理
 └─ src/
@@ -61,16 +62,24 @@ pnpm dev:mp-weixin:lanzhou    # 兰州奥体
    │  ├─ routes-alias.mjs  # ✍ 路由别名映射（可选）
    │  └─ appConfig.ts      # 运行时环境配置出口（冻结对象 env / wechatParam）
    ├─ styles/              # variables.scss($color-*) / utility.scss(原子类) / layout / iconfont
+   ├─ manifest.json        # ⚠️ mp-weixin.appid 由生成器覆写；其余字段（h5 router 等）仍手写
    └─ pages.json           # ⚠️ 自动生成，禁改
 ```
 
-**✍ = 手动维护，⚠️ = 自动生成严禁手改**（`pages.json` 与 `routes.ts` 均已入库，内容无变化时生成器会跳过写入，不会产生 diff 噪音）。
+**✍ = 手动维护，⚠️ = 自动生成严禁手改**（`pages.json`、`routes.ts` 与 `manifest.json` 的 `mp-weixin.appid` 均已入库，内容无变化时生成器会跳过写入，不会产生 diff 噪音）。
 
 ## 多环境体系（重要）
 
 一个 `--mode` 需要**两处注册**，缺一不可：
 
 1. **`src/config/environments.ts`**：后端域名（`origin`）、API 路径前缀（`webRoot`，同时是 dev 代理的匹配路径）、微信 appid、apiKey/apiSecret、腾讯地图 key、OSS 地址等。运行时代码通过 `import { env } from '@/config/appConfig'` 读取（冻结对象）。多数环境相同的字段在 `DEFAULT_ENV_CONFIG` 收口，环境条目用 `defineEnv()` 只写差异项（身份字段 `title` / `name` / `appid` / `apiKey` / `apiSecret` 必填，漏写会直接报 TS 错误）。
+
+   > 这里的 `appid` 有两处去向，缺一不可：
+   > 1. 接口入参（`/api/miniApp/queryMiniAppInfo` 的 `appId`）；
+   > 2. **`scripts/gen-manifest.mjs` 会在每次 dev/build 启动时把 `mp-weixin.appid` 覆写进 `src/manifest.json`**。
+   >    uni-app CLI 只认 `manifest.json`，它对 `--mode` 一无所知——少了这一步，`build:mp-weixin:golf` 打出来的包仍然挂在 `manifest.json` 里那个 appid 名下。
+   >    因此 `manifest.json` 的 `mp-weixin.appid` 会随构建环境变化产生 diff，属正常，随功能一起提交（与 `pages.json` 同一策略）。
+
 2. **`src/config/features.config.mjs`**：该环境打入哪些子包（`environments[mode]` 数组），以及分包预下载规则 `preloadRule`。
 
 > ⚠️ **mode 任一侧未注册都会直接失败**，绝不会静默回退到别的环境：
@@ -87,13 +96,19 @@ Vite dev 代理按 `webRoot → origin` 自动配置（见 `vite.config.js`）�
 - **SCSS 里取图**：用 `$img-base`（`src/styles/variables.scss`，无尾斜杠，拼接时补 `/`），例如 `url('#{$img-base}/gameImagexxx.png')`。⚠️ `$img-base` 与 `env.ossPrefix` 是两套编译期/运行期常量，改一处必须同步另一处。
 - **上传图片**：走后端 `/api/common/uploadFile`，客户端不直连 OSS。
 
-> ⚠️ 仓库根目录的 `.env.development` / `.env.production` 是**失效的并行配置**（代码里没有任何 `loadEnv` / `import.meta.env.VITE_*` 引用），真实来源只有 `environments.ts`。且 `.env.production` 的 appid/域名与真实配置不一致，勿据此判断环境参数。
+> ⚠️ 仓库里**没有 `.env.*` 文件**：历史上那套 `.env.development` / `.env.production` 是失效的并行配置（代码里没有任何 `loadEnv` / `import.meta.env.VITE_*` 引用），且里面的 appid/域名与真实配置不一致，已于清理中删除，`.gitignore` 现在用 `.env.*` 全量兜住。环境参数的唯一来源是 `src/config/environments.ts`。
+>
+> ⚠️ 另需知悉：`apiKey` / `apiSecret` 会随源码打进前端产物，小程序包可被反编译。当前的 MD5 算签只是**防误改/防重放**，不是安全边界。需要真正防伪造时，应改为后端下发短时凭证或把签名移到服务端。
 
-## 核心机制：路由自动生成
+## 核心机制：配置自动生成
 
 ```
 pnpm dev/build（带 --mode）
    │  vite.config.js 的 defineConfig 回调最开头（早于 uni 插件一切钩子）
+   ▼
+scripts/gen-manifest.mjs
+   按 mode 取 ENV_DICTIONARY[mode].appid → 覆写 src/manifest.json 的 mp-weixin.appid
+   （内容不变则跳过；未知 mode / 缺 appid 直接报错）
    ▼
 scripts/gen-pages.mjs
    1. 读 features.config.mjs 白名单（严格校验 mode）
@@ -109,13 +124,14 @@ scripts/gen-routes.mjs
    为每个页面生成路由别名 → 写 src/utils/routes.ts（含 as const 类型）
 ```
 
-**触发时机**：每次 dev/build 启动；dev 下修改 `features.config.mjs` / `routes-alias.mjs` / `pages.base.json` / `pages.config.mjs` 热更新重新生成；自动扫描型分包的 `.vue` 增删由 watcher 联动（200ms 去抖）。
+**触发时机**：每次 dev/build 启动；dev 下修改 `features.config.mjs` / `routes-alias.mjs` / `pages.base.json` / `pages.config.mjs` 热更新重新生成；修改 `environments.ts` 会重新同步 manifest；自动扫描型分包的 `.vue` 增删由 watcher 联动（200ms 去抖）。
 
 **别名规则**（`src/utils/routes.ts`）：取路径末段；末段为 `index` 则取上级目录名；`kebab-case → camelCase`（如 `order-info → orderInfo`）。命中 `routes-alias.mjs` 的路径完全以配置为准。同名别名冲突时控制台告警（后者覆盖，前者用完整路径跳转）。tabBar 页面带 `tab: true`。
 
 **手动触发**（排查用）：
 
 ```bash
+node scripts/gen-manifest.mjs [mode] # 不传 mode = development；只改 manifest 的 appid
 node scripts/gen-pages.mjs [mode]    # 不传 mode = development（default 白名单）
 node scripts/gen-routes.mjs
 ```
@@ -147,6 +163,7 @@ onLoad((options) => { const params = parseParams(options) })
 ## 样式约定
 
 - **px 自动转 rpx**（编译期 PostCSS，1px = 1rpx，按 750 设计稿直接写 px）；`0px`、`1px`（细边框）保留；行内注释 `/* no */` 或 `/* px */` 可跳过转换。
+  - 转换**只由** `vite.config.js` 里的 `pxToRpxPlugin` 完成。`manifest.json` 历史上有个 `transformPx` 字段，在 Vue3 + Vite CLI 工具链下没有任何代码读取它（实测开/关产物 sha1 完全一致），已删除 —— 不要指望框架侧再做一层转换。
 - 颜色统一用 `src/styles/variables.scss` 的 `$color-*` 变量；常用布局/间距/圆角用 `src/styles/utility.scss` 原子类。
 - 页面样式独立 `.scss` 文件与 `.vue` 成对存放（参照 `src/pages/*` 现状）。
 
@@ -161,20 +178,23 @@ onLoad((options) => { const params = parseParams(options) })
 | 现象 | 原因与处理 |
 |---|---|
 | `未知构建环境 mode="xxx"` 构建终止 | mode 没在 `features.config.mjs` 的 `environments` 注册（或拼错），按报错列出的可用环境核对 |
+| `[Manifest Sync] 未知构建环境 mode="xxx"` | 同上，但来自 `gen-manifest.mjs`；另外该环境还必须配了 `appid` |
 | `配置了不存在的页面: [xxx]` | 分包 `pages.config.mjs` 里的 path 没有对应 `.vue` 文件 |
 | `路由别名冲突` 警告 | 两个页面生成了同一别名，后者覆盖；在 `routes-alias.mjs` 里给其中一个改名 |
 | dev 启动时 `routeCheck` 警告 | `routes.ts` 与 `pages.json` 不一致，重启一次 dev 让生成器先跑 |
-| pages.json / routes.ts 意外变更 | 生成器内容不变会跳写；若出现 diff 说明路由确实变了，属正常，随功能一起提交 |
+| pages.json / routes.ts / manifest.json 意外变更 | 生成器内容不变会跳写；若出现 diff 说明配置确实变了，属正常，随功能一起提交 |
+| 打出的包 appid 不对 | 检查 `node scripts/gen-manifest.mjs <mode>` 是否被执行；`manifest.json` 的 `mp-weixin.appid` 是构建产物，以最后一次构建的 mode 为准 |
 
 ## AI 协作快速上下文
 
 给 AI 助手的速览（人类也可参考）：
 
-- **禁改**：`src/pages.json`、`src/utils/routes.ts`（自动生成，改了会被覆盖）。
+- **禁改**：`src/pages.json`、`src/utils/routes.ts`（自动生成，改了会被覆盖）；`src/manifest.json` 的 `mp-weixin.appid`（由 `gen-manifest.mjs` 覆写，其余字段仍可手改）。
 - **路由入口**：主包 → `src/pages.base.json`；分包 → `src/pages-*/pages.config.mjs`；白名单/预下载 → `src/config/features.config.mjs`；别名 → `src/config/routes-alias.mjs`。改这四个地方即可，不要直接碰生成产物。
 - **新页面**：以 `src/pages-template/pagesBasic` 为骨架（`index.vue + index.scss`），注册进分包清单；组件放分包内用 PascalCase 命名（不会被登记为页面）。
-- **验证命令**：`node scripts/gen-pages.mjs [mode]`（应看到各子包挂载/排除日志且 exit 0）；拼错 mode 必须报错退出。
-- **环境**：新增环境必须同时改 `environments.ts`（连接信息）与 `features.config.mjs`（子包白名单），缺任意一侧都直接构建失败；`environments.ts` 里 `origin`=后端域名、`webRoot`=API 路径前缀（不要再新增同义的 `prefix` 字段）。
+- **验证命令**：`node scripts/gen-manifest.mjs [mode]` + `node scripts/gen-pages.mjs [mode]`（应看到各子包挂载/排除日志且 exit 0）；拼错 mode 必须报错退出。
+- **环境**：新增环境必须同时改 `environments.ts`（连接信息，含 appid）与 `features.config.mjs`（子包白名单），缺任意一侧都直接构建失败；`environments.ts` 里 `origin`=后端域名、`webRoot`=API 路径前缀（不要再新增同义的 `prefix` 字段）。
+- **签名**：`src/utils/crypto.js` 的参数排序必须用码点比较，**禁止 `localeCompare`**（依赖宿主 locale，会导致真机与开发者工具签名不一致）。
 - **样式**：写 px 即可（自动转 rpx）；颜色只用 `$color-*`；优先 utility 原子类。
 - **跳转**：一律用 `@/utils/router` 的别名跳转，参数用 `parseParams` 还原；tab 页不支持参数。
 - **生成器健壮性**：行尾已做 CRLF 归一化（autocrlf 检出也不误重写）；`features.config.mjs` 保持纯数据（禁 TS 语法/外部依赖）。

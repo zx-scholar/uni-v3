@@ -42,7 +42,10 @@ export function getCodedParam(url, data = {}, requestOps = {}) {
       value: fullData[key] === undefined || fullData[key] === null ? '' : fullData[key]
     }))
 
-    fullDataArr.sort((a, b) => a.key.localeCompare(b.key))
+    // ⚠️ 禁用 localeCompare: 它依赖宿主 ICU/locale, 小程序 iOS(JSCore) 与开发者工具(V8)
+    // 对大小写、标点的排序结果可能不一致, 会导致签名偶发不匹配(工具能过、真机报签名错误)。
+    // 必须用与运行环境无关的码点比较。
+    fullDataArr.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
 
     const signStr = fullDataArr.reduce((last, v) => `${last}${v.key}=${v.value}`, '')
 

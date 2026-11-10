@@ -25,9 +25,11 @@ unpackage
 
 
 # 环境变量文件（可能包含敏感信息）
+# 本项目真实环境配置只有 src/config/environments.ts，
+# 历史上的 .env.* 并行配置已删除，这里全量兜住防止再次误提交
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
 # 操作系统
 Thumbs.db

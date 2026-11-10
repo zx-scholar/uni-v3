@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
 import { generatePagesJson, watchAutoScanPages } from './scripts/gen-pages.mjs';
+import { syncManifest } from './scripts/gen-manifest.mjs';
 import { ENV_DICTIONARY } from './src/config/environments';
 
 /**
  * 自定义 Vite 插件：与环境 mode 联动的可插拔模块化编译插件
  * - 自动识别当前环境模式 (--mode qdgx / hangzhou / sportsdev / tangfang 等)
  * - 动态匹配 src/config/features.config.ts 生成对应环境的 src/pages.json 和 src/utils/routes.ts
+ * - 按同一 mode 覆写 src/manifest.json 的 mp-weixin.appid（否则产物 appid 与本环境脱钩）
  */
 const pluggablePagesPlugin = (mode, command) => ({
   name: 'vite-plugin-pluggable-pages',
@@ -14,6 +16,7 @@ const pluggablePagesPlugin = (mode, command) => ({
   // 首次生成已在 defineConfig 回调体最开头完成（早于 uni 插件的所有钩子）。
   async buildStart() {
     if (command === 'build') {
+      await syncManifest(mode, command)
       await generatePagesJson(mode, command)
     }
   },
@@ -22,11 +25,19 @@ const pluggablePagesPlugin = (mode, command) => ({
     watchAutoScanPages(server, mode);
   },
   async handleHotUpdate({ file }) {
+    const normalized = String(file).replace(/\\/g, '/')
+
+    // environments.ts 变了：appid 等身份信息需要重新落到 manifest.json
+    if (normalized.includes('config/environments.ts')) {
+      await syncManifest(mode, 'serve')
+      return
+    }
+
     if (
-      file.includes('features.config.mjs') ||
-      file.includes('routes-alias.mjs') ||
-      file.includes('pages.base.json') ||
-      file.includes('pages.config.mjs')
+      normalized.includes('features.config.mjs') ||
+      normalized.includes('routes-alias.mjs') ||
+      normalized.includes('pages.base.json') ||
+      normalized.includes('pages.config.mjs')
     ) {
       // dev 场景：配置热更新时重新生成，失败仅警告不中断
       await generatePagesJson(mode, 'serve')
@@ -61,9 +72,13 @@ pxToRpxPlugin.postcss = true;
 
 // https://vitejs.dev/config/
 export default defineConfig(async ({ mode, command }) => {
-  // ⏱ 尽早生成 pages.json：用户 config 函数先于所有插件钩子执行，
-  // 确保 uni CLI/插件首次读取 src/pages.json 时已是本次环境的最新内容。
+  // ⏱ 尽早生成配置产物：用户 config 函数先于所有插件钩子执行，
+  // 确保 uni CLI/插件首次读取 src/pages.json、src/manifest.json 时已是本次环境的最新内容。
   // （此前挂在 buildStart 里，uni 早期阶段读到的是上一次运行留下的旧文件）
+  //
+  // ⚠️ 顺序不能反：先落 manifest 的 appid，再生成 pages.json —— 后者会联动重写 routes.ts，
+  // 两者都必须在 uni 插件读取配置之前完成。
+  await syncManifest(mode, command);
   await generatePagesJson(mode, command);
 
   // 从集中式多环境字典 src/config/environments.ts 读取当前 mode 的代理配置

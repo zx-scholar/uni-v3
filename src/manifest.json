@@ -4,7 +4,6 @@
   "description": "uni-app (Vue3 + Vite + JS) 跨端框架",
   "versionName": "1.0.0",
   "versionCode": "100",
-  "transformPx": true,
   "h5": {
     "title": "uni-app Vue3 Vite",
     "router": {
@@ -13,7 +12,7 @@
     }
   },
   "mp-weixin": {
-    "appid": "wx74ff1858ef8d829a",
+    "appid": "wx7a26c58e9b0f27bf",
     "setting": {
       "urlCheck": false,
       "es6": true,

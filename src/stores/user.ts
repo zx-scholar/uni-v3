@@ -102,8 +102,10 @@ export const useUserStore = defineStore(
   },
   {
     persist: {
+      // 存储键是数据身份标识，一经发布不可改名（改名等于丢弃用户已有的持久化数据）
       key: 'user-store',
-      // 只持久化登录凭证，用户详情每次启动重新获取
+      // 只持久化登录凭证，用户详情每次启动重新获取（避免客户端缓存脏用户数据）
+      // ⚠️ 字段名必须是 pick：v3 的 paths 在 v4 已废弃，写错会被静默忽略（不报错、不生效）
       pick: ['openId', 'unionId', 'accessToken', 'accountId', 'coAppId', 'mobileNum'],
     },
   }
