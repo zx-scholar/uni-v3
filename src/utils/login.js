@@ -1,6 +1,6 @@
 import { useAppStore } from '@/stores/app';
 import { useUserStore } from '@/stores/user';
-import { loginByWechatCode, queryUserinfoByUnionId } from '@/api';
+import { loginByWechatCode, queryUserByOpenId } from '@/api';
 import { env } from '@/config/appConfig';
 
 /**
@@ -44,7 +44,7 @@ export default async function login() {
     if (!openId) {
       const loginRes = await loginByWechatCode({
         code: wxLoginRes.code,
-        wechatMiniAppId: appStore.miniAppInfo.id,
+        wechatMiniAppId: appStore.miniAppInfo.id
       });
 
       openId = loginRes.openId;
@@ -59,23 +59,46 @@ export default async function login() {
       return userStore.userInfo;
     }
 
-    const { netUser = {} } = await queryUserinfoByUnionId(openId, unionId || '', appStore.centerId);
+    // 查询接口「查无此人」也会返回 error: 0，必须靠用户对象是否存在判断
+    const res = await queryUserByOpenId({
+      openId,
+      miniAppId: appStore.miniAppInfo.id,
+      centerId: appStore.centerId
+    });
 
-    if (!netUser?.netUserId) {
-      console.warn('[login] 未查询到用户信息', netUser);
-      return netUser;
+    const netUser = pickNetUser(res);
+    if (!netUser) {
+      // 未注册是正常状态，不是异常：保持未登录，让用户去登录页绑定
+      console.log('[login] 该 openId 未绑定用户，按未登录处理');
+      return null;
     }
 
-    // 写入 store（accessToken 等自动持久化，netUser 会话级）
+    // 写入 store（凭证自动持久化，用户详情会话级）
+    // 统一走 setLoginResult → setNetUser，字段映射收敛在 store 内（不与登录页各写一套）
     userStore.setLoginResult(netUser);
-    userStore.setNetUserId(netUser.netUserId);
-    userStore.setUserInfo({ ...netUser, avatarUrl: netUser.avatar });
 
     return netUser;
   } catch (error) {
     console.error('[login] 登录异常:', error);
     return null;
   }
+}
+
+/**
+ * 从查询接口返回中取出用户对象
+ *
+ * 兼容后端三种返回形态：
+ *   1. { netUser: {...}, error: 0 }      ← 当前接口
+ *   2. { user: {...} }
+ *   3. 扁平的 netUser 字段（历史接口形态）
+ *
+ * 取不到带 netUserId 的对象时返回 null —— 即「该 openId 尚无用户」。
+ */
+function pickNetUser(res) {
+  if (!res || typeof res !== 'object') return null;
+  const candidates = [res.netUser, res.user, res.userInfo, res];
+  const user = candidates.find(item => item && item.netUserId);
+  return user || null;
 }
 
 /** H5 环境：使用默认测试用户数据，绕过 wx.login */
@@ -85,21 +108,19 @@ function h5MockLogin(userStore) {
   const DEFAULT_USER = {
     avatar: `${env.ossPrefix}center/10000000/venueImage/00f1b345a4d644b4a088b862d8d847b4.png`,
     centerId: 10000000,
-    createTime: "2024-01-16 14:12:49",
-    gender: "0",
-    mobileNum: "18251852533",
-    name: "18251852533",
+    createTime: '2024-01-16 14:12:49',
+    gender: '0',
+    mobileNum: '18251852533',
+    name: '18251852533',
     netUserId: 2024011600001334,
-    nickName: "%E5%BE%AE%E4%BF%A1%E7%94%A8%E6%88%B7112",
-    status: "1",
-    token: "88093e4c626180d8d0dbf0ad71b05d47",
-    tokenTime: "2024-01-16 14:12:49",
-    updateTime: "2024-01-16 14:12:49"
+    nickName: '%E5%BE%AE%E4%BF%A1%E7%94%A8%E6%88%B7112',
+    status: '1',
+    token: '88093e4c626180d8d0dbf0ad71b05d47',
+    tokenTime: '2024-01-16 14:12:49',
+    updateTime: '2024-01-16 14:12:49'
   };
 
-  userStore.setLoginResult(DEFAULT_USER);
-  userStore.setNetUserId(DEFAULT_USER.netUserId);
-  userStore.setUserInfo({ ...DEFAULT_USER, avatarUrl: '' });
+  userStore.setNetUser(DEFAULT_USER);
   console.log('[login] H5 模式使用默认测试用户:', DEFAULT_USER.netUserId);
   return DEFAULT_USER;
 }

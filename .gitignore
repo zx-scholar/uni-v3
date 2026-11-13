@@ -34,3 +34,6 @@ unpackage
 # 操作系统
 Thumbs.db
 Desktop.ini
+
+# husky 内部文件（每次 install 自动生成）
+.husky/_

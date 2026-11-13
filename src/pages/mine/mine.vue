@@ -4,14 +4,17 @@
 
     <scroll-view class="page-scroll-content scrollbar-hide" scroll-y>
       <view class="scroll-wrapper mine-wrapper px-30 pt-10">
-
         <!-- 用户基础信息卡片 -->
         <view
           class="user-card bg-gradient-btn flex items-center px-30 py-40 mb-30 radius-20 shadow-2 tappable"
           :class="{ 'login-entry': !userStore.isLoggedIn }"
           @click="handleUserCardClick"
         >
-          <image class="w-120 h-120 radius-full flex-shrink-0 bg-card mr-24" :src="userAvatar" mode="aspectFill" />
+          <image
+            class="w-120 h-120 radius-full flex-shrink-0 bg-card mr-24"
+            :src="userAvatar"
+            mode="aspectFill"
+          />
           <view class="flex-1 flex-column overflow-hidden">
             <text class="fz-34 fw-7 c-t-white text-1line">{{ userName }}</text>
             <text class="fz-24 c-t-white opacity-75 mt-8 text-1line">{{ userDescription }}</text>
@@ -31,12 +34,16 @@
               class="menu-item flex-column items-center py-16 tappable"
               @click="handleMenuItemClick(item)"
             >
-              <text class="menu-item__icon iconfont c-primary lh-1 w-80 h-80 center" :class="item.icon"></text>
-              <text class="menu-item__title fz-24 lh-1-2 text-center c-t-primary mt-10">{{ item.text }}</text>
+              <text
+                class="menu-item__icon iconfont c-primary lh-1 w-80 h-80 center"
+                :class="item.icon"
+              ></text>
+              <text class="menu-item__title fz-24 lh-1-2 text-center c-t-primary mt-10">
+                {{ item.text }}
+              </text>
             </view>
           </view>
         </view>
-
       </view>
     </scroll-view>
 
@@ -54,6 +61,7 @@ import { useUserStore } from '@/stores/user';
 import ShareDialog from '@/components/ShareDialog/ShareDialog.vue';
 import CustomTabBar from '@/components/CustomTabBar/CustomTabBar.vue';
 import { routes } from '@/utils/routes';
+import { LOGIN_PAGE } from '@/utils/router';
 
 export default {
   name: 'MinePage',
@@ -68,10 +76,20 @@ export default {
             { icon: 'icon-hetong', text: '个人资料', routerPath: 'personInfo' },
             { icon: 'icon-hetong', text: '资料名片', routerPath: 'profile' },
             { icon: 'icon-sousuo', text: '浏览记录', routerPath: 'browsingHistory' },
-            { icon: 'icon-hetong', text: '用户协议', routerPath: 'userAgreement', params: { type: 'user' } },
-            { icon: 'icon-hetong', text: '会员协议', routerPath: 'userAgreement', params: { type: 'member' } },
-            { icon: 'icon-hetong', text: '保险服务', routerPath: 'insuranceService' },
-          ],
+            {
+              icon: 'icon-hetong',
+              text: '用户协议',
+              routerPath: 'userAgreement',
+              params: { type: 'user' }
+            },
+            {
+              icon: 'icon-hetong',
+              text: '会员协议',
+              routerPath: 'userAgreement',
+              params: { type: 'member' }
+            },
+            { icon: 'icon-hetong', text: '保险服务', routerPath: 'insuranceService' }
+          ]
         },
         {
           title: '💳 订单与资产中心',
@@ -80,8 +98,8 @@ export default {
             { icon: 'icon-jifen1', text: '积分明细', routerPath: 'pointsDetail' },
             { icon: 'icon-fenxiang', text: '我的订单', routerPath: 'orderInfoGolf' },
             { icon: 'icon-hetong', text: '我的票券', routerPath: 'myTicketList' },
-            { icon: 'icon-renzheng', text: '支付成功', routerPath: 'paymentSuccess' },
-          ],
+            { icon: 'icon-renzheng', text: '支付成功', routerPath: 'paymentSuccess' }
+          ]
         },
         {
           title: '🏆 赛事与竞技服务',
@@ -90,8 +108,8 @@ export default {
             { icon: 'icon-jiangbei1', text: '赛事项目', routerPath: 'eventProject' },
             { icon: 'icon-jiangbei1', text: '赛事活动', routerPath: 'eventList' },
             { icon: 'icon-jiangbei1', text: '赛事榜单', routerPath: 'eventRanking' },
-            { icon: 'icon-gaoerfu', text: '球员主页', routerPath: 'playerHome' },
-          ],
+            { icon: 'icon-gaoerfu', text: '球员主页', routerPath: 'playerHome' }
+          ]
         },
         {
           title: '⚽ 场馆与社交约球',
@@ -102,8 +120,8 @@ export default {
             { icon: 'icon-shequhuodong', text: '约球广场', routerPath: 'ballBitSquareGolf' },
             { icon: 'icon-shequhuodong', text: '约球详情', routerPath: 'ballBitDetail' },
             { icon: 'icon-wujiaoxing1', text: '评价球友', routerPath: 'ballBitEvaluateGolf' },
-            { icon: 'icon-shequhuodong', text: '我的约球', routerPath: 'ballBitMyList' },
-          ],
+            { icon: 'icon-shequhuodong', text: '我的约球', routerPath: 'ballBitMyList' }
+          ]
         },
         {
           title: '🛠️ 开发与通用工具',
@@ -114,10 +132,10 @@ export default {
             { icon: 'icon-jia', text: '图片上传', routerPath: 'uploadImage' },
             { icon: 'icon-jia', text: '文件上传', routerPath: 'uploadFile' },
             { icon: 'icon-fenxiang', text: '分享组件', action: 'share' },
-            { icon: 'icon-cuowu2', text: '重置缓存', routerPath: null },
-          ],
-        },
-      ],
+            { icon: 'icon-cuowu2', text: '重置缓存', routerPath: null }
+          ]
+        }
+      ]
     };
   },
   computed: {
@@ -128,31 +146,36 @@ export default {
       return useUserStore();
     },
     userAvatar() {
-      return this.userStore.isLoggedIn ? this.userStore.userInfo.avatarUrl || '/static/logo.png' : '/static/logo.png';
+      return this.userStore.isLoggedIn
+        ? this.userStore.userInfo.avatarUrl || '/static/logo.png'
+        : '/static/logo.png';
     },
     userName() {
       return this.userStore.isLoggedIn ? this.userStore.userInfo.name || '微信用户' : '点击登录';
     },
     userDescription() {
-      return this.userStore.isLoggedIn ? `手机号：${this.userStore.mobileNum || '未绑定'}` : '登录后查看个人信息';
+      return this.userStore.isLoggedIn
+        ? `手机号：${this.userStore.mobileNum || '未绑定'}`
+        : '登录后查看个人信息';
     },
     // 根据已编译的绝对路由清单动态过滤可用功能菜单
     computedCategories() {
       return this.categories
-        .map((cat) => ({
+        .map(cat => ({
           ...cat,
-          items: cat.items.filter((item) => {
+          items: cat.items.filter(item => {
             if (item.action || item.routerPath === null) return true;
             return !!routes[item.routerPath];
-          }),
+          })
         }))
-        .filter((cat) => cat.items.length > 0);
-    },
+        .filter(cat => cat.items.length > 0);
+    }
   },
   methods: {
     handleUserCardClick() {
       if (!this.userStore.isLoggedIn) {
-        router.push('login');
+        // 登录页按平台区分：小程序 login / H5 loginH5
+        router.push(LOGIN_PAGE.route);
       } else {
         console.log('已经登录');
       }
@@ -171,14 +194,14 @@ export default {
     handleClear() {
       this.appStore.clearMiniAppInfo();
       uni.showToast({ title: '缓存已重置', icon: 'none' });
-    },
+    }
   },
   onShareAppMessage() {
     return {
       title: '个人中心',
-      path: '/pages/mine/mine',
+      path: '/pages/mine/mine'
     };
-  },
+  }
 };
 </script>
 

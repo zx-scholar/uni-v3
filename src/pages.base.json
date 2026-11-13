@@ -13,7 +13,7 @@
       }
     },
     {
-      "path": "pages/login/login",
+      "path": "pages/login/index",
       "style": {
         "navigationStyle": "custom"
       }

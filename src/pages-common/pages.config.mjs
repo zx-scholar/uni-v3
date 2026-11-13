@@ -2,6 +2,7 @@ export default {
   root: 'pages-common',
   name: 'pages-common',
   pages: [
+    { path: 'loginH5/index', style: { navigationStyle: 'custom' } },
     { path: 'personInfo/personInfo', style: { navigationStyle: 'custom' } },
     {
       path: 'userAgreement/userAgreement',

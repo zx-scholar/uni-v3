@@ -1,118 +1,121 @@
 /**
  * ⚠️ 本文件由 scripts/gen-routes.mjs 根据 src/pages.json 自动编译生成，请勿手动修改！
- * 自动生成时间: 2026/11/10 10:43:48
+ * 自动生成时间: 2026/11/13 09:08:01
  */
 
 export interface RouteItem {
-  path: string
-  tab?: boolean
+  path: string;
+  tab?: boolean;
 }
 
 export const routes = {
-  "home": {
-    "path": "/pages/index/index",
-    "tab": true
+  home: {
+    path: '/pages/index/index',
+    tab: true
   },
-  "index": {
-    "path": "/pages/index/index",
-    "tab": true
+  index: {
+    path: '/pages/index/index',
+    tab: true
   },
-  "mine": {
-    "path": "/pages/mine/mine",
-    "tab": true
+  mine: {
+    path: '/pages/mine/mine',
+    tab: true
   },
-  "login": {
-    "path": "/pages/login/login"
+  login: {
+    path: '/pages/login/index'
   },
-  "event": {
-    "path": "/pages/event/event",
-    "tab": true
+  event: {
+    path: '/pages/event/event',
+    tab: true
   },
-  "personInfo": {
-    "path": "/pages-common/personInfo/personInfo"
+  loginH5: {
+    path: '/pages-common/loginH5/index'
   },
-  "userAgreement": {
-    "path": "/pages-common/userAgreement/userAgreement"
+  personInfo: {
+    path: '/pages-common/personInfo/personInfo'
   },
-  "insuranceService": {
-    "path": "/pages-common/insuranceService/insuranceService"
+  userAgreement: {
+    path: '/pages-common/userAgreement/userAgreement'
   },
-  "profile": {
-    "path": "/pages-common/profile/profile"
+  insuranceService: {
+    path: '/pages-common/insuranceService/insuranceService'
   },
-  "uploadImage": {
-    "path": "/pages-common/uploadImage/uploadImage"
+  profile: {
+    path: '/pages-common/profile/profile'
   },
-  "imageRecord": {
-    "path": "/pages-common/imageRecord/imageRecord"
+  uploadImage: {
+    path: '/pages-common/uploadImage/uploadImage'
   },
-  "uploadFile": {
-    "path": "/pages-common/uploadFile/index"
+  imageRecord: {
+    path: '/pages-common/imageRecord/imageRecord'
   },
-  "fileRecord": {
-    "path": "/pages-common/fileRecord/index"
+  uploadFile: {
+    path: '/pages-common/uploadFile/index'
   },
-  "eventList": {
-    "path": "/pages-event/eventList/index"
+  fileRecord: {
+    path: '/pages-common/fileRecord/index'
   },
-  "eventProject": {
-    "path": "/pages-event/eventProject/index"
+  eventList: {
+    path: '/pages-event/eventList/index'
   },
-  "eventRanking": {
-    "path": "/pages-event/eventRanking/index"
+  eventProject: {
+    path: '/pages-event/eventProject/index'
   },
-  "eventsPlan": {
-    "path": "/pages-event/eventsPlan/eventsPlan"
+  eventRanking: {
+    path: '/pages-event/eventRanking/index'
   },
-  "browsingHistory": {
-    "path": "/pages-golf/browsingHistory/browsingHistory"
+  eventsPlan: {
+    path: '/pages-event/eventsPlan/eventsPlan'
   },
-  "playerHome": {
-    "path": "/pages-golf/playerHome/index"
+  browsingHistory: {
+    path: '/pages-golf/browsingHistory/browsingHistory'
   },
-  "orderDetailGolf": {
-    "path": "/pages-pay/orderDetailGolf/index"
+  playerHome: {
+    path: '/pages-golf/playerHome/index'
   },
-  "orderInfoGolf": {
-    "path": "/pages-pay/orderInfoGolf/index"
+  orderDetailGolf: {
+    path: '/pages-pay/orderDetailGolf/index'
   },
-  "paymentSuccess": {
-    "path": "/pages-pay/paymentSuccess/index"
+  orderInfoGolf: {
+    path: '/pages-pay/orderInfoGolf/index'
   },
-  "myPoints": {
-    "path": "/pages-point/myPoints/index"
+  paymentSuccess: {
+    path: '/pages-pay/paymentSuccess/index'
   },
-  "pointsDetail": {
-    "path": "/pages-point/pointsDetail/index"
+  myPoints: {
+    path: '/pages-point/myPoints/index'
   },
-  "demo": {
-    "path": "/pages-template/demo/demo"
+  pointsDetail: {
+    path: '/pages-point/pointsDetail/index'
   },
-  "pagesBasic": {
-    "path": "/pages-template/pagesBasic/index"
+  demo: {
+    path: '/pages-template/demo/demo'
   },
-  "template": {
-    "path": "/pages-template/template/template"
+  pagesBasic: {
+    path: '/pages-template/pagesBasic/index'
   },
-  "ballBitDetail": {
-    "path": "/pages-venueball/ballBitDetail/index"
+  template: {
+    path: '/pages-template/template/template'
   },
-  "ballBitEvaluateGolf": {
-    "path": "/pages-venueball/ballBitEvaluateGolf/index"
+  ballBitDetail: {
+    path: '/pages-venueball/ballBitDetail/index'
   },
-  "ballBitMyList": {
-    "path": "/pages-venueball/ballBitMyList/index"
+  ballBitEvaluateGolf: {
+    path: '/pages-venueball/ballBitEvaluateGolf/index'
   },
-  "ballBitSquareGolf": {
-    "path": "/pages-venueball/ballBitSquareGolf/index"
+  ballBitMyList: {
+    path: '/pages-venueball/ballBitMyList/index'
   },
-  "myTicketDetail": {
-    "path": "/pages-venueticket/myTicketDetail/index"
+  ballBitSquareGolf: {
+    path: '/pages-venueball/ballBitSquareGolf/index'
   },
-  "myTicketList": {
-    "path": "/pages-venueticket/myTicketList/index"
+  myTicketDetail: {
+    path: '/pages-venueticket/myTicketDetail/index'
+  },
+  myTicketList: {
+    path: '/pages-venueticket/myTicketList/index'
   }
-} as const
+} as const;
 
-export type RouteMap = typeof routes
-export type RouteName = keyof RouteMap
+export type RouteMap = typeof routes;
+export type RouteName = keyof RouteMap;

@@ -10,69 +10,85 @@
  */
 
 // 路由配置: 新增页面时同步维护 src/utils/routes.js 与 pages.json
-import { routes } from '@/utils/routes'
+import { routes } from '@/utils/routes';
 
-export { routes }
+export { routes };
 
 const tabPaths = new Set(
   Object.values(routes)
-    .filter((route) => route.tab)
-    .map((route) => route.path)
-)
+    .filter(route => route.tab)
+    .map(route => route.path)
+);
 
 /** 复杂参数前缀: onLoad 收到 'j:...' 时用 parseParams 还原为原值 */
-const JSON_PREFIX = 'j:'
+const JSON_PREFIX = 'j:';
 
 /** 防连点窗口 (仅 push) */
-const NAV_COOLDOWN = 300
+const NAV_COOLDOWN = 300;
 
 /** uni-app 页面栈最大层数 */
-const MAX_PAGE_STACK = 10
+const MAX_PAGE_STACK = 10;
 
-let lastNavTime = 0
+let lastNavTime = 0;
 
 /** 解析别名或原始路径 -> 路由配置 (未找到返回 null) */
 function resolveRoute(nameOrPath) {
-  if (typeof nameOrPath !== 'string') return null
-  return routes[nameOrPath] || routes[nameOrPath.toLowerCase()] || null
+  if (typeof nameOrPath !== 'string') return null;
+  return routes[nameOrPath] || routes[nameOrPath.toLowerCase()] || null;
 }
 
 /** 解析别名或原始路径 -> 页面绝对路径 (不含 query) */
 function resolvePath(nameOrPath) {
-  const route = resolveRoute(nameOrPath)
-  if (route) return route.path
+  const route = resolveRoute(nameOrPath);
+  if (route) return route.path;
   if (typeof nameOrPath === 'string' && nameOrPath.startsWith('/')) {
-    return nameOrPath.split('?')[0]
+    return nameOrPath.split('?')[0];
   }
-  return null
+  return null;
 }
 
 /** 判断别名/路径是否为 tabBar 页面 */
 export function isTabPage(nameOrPath) {
-  const path = resolvePath(nameOrPath)
-  return !!path && tabPaths.has(path)
+  const path = resolvePath(nameOrPath);
+  return !!path && tabPaths.has(path);
 }
+
+/**
+ * 登录页入口（按平台区分，两端是两个完全独立的页面）
+ *  - 微信小程序：pages/login/index            别名 login（微信授权 + 手机号快捷登录，主包）
+ *  - H5：        pages-common/loginH5/index    别名 loginH5（账号体系登录，随 common 分包）
+ *
+ * 所有"去登录"的调用点统一取这里，避免条件编译散落在业务代码里。
+ */
+export const LOGIN_PAGE = (() => {
+  // #ifdef H5
+  return { route: 'loginH5', path: 'pages-common/loginH5/index' };
+  // #endif
+  // #ifndef H5
+  return { route: 'login', path: 'pages/login/index' };
+  // #endif
+})();
 
 /** 编码单个参数值: 复杂值 JSON 序列化 + 'j:' 前缀, 其余原样字符串化 */
 function encodeParamValue(value) {
-  if (value === undefined || value === null) return ''
+  if (value === undefined || value === null) return '';
   if (typeof value === 'object') {
-    return JSON_PREFIX + encodeURIComponent(JSON.stringify(value))
+    return JSON_PREFIX + encodeURIComponent(JSON.stringify(value));
   }
-  return String(value)
+  return String(value);
 }
 
 /** 将对象格式的 params 自动格式化为 URL Query 字符串 */
 function buildQueryString(params = {}) {
-  const keys = Object.keys(params)
-  if (!keys.length) return ''
+  const keys = Object.keys(params);
+  if (!keys.length) return '';
   const queryStr = keys
-    .map((key) => {
-      const val = encodeParamValue(params[key])
-      return `${encodeURIComponent(key)}=${encodeURIComponent(val)}`
+    .map(key => {
+      const val = encodeParamValue(params[key]);
+      return `${encodeURIComponent(key)}=${encodeURIComponent(val)}`;
     })
-    .join('&')
-  return `?${queryStr}`
+    .join('&');
+  return `?${queryStr}`;
 }
 
 /**
@@ -82,26 +98,26 @@ function buildQueryString(params = {}) {
  * 示例: onLoad(options) { const params = parseParams(options) }
  */
 export function parseParams(options = {}) {
-  const result = {}
-  Object.keys(options).forEach((key) => {
-    const raw = options[key]
+  const result = {};
+  Object.keys(options).forEach(key => {
+    const raw = options[key];
     if (typeof raw === 'string' && raw.startsWith(JSON_PREFIX)) {
-      const body = raw.slice(JSON_PREFIX.length)
+      const body = raw.slice(JSON_PREFIX.length);
       try {
-        result[key] = JSON.parse(body)
-        return
+        result[key] = JSON.parse(body);
+        return;
       } catch (error) {
         try {
-          result[key] = JSON.parse(decodeURIComponent(body))
-          return
+          result[key] = JSON.parse(decodeURIComponent(body));
+          return;
         } catch (error2) {
           // 解析失败按普通字符串处理
         }
       }
     }
-    result[key] = raw
-  })
-  return result
+    result[key] = raw;
+  });
+  return result;
 }
 
 /**
@@ -109,11 +125,11 @@ export function parseParams(options = {}) {
  * 用于 401 登录失效时记录来源页、登录成功后跳回
  */
 export function getCurrentPageUrl() {
-  const pages = getCurrentPages()
-  const current = pages[pages.length - 1]
-  if (!current) return ''
-  const route = `/${current.route || ''}`
-  return route + buildQueryString(current.options || {})
+  const pages = getCurrentPages();
+  const current = pages[pages.length - 1];
+  if (!current) return '';
+  const route = `/${current.route || ''}`;
+  return route + buildQueryString(current.options || {});
 }
 
 /** 基础跳转封装 (不做任何降级) */
@@ -122,12 +138,12 @@ function doNavigate(fn, url, description) {
     fn({
       url,
       success: resolve,
-      fail: (err) => {
-        console.error(`[router] ${description} 失败:`, err)
-        reject(err)
-      },
-    })
-  })
+      fail: err => {
+        console.error(`[router] ${description} 失败:`, err);
+        reject(err);
+      }
+    });
+  });
 }
 
 /** push 专用: navigateTo 失败时自动降级为 redirectTo */
@@ -136,39 +152,39 @@ function openPage(url, description) {
     uni.navigateTo({
       url,
       success: resolve,
-      fail: (err) => {
-        console.warn(`[router] ${description} 失败, 自动降级为 redirectTo:`, err)
+      fail: err => {
+        console.warn(`[router] ${description} 失败, 自动降级为 redirectTo:`, err);
         uni.redirectTo({
           url,
           success: resolve,
-          fail: (fallbackErr) => {
-            console.error(`[router] ${description} 降级跳转仍然失败:`, fallbackErr)
-            reject(fallbackErr)
-          },
-        })
-      },
-    })
-  })
+          fail: fallbackErr => {
+            console.error(`[router] ${description} 降级跳转仍然失败:`, fallbackErr);
+            reject(fallbackErr);
+          }
+        });
+      }
+    });
+  });
 }
 
 /** 页面栈深度是否接近上限 (push 前判断, 避免 navigateTo 失败) */
 function isStackAlmostFull() {
   try {
-    return getCurrentPages().length >= MAX_PAGE_STACK
+    return getCurrentPages().length >= MAX_PAGE_STACK;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
 /** 防连点: NAV_COOLDOWN 内仅允许一次 push */
 function checkCooldown() {
-  const now = Date.now()
+  const now = Date.now();
   if (now - lastNavTime < NAV_COOLDOWN) {
-    console.warn(`[router] 跳转过于频繁 (${NAV_COOLDOWN}ms 内), 已忽略本次 push`)
-    return false
+    console.warn(`[router] 跳转过于频繁 (${NAV_COOLDOWN}ms 内), 已忽略本次 push`);
+    return false;
   }
-  lastNavTime = now
-  return true
+  lastNavTime = now;
+  return true;
 }
 
 /**
@@ -184,27 +200,29 @@ export const router = {
    *      / router.push('demo', { filter: { page: 1, size: 10 } })
    */
   push(nameOrPath, params = {}) {
-    const path = resolvePath(nameOrPath)
+    const path = resolvePath(nameOrPath);
     if (!path) {
-      const message = `[router] 未找到路由: ${nameOrPath}`
-      console.error(message)
-      return Promise.reject(new Error(message))
+      const message = `[router] 未找到路由: ${nameOrPath}`;
+      console.error(message);
+      return Promise.reject(new Error(message));
     }
     if (!checkCooldown()) {
-      return Promise.resolve(false)
+      return Promise.resolve(false);
     }
     if (isTabPage(path)) {
       if (Object.keys(params || {}).length) {
-        console.warn(`[router] ${path} 是 tabBar 页面, 携带的参数会被忽略: ${JSON.stringify(params)}`)
+        console.warn(
+          `[router] ${path} 是 tabBar 页面, 携带的参数会被忽略: ${JSON.stringify(params)}`
+        );
       }
-      return doNavigate(uni.switchTab, path, `switchTab(${path})`)
+      return doNavigate(uni.switchTab, path, `switchTab(${path})`);
     }
-    const url = path + buildQueryString(params)
+    const url = path + buildQueryString(params);
     if (isStackAlmostFull()) {
-      console.warn(`[router] 页面栈接近上限, push(${path}) 降级为 redirectTo`)
-      return doNavigate(uni.redirectTo, url, `redirectTo(${url})`)
+      console.warn(`[router] 页面栈接近上限, push(${path}) 降级为 redirectTo`);
+      return doNavigate(uni.redirectTo, url, `redirectTo(${url})`);
     }
-    return openPage(url, `push(${url})`)
+    return openPage(url, `push(${url})`);
   },
 
   /**
@@ -212,51 +230,51 @@ export const router = {
    *  - 目标是 tabBar 页面时改用 reLaunch (redirectTo 无法打开 tab 页)
    */
   replace(nameOrPath, params = {}) {
-    const path = resolvePath(nameOrPath)
+    const path = resolvePath(nameOrPath);
     if (!path) {
-      const message = `[router] 未找到路由: ${nameOrPath}`
-      console.error(message)
-      return Promise.reject(new Error(message))
+      const message = `[router] 未找到路由: ${nameOrPath}`;
+      console.error(message);
+      return Promise.reject(new Error(message));
     }
-    const url = path + buildQueryString(params)
+    const url = path + buildQueryString(params);
     if (isTabPage(path)) {
-      console.warn(`[router] ${path} 是 tabBar 页面, replace 降级为 reLaunch`)
-      return doNavigate(uni.reLaunch, url, `reLaunch(${url})`)
+      console.warn(`[router] ${path} 是 tabBar 页面, replace 降级为 reLaunch`);
+      return doNavigate(uni.reLaunch, url, `reLaunch(${url})`);
     }
-    return doNavigate(uni.redirectTo, url, `redirectTo(${url})`)
+    return doNavigate(uni.redirectTo, url, `redirectTo(${url})`);
   },
 
   /**
    * 重新加载打开页面 (对应 uni.reLaunch, 清空页面栈)
    */
   reLaunch(nameOrPath, params = {}) {
-    const path = resolvePath(nameOrPath)
+    const path = resolvePath(nameOrPath);
     if (!path) {
-      const message = `[router] 未找到路由: ${nameOrPath}`
-      console.error(message)
-      return Promise.reject(new Error(message))
+      const message = `[router] 未找到路由: ${nameOrPath}`;
+      console.error(message);
+      return Promise.reject(new Error(message));
     }
-    return doNavigate(uni.reLaunch, path + buildQueryString(params), `reLaunch(${path})`)
+    return doNavigate(uni.reLaunch, path + buildQueryString(params), `reLaunch(${path})`);
   },
 
   /**
    * Tab 切换 (对应 uni.switchTab, 不支持携带参数)
    */
   switchTab(nameOrPath, params = {}) {
-    const path = resolvePath(nameOrPath)
+    const path = resolvePath(nameOrPath);
     if (!path) {
-      const message = `[router] 未找到路由: ${nameOrPath}`
-      console.error(message)
-      return Promise.reject(new Error(message))
+      const message = `[router] 未找到路由: ${nameOrPath}`;
+      console.error(message);
+      return Promise.reject(new Error(message));
     }
-    const paramKeys = Object.keys(params || {})
+    const paramKeys = Object.keys(params || {});
     if (paramKeys.length) {
-      console.warn(`[router] switchTab 不支持携带参数, 已忽略: ${JSON.stringify(params)}`)
+      console.warn(`[router] switchTab 不支持携带参数, 已忽略: ${JSON.stringify(params)}`);
     }
     if (!isTabPage(path)) {
-      console.warn(`[router] ${path} 不是 tabBar 页面, switchTab 可能失败`)
+      console.warn(`[router] ${path} 不是 tabBar 页面, switchTab 可能失败`);
     }
-    return doNavigate(uni.switchTab, path, `switchTab(${path})`)
+    return doNavigate(uni.switchTab, path, `switchTab(${path})`);
   },
 
   /**
@@ -265,33 +283,33 @@ export const router = {
    *  - 失败时同样兜底回首页
    */
   back(delta = 1) {
-    return new Promise((resolve) => {
-      let stackLength = 0
+    return new Promise(resolve => {
+      let stackLength = 0;
       try {
-        stackLength = getCurrentPages().length
+        stackLength = getCurrentPages().length;
       } catch (error) {
-        stackLength = 0
+        stackLength = 0;
       }
 
       const backToHome = () =>
         doNavigate(uni.switchTab, routes.home.path, `switchTab(${routes.home.path})`)
           .then(resolve)
-          .catch(resolve)
+          .catch(resolve);
 
       if (stackLength <= 1) {
-        backToHome()
-        return
+        backToHome();
+        return;
       }
       uni.navigateBack({
         delta,
         success: resolve,
         fail: () => {
-          console.warn('[router] navigateBack 失败, 返回首页')
-          backToHome()
-        },
-      })
-    })
-  },
-}
+          console.warn('[router] navigateBack 失败, 返回首页');
+          backToHome();
+        }
+      });
+    });
+  }
+};
 
-export default router
+export default router;

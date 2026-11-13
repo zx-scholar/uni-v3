@@ -2,7 +2,7 @@
  * 项目全局业务与数据模型 TypeScript 类型定义
  */
 
-/** 用户个人信息模型 */
+/** 用户个人信息模型（字段来自后端 netUser） */
 export interface UserInfo {
   netUserId?: number | string;
   avatarUrl?: string;
@@ -10,10 +10,16 @@ export interface UserInfo {
   nickName?: string;
   name?: string;
   mobileNum?: string;
+  email?: string;
+  centerId?: number | string;
   gender?: string;
   status?: string;
   createTime?: string;
   updateTime?: string;
+  /** 实名信息：后端提供后个人资料页自动展示（未返回则整行隐藏） */
+  realName?: string;
+  idCard?: string;
+  [key: string]: any;
 }
 
 /** 微信登录 Session 模型 */
